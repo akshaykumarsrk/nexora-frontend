@@ -1,0 +1,1230 @@
+/* =========================================================
+   EMBEDDED JOB CARD SECTION
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+:host(.embedded) {
+  margin-top: 28px;
+}
+
+/* =========================================================
+   JOB CARDS
+   NEXORA
+   Plain CSS
+   ========================================================= */
+
+.job-card-page {
+  width: 100%;
+  padding: 28px 26px 40px;
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+
+.page-title-row {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.page-title-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 13%,
+        var(--nexora-surface)
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 5%,
+        var(--nexora-surface)
+      )
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      var(--nexora-border)
+    );
+
+  color: var(--nexora-primary);
+
+  box-shadow:
+    0 5px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    );
+}
+
+
+.page-title-icon i {
+  font-size: 18px;
+}
+
+
+.page-title-content {
+  min-width: 0;
+}
+
+
+.page-title-line {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.page-title {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 24px;
+  font-weight: 750;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.025em;
+}
+
+
+.job-card-count {
+  min-width: 27px;
+  height: 23px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 7px;
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 17%,
+      var(--nexora-border)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+
+.page-subtitle {
+  margin: 5px 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   NEW JOB CARD BUTTON
+   ========================================================= */
+
+.new-job-card-button {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 17px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 82%,
+        #7c3aed
+      )
+    );
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px
+    rgb(99 102 241 / 20%);
+
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+
+.new-job-card-button:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 10px 24px
+    rgb(99 102 241 / 27%);
+}
+
+
+.new-job-card-button:active {
+  transform: translateY(0);
+}
+
+
+.new-job-card-button i {
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-container {
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+
+.loading-spinner {
+  width: 38px;
+  height: 38px;
+
+  border: 3px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      transparent
+    );
+
+  border-top-color: var(--nexora-primary);
+
+  border-radius: 50%;
+
+  animation:
+    job-card-spin 0.8s linear infinite;
+}
+
+
+@keyframes job-card-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   TABLE CARD
+   ========================================================= */
+
+.table-card {
+  width: 100%;
+
+  overflow: hidden;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 15px;
+
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.table-card-header {
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 21px;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 2.5%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+}
+
+
+.table-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.table-heading-icon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+.table-heading-icon i {
+  font-size: 13px;
+}
+
+
+.table-heading h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+  font-weight: 750;
+}
+
+
+.table-heading span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 11px;
+}
+
+
+.table-header-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 10px;
+
+  border: 1px solid
+    rgb(16 185 129 / 22%);
+
+  border-radius: 999px;
+
+  background:
+    rgb(16 185 129 / 6%);
+
+  color: #059669;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #10b981;
+
+  box-shadow:
+    0 0 0 3px
+    rgb(16 185 129 / 11%);
+}
+
+
+/* =========================================================
+   TABLE SCROLL
+   ========================================================= */
+
+.table-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.job-card-table {
+  width: 100%;
+
+  min-width: 1180px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.job-card-table thead th {
+  height: 49px;
+
+  padding: 0 15px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--nexora-surface-soft),
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-text-muted);
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  text-align: left;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  letter-spacing: 0.055em;
+
+  white-space: nowrap;
+}
+
+
+.job-card-table thead tr {
+  box-shadow:
+    0 1px 0 var(--nexora-border);
+}
+
+
+/* =========================================================
+   BODY ROWS
+   ========================================================= */
+
+.job-card-table tbody tr {
+  background: var(--nexora-surface);
+
+  transition:
+    background 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+
+.job-card-table tbody tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 2.8%,
+      var(--nexora-surface)
+    );
+
+  box-shadow:
+    inset 3px 0 0
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 52%,
+      transparent
+    );
+}
+
+
+.job-card-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+.job-card-table tbody td {
+  height: 76px;
+
+  padding: 11px 15px;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  vertical-align: middle;
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+   ========================================================= */
+
+.id-column {
+  width: 70px;
+}
+
+
+.job-column {
+  width: 85px;
+}
+
+
+.technician-column {
+  width: 115px;
+}
+
+
+.problem-column {
+  min-width: 230px;
+}
+
+
+.diagnosis-column {
+  min-width: 220px;
+}
+
+
+.status-column {
+  width: 150px;
+}
+
+
+.date-column {
+  width: 175px;
+}
+
+
+.actions-column {
+  width: 115px;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   JOB CARD ID
+   ========================================================= */
+
+.job-card-id {
+  min-width: 34px;
+  height: 27px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 8px;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 10%,
+        var(--nexora-surface)
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 4%,
+        var(--nexora-surface)
+      )
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 17%,
+      var(--nexora-border)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 10px;
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   REFERENCE IDS
+   ========================================================= */
+
+.reference-id {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+
+.reference-id::before {
+  content: "";
+
+  width: 5px;
+  height: 5px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 60%,
+      #94a3b8
+    );
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      transparent
+    );
+}
+
+
+.technician-reference {
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   WORK INFORMATION
+   ========================================================= */
+
+.work-info {
+  max-width: 270px;
+
+  min-width: 0;
+}
+
+
+.work-title {
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  color: var(--nexora-text);
+
+  font-size: 11.5px;
+  font-weight: 650;
+
+  line-height: 1.5;
+}
+
+
+.work-description {
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11.5px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.status-badge {
+  min-height: 27px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-width: 112px;
+
+  padding: 5px 11px;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+
+  font-size: 9.5px;
+  font-weight: 800;
+
+  letter-spacing: 0.035em;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.status-badge:hover {
+  transform: translateY(-1px);
+}
+
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      currentColor 10%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   ACKNOWLEDGED
+   ========================================================= */
+
+.status-badge.acknowledged {
+  background:
+    linear-gradient(
+      135deg,
+      rgb(16 185 129 / 14%),
+      rgb(34 197 94 / 7%)
+    );
+
+  border-color:
+    rgb(16 185 129 / 25%);
+
+  color: #059669;
+
+  box-shadow:
+    0 2px 8px
+    rgb(16 185 129 / 8%);
+}
+
+
+/* =========================================================
+   PENDING
+   ========================================================= */
+
+.status-badge.pending {
+  background:
+    linear-gradient(
+      135deg,
+      rgb(245 158 11 / 14%),
+      rgb(249 115 22 / 7%)
+    );
+
+  border-color:
+    rgb(245 158 11 / 25%);
+
+  color: #d97706;
+
+  box-shadow:
+    0 2px 8px
+    rgb(245 158 11 / 8%);
+}
+
+
+/* =========================================================
+   CREATED DATE
+   ========================================================= */
+
+.created-date {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 145px;
+
+  padding: 6px 9px;
+
+  border-radius: 8px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid var(--nexora-border);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+.created-date > i {
+  color: var(--nexora-primary);
+
+  font-size: 11px;
+}
+
+
+.created-date span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
+.created-date small {
+  color: var(--nexora-text-soft);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+}
+
+
+.table-action-button {
+  width: 33px;
+  height: 33px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.table-action-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-border)
+    );
+
+  box-shadow:
+    0 3px 8px rgb(15 23 42 / 6%);
+}
+
+
+.table-action-button.view:hover {
+  color: #3b82f6;
+}
+
+
+.table-action-button.edit:hover {
+  color: var(--nexora-primary);
+}
+
+
+.table-action-button.acknowledge:hover {
+  color: #059669;
+
+  background:
+    rgb(16 185 129 / 7%);
+
+  border-color:
+    rgb(16 185 129 / 20%);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-cell {
+  height: 350px !important;
+
+  padding: 45px !important;
+
+  text-align: center;
+}
+
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.empty-state-icon {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 16px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      var(--nexora-border)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 21px;
+}
+
+
+.empty-state h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 15px;
+  font-weight: 750;
+}
+
+
+.empty-state p {
+  max-width: 400px;
+
+  margin: 6px 0 18px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+.empty-action-button {
+  min-height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 14px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      var(--nexora-border)
+    );
+
+  border-radius: 8px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.empty-action-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    );
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html.dark .status-badge.acknowledged {
+  color: #34d399;
+
+  box-shadow: none;
+}
+
+
+html.dark .status-badge.pending {
+  color: #fbbf24;
+
+  box-shadow: none;
+}
+
+
+html.dark .table-header-status {
+  color: #34d399;
+}
+
+
+html.dark .job-card-table tbody tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    );
+}
+
+
+html.dark .created-date {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 4%,
+      var(--nexora-surface)
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .job-card-page {
+    padding: 22px 18px 32px;
+  }
+
+
+  .page-title {
+    font-size: 21px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .job-card-page {
+    padding: 18px 14px 28px;
+  }
+
+
+  .page-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 16px;
+  }
+
+
+  .new-job-card-button {
+    width: 100%;
+  }
+
+
+  .table-card-header {
+    padding: 0 15px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .page-title-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .page-title {
+    font-size: 19px;
+  }
+
+
+  .page-subtitle {
+    font-size: 12px;
+  }
+
+}
+
+/* =========================================================
+   EMBEDDED MODE
+   Used when Job Cards are displayed inside Job Details
+   ========================================================= */
+
+.job-card-page.embedded {
+  margin-top: 28px;
+  padding: 0;
+}
+
+.job-card-page.embedded .page-header {
+  margin-bottom: 18px;
+}

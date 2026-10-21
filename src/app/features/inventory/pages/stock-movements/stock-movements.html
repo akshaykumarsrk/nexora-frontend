@@ -1,0 +1,699 @@
+<p-toast></p-toast>
+
+<div class="movements-page">
+
+  <!-- =====================================
+       PAGE HEADER
+  ====================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+    <button
+        type="button"
+        class="back-button"
+        title="Back to Inventory"
+        (click)="goToInventory()">
+        <i class="pi pi-arrow-left"></i>
+    </button>
+
+    <div class="header-icon">
+        <i class="pi pi-sync"></i>
+    </div>
+
+  <div class="header-text">
+
+        <div class="breadcrumb">
+          Inventory
+          <i class="pi pi-angle-right"></i>
+          Stock Movements
+        </div>
+
+        <h1>Stock Movements</h1>
+
+        <p>
+          Track every inventory quantity change.
+        </p>
+
+      </div>
+
+    </div>
+
+    <button
+      pButton
+      type="button"
+      class="new-movement-button"
+      (click)="openMovementDialog()">
+
+      <i
+        class="pi pi-plus"
+        pButtonIcon>
+      </i>
+
+      <span pButtonLabel>
+        New Movement
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================
+       FILTER BAR
+  ====================================== -->
+
+  <div class="filter-card">
+
+    <div class="search-wrapper">
+
+      <i class="pi pi-search"></i>
+
+      <input
+        pInputText
+        type="text"
+        placeholder="Search movements..."
+        [value]="searchTerm()"
+        (input)="onSearch($event)" />
+
+    </div>
+
+
+        <p-select
+        class="stock-filter-select"
+        panelStyleClass="stock-filter-panel"
+        [options]="inventoryOptions()"
+        [(ngModel)]="selectedInventoryId"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="All Parts"
+        [showClear]="false">
+        </p-select>
+
+        <p-select
+        class="stock-filter-select"
+        panelStyleClass="stock-filter-panel"
+        [options]="movementTypeOptions"
+        [(ngModel)]="selectedMovementType"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="All Types"
+        [showClear]="false">
+        </p-select>
+
+
+    @if (
+      searchTerm() ||
+      selectedMovementType() ||
+      selectedInventoryId()
+    ) {
+
+      <button
+        type="button"
+        class="clear-filter-button"
+        title="Clear filters"
+        (click)="clearFilters()">
+
+        <i class="pi pi-filter-slash"></i>
+
+        <span>Clear</span>
+
+      </button>
+
+    }
+
+  </div>
+
+
+  <!-- =====================================
+       ERROR STATE
+  ====================================== -->
+
+  @if (!loading() && error()) {
+
+    <div class="state-container error-state">
+
+      <div class="state-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+
+      <h2>Unable to load movements</h2>
+
+      <p>{{ error() }}</p>
+
+      <button
+        pButton
+        type="button"
+        (click)="loadMovements()">
+
+        <i
+          class="pi pi-refresh"
+          pButtonIcon>
+        </i>
+
+        <span pButtonLabel>
+          Try Again
+        </span>
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================
+       LOADING STATE
+  ====================================== -->
+
+  @if (loading()) {
+
+    <div class="state-container">
+
+      <div class="loading-icon">
+        <i class="pi pi-spin pi-spinner"></i>
+      </div>
+
+      <h2>Loading stock movements...</h2>
+
+      <p>
+        Fetching the latest inventory activity.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================
+       EMPTY STATE
+  ====================================== -->
+
+  @if (
+    !loading() &&
+    !error() &&
+    filteredMovements().length === 0
+  ) {
+
+    <div class="state-container empty-state">
+
+      <div class="state-icon">
+        <i class="pi pi-sync"></i>
+      </div>
+
+      @if (
+        searchTerm() ||
+        selectedMovementType() ||
+        selectedInventoryId()
+      ) {
+
+        <h2>No movements found</h2>
+
+        <p>
+          Try changing your search or filters.
+        </p>
+
+        <button
+          pButton
+          type="button"
+          severity="secondary"
+          [outlined]="true"
+          (click)="clearFilters()">
+
+          <i
+            class="pi pi-filter-slash"
+            pButtonIcon>
+          </i>
+
+          <span pButtonLabel>
+            Clear Filters
+          </span>
+
+        </button>
+
+      } @else {
+
+        <h2>No stock movements yet</h2>
+
+        <p>
+          Record your first stock movement to see it here.
+        </p>
+
+        <button
+          pButton
+          type="button"
+          (click)="openMovementDialog()">
+
+          <i
+            class="pi pi-plus"
+            pButtonIcon>
+          </i>
+
+          <span pButtonLabel>
+            Create Movement
+          </span>
+
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- =====================================
+       TABLE
+  ====================================== -->
+
+  @if (
+    !loading() &&
+    !error() &&
+    filteredMovements().length > 0
+  ) {
+
+    <div class="table-card">
+
+      <p-table
+        [value]="filteredMovements()"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} movements"
+        [paginatorDropdownAppendTo]="'body'"
+        [paginatorDropdownScrollHeight]="'220px'"
+        [tableStyle]="{ 'min-width': '900px' }"
+        styleClass="nexora-movement-table">
+
+        <!-- HEADER -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>Part</th>
+
+            <th>Movement</th>
+
+            <th>Quantity</th>
+
+            <th>Before</th>
+
+            <th>After</th>
+
+            <th>Reason</th>
+
+            <th>Date</th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- BODY -->
+
+        <ng-template
+          #body
+          let-movement>
+
+          <tr>
+
+            <!-- PART -->
+
+            <td>
+
+              <div class="part-cell">
+
+                <div class="part-icon">
+                  <i class="pi pi-cog"></i>
+                </div>
+
+                <div class="part-info">
+
+                  <strong>
+                    {{ movement.partCode }}
+                  </strong>
+
+                  <span>
+                    {{ movement.partName }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- MOVEMENT TYPE -->
+
+            <td>
+
+              <p-tag
+                [value]="getMovementLabel(movement.movementType)"
+                [severity]="getMovementSeverity(movement.movementType)"
+                [rounded]="true">
+              </p-tag>
+
+            </td>
+
+
+            <!-- QUANTITY -->
+
+            <td>
+
+              <span
+                class="quantity-value"
+                [class]="getQuantityClass(movement)">
+
+                {{ getQuantityPrefix(movement) }}{{ movement.quantity }}
+
+              </span>
+
+            </td>
+
+
+            <!-- BEFORE -->
+
+            <td>
+
+              <span class="stock-number">
+                {{ movement.quantityBefore }}
+              </span>
+
+            </td>
+
+
+            <!-- AFTER -->
+
+            <td>
+
+              <span class="stock-number after-number">
+                {{ movement.quantityAfter }}
+              </span>
+
+            </td>
+
+
+            <!-- REASON -->
+
+            <td>
+
+              <div class="reason-cell">
+
+                @if (movement.reason) {
+
+                  <span
+                    class="reason-text"
+                    [title]="movement.reason">
+
+                    {{ movement.reason }}
+
+                  </span>
+
+                } @else {
+
+                  <span class="no-value">
+                    —
+                  </span>
+
+                }
+
+              </div>
+
+            </td>
+
+
+            <!-- DATE -->
+
+            <td>
+
+              <div class="date-cell">
+
+                <span>
+                  {{ formatDate(movement.createdAt) }}
+                </span>
+
+                <small>
+                  {{ formatDateTime(movement.createdAt).split(',')[1] || '' }}
+                </small>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- EMPTY -->
+
+        <ng-template #emptymessage>
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="table-empty">
+
+              No stock movements found.
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+  }
+
+</div>
+
+
+<!-- =====================================
+     NEW MOVEMENT DIALOG
+====================================== -->
+
+<p-dialog
+  [visible]="movementDialogVisible()"
+  (visibleChange)="movementDialogVisible.set($event)"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="!saving()"
+  [style]="{ width: '520px' }"
+  styleClass="movement-dialog">
+
+  <ng-template #header>
+
+    <div class="dialog-header">
+
+      <div class="dialog-icon">
+        <i class="pi pi-sync"></i>
+      </div>
+
+      <div>
+
+        <h2>New Stock Movement</h2>
+
+        <p>
+          Record an inventory quantity change.
+        </p>
+
+      </div>
+
+    </div>
+
+  </ng-template>
+
+
+  <form
+    [formGroup]="movementForm"
+    (ngSubmit)="saveMovement()"
+    class="movement-form">
+
+
+    <!-- INVENTORY -->
+
+    <div class="form-field">
+
+      <label for="inventory">
+        Inventory
+        <span>*</span>
+      </label>
+
+      <p-select
+        inputId="inventory"
+        formControlName="inventoryId"
+        [options]="inventoryOptions()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select inventory"
+        [filter]="true"
+        filterPlaceholder="Search part..."
+        appendTo="body"
+        [loading]="inventoriesLoading()"
+        [class.ng-invalid]="
+          movementForm.controls.inventoryId.invalid &&
+          movementForm.controls.inventoryId.touched
+        "
+        fluid>
+      </p-select>
+
+      @if (
+        movementForm.controls.inventoryId.invalid &&
+        movementForm.controls.inventoryId.touched
+      ) {
+
+        <small class="field-error">
+          Inventory is required.
+        </small>
+
+      }
+
+    </div>
+
+
+    <!-- MOVEMENT TYPE -->
+
+    <div class="form-field">
+
+      <label for="movementType">
+        Movement Type
+        <span>*</span>
+      </label>
+
+      <p-select
+        inputId="movementType"
+        formControlName="movementType"
+        [options]="movementFormTypeOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select movement type"
+        appendTo="body"
+        fluid>
+      </p-select>
+
+    </div>
+
+
+    <!-- QUANTITY -->
+
+    <div class="form-field">
+
+      <label for="quantity">
+        Quantity
+        <span>*</span>
+      </label>
+
+        <p-inputNumber
+        inputId="quantity"
+        formControlName="quantity"
+        placeholder="Enter quantity">
+        </p-inputNumber>
+
+      @if (
+        movementForm.controls.quantity.invalid &&
+        movementForm.controls.quantity.touched
+      ) {
+
+        <small class="field-error">
+          Quantity must be at least 1.
+        </small>
+
+      }
+
+    </div>
+
+
+    <!-- REASON -->
+
+    <div class="form-field">
+
+      <label for="reason">
+        Reason
+      </label>
+
+      <input
+        pInputText
+        id="reason"
+        type="text"
+        formControlName="reason"
+        placeholder="e.g. New stock received"
+        maxlength="500" />
+
+      <div class="field-footer">
+
+        <small>
+          Optional
+        </small>
+
+        <small>
+          {{ movementForm.controls.reason.value.length }}/500
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="movement-info">
+
+      <i class="pi pi-info-circle"></i>
+
+      <p>
+        Stock quantity will be updated automatically by the
+        backend after this movement is recorded.
+      </p>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="dialog-actions">
+
+      <button
+        pButton
+        type="button"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="saving()"
+        (click)="closeMovementDialog()">
+
+        <span pButtonLabel>
+          Cancel
+        </span>
+
+      </button>
+
+      <button
+        pButton
+        type="submit"
+        [loading]="saving()"
+        [disabled]="saving()">
+
+        <i
+          class="pi pi-check"
+          pButtonIcon>
+        </i>
+
+        <span pButtonLabel>
+          Record Movement
+        </span>
+
+      </button>
+
+    </div>
+
+  </form>
+
+</p-dialog>

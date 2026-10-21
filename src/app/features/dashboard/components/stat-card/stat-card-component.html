@@ -1,0 +1,21 @@
+<div class="stat-card">
+
+  <div class="card-top">
+    <span class="stat-label">{{ title() }}</span>
+
+    <div class="icon-wrapper">
+      <i [class]="icon()"></i>
+    </div>
+  </div>
+
+  <strong class="stat-value">
+    {{ value() }}
+  </strong>
+
+  @if (description()) {
+    <span class="stat-description">
+      {{ description() }}
+    </span>
+  }
+
+</div>

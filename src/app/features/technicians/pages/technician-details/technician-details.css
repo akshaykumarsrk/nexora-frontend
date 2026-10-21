@@ -1,0 +1,808 @@
+/* =========================================================
+   NEXORA - TECHNICIAN DETAILS
+========================================================= */
+
+.technician-details-page {
+  min-height: 100%;
+  padding: 1.5rem;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-left h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.75rem;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.header-left p {
+  margin: 0.3rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.9rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+/*
+   Important:
+   PrimeNG was giving this button the black hover shown
+   in your screenshot.
+
+   We explicitly override all button states.
+*/
+
+:host ::ng-deep
+.technician-details-page
+.header-left
+.p-button {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0 !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent !important;
+  color: var(--nexora-text-muted) !important;
+
+  border: 1px solid transparent !important;
+  border-radius: 0.7rem !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+
+/* Back hover */
+
+:host ::ng-deep
+.technician-details-page
+.header-left
+.p-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      transparent
+    ) !important;
+
+  transform: translateX(-2px);
+
+  box-shadow:
+    0 3px 10px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+
+/* Back active */
+
+:host ::ng-deep
+.technician-details-page
+.header-left
+.p-button:active {
+  transform: translateX(-1px) scale(0.96);
+}
+
+
+/* Back icon animation */
+
+:host ::ng-deep
+.technician-details-page
+.header-left
+.p-button
+.p-button-icon {
+  transition: transform 180ms ease !important;
+}
+
+:host ::ng-deep
+.technician-details-page
+.header-left
+.p-button:hover
+.p-button-icon {
+  transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+:host ::ng-deep
+.technician-details-page
+.header-actions
+.p-button {
+  min-height: 2.5rem;
+
+  padding: 0.55rem 0.9rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.7rem !important;
+
+  box-shadow: var(--nexora-shadow-sm) !important;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+
+/* Edit hover */
+
+:host ::ng-deep
+.technician-details-page
+.header-actions
+.p-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    ) !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 13%,
+      transparent
+    ) !important;
+}
+
+
+/* Edit active */
+
+:host ::ng-deep
+.technician-details-page
+.header-actions
+.p-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+
+/* Pencil icon */
+
+:host ::ng-deep
+.technician-details-page
+.header-actions
+.p-button-icon {
+  transition: transform 180ms ease !important;
+}
+
+:host ::ng-deep
+.technician-details-page
+.header-actions
+.p-button:hover
+.p-button-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+
+/* =========================================================
+   DETAILS GRID
+========================================================= */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1.25rem;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+:host ::ng-deep
+.technician-details-page
+.p-card {
+  position: relative;
+
+  overflow: hidden;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 1.5%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg) !important;
+
+  box-shadow:
+    var(--nexora-shadow-sm) !important;
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease !important;
+}
+
+
+/* Card hover */
+
+:host ::ng-deep
+.technician-details-page
+.p-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    0 10px 28px
+    color-mix(
+      in srgb,
+      var(--nexora-text) 8%,
+      transparent
+    ) !important;
+}
+
+
+:host ::ng-deep
+.technician-details-page
+.p-card-body {
+  height: 100%;
+
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+}
+
+
+:host ::ng-deep
+.technician-details-page
+.p-card-content {
+  color: var(--nexora-text) !important;
+}
+
+
+:host ::ng-deep
+.technician-details-page
+.p-card-title {
+  position: relative;
+
+  margin-bottom: 1rem;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+
+/* Small accent under card title */
+
+:host ::ng-deep
+.technician-details-page
+.p-card-title::after {
+  content: '';
+
+  display: block;
+
+  width: 2rem;
+  height: 2px;
+
+  margin-top: 0.45rem;
+
+  background: var(--nexora-primary);
+
+  border-radius: 999px;
+
+  transition: width 200ms ease;
+}
+
+
+:host ::ng-deep
+.technician-details-page
+.p-card:hover
+.p-card-title::after {
+  width: 3.25rem;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile {
+  position: relative;
+
+  min-height: 170px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1.35rem;
+
+  padding-left: 0.35rem;
+}
+
+
+/* Colored side accent */
+
+.profile::before {
+  content: '';
+
+  position: absolute;
+
+  left: -1.25rem;
+  top: -1.25rem;
+
+  width: 4px;
+  height: calc(100% + 2.5rem);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--nexora-primary),
+      var(--nexora-accent)
+    );
+
+  border-radius: 0 999px 999px 0;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+  position: relative;
+
+  width: 5.4rem;
+  height: 5.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      var(--nexora-primary-hover)
+    );
+
+  color: #ffffff;
+
+  font-size: 2rem;
+  font-weight: 750;
+
+  border:
+    4px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  box-shadow:
+    0 8px 22px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      transparent
+    );
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+
+/* Avatar hover */
+
+.profile:hover .avatar {
+  transform:
+    translateY(-3px)
+    scale(1.04);
+
+  box-shadow:
+    0 12px 28px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 32%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   PROFILE INFO
+========================================================= */
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0.45rem;
+}
+
+.profile-info h2 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.4rem;
+  font-weight: 750;
+
+  letter-spacing: -0.015em;
+}
+
+.profile-info p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   STATUS TAG
+========================================================= */
+
+:host ::ng-deep
+.technician-details-page
+.profile
+.p-tag {
+  margin-top: 0.2rem;
+
+  padding: 0.3rem 0.65rem !important;
+
+  border-radius: 999px !important;
+
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease !important;
+}
+
+
+:host ::ng-deep
+.technician-details-page
+.profile
+.p-tag:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 10px
+    color-mix(
+      in srgb,
+      var(--nexora-success) 15%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   INFORMATION LIST
+========================================================= */
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.15rem;
+}
+
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  min-height: 49px;
+
+  padding: 0.6rem 0.7rem;
+
+  border-radius: 0.7rem;
+
+  transition:
+    background-color 170ms ease,
+    transform 170ms ease !important;
+}
+
+
+/* Information row hover */
+
+.info-item:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 6%,
+      transparent
+    );
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.label {
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.88rem;
+}
+
+
+.label i {
+  width: 1.15rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--nexora-primary);
+
+  font-size: 0.9rem;
+
+  transition:
+    transform 180ms ease,
+    color 180ms ease !important;
+}
+
+
+/* Icon interaction */
+
+.info-item:hover .label i {
+  transform: scale(1.12);
+
+  color: var(--nexora-primary-hover);
+}
+
+
+/* =========================================================
+   VALUE
+========================================================= */
+
+.value {
+  color: var(--nexora-text);
+
+  font-size: 0.88rem;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+.notes {
+  position: relative;
+
+  margin: 0;
+
+  padding: 1rem 1.1rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 4%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-text-muted);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-border)
+    );
+
+  border-radius: 0.8rem;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+
+.notes:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 6%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    );
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.75rem;
+
+  color: var(--nexora-text-muted);
+}
+
+.loading-state i {
+  color: var(--nexora-primary);
+
+  font-size: 2rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .technician-details-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .profile {
+    min-height: auto;
+  }
+
+  .info-item {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 0.3rem;
+  }
+
+  .value {
+    text-align: left;
+  }
+}

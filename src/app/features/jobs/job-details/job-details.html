@@ -1,0 +1,837 @@
+<div class="card">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="flex justify-content-between align-items-center mb-4">
+
+    <div
+      class="flex align-items-center gap-3"
+    >
+
+      <p-button
+        icon="pi pi-arrow-left"
+        [text]="true"
+        [rounded]="true"
+        severity="secondary"
+        styleClass="flex-shrink-0"
+        (onClick)="goBack()"
+      />
+
+      <div>
+
+        <h2 class="m-0">
+          Job Details
+        </h2>
+
+        @if (job()) {
+          <small class="text-color-secondary">
+            {{ job()?.jobNumber }}
+          </small>
+        }
+
+      </div>
+
+    </div>
+
+     <!-- RIGHT: EDIT -->
+    @if (job() && canEdit()) {
+
+      <div class="flex gap-2 flex-shrink-0 ml-auto">
+
+        @if (canEdit()) {
+
+          <p-button
+            label="Edit"
+            icon="pi pi-pencil"
+            severity="secondary"
+            (onClick)="editJob()"
+            [style]="{
+              'min-width': '90px',
+              'white-space': 'nowrap'
+            }"
+          />
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div
+      class="flex justify-content-center py-6"
+    >
+
+      <p-progressspinner
+        strokeWidth="4"
+        [style]="{
+          width: '40px',
+          height: '40px'
+        }"
+      ></p-progressspinner>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       JOB DETAILS
+       ===================================================== -->
+
+  @if (!loading() && job()) {
+
+    <!-- ===================================================
+         STATUS
+         =================================================== -->
+
+    <p-card styleClass="mb-4">
+
+      <div
+        class="flex justify-content-between align-items-center"
+      >
+
+        <div>
+
+          <span class="text-color-secondary">
+            Current Status
+          </span>
+
+          <div class="mt-2">
+
+            <p-tag
+              [value]="job()?.status"
+              [severity]="getSeverity(job()?.status)"
+            ></p-tag>
+
+          </div>
+
+        </div>
+
+
+        <div class="text-right">
+
+          <span class="text-color-secondary">
+            Job Number
+          </span>
+
+          <div class="font-bold text-xl mt-2">
+            {{ job()?.jobNumber }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </p-card>
+
+
+    <!-- ===================================================
+         BASIC INFORMATION
+         =================================================== -->
+
+    <p-card
+      header="Job Information"
+      styleClass="mb-4"
+    >
+
+      <div class="grid">
+
+        <!-- SERVICE REQUEST -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Service Request
+          </span>
+
+          <strong>
+            #{{ job()?.serviceRequestId }}
+          </strong>
+
+        </div>
+
+
+        <!-- CUSTOMER -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Customer
+          </span>
+
+          <strong>
+            #{{ job()?.customerId }}
+          </strong>
+
+        </div>
+
+
+        <!-- SITE -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Site
+          </span>
+
+          <strong>
+            #{{ job()?.siteId }}
+          </strong>
+
+        </div>
+
+
+        <!-- ASSET -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Asset
+          </span>
+
+          @if (job()?.assetId) {
+
+            <strong>
+              #{{ job()?.assetId }}
+            </strong>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              Not specified
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- TECHNICIAN -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Technician
+          </span>
+
+          @if (job()?.technicianId) {
+
+            <strong>
+              #{{ job()?.technicianId }}
+            </strong>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              Unassigned
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- SCHEDULED AT -->
+
+        <div class="col-12 md:col-6 lg:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Scheduled At
+          </span>
+
+          @if (job()?.scheduledAt) {
+
+            <strong>
+              {{
+                job()?.scheduledAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </strong>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              Not scheduled
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+    </p-card>
+
+
+    <!-- ===================================================
+         TIMELINE
+         =================================================== -->
+
+    <p-card
+      header="Job Timeline"
+      styleClass="mb-4"
+    >
+
+      <div class="grid">
+
+        <!-- STARTED -->
+
+        <div class="col-12 md:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Started
+          </span>
+
+          @if (job()?.startedAt) {
+
+            <span>
+              {{
+                job()?.startedAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </span>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              —
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- COMPLETED -->
+
+        <div class="col-12 md:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Completed
+          </span>
+
+          @if (job()?.completedAt) {
+
+            <span>
+              {{
+                job()?.completedAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </span>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              —
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- WORK SUMMARY -->
+
+        <div class="col-12 md:col-4">
+
+          <span
+            class="block text-color-secondary mb-1"
+          >
+            Work Summary
+          </span>
+
+          @if (job()?.workSummary) {
+
+            <span>
+              {{ job()?.workSummary }}
+            </span>
+
+          } @else {
+
+            <span class="text-color-secondary">
+              —
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+    </p-card>
+
+    <!-- =========================================================
+     JOB CARD
+     ========================================================= -->
+
+    @if (jobId) {
+
+      <app-job-card-list
+        [jobId]="jobId"
+        [embedded]="true"
+      ></app-job-card-list>
+
+    }
+
+    <!-- ===================================================
+     JOB ACTIONS
+     =================================================== -->
+
+    <p-card header="Job Actions">
+
+      <div class="flex flex-wrap gap-2">
+
+        @if (canAssign()) {
+
+          <p-button
+            label="Assign Technician"
+            icon="pi pi-user"
+            severity="info"
+            (onClick)="assignTechnician()"
+          />
+
+        }
+
+
+        @if (canSchedule()) {
+
+          <p-button
+            label="Schedule"
+            icon="pi pi-calendar"
+            (onClick)="scheduleJob()"
+          />
+
+        }
+
+
+        @if (canStart()) {
+
+          <p-button
+            label="Start Job"
+            icon="pi pi-play"
+            severity="success"
+            (onClick)="startJob()"
+          />
+
+        }
+
+
+        @if (canHold()) {
+
+          <p-button
+            label="Put On Hold"
+            icon="pi pi-pause"
+            severity="warn"
+            (onClick)="holdJob()"
+          />
+
+        }
+
+
+        @if (canResume()) {
+
+          <p-button
+            label="Resume"
+            icon="pi pi-play"
+            severity="info"
+            (onClick)="resumeJob()"
+          />
+
+        }
+
+
+        @if (canComplete()) {
+
+          <p-button
+            label="Complete Job"
+            icon="pi pi-check"
+            severity="success"
+            (onClick)="completeJob()"
+          />
+
+        }
+
+
+        @if (canCancel()) {
+
+          <p-button
+            label="Cancel Job"
+            icon="pi pi-times"
+            severity="danger"
+            (onClick)="cancelJob()"
+          />
+
+        }
+
+      </div>
+
+    </p-card>
+
+  }
+
+
+  <!-- =====================================================
+       JOB PARTS
+       ===================================================== -->
+
+  <div class="mt-4">
+
+    <div
+      class="flex justify-content-between align-items-center mb-3"
+    >
+
+      <div>
+
+        <h3 class="m-0">
+          Job Parts
+        </h3>
+
+        <small class="text-color-secondary">
+          Parts used for this job
+        </small>
+
+      </div>
+
+
+      <p-button
+        label="Add Part"
+        icon="pi pi-plus"
+        (onClick)="openAddJobPartDialog()"
+      ></p-button>
+
+    </div>
+
+
+    <!-- JOB PARTS LOADING -->
+
+    @if (jobPartsLoading()) {
+
+      <div
+        class="flex justify-content-center p-4"
+      >
+
+        <p-progressspinner
+          strokeWidth="4"
+          styleClass="w-2rem h-2rem"
+        ></p-progressspinner>
+
+      </div>
+
+    }
+
+
+    <!-- JOB PARTS TABLE -->
+
+    @if (!jobPartsLoading()) {
+
+      <p-table
+        [value]="jobParts()"
+        responsiveLayout="scroll"
+      >
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>Part</th>
+            <th>Technician</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+            <th>Notes</th>
+            <th>Actions</th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template
+          #body
+          let-jobPart
+        >
+
+          <tr>
+
+            <!-- PART -->
+
+            <td>
+
+              <div class="font-semibold">
+                {{
+                  jobPart.partName ||
+                  ('Part #' + jobPart.partId)
+                }}
+              </div>
+
+              @if (jobPart.partCode) {
+
+                <small class="text-color-secondary">
+                  {{ jobPart.partCode }}
+                </small>
+
+              }
+
+            </td>
+
+
+            <!-- TECHNICIAN -->
+
+            <td>
+              {{
+                jobPart.technicianName ||
+                ('Technician #' + jobPart.technicianId)
+              }}
+            </td>
+
+
+            <!-- QUANTITY -->
+
+            <td>
+              {{ jobPart.quantity }}
+            </td>
+
+
+            <!-- UNIT PRICE -->
+
+            <td>
+              {{ jobPart.unitPrice | currency:'INR' }}
+            </td>
+
+
+            <!-- TOTAL -->
+
+            <td class="font-semibold">
+              {{ jobPart.totalPrice | currency:'INR' }}
+            </td>
+
+
+            <!-- NOTES -->
+
+            <td>
+              {{ jobPart.notes || '-' }}
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td>
+
+              <div class="flex gap-2">
+
+                <p-button
+                  icon="pi pi-pencil"
+                  [text]="true"
+                  severity="secondary"
+                  (onClick)="openEditJobPartDialog(jobPart)"
+                ></p-button>
+
+
+                <p-button
+                  icon="pi pi-trash"
+                  [text]="true"
+                  severity="danger"
+                  (onClick)="deleteJobPart(jobPart)"
+                ></p-button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- EMPTY TABLE -->
+
+        <ng-template #emptymessage>
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="text-center p-4"
+            >
+              No parts have been added to this job()?.
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </div>
+
+
+  <!-- =====================================================
+       JOB PART DIALOG
+       ===================================================== -->
+
+  <p-dialog
+    [(visible)]="showJobPartDialog"
+    [modal]="true"
+    [style]="{ width: '500px' }"
+    [header]="
+      editingJobPart
+        ? 'Edit Job Part'
+        : 'Add Job Part'
+    "
+  >
+
+    <div class="flex flex-column gap-3">
+
+      <!-- PART -->
+
+      <div>
+
+        <label class="block mb-2 font-medium">
+          Part
+        </label>
+
+        <p-select
+          [options]="parts"
+          optionLabel="name"
+          optionValue="id"
+          [(ngModel)]="jobPartForm.partId"
+          placeholder="Select Part"
+          class="w-full"
+        ></p-select>
+
+      </div>
+
+
+      <!-- TECHNICIAN -->
+
+      <div>
+
+        <label class="block mb-2 font-medium">
+          Technician
+        </label>
+
+        <p-select
+          [options]="technicians"
+          optionLabel="name"
+          optionValue="id"
+          [(ngModel)]="jobPartForm.technicianId"
+          placeholder="Select Technician"
+          class="w-full"
+        ></p-select>
+
+      </div>
+
+
+      <!-- QUANTITY -->
+
+      <div>
+
+        <label class="block mb-2 font-medium">
+          Quantity
+        </label>
+
+        <p-inputNumber
+          [(ngModel)]="jobPartForm.quantity"
+          (ngModelChange)="onQuantityChange()"
+          class="w-full"
+        ></p-inputNumber>
+
+      </div>
+
+
+      <!-- UNIT PRICE -->
+
+      <div>
+
+        <label class="block mb-2 font-medium">
+          Unit Price
+        </label>
+
+        <p-inputNumber
+          [(ngModel)]="jobPartForm.unitPrice"
+          mode="currency"
+          currency="INR"
+          locale="en-IN"
+          (ngModelChange)="onUnitPriceChange()"
+          class="w-full"
+        ></p-inputNumber>
+
+      </div>
+
+
+      <!-- NOTES -->
+
+      <div>
+
+        <label class="block mb-2 font-medium">
+          Notes
+        </label>
+
+        <textarea
+          pTextarea
+          [(ngModel)]="jobPartForm.notes"
+          rows="3"
+          class="w-full"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- DIALOG FOOTER -->
+
+    <ng-template pTemplate="footer">
+
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        [text]="true"
+        (onClick)="closeJobPartDialog()"
+      ></p-button>
+
+
+      <p-button
+        [label]="
+          editingJobPart
+            ? 'Update'
+            : 'Add'
+        "
+        icon="pi pi-check"
+        (onClick)="saveJobPart()"
+      ></p-button>
+
+    </ng-template>
+
+  </p-dialog>
+
+</div>

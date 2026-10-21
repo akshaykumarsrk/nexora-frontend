@@ -1,0 +1,298 @@
+:host {
+  display: block;
+}
+
+/* ================================
+   Dialog
+================================ */
+
+:host ::ng-deep .payment-dialog {
+  border-radius: var(--nexora-radius-lg);
+  overflow: hidden;
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-content {
+  padding: 0;
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+}
+
+
+/* ================================
+   Main
+================================ */
+
+.payment-form {
+  padding: 1.5rem;
+}
+
+
+/* ================================
+   Invoice Header
+================================ */
+
+.invoice-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.invoice-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    transparent
+  );
+  color: var(--nexora-primary);
+}
+
+.invoice-icon i {
+  font-size: 1.1rem;
+}
+
+.invoice-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  color: var(--nexora-text-muted);
+}
+
+.invoice-heading strong {
+  color: var(--nexora-text);
+  font-size: 1rem;
+}
+
+
+/* ================================
+   Summary
+================================ */
+
+.payment-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--nexora-border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--nexora-surface-soft);
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  border-right: 1px solid var(--nexora-border);
+}
+
+.summary-item:last-child {
+  border-right: none;
+}
+
+.summary-item span {
+  font-size: 0.75rem;
+  color: var(--nexora-text-muted);
+}
+
+.summary-item strong {
+  font-size: 0.95rem;
+  color: var(--nexora-text);
+}
+
+.summary-item .paid-amount {
+  color: var(--nexora-success);
+}
+
+.summary-item.remaining strong {
+  color: var(--nexora-primary);
+}
+
+
+/* ================================
+   Fields
+================================ */
+
+.payment-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--nexora-text);
+}
+
+.field label span {
+  color: var(--nexora-danger);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 80px;
+  border: 1px solid var(--nexora-border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+  font-family: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field textarea:focus {
+  border-color: var(--nexora-primary);
+  box-shadow: 0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+}
+
+.field-error {
+  color: var(--nexora-danger);
+  font-size: 0.75rem;
+}
+
+
+/* ================================
+   Fully Paid
+================================ */
+
+.fully-paid-message {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: color-mix(
+    in srgb,
+    var(--nexora-success) 10%,
+    var(--nexora-surface-soft)
+  );
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-success) 25%,
+      var(--nexora-border)
+    );
+}
+
+.fully-paid-message > i {
+  color: var(--nexora-success);
+  font-size: 1.35rem;
+}
+
+.fully-paid-message div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fully-paid-message strong {
+  color: var(--nexora-text);
+}
+
+.fully-paid-message span {
+  font-size: 0.8rem;
+  color: var(--nexora-text-muted);
+}
+
+
+/* ================================
+   Loading
+================================ */
+
+.loading-state {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--nexora-text-muted);
+}
+
+.loading-state i {
+  font-size: 1.5rem;
+  color: var(--nexora-primary);
+}
+
+
+/* ================================
+   Actions
+================================ */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
+}
+
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 560px) {
+
+  .payment-form {
+    padding: 1rem;
+  }
+
+  .payment-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-item {
+    border-right: none;
+    border-bottom: 1px solid var(--nexora-border);
+  }
+
+  .summary-item:last-child {
+    border-bottom: none;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions p-button {
+    width: 100%;
+  }
+}

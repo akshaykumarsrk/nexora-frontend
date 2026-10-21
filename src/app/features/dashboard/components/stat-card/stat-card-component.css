@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.stat-card {
+  position: relative;
+  min-height: 150px;
+  padding: 1.35rem;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  background: var(--nexora-surface);
+  box-shadow: var(--nexora-shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.stat-card::after {
+  content: "";
+
+  position: absolute;
+  right: -2rem;
+  bottom: -2rem;
+
+  width: 7rem;
+  height: 7rem;
+
+  border-radius: 50%;
+  background: var(--nexora-primary);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-primary) 35%,
+    var(--nexora-border)
+  );
+
+  box-shadow: var(--nexora-shadow-md);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stat-label {
+  color: var(--nexora-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.icon-wrapper {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--nexora-radius-md);
+
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    transparent
+  );
+
+  color: var(--nexora-primary);
+}
+
+.icon-wrapper i {
+  font-size: 1.2rem;
+}
+
+.stat-value {
+  color: var(--nexora-text);
+  font-size: 1.9rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.stat-description {
+  color: var(--nexora-text-muted);
+  font-size: 0.78rem;
+}

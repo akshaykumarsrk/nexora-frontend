@@ -1,0 +1,949 @@
+/* =========================================================
+   JOB CARD DETAILS
+   NEXORA THEME-AWARE STYLES
+   ========================================================= */
+
+.job-card-details-page {
+  width: 100%;
+  padding: 28px 32px 48px;
+  box-sizing: border-box;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.back-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 10px;
+
+  background: var(--nexora-surface);
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 6%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    );
+
+  transform: translateX(-2px);
+}
+
+
+.page-title-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.breadcrumb i {
+  font-size: 10px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-title-content h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.request-id {
+  padding: 5px 9px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 22%,
+      var(--nexora-border)
+    );
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.page-title-content p {
+  margin: 2px 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.edit-button,
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 40px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: var(--nexora-primary);
+  color: #ffffff;
+
+  padding: 0 17px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 24px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit-button:hover:not(:disabled),
+.primary-button:hover {
+  background: var(--nexora-primary-hover);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 28px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      transparent
+    );
+}
+
+.edit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-card {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 14px;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+
+  border: 3px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+
+  border-top-color: var(--nexora-primary);
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-card {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 18px;
+  padding: 20px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 25%,
+      var(--nexora-border)
+    );
+
+  border-radius: 13px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 5%,
+      var(--nexora-surface)
+    );
+}
+
+.error-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      transparent
+    );
+
+  color: var(--nexora-danger);
+}
+
+.error-card h3 {
+  margin: 0 0 4px;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+}
+
+.error-card p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+}
+
+.back-error-button {
+  margin-left: auto;
+
+  padding: 9px 13px;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 8px;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+}
+
+.back-error-button:hover {
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    );
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.request-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 24px 26px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-left: 2px solid var(--nexora-primary);
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 3%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+.hero-left {
+  display: flex;
+  align-items: center;
+
+  gap: 17px;
+}
+
+.hero-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      var(--nexora-border)
+    );
+
+  border-radius: 12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 19px;
+}
+
+.hero-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+}
+
+.hero-left h2 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.hero-id {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+}
+
+.hero-statuses {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  min-height: 31px;
+
+  padding: 0 12px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.status-badge.pending {
+  border-color: rgb(245 158 11 / 25%);
+
+  background: rgb(245 158 11 / 8%);
+
+  color: #d97706;
+}
+
+.status-badge.pending .badge-dot {
+  background: #f59e0b;
+}
+
+.status-badge.acknowledged {
+  border-color: rgb(16 185 129 / 25%);
+
+  background: rgb(16 185 129 / 8%);
+
+  color: #059669;
+}
+
+.status-badge.acknowledged .badge-dot {
+  background: #10b981;
+}
+
+
+/* =========================================================
+   DETAILS CARD
+   ========================================================= */
+
+.details-card {
+  margin-bottom: 18px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 13px;
+
+  background: var(--nexora-surface);
+
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 17px 20px;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background: var(--nexora-surface);
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.card-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 14px;
+}
+
+.card-heading h3 {
+  margin: 0 0 3px;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.card-heading span {
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  background: var(--nexora-surface);
+}
+
+.detail-item {
+  min-height: 90px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 18px 20px;
+
+  border-right: 1px solid var(--nexora-border);
+}
+
+.detail-item:last-child {
+  border-right: none;
+}
+
+.detail-label {
+  color: var(--nexora-text-muted);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.detail-value {
+  color: var(--nexora-text);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reference-value {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--nexora-primary);
+}
+
+.reference-value i {
+  font-size: 11px;
+}
+
+.date-value {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--nexora-text);
+}
+
+.date-value i {
+  color: var(--nexora-primary);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.description-content {
+  padding: 22px 20px;
+
+  background: var(--nexora-surface);
+}
+
+.description-content p {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}
+
+.description-content p.empty-value {
+  color: var(--nexora-text-soft);
+}
+
+
+/* =========================================================
+   ACKNOWLEDGEMENT
+   ========================================================= */
+
+.acknowledgement-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px;
+
+  background: var(--nexora-surface);
+}
+
+.acknowledgement-status {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+}
+
+.acknowledgement-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+}
+
+.acknowledgement-status.pending
+  .acknowledgement-icon {
+
+  background: rgb(245 158 11 / 8%);
+
+  color: #f59e0b;
+}
+
+.acknowledgement-status.acknowledged
+  .acknowledgement-icon {
+
+  background: rgb(16 185 129 / 8%);
+
+  color: #10b981;
+}
+
+.acknowledgement-status strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--nexora-text);
+
+  font-size: 12px;
+}
+
+.acknowledgement-status span {
+  display: block;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+}
+
+.acknowledge-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 40px;
+
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: var(--nexora-success);
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.acknowledge-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  filter: brightness(1.05);
+}
+
+.acknowledge-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   BOTTOM ACTIONS
+   ========================================================= */
+
+.bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 24px;
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 9px;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondary-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .detail-item:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--nexora-border);
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .job-card-details-page {
+    padding: 20px 16px 36px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+  }
+
+  .edit-button span {
+    display: none;
+  }
+
+  .edit-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .request-hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-statuses {
+    width: 100%;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item {
+    border-right: none;
+
+    border-bottom: 1px solid
+      var(--nexora-border);
+  }
+
+  .detail-item:last-child {
+    border-bottom: none;
+  }
+
+  .acknowledgement-content {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .acknowledge-button {
+    width: 100%;
+  }
+
+  .bottom-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .secondary-button,
+  .primary-button {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,287 @@
+<div class="inventory-form-page">
+
+  <p-toast />
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <div class="breadcrumb">
+        <span
+          class="breadcrumb-link"
+          (click)="onCancel()"
+        >
+          Inventory
+        </span>
+
+        <i class="pi pi-angle-right"></i>
+
+        <span>
+          {{ editing() ? 'Edit Inventory' : 'Add Inventory' }}
+        </span>
+      </div>
+
+      <h1>
+        {{ editing() ? 'Edit Inventory' : 'Add Inventory' }}
+      </h1>
+
+      <p>
+        {{
+          editing()
+            ? 'Update the reorder level for this inventory.'
+            : 'Create inventory for an existing part.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>
+        Loading inventory...
+      </span>
+
+    </div>
+
+  }
+
+
+  @else {
+
+    <!-- ===================================================
+         FORM CARD
+         =================================================== -->
+
+    <form
+      [formGroup]="inventoryForm"
+      (ngSubmit)="onSubmit()"
+      class="inventory-form"
+    >
+
+      <!-- =================================================
+           INVENTORY INFORMATION
+           ================================================= -->
+
+      <section class="form-card">
+
+        <div class="section-header">
+
+          <div class="section-icon">
+            <i class="pi pi-database"></i>
+          </div>
+
+          <div>
+
+            <h2>
+              Inventory Information
+            </h2>
+
+            <p>
+              {{
+                editing()
+                  ? 'Review inventory information and update the reorder level.'
+                  : 'Select a part and define its initial stock.'
+              }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- PART -->
+
+          <div class="form-field full-width">
+
+            <label for="part">
+              Part
+              <span>*</span>
+            </label>
+
+            <p-select
+              inputId="part"
+              formControlName="partId"
+              [options]="parts()"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select a part"
+              appendTo="body"
+              [filter]="true"
+              filterPlaceholder="Search parts..."
+              [class.ng-invalid]="isInvalid('partId')"
+              [class.ng-dirty]="isInvalid('partId')"
+            />
+
+            @if (isInvalid('partId')) {
+
+              <small class="field-error">
+                Part is required.
+              </small>
+
+            }
+
+            @if (editing()) {
+
+              <small class="field-hint">
+                Part cannot be changed after inventory is created.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- QUANTITY -->
+
+          <div class="form-field">
+
+            <label for="quantity">
+              Initial Quantity
+              <span>*</span>
+            </label>
+
+            <p-inputnumber
+                inputId="quantity"
+                formControlName="quantity"
+                placeholder="Enter quantity"
+            />
+
+            @if (isInvalid('quantity')) {
+
+              <small class="field-error">
+                Quantity must be 0 or greater.
+              </small>
+
+            }
+
+            @if (editing()) {
+
+              <small class="field-hint">
+                Stock quantity is managed through stock operations.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- REORDER LEVEL -->
+
+          <div class="form-field">
+
+            <label for="reorderLevel">
+              Reorder Level
+              <span>*</span>
+            </label>
+
+            <p-inputnumber
+                inputId="reorderLevel"
+                formControlName="reorderLevel"
+                placeholder="Enter reorder level"
+            />
+
+            @if (isInvalid('reorderLevel')) {
+
+              <small class="field-error">
+                Reorder level must be 0 or greater.
+              </small>
+
+            }
+
+            <small class="field-hint">
+              Low stock is triggered when available quantity reaches this level.
+            </small>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           EDIT INFORMATION
+           ================================================= -->
+
+      @if (editing() && inventory()) {
+
+        <section class="info-card">
+
+          <div class="info-icon">
+            <i class="pi pi-info-circle"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              Stock quantity is protected
+            </strong>
+
+            <p>
+              Current stock:
+              <b>{{ inventory()?.quantity }}</b>
+
+              · Reserved:
+              <b>{{ inventory()?.reservedQuantity }}</b>
+
+              · Available:
+              <b>{{ inventory()?.availableQuantity }}</b>
+            </p>
+
+            <span>
+              Stock changes should be recorded through inventory movement operations.
+            </span>
+
+          </div>
+
+        </section>
+
+      }
+
+
+      <!-- =================================================
+           ACTIONS
+           ================================================= -->
+
+      <div class="form-actions">
+
+        <p-button
+          type="button"
+          label="Cancel"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="onCancel()"
+        />
+
+        <p-button
+          type="submit"
+          [label]="editing() ? 'Update Inventory' : 'Create Inventory'"
+          icon="pi pi-check"
+          [loading]="saving()"
+          [disabled]="saving()"
+        />
+
+      </div>
+
+    </form>
+
+  }
+
+</div>

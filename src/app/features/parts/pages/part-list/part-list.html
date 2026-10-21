@@ -1,0 +1,402 @@
+<div class="parts-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div class="page-heading">
+
+      <p class="eyebrow">
+        INVENTORY
+      </p>
+
+      <h1>
+        <i class="pi pi-box title-icon" aria-hidden="true"></i>
+        Parts
+      </h1>
+
+      <p class="subtitle">
+        Manage spare parts, components and inventory items.
+      </p>
+
+    </div>
+
+
+    <div class="page-actions">
+      @if (canManageParts()) {
+        <p-button label="Add Part" icon="pi pi-plus" (onClick)="createPart()" />
+      }
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       MAIN CARD
+       ===================================================== -->
+
+  <section class="parts-card">
+
+
+    <!-- ===================================================
+         CARD HEADER
+         =================================================== -->
+
+    <div class="card-header">
+
+      <div>
+
+        <h2>
+          <i class="pi pi-box" aria-hidden="true"></i>
+          All Parts
+        </h2>
+
+        <p>
+          {{ filteredParts.length }} {{ filteredParts.length === 1 ? 'part' : 'parts' }} found
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           FILTERS
+           ================================================= -->
+
+      <div class="table-actions">
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <i class="pi pi-search"></i>
+
+          <input
+            pInputText
+            type="text"
+            placeholder="Search parts..."
+            [value]="searchTerm"
+            (input)="onSearch($any($event.target).value)"
+          />
+
+        </div>
+
+
+        <!-- Category -->
+
+        <p-select
+          [options]="categories"
+          optionLabel="label"
+          optionValue="value"
+          [(ngModel)]="selectedCategory"
+          placeholder="All Categories"
+          [showClear]="true"
+          appendTo="body"
+        />
+
+
+        <!-- Status -->
+
+        <p-select
+          [options]="statusOptions"
+          optionLabel="label"
+          optionValue="value"
+          [(ngModel)]="selectedStatus"
+          placeholder="All Statuses"
+          appendTo="body"
+        />
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         LOADING
+         =================================================== -->
+
+    @if (loading()) {
+
+      <div class="state-container">
+
+        <i class="pi pi-spin pi-spinner"></i>
+
+        <h3>
+          Loading parts...
+        </h3>
+
+        <p>
+          Please wait while we load your inventory.
+        </p>
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         ERROR
+         =================================================== -->
+
+    @else if (error()) {
+
+      <div class="state-container error-state">
+
+        <i class="pi pi-exclamation-triangle"></i>
+
+        <h3>
+          Unable to load parts
+        </h3>
+
+        <p>
+          Something went wrong while loading the inventory.
+        </p>
+
+        <p-button
+          label="Retry"
+          icon="pi pi-refresh"
+          [outlined]="true"
+          (onClick)="loadParts()"
+        />
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         EMPTY
+         =================================================== -->
+
+    @else if (filteredParts.length === 0) {
+
+      <div class="state-container">
+
+        <i class="pi pi-box"></i>
+
+        <h3>
+          No parts found
+        </h3>
+
+        <p>
+          Try changing your search or filters.
+        </p>
+
+        @if (
+          searchTerm ||
+          selectedCategory ||
+          selectedStatus !== null
+        ) {
+
+          <p-button
+            label="Clear Filters"
+            icon="pi pi-filter-slash"
+            [outlined]="true"
+            (onClick)="clearFilters()"
+          />
+
+        }
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         TABLE
+         =================================================== -->
+
+    @else {
+
+      <p-table
+        [value]="filteredParts"
+        [loading]="loading()"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} of {totalRecords}"
+        responsiveLayout="scroll"
+      >
+
+        <!-- TABLE HEADER -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>
+              PART
+            </th>
+
+            <th>
+              PART CODE
+            </th>
+
+            <th>
+              CATEGORY
+            </th>
+
+            <th>
+              BRAND
+            </th>
+
+            <th>
+              UNIT
+            </th>
+
+            <th>
+              STATUS
+            </th>
+
+            <th class="actions-column">
+              ACTIONS
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- TABLE BODY -->
+
+        <ng-template
+          #body
+          let-part
+        >
+
+          <tr>
+
+
+            <!-- Part -->
+
+            <td>
+
+              <div class="part-info">
+
+                <div class="part-avatar">
+
+                  <i class="pi pi-box"></i>
+
+                </div>
+
+
+                <div>
+
+                  <strong>
+                    {{ part.name }}
+                  </strong>
+
+                  <span>
+                    {{ part.description || 'No description' }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Code -->
+
+            <td>
+
+              <span class="part-code">
+                {{ part.partCode }}
+              </span>
+
+            </td>
+
+
+            <!-- Category -->
+
+            <td>
+
+              <span class="table-text">
+
+                {{ part.category || '—' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Brand -->
+
+            <td>
+
+              <span class="table-text">
+
+                {{ part.brand || '—' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Unit -->
+
+            <td>
+
+              <span class="unit-badge">
+
+                {{ part.unit || '—' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <p-tag
+                [value]="getStatusLabel(part.active)"
+                [severity]="getStatusSeverity(part.active)"
+                [rounded]="true"
+              />
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td class="actions-cell">
+
+              <p-button
+                icon="pi pi-eye"
+                [text]="true"
+                rounded
+                severity="secondary"
+                pTooltip="View Part"
+                tooltipPosition="top"
+                (onClick)="viewPart(part)"
+              />
+
+              <p-button
+                icon="pi pi-pencil"
+                [text]="true"
+                rounded
+                severity="secondary"
+                pTooltip="Edit Part"
+                tooltipPosition="top"
+                (onClick)="editPart(part)"
+              />
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </section>
+
+</div>

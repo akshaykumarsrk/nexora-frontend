@@ -1,0 +1,283 @@
+<p-toast></p-toast>
+
+<div class="part-details-page">
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>Loading part...</span>
+
+    </div>
+
+  }
+
+  @else if (part(); as part) {
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="page-header">
+
+      <div class="header-left">
+
+        <p-button
+          icon="pi pi-arrow-left"
+          [text]="true"
+          severity="secondary"
+          pTooltip="Back to parts"
+          (onClick)="goBack()">
+        </p-button>
+
+        <div>
+
+          <div class="eyebrow">
+            PART DETAILS
+          </div>
+
+          <h1>
+            {{ part.name }}
+          </h1>
+
+          <p>
+            {{ part.partCode }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <p-button
+          label="Edit Part"
+          icon="pi pi-pencil"
+          [outlined]="true"
+          severity="secondary"
+          (onClick)="editPart()">
+        </p-button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         OVERVIEW
+         ===================================================== -->
+
+    <div class="overview-grid">
+
+      <!-- Identity -->
+
+      <p-card styleClass="overview-card">
+
+        <div class="part-profile">
+
+          <div class="part-icon">
+
+            <i class="pi pi-cog"></i>
+
+          </div>
+
+          <div class="profile-content">
+
+            <span class="profile-label">
+              Part
+            </span>
+
+            <h2>
+              {{ part.name }}
+            </h2>
+
+            <span class="part-code">
+              {{ part.partCode }}
+            </span>
+
+          </div>
+
+          <p-tag
+            [value]="getStatusLabel(part.active)"
+            [severity]="getStatusSeverity(part.active)">
+          </p-tag>
+
+        </div>
+
+      </p-card>
+
+
+      <!-- Basic Information -->
+
+      <p-card
+        header="Basic Information"
+        styleClass="overview-card">
+
+        <div class="info-list">
+
+          <div class="info-item">
+
+            <span class="info-label">
+              <i class="pi pi-tag"></i>
+              Category
+            </span>
+
+            <span class="info-value">
+              {{ part.category || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              <i class="pi pi-building"></i>
+              Brand
+            </span>
+
+            <span class="info-value">
+              {{ part.brand || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              <i class="pi pi-box"></i>
+              Unit
+            </span>
+
+            <span class="info-value">
+              {{ part.unit || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-label">
+              <i class="pi pi-check-circle"></i>
+              Status
+            </span>
+
+            <span class="info-value">
+              {{ getStatusLabel(part.active) }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </p-card>
+
+    </div>
+
+
+    <!-- =====================================================
+         DESCRIPTION
+         ===================================================== -->
+
+    <p-card
+      header="Description"
+      styleClass="details-card">
+
+      <div class="description">
+
+        @if (part.description) {
+
+          <p>
+            {{ part.description }}
+          </p>
+
+        } @else {
+
+          <div class="empty-description">
+
+            <i class="pi pi-file"></i>
+
+            <span>
+              No description available for this part.
+            </span>
+
+          </div>
+
+        }
+
+      </div>
+
+    </p-card>
+
+
+    <!-- =====================================================
+         RECORD INFORMATION
+         ===================================================== -->
+
+    <p-card
+      header="Record Information"
+      styleClass="details-card">
+
+      <div class="record-grid">
+
+        <div class="record-item">
+
+          <span class="record-label">
+            Created At
+          </span>
+
+          <span class="record-value">
+            {{ formatDate(part.createdAt) }}
+          </span>
+
+        </div>
+
+
+        <div class="record-item">
+
+          <span class="record-label">
+            Last Updated
+          </span>
+
+          <span class="record-value">
+            {{ formatDate(part.updatedAt) }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </p-card>
+
+  }
+
+  @else {
+
+    <div class="empty-state">
+
+      <i class="pi pi-box"></i>
+
+      <h3>
+        Part not found
+      </h3>
+
+      <p>
+        The requested part could not be found.
+      </p>
+
+      <p-button
+        label="Back to Parts"
+        icon="pi pi-arrow-left"
+        (onClick)="goBack()">
+      </p-button>
+
+    </div>
+
+  }
+
+</div>

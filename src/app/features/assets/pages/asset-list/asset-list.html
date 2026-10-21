@@ -1,0 +1,386 @@
+<div class="page-container">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Assets</h1>
+
+      <p>
+        Manage customer equipment and installed assets.
+      </p>
+    </div>
+
+    <p-button
+      label="Add Asset"
+      icon="pi pi-plus"
+      (onClick)="createAsset()"
+    ></p-button>
+
+  </div>
+
+
+  <!-- =====================================================
+       FILTER BAR
+       ===================================================== -->
+
+  <div class="toolbar-card">
+
+    <div class="search-wrapper">
+
+      <i class="pi pi-search"></i>
+
+      <input
+        pInputText
+        type="text"
+        placeholder="Search assets..."
+        [value]="searchTerm()"
+        (input)="onSearch($event)"
+      />
+
+    </div>
+
+
+    <div class="site-filter">
+
+      <p-select
+        [options]="siteOptions()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="All Sites"
+        [showClear]="true"
+        [loading]="sitesLoading()"
+        appendTo="body"
+        [ngModel]="selectedSiteId()"
+        (ngModelChange)="onSiteChange($event)"
+      ></p-select>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ERROR
+       ===================================================== -->
+
+  @if (error()) {
+
+    <div class="state-card error-state">
+
+      <i class="pi pi-exclamation-circle"></i>
+
+      <h3>Unable to load assets</h3>
+
+      <p>{{ error() }}</p>
+
+      <p-button
+        label="Try Again"
+        icon="pi pi-refresh"
+        [outlined]="true"
+        (onClick)="loadAssets()"
+      ></p-button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @else if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>Loading Assets</h3>
+
+      <p>
+        Please wait while we load the assets.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       TABLE
+       ===================================================== -->
+
+  @else {
+
+    <div class="table-card">
+
+      <p-table
+        class="asset-table"
+        styleClass="asset-table"
+
+        [value]="filteredAssets()"
+
+        [paginator]="true"
+
+        [rows]="10"
+
+        [rowsPerPageOptions]="[10, 20, 50]"
+
+        [paginatorDropdownAppendTo]="'body'"
+
+        [paginatorDropdownScrollHeight]="'220px'"
+
+        [showCurrentPageReport]="true"
+
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} assets"
+
+        [tableStyle]="{
+          'min-width': '1050px'
+        }"
+      >
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>
+              Asset
+            </th>
+
+            <th>
+              Customer
+            </th>
+
+            <th>
+              Site
+            </th>
+
+            <th>
+              Category
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Warranty
+            </th>
+
+            <th>
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- =================================================
+             BODY
+             ================================================= -->
+
+        <ng-template
+          #body
+          let-asset
+        >
+
+          <tr>
+
+            <!-- Asset -->
+
+            <td>
+
+              <div class="asset-cell">
+
+                <div class="asset-avatar">
+
+                  <i class="pi pi-box"></i>
+
+                </div>
+
+                <div>
+
+                  <span class="asset-name">
+                    {{ asset.name }}
+                  </span>
+
+                  <span class="asset-code">
+                    {{ asset.assetCode }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Customer -->
+
+            <td>
+
+              <div class="customer-cell">
+
+                <i class="pi pi-user"></i>
+
+                <span>
+                  {{ getCustomerNameBySite(asset.siteId) }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Site -->
+
+            <td>
+
+              <div class="site-cell">
+
+                <i class="pi pi-building"></i>
+
+                <span>
+                  {{ getSiteName(asset.siteId) }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Category -->
+
+            <td>
+
+              <span class="category-cell">
+
+                {{ asset.category || 'Not specified' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <p-tag
+                [value]="asset.status"
+                [severity]="getStatusSeverity(asset.status)"
+              ></p-tag>
+
+            </td>
+
+
+            <!-- Warranty -->
+
+            <td>
+
+              <p-tag
+                [value]="getWarrantyLabel(asset.warrantyEndDate)"
+                [severity]="getWarrantySeverity(asset.warrantyEndDate)"
+              ></p-tag>
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="action-button view-action"
+                  title="View"
+                  (click)="viewAsset(asset.id)"
+                >
+                  <i class="pi pi-eye"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="action-button edit-action"
+                  title="Edit"
+                  (click)="editAsset(asset.id)"
+                >
+                  <i class="pi pi-pencil"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="action-button delete-action"
+                  title="Delete"
+                  (click)="deleteAsset(asset)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- =================================================
+             EMPTY
+             ================================================= -->
+
+        <ng-template #emptymessage>
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty-cell"
+            >
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  <i class="pi pi-box"></i>
+                </div>
+
+                <h3>No assets found</h3>
+
+                <p>
+                  Try changing your search or site filter.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+  }
+
+</div>
+
+
+<p-confirmdialog></p-confirmdialog>
+
+<p-toast></p-toast>

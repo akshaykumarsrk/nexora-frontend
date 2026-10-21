@@ -1,0 +1,652 @@
+<div class="job-card-details-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        title="Back to Job"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+      <div class="page-title-content">
+
+        <div class="breadcrumb">
+          <span>Jobs</span>
+          <i class="pi pi-angle-right"></i>
+          <span>Job Details</span>
+          <i class="pi pi-angle-right"></i>
+          <span>Job Card</span>
+        </div>
+
+        <div class="title-row">
+
+          <h1>Job Card Details</h1>
+
+          @if (jobCard(); as card) {
+            <span class="request-id">
+              #{{ card.id }}
+            </span>
+          }
+
+        </div>
+
+        <p>
+          Technician work and service report
+        </p>
+
+      </div>
+
+    </div>
+
+
+    @if (jobCard(); as card) {
+
+      <button
+        type="button"
+        class="edit-button"
+        [disabled]="card.customerAcknowledged"
+        (click)="editJobCard()"
+      >
+        <i class="pi pi-pencil"></i>
+        <span>Edit Job Card</span>
+      </button>
+
+    }
+
+  </header>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-card">
+
+      <div class="loading-spinner"></div>
+
+      <span>
+        Loading job card details...
+      </span>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       ERROR
+       ===================================================== -->
+
+  @if (!loading() && error()) {
+
+    <div class="error-card">
+
+      <div class="error-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+
+      <div>
+        <h3>Unable to load job card</h3>
+
+        <p>
+          {{ error() }}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="back-error-button"
+        (click)="goBack()"
+      >
+        Back to Job
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+
+  @if (!loading() && jobCard(); as card) {
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <section class="request-hero">
+
+      <div class="hero-left">
+
+        <div class="hero-icon">
+          <i class="pi pi-file-edit"></i>
+        </div>
+
+        <div>
+
+          <span class="hero-label">
+            JOB CARD
+          </span>
+
+          <h2>
+            Job Card #{{ card.id }}
+          </h2>
+
+          <span class="hero-id">
+            Job #{{ card.jobId }}
+            &nbsp; • &nbsp;
+            Technician #{{ card.technicianId }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-statuses">
+
+        <span
+          class="status-badge"
+          [class.acknowledged]="card.customerAcknowledged"
+          [class.pending]="!card.customerAcknowledged"
+        >
+
+          <span class="badge-dot"></span>
+
+          {{ getAcknowledgementLabel() }}
+
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         JOB INFORMATION
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-briefcase"></i>
+          </div>
+
+          <div>
+
+            <h3>Job Information</h3>
+
+            <span>
+              Information associated with this work record
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Job ID
+          </span>
+
+          <span class="detail-value reference-value">
+            <i class="pi pi-briefcase"></i>
+            #{{ card.jobId }}
+          </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Technician
+          </span>
+
+          <span class="detail-value reference-value">
+            <i class="pi pi-user"></i>
+            #{{ card.technicianId }}
+          </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Created
+          </span>
+
+          <span class="detail-value date-value">
+            <i class="pi pi-calendar"></i>
+            {{ formatDate(card.createdAt) }}
+          </span>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Last Updated
+          </span>
+
+          <span class="detail-value date-value">
+            <i class="pi pi-clock"></i>
+            {{ formatDate(card.updatedAt) }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PROBLEM REPORTED
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-info-circle"></i>
+          </div>
+
+          <div>
+
+            <h3>Problem Reported</h3>
+
+            <span>
+              Issue reported by the customer
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.problemReported"
+        >
+          {{ getValue(card.problemReported) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         DIAGNOSIS
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-search"></i>
+          </div>
+
+          <div>
+
+            <h3>Diagnosis</h3>
+
+            <span>
+              Technician's diagnosis of the issue
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.diagnosis"
+        >
+          {{ getValue(card.diagnosis) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         WORK PERFORMED
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-wrench"></i>
+          </div>
+
+          <div>
+
+            <h3>Work Performed</h3>
+
+            <span>
+              Work completed by the technician
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.workPerformed"
+        >
+          {{ getValue(card.workPerformed) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         FINDINGS
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-list"></i>
+          </div>
+
+          <div>
+
+            <h3>Findings</h3>
+
+            <span>
+              Findings identified during the service
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.findings"
+        >
+          {{ getValue(card.findings) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         TECHNICIAN REMARKS
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-user-edit"></i>
+          </div>
+
+          <div>
+
+            <h3>Technician Remarks</h3>
+
+            <span>
+              Additional comments from the technician
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.technicianRemarks"
+        >
+          {{ getValue(card.technicianRemarks) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CUSTOMER REMARKS
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-comments"></i>
+          </div>
+
+          <div>
+
+            <h3>Customer Remarks</h3>
+
+            <span>
+              Comments provided by the customer
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="description-content">
+
+        <p
+          [class.empty-value]="!card.customerRemarks"
+        >
+          {{ getValue(card.customerRemarks) }}
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CUSTOMER ACKNOWLEDGEMENT
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-heading">
+
+          <div class="card-icon">
+            <i class="pi pi-check-circle"></i>
+          </div>
+
+          <div>
+
+            <h3>Customer Acknowledgement</h3>
+
+            <span>
+              Customer confirmation of the completed service
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="acknowledgement-content">
+
+        <div
+          class="acknowledgement-status"
+          [class.acknowledged]="card.customerAcknowledged"
+          [class.pending]="!card.customerAcknowledged"
+        >
+
+          <div class="acknowledgement-icon">
+
+            <i
+              class="pi"
+              [class.pi-check]="card.customerAcknowledged"
+              [class.pi-clock]="!card.customerAcknowledged"
+            ></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              {{ getAcknowledgementLabel() }}
+            </strong>
+
+            @if (card.customerAcknowledged) {
+
+              <span>
+                Acknowledged on
+                {{ formatDate(card.acknowledgedAt) }}
+              </span>
+
+            } @else {
+
+              <span>
+                Waiting for customer acknowledgement
+              </span>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        @if (!card.customerAcknowledged) {
+
+          <button
+            type="button"
+            class="acknowledge-button"
+            [disabled]="acknowledging()"
+            (click)="acknowledgeJobCard()"
+          >
+
+            <i
+              class="pi"
+              [class.pi-check]="!acknowledging()"
+              [class.pi-spin]="acknowledging()"
+              [class.pi-spinner]="acknowledging()"
+            ></i>
+
+            {{
+              acknowledging()
+                ? 'Acknowledging...'
+                : 'Acknowledge Job Card'
+            }}
+
+          </button>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         BOTTOM ACTIONS
+         =================================================== -->
+
+    <div class="bottom-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="goBack()"
+      >
+        <i class="pi pi-arrow-left"></i>
+        Back to Job
+      </button>
+
+
+      @if (!card.customerAcknowledged) {
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="editJobCard()"
+        >
+          <i class="pi pi-pencil"></i>
+          Edit Job Card
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+</div>

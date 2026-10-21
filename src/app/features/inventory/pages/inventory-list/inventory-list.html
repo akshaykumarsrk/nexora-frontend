@@ -1,0 +1,400 @@
+<div class="inventory-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-heading">
+
+      <div class="title-icon">
+        <i class="pi pi-database"></i>
+      </div>
+
+      <div>
+        <h1>Inventory</h1>
+
+        <p>
+          Manage parts stock, availability and reorder levels.
+        </p>
+      </div>
+
+    </div>
+
+    <p-button
+      label="Add Inventory"
+      icon="pi pi-plus"
+      (onClick)="createInventory()"
+    />
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST / CONFIRMATION
+       ===================================================== -->
+
+  <p-toast />
+
+  <p-confirmdialog />
+
+
+  <!-- =====================================================
+       MAIN CARD
+       ===================================================== -->
+
+  <div class="inventory-card">
+
+
+    <!-- ===================================================
+         FILTER BAR
+         =================================================== -->
+
+    <div class="filters">
+
+      <div class="search-box">
+
+        <i class="pi pi-search"></i>
+
+        <input
+          pInputText
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search by part name or code..."
+        />
+
+      </div>
+
+
+      <p-select
+        [options]="stockOptions"
+        [(ngModel)]="stockFilter"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+        placeholder="Stock Status"
+      />
+
+    </div>
+
+
+    <!-- ===================================================
+         LOADING
+         =================================================== -->
+
+    @if (loading()) {
+
+      <div class="loading-state">
+
+        <i class="pi pi-spin pi-spinner"></i>
+
+        <span>
+          Loading inventory...
+        </span>
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         ERROR
+         =================================================== -->
+
+    @else if (error) {
+
+      <div class="state-container">
+
+        <div class="state-icon error">
+          <i class="pi pi-exclamation-triangle"></i>
+        </div>
+
+        <h3>
+          Unable to load inventory
+        </h3>
+
+        <p>
+          Something went wrong while loading inventory.
+        </p>
+
+        <p-button
+          label="Try Again"
+          icon="pi pi-refresh"
+          [outlined]="true"
+          (onClick)="loadInventory()"
+        />
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         EMPTY
+         =================================================== -->
+
+    @else if (filteredInventory.length === 0) {
+
+      <div class="state-container">
+
+        <div class="state-icon">
+
+          <i class="pi pi-database"></i>
+
+        </div>
+
+        <h3>
+          No inventory found
+        </h3>
+
+        <p>
+          @if (searchTerm || stockFilter !== 'ALL') {
+            Try changing your search or filters.
+          } @else {
+            Start by adding inventory for a part.
+          }
+        </p>
+
+        @if (!searchTerm && stockFilter === 'ALL') {
+
+          <p-button
+            label="Add Inventory"
+            icon="pi pi-plus"
+            (onClick)="createInventory()"
+          />
+
+        }
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         TABLE
+         =================================================== -->
+
+    @else {
+
+      <p-table
+        [value]="filteredInventory"
+        [rows]="10"
+        [paginator]="filteredInventory.length > 10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        dataKey="id"
+        responsiveLayout="scroll"
+      >
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>
+              Part
+            </th>
+
+            <th>
+              Part Code
+            </th>
+
+            <th>
+              Total Stock
+            </th>
+
+            <th>
+              Reserved
+            </th>
+
+            <th>
+              Available
+            </th>
+
+            <th>
+              Reorder Level
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- =================================================
+             BODY
+             ================================================= -->
+
+        <ng-template
+          #body
+          let-item
+        >
+
+          <tr>
+
+            <!-- PART -->
+
+            <td>
+
+              <div class="part-info">
+
+                <div class="part-icon">
+
+                  <i class="pi pi-cog"></i>
+
+                </div>
+
+                <div class="part-info-text">
+
+                  <strong>
+                    {{ item.partName }}
+                  </strong>
+
+                  <span>
+                    Part #{{ item.partId }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- CODE -->
+
+            <td>
+
+              <span class="part-code">
+                {{ item.partCode }}
+              </span>
+
+            </td>
+
+
+            <!-- TOTAL -->
+
+            <td>
+
+              <span class="quantity-value">
+                {{ item.quantity }}
+              </span>
+
+            </td>
+
+
+            <!-- RESERVED -->
+
+            <td>
+
+              <span class="secondary-text">
+                {{ item.reservedQuantity }}
+              </span>
+
+            </td>
+
+
+            <!-- AVAILABLE -->
+
+            <td>
+
+              <span
+                class="available-quantity"
+                [class.warning]="item.lowStock"
+                [class.danger]="item.availableQuantity === 0"
+              >
+                {{ item.availableQuantity }}
+              </span>
+
+            </td>
+
+
+            <!-- REORDER LEVEL -->
+
+            <td>
+
+              <span class="secondary-text">
+                {{ item.reorderLevel }}
+              </span>
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="inventory-status"
+                [class]="getStockClass(item)"
+              >
+
+                <span class="status-dot"></span>
+
+                {{ getStockLabel(item) }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td class="actions-cell">
+
+              <p-button
+                icon="pi pi-eye"
+                [text]="true"
+                [rounded]="true"
+                severity="info"
+                pTooltip="View"
+                tooltipPosition="top"
+                (onClick)="viewInventory(item.id)"
+              />
+
+              <p-button
+                icon="pi pi-pencil"
+                [text]="true"
+                [rounded]="true"
+                pTooltip="Edit"
+                tooltipPosition="top"
+                (onClick)="editInventory(item.id)"
+              />
+
+              @if (item.active) {
+
+                <p-button
+                  icon="pi pi-ban"
+                  [text]="true"
+                  [rounded]="true"
+                  severity="danger"
+                  pTooltip="Deactivate"
+                  tooltipPosition="top"
+                  (onClick)="deactivateInventory(item)"
+                />
+
+              }
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </div>
+
+</div>

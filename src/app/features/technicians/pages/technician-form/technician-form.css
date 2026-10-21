@@ -1,0 +1,713 @@
+/* =========================================================
+   NEXORA - TECHNICIAN FORM
+========================================================= */
+
+.technician-form-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.75rem;
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.page-header p {
+  margin: 0.35rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.92rem;
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+:host ::ng-deep
+.technician-form-page
+.p-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 1.5%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg) !important;
+
+  box-shadow:
+    var(--nexora-shadow-sm) !important;
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease !important;
+}
+
+
+/* Card hover */
+
+:host ::ng-deep
+.technician-form-page
+.p-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    var(--nexora-shadow-md) !important;
+}
+
+
+:host ::ng-deep
+.technician-form-page
+.p-card-body {
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+
+  padding: 1.35rem !important;
+}
+
+
+:host ::ng-deep
+.technician-form-page
+.p-card-content {
+  color: var(--nexora-text) !important;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   FIELD LABEL
+========================================================= */
+
+.field label {
+  color: var(--nexora-text);
+
+  font-size: 0.88rem;
+
+  font-weight: 650;
+
+  transition:
+    color 160ms ease;
+}
+
+.field:focus-within label {
+  color: var(--nexora-primary);
+}
+
+.required {
+  color: var(--nexora-danger);
+}
+
+
+/* =========================================================
+   INPUTS / TEXTAREA
+========================================================= */
+
+:host ::ng-deep
+.technician-form-page
+.p-inputtext,
+
+:host ::ng-deep
+.technician-form-page
+.p-textarea {
+  width: 100%;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    0.75rem !important;
+
+  box-shadow:
+    none !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+
+/* Placeholder */
+
+:host ::ng-deep
+.technician-form-page
+.p-inputtext::placeholder,
+
+:host ::ng-deep
+.technician-form-page
+.p-textarea::placeholder {
+  color:
+    var(--nexora-text-soft) !important;
+}
+
+
+/* Hover */
+
+:host ::ng-deep
+.technician-form-page
+.p-inputtext:hover,
+
+:host ::ng-deep
+.technician-form-page
+.p-textarea:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 32%,
+      var(--nexora-border)
+    ) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 1.5%,
+      var(--nexora-surface)
+    ) !important;
+}
+
+
+/* Focus */
+
+:host ::ng-deep
+.technician-form-page
+.p-inputtext:focus,
+
+:host ::ng-deep
+.technician-form-page
+.p-textarea:focus {
+  border-color:
+    var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 11%,
+      transparent
+    ) !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+:host ::ng-deep
+.technician-form-page
+.p-select {
+  width: 100%;
+
+  min-height: 2.75rem;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    0.75rem !important;
+
+  box-shadow:
+    none !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+
+/* Selected value */
+
+:host ::ng-deep
+.technician-form-page
+.p-select
+.p-select-label {
+  color:
+    var(--nexora-text) !important;
+
+  background:
+    transparent !important;
+}
+
+
+/* Placeholder */
+
+:host ::ng-deep
+.technician-form-page
+.p-select
+.p-select-label.p-placeholder {
+  color:
+    var(--nexora-text-muted) !important;
+}
+
+
+/* Dropdown arrow */
+
+:host ::ng-deep
+.technician-form-page
+.p-select
+.p-select-dropdown {
+  color:
+    var(--nexora-text-muted) !important;
+
+  background:
+    transparent !important;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease !important;
+}
+
+
+/* Select hover */
+
+:host ::ng-deep
+.technician-form-page
+.p-select:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 32%,
+      var(--nexora-border)
+    ) !important;
+}
+
+
+/* Select focus */
+
+:host ::ng-deep
+.technician-form-page
+.p-select.p-focus {
+  border-color:
+    var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 11%,
+      transparent
+    ) !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* Arrow on focus */
+
+:host ::ng-deep
+.technician-form-page
+.p-select.p-focus
+.p-select-dropdown {
+  color:
+    var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.error {
+  color:
+    var(--nexora-danger);
+
+  font-size:
+    0.78rem;
+
+  line-height:
+    1.4;
+
+  animation:
+    errorAppear 160ms ease;
+}
+
+
+@keyframes errorAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.form-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 0.75rem;
+
+  margin-top: 2rem;
+
+  padding-top: 1.25rem;
+
+  border-top:
+    1px solid
+    var(--nexora-border);
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+========================================================= */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:first-child {
+  min-height: 2.6rem;
+
+  padding:
+    0.55rem 1rem !important;
+
+  background:
+    transparent !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    0.7rem !important;
+
+  box-shadow:
+    none !important;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+
+/* Cancel hover */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:first-child:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 7%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 28%,
+      var(--nexora-border)
+    ) !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* Cancel active */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:first-child:active {
+  transform:
+    translateY(0)
+    scale(0.98);
+}
+
+
+/* Cancel icon */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:first-child
+.p-button-icon {
+  transition:
+    transform 160ms ease !important;
+}
+
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:first-child:hover
+.p-button-icon {
+  transform:
+    rotate(90deg);
+}
+
+
+/* =========================================================
+   CREATE / UPDATE BUTTON
+========================================================= */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:last-child {
+  min-height: 2.6rem;
+
+  padding:
+    0.55rem 1rem !important;
+
+  background:
+    var(--nexora-primary) !important;
+
+  color:
+    #ffffff !important;
+
+  border:
+    1px solid
+    var(--nexora-primary) !important;
+
+  border-radius:
+    0.7rem !important;
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+
+/* Primary hover */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:last-child:hover {
+  background:
+    var(--nexora-primary-hover) !important;
+
+  border-color:
+    var(--nexora-primary-hover) !important;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 7px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      transparent
+    ) !important;
+}
+
+
+/* Primary active */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:last-child:active {
+  transform:
+    translateY(0)
+    scale(0.98);
+
+  box-shadow:
+    0 3px 8px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+}
+
+
+/* Check icon */
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:last-child
+.p-button-icon {
+  transition:
+    transform 180ms ease !important;
+}
+
+
+:host ::ng-deep
+.technician-form-page
+.form-actions
+.p-button:last-child:hover
+.p-button-icon {
+  transform:
+    scale(1.12);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.75rem;
+
+  color:
+    var(--nexora-text-muted);
+}
+
+.loading-state i {
+  color:
+    var(--nexora-primary);
+
+  font-size:
+    2rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .technician-form-page {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    align-items: stretch;
+
+    flex-direction: column-reverse;
+  }
+
+  :host ::ng-deep
+  .technician-form-page
+  .form-actions
+  .p-button {
+    width: 100%;
+  }
+}

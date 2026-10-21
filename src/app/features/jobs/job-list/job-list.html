@@ -1,0 +1,383 @@
+<div class="job-page">
+
+  <p-toast></p-toast>
+
+  <p-confirmdialog></p-confirmdialog>
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <div>
+      <h2>Jobs</h2>
+
+      <p>
+        Manage service jobs and technician assignments
+      </p>
+    </div>
+
+    <p-button
+      label="Create Job"
+      icon="pi pi-plus"
+      (onClick)="createJob()">
+    </p-button>
+
+  </div>
+
+
+  <!-- FILTERS -->
+
+  <div class="filter-card">
+
+    <div class="filter-group">
+
+      <label>
+        Search
+      </label>
+
+      <input
+        pInputText
+        type="text"
+        placeholder="Search job number..."
+        (input)="onSearch($event)"
+      />
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Status
+      </label>
+
+      <p-select
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="All Status"
+        (onChange)="filterByStatus()">
+      </p-select>
+
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+
+  <div class="table-card">
+
+    <!-- OUR OWN LOADING -->
+
+    @if (loading()) {
+
+      <div class="job-loading">
+
+        <p-progressspinner
+          strokeWidth="4"
+          [style]="{
+            width: '40px',
+            height: '40px'
+          }">
+        </p-progressspinner>
+
+      </div>
+
+    }
+
+
+    <!-- TABLE -->
+
+    @if (!loading()) {
+
+      <p-table
+        #jobsTable
+        [value]="jobs()"
+        [paginator]="true"  
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [globalFilterFields]="[
+          'jobNumber',
+          'serviceRequestId',
+          'customerId',
+          'siteId',
+          'technicianId',
+          'status'
+        ]"
+        responsiveLayout="scroll"
+        [tableStyle]="{ 'min-width': '900px' }">
+
+        <!-- HEADER -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>Job Number</th>
+
+            <th>Service Request</th>
+
+            <th>Customer</th>
+
+            <th>Site</th>
+
+            <th>Technician</th>
+
+            <th>Scheduled</th>
+
+            <th>Status</th>
+
+            <th style="width: 220px">
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- BODY -->
+
+        <ng-template
+          #body
+          let-job>
+
+          <tr>
+
+            <td>
+
+              <button
+                type="button"
+                class="job-number"
+                (click)="viewJob(job)">
+
+                {{ job.jobNumber }}
+
+              </button>
+
+            </td>
+
+
+            <td>
+
+              #{{ job.serviceRequestId }}
+
+            </td>
+
+
+            <td>
+
+              #{{ job.customerId }}
+
+            </td>
+
+
+            <td>
+
+              #{{ job.siteId }}
+
+            </td>
+
+
+            <td>
+
+              @if (job.technicianId) {
+
+                #{{ job.technicianId }}
+
+              } @else {
+
+                Unassigned
+
+              }
+
+            </td>
+
+
+            <td>
+
+              @if (job.scheduledAt) {
+
+                {{
+                  job.scheduledAt
+                    | date:'dd MMM yyyy, hh:mm a'
+                }}
+
+              } @else {
+
+                Not scheduled
+
+              }
+
+            </td>
+
+
+            <td>
+
+              <p-tag
+                [value]="getStatusLabel(job.status)"
+                [severity]="getStatusSeverity(job.status)">
+              </p-tag>
+
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <p-button
+                  icon="pi pi-eye"
+                  [text]="true"
+                  severity="secondary"
+                  pTooltip="View"
+                  (onClick)="viewJob(job)">
+                </p-button>
+
+
+                @if (
+                  job.status !== 'COMPLETED' &&
+                  job.status !== 'CANCELLED' &&
+                  job.status !== 'IN_PROGRESS'
+                ) {
+
+                  <p-button
+                    icon="pi pi-pencil"
+                    [text]="true"
+                    severity="secondary"
+                    pTooltip="Edit"
+                    (onClick)="editJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status === 'CREATED') {
+
+                  <p-button
+                    icon="pi pi-user-plus"
+                    [text]="true"
+                    severity="info"
+                    pTooltip="Assign Technician"
+                    (onClick)="assignTechnician(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status === 'ASSIGNED') {
+
+                  <p-button
+                    icon="pi pi-calendar"
+                    [text]="true"
+                    severity="info"
+                    pTooltip="Schedule"
+                    (onClick)="scheduleJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status === 'SCHEDULED') {
+
+                  <p-button
+                    icon="pi pi-play"
+                    [text]="true"
+                    severity="success"
+                    pTooltip="Start"
+                    (onClick)="startJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status === 'IN_PROGRESS') {
+
+                  <p-button
+                    icon="pi pi-pause"
+                    [text]="true"
+                    severity="warn"
+                    pTooltip="Hold"
+                    (onClick)="holdJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status === 'ON_HOLD') {
+
+                  <p-button
+                    icon="pi pi-play"
+                    [text]="true"
+                    severity="success"
+                    pTooltip="Resume"
+                    (onClick)="resumeJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (
+                  job.status !== 'COMPLETED' &&
+                  job.status !== 'CANCELLED'
+                ) {
+
+                  <p-button
+                    icon="pi pi-times"
+                    [text]="true"
+                    severity="danger"
+                    pTooltip="Cancel"
+                    (onClick)="cancelJob(job)">
+                  </p-button>
+
+                }
+
+
+                @if (job.status !== 'COMPLETED') {
+
+                  <p-button
+                    icon="pi pi-trash"
+                    [text]="true"
+                    severity="danger"
+                    pTooltip="Delete"
+                    (onClick)="deleteJob(job)">
+                  </p-button>
+
+                }
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- EMPTY -->
+
+        <ng-template #emptymessage>
+
+          <tr>
+
+            <td
+              colspan="8"
+              class="empty-message">
+
+              No jobs found.
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </div>
+
+</div>

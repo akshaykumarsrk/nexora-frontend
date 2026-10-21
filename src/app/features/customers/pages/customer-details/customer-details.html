@@ -1,0 +1,324 @@
+<p-toast></p-toast>
+
+
+<div class="page-container">
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <button
+        type="button"
+        class="back-button icon-back-button"
+        aria-label="Back to customers"
+        title="Back to customers"
+        (click)="goBack()"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+      @if (customer()) {
+
+        <h1>{{ customer()?.name }}</h1>
+
+        <p>
+          Customer #{{ customer()?.id }}
+        </p>
+
+      } @else {
+
+        <h1>Customer Details</h1>
+
+      }
+
+    </div>
+
+
+    @if (customer()) {
+
+      <p-button
+        label="Edit Customer"
+        icon="pi pi-pencil"
+        (onClick)="editCustomer()"
+      ></p-button>
+
+    }
+
+  </div>
+
+
+  <!-- Loading -->
+
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>Loading customer...</h3>
+
+      <p>
+        Please wait while we fetch the customer information.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- Error -->
+
+  @if (!loading() && error()) {
+
+    <div class="state-card error-state">
+
+      <i class="pi pi-exclamation-circle"></i>
+
+      <h3>Unable to load customer</h3>
+
+      <p>
+        The customer information could not be loaded.
+      </p>
+
+      <p-button
+        label="Try Again"
+        icon="pi pi-refresh"
+        [outlined]="true"
+        (onClick)="retry()"
+      ></p-button>
+
+    </div>
+
+  }
+
+
+  <!-- Details -->
+
+  @if (!loading() && !error() && customer()) {
+
+    <div class="details-layout">
+
+
+      <!-- Main Information -->
+
+      <div class="details-card">
+
+        <div class="card-header">
+
+          <div class="customer-heading">
+
+            <div class="customer-avatar">
+              {{ customer.name.charAt(0).toUpperCase() }}
+            </div>
+
+            <div>
+
+              <h2>{{ customer()?.name }}</h2>
+
+              <p>
+                Customer #{{ customer()?.id }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <p-tag
+            [value]="
+              getCustomerTypeLabel(
+                customer()!.customerType
+              )
+            "
+            [severity]="
+              getCustomerTypeSeverity(
+                customer()!.customerType
+              )
+            "
+          ></p-tag>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="information-grid">
+
+
+          <!-- Phone -->
+
+          <div class="information-item">
+
+            <span class="label">
+              Phone Number
+            </span>
+
+            <span class="value">
+
+              @if (customer()?.phone) {
+
+                <a
+                  [href]="'tel:' + customer()?.phone"
+                >
+                  <i class="pi pi-phone"></i>
+                  {{ customer()?.phone }}
+                </a>
+
+              } @else {
+
+                —
+
+              }
+
+            </span>
+
+          </div>
+
+
+          <!-- Email -->
+
+          <div class="information-item">
+
+            <span class="label">
+              Email Address
+            </span>
+
+            <span class="value">
+
+              @if (customer()?.email) {
+
+                <a
+                  [href]="'mailto:' + customer()?.email"
+                >
+                  <i class="pi pi-envelope"></i>
+                  {{ customer()?.email }}
+                </a>
+
+              } @else {
+
+                —
+
+              }
+
+            </span>
+
+          </div>
+
+
+          <!-- GST -->
+
+          <div class="information-item">
+
+            <span class="label">
+              GST Number
+            </span>
+
+            <span class="value">
+              {{ customer()?.gstNumber || '—' }}
+            </span>
+
+          </div>
+
+
+          <!-- Customer Type -->
+
+          <div class="information-item">
+
+            <span class="label">
+              Customer Type
+            </span>
+
+            <span class="value">
+              {{
+                getCustomerTypeLabel(
+                  customer()!.customerType
+                )
+              }}
+            </span>
+
+          </div>
+
+
+          <!-- Created -->
+
+          <div class="information-item">
+
+            <span class="label">
+              Created At
+            </span>
+
+            <span class="value">
+              {{
+                customer()?.createdAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </span>
+
+          </div>
+
+
+          <!-- Updated -->
+
+          <div class="information-item">
+
+            <span class="label">
+              Last Updated
+            </span>
+
+            <span class="value">
+              {{
+                customer()?.updatedAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Notes -->
+
+      <div class="details-card notes-card">
+
+        <div class="card-title">
+
+          <i class="pi pi-file-edit"></i>
+
+          <h2>Notes</h2>
+
+        </div>
+
+
+        @if (customer()?.notes) {
+
+          <p class="notes-content">
+            {{ customer()?.notes }}
+          </p>
+
+        } @else {
+
+          <div class="no-notes">
+
+            <i class="pi pi-info-circle"></i>
+
+            <span>
+              No notes have been added for this customer.
+            </span>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

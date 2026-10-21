@@ -1,0 +1,187 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-grid">
+
+    <!-- Employee Name -->
+    <div class="form-field">
+      <label for="name">Employee Name</label>
+
+      <input
+        id="name"
+        type="text"
+        pInputText
+        formControlName="name"
+        placeholder="Enter employee name"
+      />
+
+      @if (employeeForm.controls.name.touched && employeeForm.controls.name.invalid) {
+        <small class="error-message">
+          Employee name is required.
+        </small>
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="form-field">
+      <label for="email">Email</label>
+
+      <input
+        id="email"
+        type="email"
+        pInputText
+        formControlName="email"
+        placeholder="Enter email address"
+      />
+
+      <!-- controls means: "Give me all the individual fields inside this form." -->
+       <!-- touched tells us whether the user has interacted with the field and then left it. -->
+        <!-- Here Angular checks: Did user touch email? and Does email have server error -->
+      @if (employeeForm.controls.email.touched && employeeForm.controls.email.errors?.['server']) {
+        <small class="error-message">
+          {{ employeeForm.controls.email.errors?.['server'] }}
+        </small>
+      } @else if (employeeForm.controls.email.touched && employeeForm.controls.email.invalid) {
+        <small class="error-message">
+          Please enter a valid email address.
+        </small>
+      } 
+    </div>
+
+    <!-- Employee Code -->
+    <div class="form-field">
+      <label for="employeeCode">Employee Code</label>
+
+      <input
+        id="employeeCode"
+        type="text"
+        pInputText
+        formControlName="employeeCode"
+        placeholder="EMP-1007"
+      />
+
+      @if (employeeForm.controls.employeeCode.touched && employeeForm.controls.employeeCode.errors?.['server']) {
+        <small class="error-message">
+          {{ employeeForm.controls.employeeCode.errors?.['server'] }}
+        </small>
+      } @else if (employeeForm.controls.employeeCode.touched && employeeForm.controls.employeeCode.invalid) {
+        <small class="error-message">
+          Employee code is required.
+        </small>
+      }
+    </div>
+
+    <!-- Department -->
+    <div class="form-field">
+      <label for="department">Department</label>
+
+      <input
+        id="department"
+        type="text"
+        pInputText
+        formControlName="department"
+        placeholder="Engineering"
+      />
+
+      @if (employeeForm.controls.department.touched && employeeForm.controls.department.invalid) {
+        <small class="error-message">
+          Department is required.
+        </small>
+      }
+    </div>
+
+    <!-- Designation -->
+    <div class="form-field">
+      <label for="designation">Designation</label>
+
+      <input
+        id="designation"
+        type="text"
+        pInputText
+        formControlName="designation"
+        placeholder="Software Engineer"
+      />
+
+      @if (employeeForm.controls.designation.touched && employeeForm.controls.designation.invalid) {
+        <small class="error-message">
+          Designation is required.
+        </small>
+      }
+    </div>
+
+    <!-- Joining Date -->
+    <div class="form-field">
+      <label for="joiningDate">Joining Date</label>
+
+      <input
+        id="joiningDate"
+        type="date"
+        pInputText
+        formControlName="joiningDate"
+      />
+
+      @if (employeeForm.controls.joiningDate.touched && employeeForm.controls.joiningDate.invalid) {
+        <small class="error-message">
+          Joining date is required.
+        </small>
+      }
+    </div>
+
+    <!-- Status -->
+    <div class="form-field">
+      <label for="status">Status</label>
+
+      <!-- 🧠 What does formControlName mean? -->
+       <!-- We created this in TypeScript: -->
+        <!-- employeeForm = {
+                name,
+                email,
+                employeeCode,
+                ...
+                status
+            } -->
+        <!-- Then HTML says: formControlName="status" -->
+         <!-- Angular connects the two -->
+          <!-- TypeScript                 HTML
+                ──────────                 ────
+                name       ←────────────→  input
+                email      ←────────────→  input
+                department ←────────────→  input
+                status     ←────────────→  select -->
+      <p-select
+        inputId="status"
+        [options]="statusOptions"
+        optionLabel="label"
+        optionValue="value"
+        formControlName="status"
+        placeholder="Select status"
+        appendTo="body"
+      />
+
+      @if (employeeForm.controls.status.touched && employeeForm.controls.status.invalid) {
+        <small class="error-message">
+          Status is required.
+        </small>
+      }
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <p-button
+      type="button"
+      label="Cancel"
+      severity="secondary"
+      [outlined]="true"
+      (onClick)="onCancel()"
+    />
+
+    <p-button
+      type="submit"
+      label="Save Employee"
+      icon="pi pi-check"
+      [loading]="saving"
+      [disabled]="saving"
+    />
+  </div>
+
+</form>

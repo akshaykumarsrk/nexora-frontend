@@ -1,0 +1,131 @@
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.invitation-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-ground, #f4f6fb);
+}
+
+.invitation-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 36px;
+  border: 1px solid var(--surface-border, #e5e7eb);
+  border-radius: 18px;
+  background: var(--surface-card, #ffffff);
+  box-shadow: 0 12px 36px rgb(15 23 42 / 8%);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 22px;
+  border-radius: 14px;
+  background: #166534;
+  color: white;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 27px;
+  color: var(--text-color, #172033);
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: var(--text-color-secondary, #64748b);
+  line-height: 1.6;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--surface-border, #d1d5db);
+  border-radius: 9px;
+  background: var(--surface-card, white);
+  color: var(--text-color, #172033);
+  font: inherit;
+}
+
+.form-field input:focus {
+  outline: 2px solid #86b99a;
+  outline-offset: 1px;
+}
+
+button {
+  width: 100%;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #166534;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.alert {
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.success {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.field-error {
+  color: #b91c1c;
+}
+
+.login-link {
+  display: block;
+  margin-top: 22px;
+  text-align: center;
+  color: var(--primary-color, #166534);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .invitation-card {
+    padding: 24px;
+  }
+}

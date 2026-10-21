@@ -1,0 +1,96 @@
+<section class="subscription-page">
+  <header class="page-heading">
+    <div class="heading-icon"><i class="pi pi-wallet" aria-hidden="true"></i></div>
+    <div class="heading-copy">
+      <p class="eyebrow">BILLING &amp; PLAN</p>
+      <h1>Subscription</h1>
+      <p class="subtitle">Choose a plan that fits your service business as it grows.</p>
+    </div>
+  </header>
+
+  @if (current(); as subscription) {
+    <section class="current-plan" aria-label="Current subscription">
+      <div class="current-plan-icon"><i class="pi pi-check-circle" aria-hidden="true"></i></div>
+      <div class="current-plan-copy">
+        <span class="current-plan-label">YOUR CURRENT PLAN</span>
+        <strong>{{ subscription.planCode }} <span class="status-pill" [class.status-trial]="subscription.status === 'TRIALING'">{{ subscription.status.replace('_', ' ') }}</span></strong>
+        @if (subscription.status === 'TRIALING' && subscription.trialEndAt) {
+          <span>Your trial ends {{ subscription.trialEndAt | date:'mediumDate' }}.</span>
+        } @else if (subscription.currentPeriodEndAt) {
+          <span>Current period ends {{ subscription.currentPeriodEndAt | date:'mediumDate' }}.</span>
+        }
+      </div>
+    </section>
+  }
+
+  @if (pageError()) {
+    <div class="integration-notice" role="status">
+      <i class="pi pi-info-circle" aria-hidden="true"></i>
+      <span>{{ pageError() }}</span>
+    </div>
+  }
+
+  <div class="pricing-controls">
+    <div>
+      <h2>Simple, transparent plans</h2>
+      <p>Proposed pricing for early customer pilots. Final prices and limits will be confirmed by the subscription API.</p>
+    </div>
+    <div class="billing-toggle" role="group" aria-label="Billing interval">
+      <button type="button" [class.selected]="!annual()" [attr.aria-pressed]="!annual()" (click)="annual.set(false)">Monthly</button>
+      <button type="button" [class.selected]="annual()" [attr.aria-pressed]="annual()" (click)="annual.set(true)">Yearly <span>Save ~17%</span></button>
+    </div>
+  </div>
+
+  <div class="plan-grid">
+    @for (plan of plans(); track plan.code) {
+      <article class="plan-card" [class.recommended]="plan.recommended" [class.current-card]="isCurrent(plan)">
+        @if (plan.recommended) { <div class="popular-ribbon">MOST POPULAR</div> }
+        <div class="plan-topline">
+          <div class="plan-symbol" [class.business-symbol]="plan.code === 'BUSINESS'" [class.growth-symbol]="plan.code === 'GROWTH'">
+            <i [class]="plan.code === 'STARTER' ? 'pi pi-bolt' : plan.code === 'BUSINESS' ? 'pi pi-chart-line' : 'pi pi-sparkles'" aria-hidden="true"></i>
+          </div>
+          @if (isCurrent(plan)) { <span class="current-badge">CURRENT PLAN</span> }
+        </div>
+        <h3>{{ plan.name }}</h3>
+        <p class="plan-description">{{ plan.description }}</p>
+        <div class="plan-price">
+          <span class="currency">₹</span><strong>{{ price(plan) | number:'1.0-0' }}</strong><span class="price-period">/{{ intervalLabel() }}</span>
+        </div>
+        @if (annual()) { <p class="billing-caption">Billed annually · equivalent to ₹{{ (plan.annualPriceInr / 12) | number:'1.0-0' }}/month</p> }
+        @else { <p class="billing-caption">No payment is collected on this page.</p> }
+        <button type="button" class="plan-action" [class.primary-action]="plan.recommended" [disabled]="!apiConnected() || startingTrial() !== null || isCurrent(plan)" (click)="startTrial(plan)">
+          @if (startingTrial() === plan.code) { <i class="pi pi-spin pi-spinner" aria-hidden="true"></i> Starting trial… }
+          @else if (isCurrent(plan)) { Current plan }
+          @else if (!apiConnected()) { Backend setup required }
+          @else { Start 30-day trial }
+        </button>
+        <div class="plan-limits">
+          <div><i class="pi pi-users" aria-hidden="true"></i><span>Up to {{ plan.limits.maxUsers }} users</span></div>
+          <div><i class="pi pi-wrench" aria-hidden="true"></i><span>Up to {{ plan.limits.maxTechnicians }} technicians</span></div>
+          <div><i class="pi pi-briefcase" aria-hidden="true"></i><span>{{ plan.limits.maxJobsPerMonth | number }} jobs / month</span></div>
+        </div>
+        <div class="feature-divider"></div>
+        <p class="included-label">WHAT'S INCLUDED</p>
+        <ul class="feature-list">
+          @for (feature of plan.features; track feature) {
+            <li><i class="pi pi-check" aria-hidden="true"></i><span>{{ feature }}</span></li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+
+  @if (actionMessage()) {
+    <div class="action-message" role="status"><i class="pi pi-info-circle" aria-hidden="true"></i>{{ actionMessage() }}</div>
+  }
+
+  <section class="trial-note">
+    <div class="trial-note-icon"><i class="pi pi-calendar-clock" aria-hidden="true"></i></div>
+    <div><strong>Try NEXORA for 30 days</strong><p>The trial length is enforced by the backend, not this page. No payment gateway is connected yet; paid checkout will be enabled after subscription APIs, authorization and billing webhooks are implemented and tested.</p></div>
+  </section>
+
+  <footer class="pricing-footer">
+    <i class="pi pi-shield" aria-hidden="true"></i>
+    <span>Subscription status and plan limits must be verified by the server for every organization and protected API request.</span>
+  </footer>
+</section>

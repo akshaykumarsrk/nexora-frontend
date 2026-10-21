@@ -1,0 +1,1450 @@
+/* =========================================================
+   NEXORA TOPBAR
+   ========================================================= */
+
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+
+
+.topbar {
+  width: 100%;
+  max-width: 100%;
+  height: var(--nx-topbar-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 1.5rem;
+
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  box-sizing: border-box;
+
+  position: relative;
+  z-index: 100;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT
+   ========================================================= */
+
+.topbar-left {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mobile-menu {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: var(--nexora-radius-md);
+
+  background: transparent;
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.15s ease;
+}
+
+
+.mobile-menu:hover {
+  background: var(--nexora-surface-soft);
+  color: var(--nexora-primary);
+  border-color: var(--nexora-border);
+}
+
+
+.mobile-menu:active {
+  transform: scale(0.94);
+}
+
+
+.mobile-menu:focus-visible {
+  outline: 2px solid var(--nexora-primary);
+  outline-offset: 2px;
+}
+
+
+.mobile-menu i {
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.65rem;
+
+  font-size: 0.8rem;
+}
+
+
+.breadcrumb span {
+  color: var(--nexora-text-soft);
+  font-weight: 500;
+}
+
+
+.breadcrumb i {
+  color: var(--nexora-text-soft);
+  font-size: 0.65rem;
+}
+
+
+.breadcrumb strong {
+  color: var(--nexora-text);
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   ICON BUTTON
+   ========================================================= */
+
+.icon-button {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: var(--nexora-radius-md);
+
+  background: transparent;
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.15s ease;
+}
+
+
+.icon-button:hover {
+  background: var(--nexora-surface-soft);
+  color: var(--nexora-primary);
+  border-color: var(--nexora-border);
+}
+
+
+.icon-button:active {
+  transform: scale(0.94);
+}
+
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--nexora-primary);
+  outline-offset: 2px;
+}
+
+
+.icon-button i {
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+   ========================================================= */
+
+.notification-wrapper {
+  position: relative;
+}
+
+
+.notification.has-unread .pi-bell {
+  animation: notification-bell 2.8s ease-in-out infinite;
+}
+
+
+@keyframes notification-bell {
+
+  0%,
+  90%,
+  100% {
+    transform: rotate(0);
+  }
+
+  93% {
+    transform: rotate(8deg);
+  }
+
+  96% {
+    transform: rotate(-8deg);
+  }
+
+  98% {
+    transform: rotate(4deg);
+  }
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+   ========================================================= */
+
+.notification-badge {
+  position: absolute;
+
+  top: 1px;
+  right: 0;
+
+  min-width: 18px;
+  height: 18px;
+
+  padding: 0 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 2px solid var(--nexora-surface);
+  border-radius: 999px;
+
+  background: var(--nexora-danger);
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 18%);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   NOTIFICATION POPOVER
+   ========================================================= */
+
+:host ::ng-deep .nexora-notification-popover {
+  width: 420px;
+  max-width: calc(100vw - 24px);
+
+  padding: 0 !important;
+
+  overflow: hidden;
+
+  background: var(--nexora-surface) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 16px !important;
+
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+
+
+:host ::ng-deep .nexora-notification-popover .p-popover-content {
+  padding: 0 !important;
+}
+
+
+/* =========================================================
+   NOTIFICATION PANEL
+   ========================================================= */
+
+.notification-panel {
+  width: 100%;
+  overflow: hidden;
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.notification-header {
+  min-height: 70px;
+
+  padding: 14px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 5%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+}
+
+
+.notification-header-left {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.notification-title-icon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+.notification-title-icon i {
+  font-size: 15px;
+}
+
+
+.notification-header h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+
+.notification-subtitle {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 0.68rem;
+}
+
+
+.notification-count {
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 6px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   MARK ALL READ
+   ========================================================= */
+
+.mark-all-read {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  flex-shrink: 0;
+
+  padding: 7px 9px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--nexora-primary);
+
+  font-size: 0.68rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+
+.mark-all-read:hover:not(:disabled) {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+}
+
+
+.mark-all-read:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.notification-divider {
+  height: 1px;
+  background: var(--nexora-border);
+}
+
+
+/* =========================================================
+   LIST
+   ========================================================= */
+
+.notification-list {
+  max-height: 390px;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+}
+
+
+.notification-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+.notification-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text) 18%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   NOTIFICATION ITEM
+   ========================================================= */
+
+.notification-item {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  border: 0;
+  border-bottom: 1px solid var(--nexora-border);
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    background 0.18s ease,
+    transform 0.15s ease;
+}
+
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+
+.notification-item:hover {
+  background: var(--nexora-surface-soft);
+}
+
+
+.notification-item:active {
+  transform: scale(0.995);
+}
+
+
+.notification-item:focus-visible {
+  outline: 2px solid var(--nexora-primary);
+  outline-offset: -2px;
+}
+
+
+.notification-item.unread {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      transparent
+    );
+}
+
+
+.notification-item.unread:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   NOTIFICATION ICON
+   ========================================================= */
+
+.notification-icon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  font-size: 15px;
+}
+
+
+.notification-job .notification-icon {
+  background: rgb(59 130 246 / 12%);
+  color: #3b82f6;
+}
+
+
+.notification-success .notification-icon {
+  background: rgb(34 197 94 / 12%);
+  color: #22c55e;
+}
+
+
+.notification-warning .notification-icon {
+  background: rgb(245 158 11 / 12%);
+  color: #f59e0b;
+}
+
+
+.notification-error .notification-icon {
+  background: rgb(239 68 68 / 12%);
+  color: #ef4444;
+}
+
+
+.notification-payment .notification-icon {
+  background: rgb(168 85 247 / 12%);
+  color: #a855f7;
+}
+
+
+.notification-customer .notification-icon {
+  background: rgb(20 184 166 / 12%);
+  color: #14b8a6;
+}
+
+
+.notification-default .notification-icon {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.notification-content {
+  min-width: 0;
+  flex: 1;
+}
+
+
+.notification-item-header {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 4px;
+}
+
+
+.notification-item-header strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: var(--nexora-text);
+
+  font-size: 0.78rem;
+  font-weight: 650;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.notification-message {
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.72rem;
+  line-height: 1.5;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+
+.notification-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 7px;
+
+  color: var(--nexora-text-soft);
+}
+
+
+.notification-meta i {
+  font-size: 9px;
+}
+
+
+.notification-meta small {
+  font-size: 0.62rem;
+}
+
+
+/* =========================================================
+   NEW LABEL
+   ========================================================= */
+
+.unread-label {
+  flex-shrink: 0;
+
+  padding: 2px 5px;
+
+  border-radius: 4px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   UNREAD DOT
+   ========================================================= */
+
+.unread-dot {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  margin-top: 6px;
+
+  border-radius: 50%;
+
+  background: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+   ========================================================= */
+
+.notification-state {
+  min-height: 220px;
+
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+.notification-state-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  font-size: 19px;
+}
+
+
+.notification-state-icon.empty {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text) 6%,
+      transparent
+    );
+
+  color: var(--nexora-text-muted);
+}
+
+
+.notification-state-icon.loading {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+.notification-state strong {
+  margin-bottom: 4px;
+
+  color: var(--nexora-text);
+
+  font-size: 0.78rem;
+}
+
+
+.notification-state span {
+  color: var(--nexora-text-muted);
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+
+  margin-left: 0.35rem;
+}
+
+
+.profile {
+  display: flex;
+  align-items: center;
+
+  gap: 0.6rem;
+
+  padding: 0.25rem 0.45rem;
+
+  border: 1px solid transparent;
+  border-radius: var(--nexora-radius-md);
+
+  background: transparent;
+
+  color: var(--nexora-text);
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+
+.profile:hover {
+  background: var(--nexora-surface-soft);
+  border-color: var(--nexora-border);
+}
+
+
+.profile:focus-visible {
+  outline: 2px solid var(--nexora-primary);
+  outline-offset: 2px;
+}
+
+
+.profile-avatar {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--nexora-primary);
+  color: #ffffff;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 70px;
+
+  line-height: 1.2;
+}
+
+
+.profile-details strong {
+  color: var(--nexora-text);
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+
+.profile-details span {
+  margin-top: 3px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.65rem;
+}
+
+
+.profile > i {
+  margin-left: 0.1rem;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   PRIME MENU
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay {
+  min-width: 210px;
+
+  padding: 0.4rem;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-md);
+
+  box-shadow: var(--nexora-shadow-lg);
+
+  overflow: hidden;
+}
+
+
+:host ::ng-deep .p-menu-list {
+  padding: 0;
+}
+
+
+:host ::ng-deep .p-menu-item-link {
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0.65rem 0.75rem;
+
+  border-radius: var(--nexora-radius-sm);
+
+  color: var(--nexora-text);
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+
+:host ::ng-deep .p-menu-item-link:hover {
+  background: var(--nexora-surface-soft);
+}
+
+
+:host ::ng-deep .p-menu-item-icon {
+  margin-right: 0.65rem;
+
+  color: var(--nexora-text-muted);
+}
+
+
+:host ::ng-deep .p-menu-item-label {
+  color: var(--nexora-text);
+
+  font-size: 0.8rem;
+}
+
+
+/* Logout */
+
+:host ::ng-deep
+.p-menu-item:last-child
+.p-menu-item-icon {
+  color: var(--nexora-danger);
+}
+
+
+:host ::ng-deep
+.p-menu-item:last-child
+.p-menu-item-label {
+  color: var(--nexora-danger);
+}
+
+
+:host ::ng-deep
+.p-menu-item:last-child
+.p-menu-item-link:hover {
+  background: rgb(239 68 68 / 8%);
+}
+
+
+/* =========================================================
+   TABLET
+   IMPORTANT:
+   Same breakpoint as sidebar.css
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .mobile-menu {
+    display: flex;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .topbar {
+    height: 60px;
+    padding: 0 1rem;
+  }
+
+
+  .breadcrumb span,
+  .breadcrumb i {
+    display: none;
+  }
+
+
+  .profile-details,
+  .profile > i {
+    display: none;
+  }
+
+
+  .profile {
+    padding: 0.2rem;
+  }
+
+
+  .profile-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  :host ::ng-deep .nexora-notification-popover {
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+
+    border-radius: 14px !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .topbar {
+    padding: 0 0.7rem;
+  }
+
+
+  .topbar-left {
+    gap: 0.5rem;
+  }
+
+
+  .topbar-right {
+    gap: 0;
+  }
+
+
+  .icon-button,
+  .mobile-menu {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  .notification-badge {
+    top: 0;
+    right: -1px;
+  }
+
+
+  .notification-header {
+    padding: 13px;
+  }
+
+
+  .notification-subtitle {
+    display: none;
+  }
+
+
+  .notification-item {
+    padding: 13px;
+  }
+
+
+  .notification-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+  }
+
+
+  .mark-all-read span {
+    display: none;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Text follows hover */
+
+:host ::ng-deep .p-menu-item-link:hover .p-menu-item-label {
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   PROFILE POPUP
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay {
+  position: fixed !important;
+
+  min-width: 210px;
+  max-width: calc(100vw - 24px);
+
+  padding: 0.4rem;
+
+  box-sizing: border-box;
+
+  background: var(--nexora-surface) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: var(--nexora-radius-md);
+
+  box-shadow: var(--nexora-shadow-lg);
+
+  overflow: hidden;
+
+  z-index: 2000;
+}
+
+
+/* =========================================================
+   MENU LIST
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-list {
+  padding: 0;
+}
+
+
+/* =========================================================
+   MENU ITEM
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item {
+  margin: 2px 0;
+}
+
+
+/* =========================================================
+   MENU LINK
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link {
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0.65rem 0.75rem;
+
+  border-radius: 8px;
+
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-icon {
+  margin-right: 0.65rem;
+
+  color: var(--nexora-text-muted) !important;
+
+  transition: color 0.18s ease;
+}
+
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item-link:hover
+.p-menu-item-icon {
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-label {
+  color: var(--nexora-text) !important;
+
+  font-size: 0.84rem;
+
+  transition: color 0.18s ease;
+}
+
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item-link:hover
+.p-menu-item-label {
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   SEPARATOR
+   ========================================================= */
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-separator {
+  margin: 0.35rem 0;
+
+  border-color: var(--nexora-border);
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item:last-child
+.p-menu-item-link {
+  color: var(--nexora-danger) !important;
+
+  background: transparent !important;
+}
+
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item:last-child
+.p-menu-item-icon {
+  color: var(--nexora-danger) !important;
+}
+
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item:last-child
+.p-menu-item-label {
+  color: var(--nexora-danger) !important;
+}
+
+
+:host ::ng-deep
+.p-menu.p-menu-overlay
+.p-menu-item:last-child
+.p-menu-item-link:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-danger) !important;
+}
+
+.help-panel{display:grid;gap:.65rem;width:min(300px,75vw);padding:.2rem}.help-panel>strong{font-size:.95rem;color:var(--nexora-text)}.help-panel p{margin:0;color:var(--nexora-text-muted);font-size:.82rem;line-height:1.5}.help-panel button{display:flex;align-items:center;gap:.6rem;padding:.65rem .7rem;border:1px solid transparent;border-radius:.65rem;background:transparent;color:var(--nexora-text);text-align:left;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}.help-panel button:hover{background:var(--nexora-surface-soft);border-color:var(--nexora-border);color:var(--nexora-primary)}.help-panel button i{color:var(--nexora-primary)}.help-panel small{padding-top:.5rem;border-top:1px solid var(--nexora-border);color:var(--nexora-text-muted);font-size:.74rem;line-height:1.5}
+
+
+/* Theme-aware search/help popovers and consistent profile-menu hover.
+   PrimeNG overlays are rendered outside component markup, so use deep selectors. */
+:host ::ng-deep .nexora-search-popover.p-popover,
+:host ::ng-deep .nexora-help-popover.p-popover,
+:host ::ng-deep .nexora-notification-popover.p-popover {
+  color: var(--nexora-text) !important;
+  background: var(--nexora-surface) !important;
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: var(--nexora-radius-lg, 14px) !important;
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+
+:host ::ng-deep .nexora-search-popover .p-popover-content,
+:host ::ng-deep .nexora-help-popover .p-popover-content {
+  padding: 1rem !important;
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border-radius: inherit;
+}
+
+.search-panel { display: grid; gap: .7rem; width: min(300px, 76vw); color: var(--nexora-text); }
+.search-panel > label { font-size: .84rem; font-weight: 650; color: var(--nexora-text); }
+.search-input-wrap { display: flex; align-items: center; gap: .55rem; padding: 0 .7rem; min-height: 42px; border: 1px solid var(--nexora-border); border-radius: .7rem; background: var(--nexora-surface-soft); color: var(--nexora-text-muted); }
+.search-input-wrap:focus-within { border-color: var(--nexora-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--nexora-primary) 14%, transparent); }
+.search-input-wrap input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--nexora-text); font: inherit; font-size: .82rem; }
+.search-input-wrap input::placeholder { color: var(--nexora-text-soft); }
+.search-results { display: grid; gap: .2rem; max-height: min(320px, 50vh); overflow: auto; }
+.search-result { display: flex; align-items: center; gap: .65rem; width: 100%; padding: .65rem .7rem; border: 1px solid transparent; border-radius: .6rem; background: transparent !important; color: var(--nexora-text) !important; text-align: left; cursor: pointer; transition: background .16s ease, color .16s ease, border-color .16s ease; }
+.search-result > i:first-child { color: var(--nexora-primary); }
+.search-result span { flex: 1; font-size: .82rem; }
+.search-result .result-arrow { opacity: 0; color: var(--nexora-primary); font-size: .75rem; }
+.search-result:hover, .search-result:focus-visible { background: color-mix(in srgb, var(--nexora-primary) 9%, var(--nexora-surface)) !important; border-color: color-mix(in srgb, var(--nexora-primary) 20%, var(--nexora-border)); color: var(--nexora-primary) !important; outline: 0; }
+.search-result:hover .result-arrow, .search-result:focus-visible .result-arrow { opacity: 1; }
+.search-empty { margin: 0; padding: .8rem .5rem; color: var(--nexora-text-muted); font-size: .82rem; }
+.search-panel > small { padding-top: .55rem; border-top: 1px solid var(--nexora-border); color: var(--nexora-text-muted); font-size: .72rem; }
+
+:host ::ng-deep .nexora-help-popover .help-panel { width: min(300px, 76vw); gap: .7rem; padding: .15rem; color: var(--nexora-text); }
+:host ::ng-deep .nexora-help-popover .help-panel > strong,
+:host ::ng-deep .nexora-help-popover .help-panel p,
+:host ::ng-deep .nexora-help-popover .help-panel small { color: var(--nexora-text); }
+:host ::ng-deep .nexora-help-popover .help-panel p,
+:host ::ng-deep .nexora-help-popover .help-panel small { color: var(--nexora-text-muted); }
+:host ::ng-deep .nexora-help-popover .help-panel button { background: transparent !important; color: var(--nexora-text) !important; }
+:host ::ng-deep .nexora-help-popover .help-panel button:hover,
+:host ::ng-deep .nexora-help-popover .help-panel button:focus-visible { background: color-mix(in srgb, var(--nexora-primary) 9%, var(--nexora-surface)) !important; color: var(--nexora-primary) !important; border-color: color-mix(in srgb, var(--nexora-primary) 20%, var(--nexora-border)) !important; outline: 0; }
+
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-content { background: transparent !important; border-radius: 8px; }
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:visited { background: transparent !important; color: var(--nexora-text) !important; }
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-content:hover,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:hover,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:focus-visible { background: color-mix(in srgb, var(--nexora-primary) 9%, var(--nexora-surface)) !important; color: var(--nexora-primary) !important; outline: 0; }
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-content:hover .p-menu-item-icon,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:hover .p-menu-item-icon,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item-link:hover .p-menu-item-label { color: var(--nexora-primary) !important; }
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-content:hover,
+:host ::ng-deep .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover { background: color-mix(in srgb, var(--nexora-danger) 9%, var(--nexora-surface)) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .search-result, :host ::ng-deep .nexora-help-popover .help-panel button { transition: none !important; }
+}

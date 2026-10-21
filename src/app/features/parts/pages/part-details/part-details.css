@@ -1,0 +1,656 @@
+/* =========================================================
+   NEXORA - PART DETAILS
+   LIGHT + DARK THEME
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+.part-details-page {
+  min-height: 100%;
+  padding: 1.5rem;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.header-left h1 {
+  margin: 0.15rem 0 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.7rem;
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.header-left p {
+  margin: 0.35rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.85rem;
+}
+
+.eyebrow {
+  color: var(--nexora-primary);
+
+  font-size: 0.68rem;
+  font-weight: 750;
+
+  letter-spacing: 0.12em;
+}
+
+/* Back button */
+
+:host ::ng-deep
+.part-details-page
+.header-left
+.p-button {
+
+  width: 2.4rem;
+  height: 2.4rem;
+
+  border-radius: 0.7rem;
+
+  color: var(--nexora-text-muted) !important;
+
+  background: transparent !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease !important;
+}
+
+:host ::ng-deep
+.part-details-page
+.header-left
+.p-button:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transform: translateX(-2px);
+}
+
+:host ::ng-deep
+.part-details-page
+.header-left
+.p-button:active {
+
+  transform: scale(0.94);
+}
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.overview-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1.25fr);
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep
+.part-details-page
+.p-card {
+
+  border:
+    1px solid var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    var(--nexora-surface);
+
+  color:
+    var(--nexora-text);
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+:host ::ng-deep
+.part-details-page
+.p-card:hover {
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-border)
+    );
+
+  box-shadow:
+    var(--nexora-shadow-md);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.part-profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  min-height: 100px;
+}
+
+.part-icon {
+
+  width: 4rem;
+  height: 4rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 1.1rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 18%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 6%,
+        transparent
+      )
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.5rem;
+
+  box-shadow:
+    0 7px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.part-profile:hover .part-icon {
+
+  transform:
+    translateY(-2px)
+    rotate(-3deg);
+
+  box-shadow:
+    0 10px 22px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+}
+
+.profile-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.profile-label {
+
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.7rem;
+
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+.profile-content h2 {
+
+  margin: 0;
+
+  overflow: hidden;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.part-code {
+
+  display: inline-block;
+
+  margin-top: 0.3rem;
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   INFO LIST
+   ========================================================= */
+
+.info-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1rem;
+}
+
+.info-item {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.35rem;
+
+  min-width: 0;
+
+  padding: 0.8rem;
+
+  border:
+    1px solid var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-md);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-surface-soft) 55%,
+      transparent
+    );
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.info-item:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface-soft)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      var(--nexora-border)
+    );
+
+  transform: translateY(-1px);
+}
+
+.info-label {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.7rem;
+
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+.info-label i {
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 0.75rem;
+}
+
+.info-value {
+
+  overflow: hidden;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 0.85rem;
+
+  font-weight: 650;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.details-card {
+  margin-bottom: 1rem;
+}
+
+.description p {
+
+  margin: 0;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 0.88rem;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}
+
+.empty-description {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  padding: 1rem;
+
+  border:
+    1px dashed var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-md);
+
+  color:
+    var(--nexora-text-muted);
+
+  background:
+    var(--nexora-surface-soft);
+
+  font-size: 0.82rem;
+}
+
+.empty-description i {
+
+  color:
+    var(--nexora-primary);
+}
+
+/* =========================================================
+   RECORD INFORMATION
+   ========================================================= */
+
+.record-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1rem;
+}
+
+.record-item {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.35rem;
+}
+
+.record-label {
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.7rem;
+
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+.record-value {
+
+  color:
+    var(--nexora-text);
+
+  font-size: 0.84rem;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+
+  min-height: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.85rem;
+}
+
+.loading-state i {
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.1rem;
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-state {
+
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.empty-state > i {
+
+  width: 3.5rem;
+  height: 3.5rem;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.5rem;
+}
+
+.empty-state h3 {
+
+  margin: 0;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 1rem;
+}
+
+.empty-state p {
+
+  margin: 0.45rem 0 1.2rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.84rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .overview-grid {
+
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .part-details-page {
+
+    padding: 1rem;
+  }
+
+  .page-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .header-actions {
+
+    width: 100%;
+  }
+
+  :host ::ng-deep
+  .header-actions
+  .p-button {
+
+    width: 100%;
+  }
+
+  .info-list,
+  .record-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .part-profile {
+
+    align-items: flex-start;
+  }
+}
+/* Shared action motion: consistent across details and movement screens. */
+.back-button, .icon-back-button, .header-actions .p-button, .header-actions button, .movements-page button, .p-button { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.back-button:hover, .icon-back-button:hover, .header-actions .p-button:hover, .header-actions button:hover, .movements-page button:hover, .p-button:not(:disabled):hover { transform: translateY(-1px); }
+.back-button:focus-visible, .icon-back-button:focus-visible, .header-actions button:focus-visible, .movements-page button:focus-visible { outline: 2px solid var(--nexora-primary); outline-offset: 2px; }
+.icon-back-button { display:inline-grid; place-items:center; width:2.35rem; height:2.35rem; padding:0; border:1px solid var(--nexora-border); border-radius:10px; background:var(--nexora-surface); color:var(--nexora-text-muted); cursor:pointer; }
+.icon-back-button:hover { color:var(--nexora-primary); background:color-mix(in srgb,var(--nexora-primary) 8%,var(--nexora-surface)); border-color:color-mix(in srgb,var(--nexora-primary) 35%,var(--nexora-border)); box-shadow:var(--nexora-shadow-sm); }

@@ -1,0 +1,546 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page-container {
+  padding: 28px;
+  max-width: 1500px;
+  margin: 0 auto;
+  animation: pageEnter 0.35s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 14px 0 6px;
+  color: var(--nexora-text);
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--nexora-text-muted);
+  font-size: 14px;
+}
+
+.back-button {
+  border: 0;
+  background: transparent;
+  color: var(--nexora-primary);
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  color: var(--nexora-primary-hover);
+  transform: translateX(-2px);
+}
+
+.header-actions {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   DETAILS LAYOUT
+   ========================================================= */
+
+.details-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.details-card {
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+  padding: 24px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  animation: cardEnter 0.4s ease both;
+}
+
+.details-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--nexora-shadow-md);
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 22%,
+      var(--nexora-border)
+    );
+}
+
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.overview-card {
+  min-height: 250px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.site-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+
+  font-size: 23px;
+
+  transition: 0.25s ease;
+}
+
+.overview-card:hover .site-icon {
+  transform: scale(1.05) rotate(-2deg);
+
+  box-shadow:
+    0 10px 25px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      transparent
+    );
+}
+
+.eyebrow {
+  display: block;
+  color: var(--nexora-text-soft);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  margin-bottom: 4px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: var(--nexora-text);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.card-header p {
+  margin: 4px 0 0;
+  color: var(--nexora-text-muted);
+  font-size: 13px;
+}
+
+.overview-divider {
+  height: 1px;
+  background: var(--nexora-border);
+  margin: 22px 0 8px;
+}
+
+.overview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.overview-item span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nexora-text-muted);
+  font-size: 13px;
+}
+
+.overview-item span i {
+  color: var(--nexora-primary);
+}
+
+.overview-item strong {
+  color: var(--nexora-text);
+  font-size: 13px;
+  text-align: right;
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 24px;
+}
+
+.title-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      transparent
+    );
+}
+
+.contact-icon {
+  color: var(--nexora-success);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 9%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 16%,
+      transparent
+    );
+}
+
+.notes-icon {
+  color: var(--nexora-warning);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 9%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 16%,
+      transparent
+    );
+}
+
+.card-title h3 {
+  margin: 0 0 3px;
+  color: var(--nexora-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.card-title p {
+  margin: 0;
+  color: var(--nexora-text-muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   INFO GRID
+   ========================================================= */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+
+.info-item {
+  min-width: 0;
+}
+
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-item span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--nexora-text-soft);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item strong,
+.info-item a {
+  display: block;
+  color: var(--nexora-text);
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.info-item a {
+  color: var(--nexora-primary);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.info-item a:hover {
+  color: var(--nexora-primary-hover);
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.notes-card {
+  grid-column: 1 / -1;
+}
+
+.notes-content {
+  border-radius: var(--nexora-radius-md);
+  background: var(--nexora-surface-soft);
+  border: 1px solid var(--nexora-border);
+  padding: 16px;
+  color: var(--nexora-text);
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   STATES
+   ========================================================= */
+
+.state-card {
+  min-height: 320px;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  padding: 40px;
+
+  animation: cardEnter 0.35s ease;
+}
+
+.state-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  margin-bottom: 16px;
+
+  font-size: 21px;
+}
+
+.error-state .state-icon {
+  color: var(--nexora-danger);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      var(--nexora-surface)
+    );
+}
+
+.state-card h3 {
+  margin: 0 0 6px;
+  color: var(--nexora-text);
+  font-size: 17px;
+}
+
+.state-card p {
+  margin: 0 0 18px;
+  color: var(--nexora-text-muted);
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .notes-card {
+    grid-column: auto;
+  }
+
+}
+
+
+@media (max-width: 640px) {
+
+  .page-container {
+    padding: 18px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions p-button {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item.full-width {
+    grid-column: auto;
+  }
+
+  .details-card {
+    padding: 18px;
+  }
+
+  .overview-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .overview-item strong {
+    text-align: left;
+  }
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Shared action motion: consistent across details and movement screens. */
+.back-button, .icon-back-button, .header-actions .p-button, .header-actions button, .movements-page button, .p-button { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.back-button:hover, .icon-back-button:hover, .header-actions .p-button:hover, .header-actions button:hover, .movements-page button:hover, .p-button:not(:disabled):hover { transform: translateY(-1px); }
+.back-button:focus-visible, .icon-back-button:focus-visible, .header-actions button:focus-visible, .movements-page button:focus-visible { outline: 2px solid var(--nexora-primary); outline-offset: 2px; }
+.icon-back-button { display:inline-grid; place-items:center; width:2.35rem; height:2.35rem; padding:0; border:1px solid var(--nexora-border); border-radius:10px; background:var(--nexora-surface); color:var(--nexora-text-muted); cursor:pointer; }
+.icon-back-button:hover { color:var(--nexora-primary); background:color-mix(in srgb,var(--nexora-primary) 8%,var(--nexora-surface)); border-color:color-mix(in srgb,var(--nexora-primary) 35%,var(--nexora-border)); box-shadow:var(--nexora-shadow-sm); }

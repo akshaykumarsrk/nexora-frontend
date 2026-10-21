@@ -1,0 +1,1434 @@
+/* =========================================================
+   NEXORA - TECHNICIAN LIST
+========================================================= */
+
+.technician-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.75rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.page-header p {
+  margin: 0.35rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.92rem;
+}
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+:host ::ng-deep .technician-page > .p-card {
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 2%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    ) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: var(--nexora-radius-lg) !important;
+
+  box-shadow: var(--nexora-shadow-sm) !important;
+
+  transition:
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+:host ::ng-deep .technician-page > .p-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow: var(--nexora-shadow-md) !important;
+}
+
+:host ::ng-deep .technician-page > .p-card .p-card-body {
+  padding: 1.1rem 1.25rem 0.8rem;
+
+  background: transparent !important;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filters {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box > i {
+  position: absolute;
+
+  top: 50%;
+  left: 0.9rem;
+
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: var(--nexora-text-muted);
+
+  pointer-events: none;
+
+  transition: color 180ms ease;
+}
+
+.search-box:focus-within > i {
+  color: var(--nexora-primary);
+}
+
+.search-box input {
+  width: 100%;
+  padding-left: 2.6rem;
+}
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+:host ::ng-deep .technician-page .search-box .p-inputtext {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: var(--nexora-radius-md) !important;
+
+  box-shadow: none !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+:host ::ng-deep
+.technician-page
+.search-box
+.p-inputtext::placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.search-box
+.p-inputtext:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.search-box
+.p-inputtext:focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    ) !important;
+}
+
+/* =========================================================
+   STATUS SELECT
+========================================================= */
+
+.status-filter {
+  min-width: 200px;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: var(--nexora-radius-md) !important;
+
+  box-shadow: none !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter
+.p-select-label {
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter
+.p-select-label.p-placeholder {
+  color: var(--nexora-text-muted) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter
+.p-select-dropdown {
+  color: var(--nexora-text-muted) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.status-filter.p-focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    ) !important;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable {
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table {
+  border-collapse: separate;
+
+  border-spacing: 0;
+}
+
+/* Header */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-thead > tr > th {
+  padding: 0.85rem 1rem;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border-top: 1px solid var(--nexora-border) !important;
+
+  border-bottom: 1px solid var(--nexora-border) !important;
+
+  font-size: 0.78rem;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.035em;
+}
+
+/* First header cell */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-thead > tr > th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+
+/* Last header cell */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-thead > tr > th:last-child {
+  border-top-right-radius: 0.75rem;
+}
+
+/* Rows */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-tbody > tr {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:host ::ng-deep
+.technician-page
+.p-datatable-tbody > tr > td {
+  padding: 0.78rem 1rem;
+
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+
+  border-bottom:
+    1px solid var(--nexora-border) !important;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+/* Row hover */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-tbody > tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.p-datatable-tbody > tr:hover > td {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+}
+
+/* =========================================================
+   TECHNICIAN NAME
+========================================================= */
+
+.technician-name {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+}
+
+.technician-name strong {
+  display: block;
+
+  color: var(--nexora-text);
+
+  font-size: 0.9rem;
+}
+
+.technician-name small {
+  display: block;
+
+  margin-top: 0.18rem;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+  position: relative;
+
+  width: 2.55rem;
+  height: 2.55rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      var(--nexora-primary-hover)
+    );
+
+  color: #ffffff;
+
+  font-size: 0.85rem;
+  font-weight: 750;
+
+  box-shadow:
+    0 4px 10px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      transparent
+    );
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.technician-name:hover .avatar {
+  transform: translateY(-1px) scale(1.04);
+
+  box-shadow:
+    0 6px 14px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 28%,
+      transparent
+    );
+}
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.actions-column {
+  width: 145px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
+}
+
+/*
+   PrimeNG text buttons can inherit dark-theme
+   backgrounds. Explicitly make them transparent.
+*/
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button {
+  width: 2.15rem;
+  height: 2.15rem;
+
+  padding: 0 !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent !important;
+
+  border: 1px solid transparent !important;
+
+  border-radius: 0.65rem !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+/* View */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:first-child {
+  color: var(--nexora-primary) !important;
+}
+
+/* Edit */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:nth-child(2) {
+  color: var(--nexora-text-muted) !important;
+}
+
+/* Delete */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:nth-child(3) {
+  color: var(--nexora-danger) !important;
+}
+
+/* Hover */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:hover {
+  transform: translateY(-1px);
+}
+
+/* View hover */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:first-child:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+/* Edit hover */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:nth-child(2):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 10%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 18%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-text) !important;
+}
+
+/* Delete hover */
+
+:host ::ng-deep
+.technician-page
+.actions
+.p-button:nth-child(3):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-danger) !important;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-paginator {
+  padding: 0.85rem 0.25rem 0.15rem;
+
+  background: transparent !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border: none !important;
+}
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-page,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-first,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-prev,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-next,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-last {
+  min-width: 2.2rem;
+  height: 2.2rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border: none !important;
+
+  border-radius: 0.65rem !important;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-page:not(.p-disabled):hover,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-first:not(.p-disabled):hover,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-prev:not(.p-disabled):hover,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-next:not(.p-disabled):hover,
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-last:not(.p-disabled):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-paginator-page.p-selected {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  font-weight: 750;
+}
+
+/* Rows per page */
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-select {
+  min-width: 5.25rem;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.7rem !important;
+
+  box-shadow: none !important;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:host ::ng-deep
+.technician-page
+.p-paginator
+.p-select:hover {
+  border-color: var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .technician-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .filters {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .status-filter {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   TECHNICIAN TABLE SCROLLBAR
+   LIGHT + DARK THEME
+   ========================================================= */
+
+/*
+ * PrimeNG table wrapper creates the horizontal scrollbar.
+ * The scrollbar must use NEXORA theme variables so it
+ * automatically changes between light and dark mode.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper {
+
+  width: 100% !important;
+
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+
+  /*
+   * Firefox
+   */
+  scrollbar-width: thin !important;
+
+  scrollbar-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 35%,
+      transparent
+    )
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* =========================================================
+   CHROME / EDGE / SAFARI
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar {
+
+  width: 8px;
+  height: 8px;
+}
+
+
+/* =========================================================
+   SCROLLBAR TRACK
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-track {
+
+  background:
+    var(--nexora-surface-soft) !important;
+
+  border-radius: 999px !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR THUMB
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 32%,
+      transparent
+    ) !important;
+
+  border:
+    2px solid
+    var(--nexora-surface-soft) !important;
+
+  border-radius:
+    999px !important;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR HOVER
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 60%,
+      var(--nexora-text-muted)
+    ) !important;
+
+  border-color:
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR ACTIVE / DRAGGING
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb:active {
+
+  background:
+    var(--nexora-primary) !important;
+
+  border-color:
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* =========================================================
+   REMOVE BLACK SCROLLBAR ARROWS
+   ========================================================= */
+
+/*
+ * Chrome / Edge can show native black arrow buttons
+ * at the left/right side of the horizontal scrollbar.
+ *
+ * Hide them completely so they don't override the
+ * NEXORA light/dark theme.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-button {
+
+  width: 0 !important;
+  height: 0 !important;
+
+  display: none !important;
+
+  background:
+    transparent !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR CORNER
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-corner {
+
+  background:
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+/*
+ * Explicitly keep the scrollbar light when the application
+ * is in light mode.
+ */
+
+:host-context(html:not(.dark))
+.technician-page
+.p-datatable-wrapper {
+
+  scrollbar-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 32%,
+      transparent
+    )
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+:host-context(html.dark)
+.technician-page
+.p-datatable-wrapper {
+
+  scrollbar-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 45%,
+      transparent
+    )
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* Dark scrollbar thumb */
+
+:host-context(html.dark)
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 42%,
+      transparent
+    ) !important;
+
+  border-color:
+    var(--nexora-surface-soft) !important;
+}
+
+
+/* Dark scrollbar hover */
+
+:host-context(html.dark)
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 65%,
+      var(--nexora-text-muted)
+    ) !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  :host ::ng-deep
+  .technician-page
+  .p-datatable-wrapper::-webkit-scrollbar {
+
+    height: 7px;
+  }
+}
+/* =========================================================
+   NEXORA TECHNICIAN TABLE
+   THEME-AWARE HORIZONTAL SCROLLBAR
+   LIGHT + DARK
+   ========================================================= */
+
+/*
+ * IMPORTANT:
+ *
+ * PrimeNG can use different internal elements for table
+ * scrolling depending on the version/configuration.
+ *
+ * Therefore we target:
+ *
+ * 1. .p-datatable-wrapper
+ * 2. .p-datatable-table-container
+ * 3. .p-datatable-scrollable-body
+ *
+ * This prevents the browser's default black scrollbar
+ * from appearing.
+ */
+
+
+/* =========================================================
+   1. ALL POSSIBLE PRIME NG SCROLL CONTAINERS
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body {
+
+  scrollbar-width: thin !important;
+
+  scrollbar-color:
+    var(--nexora-scrollbar-thumb)
+    var(--nexora-scrollbar-track) !important;
+}
+
+
+/* =========================================================
+   2. CHROME / EDGE / SAFARI
+   ========================================================= */
+
+/*
+ * Target every possible scrolling container.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar {
+
+  width: 8px !important;
+  height: 8px !important;
+
+  background:
+    var(--nexora-scrollbar-track) !important;
+}
+
+
+/* =========================================================
+   3. SCROLLBAR TRACK
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-track,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-track,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-track {
+
+  background:
+    var(--nexora-scrollbar-track) !important;
+
+  border-radius:
+    999px !important;
+}
+
+
+/* =========================================================
+   4. SCROLLBAR THUMB
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-thumb,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-thumb {
+
+  background:
+    var(--nexora-scrollbar-thumb) !important;
+
+  border:
+    2px solid
+    var(--nexora-scrollbar-track) !important;
+
+  border-radius:
+    999px !important;
+
+  min-width:
+    35px !important;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease !important;
+}
+
+
+/* =========================================================
+   5. THUMB HOVER
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb:hover,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-thumb:hover,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+
+  background:
+    var(--nexora-scrollbar-hover) !important;
+
+  border-color:
+    var(--nexora-scrollbar-track) !important;
+}
+
+
+/* =========================================================
+   6. THUMB ACTIVE / DRAGGING
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-thumb:active,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-thumb:active,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-thumb:active {
+
+  background:
+    var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   7. REMOVE BLACK LEFT / RIGHT ARROWS
+   ========================================================= */
+
+/*
+ * Chrome / Edge sometimes render native scrollbar
+ * buttons as black squares/arrows.
+ *
+ * Completely remove them.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-button,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-button,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-button {
+
+  width:
+    0 !important;
+
+  height:
+    0 !important;
+
+  display:
+    none !important;
+
+  background:
+    transparent !important;
+
+  border:
+    none !important;
+}
+
+
+/* =========================================================
+   8. REMOVE NATIVE ARROW VARIATIONS
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-button:single-button,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-button:single-button,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-button:single-button {
+
+  width:
+    0 !important;
+
+  height:
+    0 !important;
+
+  display:
+    none !important;
+
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+}
+
+
+/* =========================================================
+   9. SCROLLBAR CORNER
+   ========================================================= */
+
+:host ::ng-deep
+.technician-page
+.p-datatable-wrapper::-webkit-scrollbar-corner,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-table-container::-webkit-scrollbar-corner,
+
+:host ::ng-deep
+.technician-page
+.p-datatable-scrollable-body::-webkit-scrollbar-corner {
+
+  background:
+    var(--nexora-scrollbar-track) !important;
+}
+
+
+/* =========================================================
+   10. NEXORA LIGHT THEME
+   ========================================================= */
+
+/*
+ * These variables are local to this component.
+ * They automatically use your existing NEXORA colors.
+ */
+
+:host-context(html:not(.dark)) {
+
+  --nexora-scrollbar-track:
+    color-mix(
+      in srgb,
+      var(--nexora-surface-soft) 92%,
+      var(--nexora-border)
+    );
+
+  --nexora-scrollbar-thumb:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 30%,
+      transparent
+    );
+
+  --nexora-scrollbar-hover:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 65%,
+      var(--nexora-text-muted)
+    );
+}
+
+
+/* =========================================================
+   11. NEXORA DARK THEME
+   ========================================================= */
+
+:host-context(html.dark) {
+
+  --nexora-scrollbar-track:
+    color-mix(
+      in srgb,
+      var(--nexora-surface) 88%,
+      #000000
+    );
+
+  --nexora-scrollbar-thumb:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 48%,
+      transparent
+    );
+
+  --nexora-scrollbar-hover:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 70%,
+      var(--nexora-text-muted)
+    );
+}
+
+
+/* =========================================================
+   12. FORCE SCROLLBAR COLORS ON ALL TECHNICIAN
+       TABLE DESCENDANTS
+   ========================================================= */
+
+/*
+ * This catches PrimeNG internal containers if the exact
+ * class differs between PrimeNG versions.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable
+* {
+
+  scrollbar-color:
+    var(--nexora-scrollbar-thumb)
+    var(--nexora-scrollbar-track);
+}
+
+
+/* =========================================================
+   13. FINAL SAFETY NET
+   ========================================================= */
+
+/*
+ * If PrimeNG creates another scroll container inside
+ * the table, it will still receive the NEXORA scrollbar.
+ */
+
+:host ::ng-deep
+.technician-page
+.p-datatable
+[style*="overflow"] {
+
+  scrollbar-color:
+    var(--nexora-scrollbar-thumb)
+    var(--nexora-scrollbar-track);
+}
+
+
+/* =========================================================
+   14. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  :host ::ng-deep
+  .technician-page
+  .p-datatable-wrapper::-webkit-scrollbar,
+
+  :host ::ng-deep
+  .technician-page
+  .p-datatable-table-container::-webkit-scrollbar,
+
+  :host ::ng-deep
+  .technician-page
+  .p-datatable-scrollable-body::-webkit-scrollbar {
+
+    height:
+      7px !important;
+  }
+}

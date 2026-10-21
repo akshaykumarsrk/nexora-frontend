@@ -1,0 +1,106 @@
+<div class="login-page">
+
+  <div class="login-card">
+
+    <div class="login-header">
+
+      <div class="brand-logo">
+        N
+      </div>
+
+      <h1>Welcome to NEXORA</h1>
+
+      <p>Sign in to continue to your workspace</p>
+
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <!-- Username -->
+      <div class="form-field">
+
+        <label for="username">
+          Username
+        </label>
+
+        <input
+          id="username"
+          type="text"
+          pInputText
+          formControlName="username"
+          placeholder="Enter username"
+        />
+
+        @if (
+          loginForm.controls.username.touched &&
+          loginForm.controls.username.invalid
+        ) {
+          <small class="error-message">
+            Username is required.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- Password -->
+      <div class="form-field">
+
+        <label for="password">
+          Password
+        </label>
+
+        <p-password
+          inputId="password"
+          formControlName="password"
+          placeholder="Enter password"
+          [feedback]="false"
+          [toggleMask]="true"
+        />
+
+        @if (
+          loginForm.controls.password.touched &&
+          loginForm.controls.password.invalid
+        ) {
+          <small class="error-message">
+            Password is required.
+          </small>
+        }
+
+      </div>
+
+
+      <div class="login-recovery-link"><a routerLink="/forgot-password">Forgot password?</a></div>
+
+      <!-- Server Error -->
+      @if (error()) {
+
+        <small class="server-error">
+          {{ error() }}
+        </small>
+
+      }
+
+
+      <!-- Login Button -->
+      <p-button
+        type="submit"
+        label="Login"
+        icon="pi pi-sign-in"
+        [loading]="loading()"
+        [disabled]="loading()"
+        styleClass="login-button"
+      />
+
+    </form>
+
+    <div class="login-footer">
+      Secure access to your NEXORA workspace
+    </div>
+
+  </div>
+
+</div>

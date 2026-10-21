@@ -1,0 +1,35 @@
+<div class="verification-page">
+  <div class="verification-card">
+    <div
+      class="status-icon"
+      [class.success]="status() === 'success'"
+      [class.error]="status() === 'error'"
+    >
+      @if (loading()) {
+        <span class="spinner"></span>
+      } @else if (status() === 'success') {
+        ✓
+      } @else {
+        !
+      }
+    </div>
+
+    <h1>Email Verification</h1>
+
+    <p class="message" aria-live="polite">
+      {{ message() }}
+    </p>
+
+    @if (status() === 'success') {
+      <button class="primary-button" (click)="goToLogin()">
+        Continue to Login
+      </button>
+    } @else if (status() === 'error') {
+      <a routerLink="/login" class="secondary-link">
+        Back to Login
+      </a>
+    }
+
+    <p class="branding">NEXORA VISION 360</p>
+  </div>
+</div>

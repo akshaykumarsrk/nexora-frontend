@@ -1,0 +1,1089 @@
+/* =========================================================
+   NEXORA - JOB DETAILS
+   Production UI - Light + Dark Theme
+   ========================================================= */
+
+
+/* =========================================================
+   HOST
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+
+  /*
+   * Job Details uses the global NEXORA design system.
+   * These are fallbacks only — they are NOT Job-specific
+   * design tokens.
+   */
+  color: var(--nexora-text);
+  background: var(--nexora-background);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.card {
+  min-height: calc(100vh - 70px);
+
+  padding: 30px 34px;
+
+  background-color: var(--nexora-background);
+
+  background-image:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(99, 102, 241, 0.06),
+      transparent 30%
+    );
+
+  color: var(--nexora-text);
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.card > .flex:first-child {
+  margin-bottom: 28px;
+}
+
+.card > .flex:first-child > div:first-child {
+  gap: 14px;
+}
+
+
+/* Back button */
+
+.card > .flex:first-child ::ng-deep .p-button {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--nexora-border);
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text-muted);
+
+  box-shadow:
+    0 3px 12px rgba(15, 23, 42, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card > .flex:first-child ::ng-deep .p-button:hover {
+  transform: translateX(-2px);
+
+  background: rgba(99, 102, 241, 0.08);
+
+  color: var(--nexora-primary);
+
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 6px 18px rgba(99, 102, 241, 0.12);
+}
+
+
+/* Heading */
+
+.card h2 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 28px;
+  font-weight: 750;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* Job number */
+
+.card h2 + small {
+  display: inline-block;
+
+  margin-top: 7px;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+/* Header action area */
+
+.card > .flex:first-child > div:last-child {
+  display: flex;
+  gap: 8px;
+}
+
+
+/* Header buttons */
+
+.card > .flex:first-child > div:last-child
+  ::ng-deep .p-button {
+  min-height: 40px;
+
+  padding: 0 17px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   PRIME CARDS
+   ========================================================= */
+
+.card ::ng-deep .p-card {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-md);
+
+  color: var(--nexora-text);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* Card hover */
+
+.card ::ng-deep .p-card:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-primary) 22%,
+    var(--nexora-border)
+  );
+
+  box-shadow: var(--nexora-shadow-lg);
+}
+
+
+/* Card title */
+
+.card ::ng-deep .p-card-title {
+  margin-bottom: 18px;
+
+  color: var(--nexora-text);
+
+  font-size: 17px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+}
+
+
+/* Card content */
+
+.card ::ng-deep .p-card-content {
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   STATUS CARD
+   ========================================================= */
+
+.card ::ng-deep .p-card:first-of-type {
+  border-left: 4px solid var(--nexora-primary);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-surface),
+      var(--nexora-surface-soft)
+    );
+}
+
+
+/* Status label */
+
+.card ::ng-deep .p-card:first-of-type
+  .text-color-secondary {
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* Job number */
+
+.card ::ng-deep .p-card:first-of-type
+  .text-xl {
+  color: var(--nexora-text) !important;
+
+  font-size: 20px;
+  font-weight: 750;
+
+  letter-spacing: -0.02em;
+}
+
+
+/* =========================================================
+   STATUS TAG
+   ========================================================= */
+
+.card ::ng-deep .p-tag {
+  min-width: 90px;
+
+  justify-content: center;
+
+  padding: 6px 13px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   INFORMATION
+   ========================================================= */
+
+.card .text-color-secondary {
+  color: var(--nexora-text-muted) !important;
+}
+
+
+/* Information labels */
+
+.card .grid .text-color-secondary {
+  display: block;
+
+  margin-bottom: 7px !important;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.055em;
+}
+
+
+/* Information values */
+
+.card strong {
+  color: var(--nexora-text);
+
+  font-size: 14px;
+  font-weight: 650;
+
+  line-height: 1.5;
+}
+
+
+/* Information boxes */
+
+.card ::ng-deep .p-card .grid > div {
+  padding: 15px 18px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 11px;
+
+  background: var(--nexora-surface-soft);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card ::ng-deep .p-card .grid > div:hover {
+  transform: translateY(-1px);
+
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-primary) 22%,
+    var(--nexora-border)
+  );
+
+  background: rgba(99, 102, 241, 0.08);
+}
+
+
+/* Normal information text */
+
+.card ::ng-deep
+  .p-card .grid > div
+  span:not(.text-color-secondary) {
+  color: var(--nexora-text);
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   JOB ACTIONS
+   ========================================================= */
+
+.card ::ng-deep .p-card .p-button {
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.card ::ng-deep .p-card .p-button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   JOB PARTS HEADER
+   ========================================================= */
+
+.mt-4 {
+  margin-top: 30px !important;
+}
+
+.mt-4 > .flex:first-child {
+  padding: 0 3px;
+
+  margin-bottom: 14px !important;
+}
+
+.mt-4 h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 20px;
+  font-weight: 750;
+
+  letter-spacing: -0.02em;
+}
+
+.mt-4 h3 + small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 12px;
+}
+
+
+/* Add Part button */
+
+.mt-4 > .flex:first-child
+  ::ng-deep .p-button {
+  min-height: 40px;
+
+  padding: 0 17px;
+
+  border-radius: 10px;
+
+  font-weight: 650;
+
+  box-shadow:
+    0 5px 14px rgba(99, 102, 241, 0.16);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mt-4 > .flex:first-child
+  ::ng-deep .p-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 9px 22px rgba(99, 102, 241, 0.24);
+}
+
+
+/* =========================================================
+   JOB PARTS TABLE
+   ========================================================= */
+
+.mt-4 ::ng-deep .p-datatable {
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-md);
+}
+
+.mt-4 ::ng-deep .p-datatable-table {
+  width: 100%;
+}
+
+
+/* Table header */
+
+.mt-4 ::ng-deep .p-datatable-thead > tr > th {
+  height: 50px;
+
+  padding: 0 17px;
+
+  background: var(--nexora-surface-soft);
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.055em;
+
+  white-space: nowrap;
+}
+
+
+/* Table rows */
+
+.mt-4 ::ng-deep .p-datatable-tbody > tr {
+  background: var(--nexora-surface);
+
+  transition:
+    background 0.18s ease;
+}
+
+.mt-4 ::ng-deep .p-datatable-tbody > tr:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+
+/* Table cells */
+
+.mt-4 ::ng-deep
+  .p-datatable-tbody > tr > td {
+  min-height: 62px;
+
+  padding: 13px 17px;
+
+  background: transparent;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+
+  vertical-align: middle;
+}
+
+
+/* Last row */
+
+.mt-4 ::ng-deep
+  .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+
+/* Part name */
+
+.mt-4 ::ng-deep .font-semibold {
+  color: var(--nexora-text) !important;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* Part code */
+
+.mt-4 ::ng-deep td small {
+  display: inline-block;
+
+  margin-top: 3px;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 11px;
+}
+
+
+/* Quantity */
+
+.mt-4 ::ng-deep td:nth-child(3) {
+  color: var(--nexora-text);
+
+  font-weight: 600;
+}
+
+
+/* Price */
+
+.mt-4 ::ng-deep td:nth-child(4),
+.mt-4 ::ng-deep td:nth-child(5) {
+  color: var(--nexora-text);
+
+  font-weight: 600;
+}
+
+
+/* Total price */
+
+.mt-4 ::ng-deep td:nth-child(5) {
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   PART ACTION BUTTONS
+   ========================================================= */
+
+.mt-4 ::ng-deep td .p-button {
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border-radius: 9px;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.mt-4 ::ng-deep td .p-button:hover {
+  transform: translateY(-1px);
+
+  background: rgba(99, 102, 241, 0.08);
+}
+
+
+/* =========================================================
+   EMPTY PARTS
+   ========================================================= */
+
+.card ::ng-deep
+  .p-datatable .text-center {
+  height: 170px;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 13px;
+
+  vertical-align: middle !important;
+
+  background: var(--nexora-surface);
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.card ::ng-deep .p-progressspinner {
+  width: 42px;
+  height: 42px;
+}
+
+
+/* =========================================================
+   DIALOG
+   ========================================================= */
+
+.card ::ng-deep .p-dialog {
+  overflow: hidden;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 30px 80px rgba(15, 23, 42, 0.22);
+
+  color: var(--nexora-text);
+}
+
+
+/* Dialog header */
+
+.card ::ng-deep .p-dialog-header {
+  padding: 20px 23px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-surface),
+      var(--nexora-surface-soft)
+    );
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  color: var(--nexora-text);
+
+  font-size: 18px;
+  font-weight: 750;
+}
+
+
+/* Dialog content */
+
+.card ::ng-deep .p-dialog-content {
+  padding: 24px;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+}
+
+
+/* Dialog footer */
+
+.card ::ng-deep .p-dialog-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  padding: 15px 23px;
+
+  background: var(--nexora-surface-soft);
+
+  border-top: 1px solid var(--nexora-border);
+}
+
+
+/* =========================================================
+   DIALOG LABELS
+   ========================================================= */
+
+.card ::ng-deep .p-dialog label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--nexora-text);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   DIALOG SELECT
+   ========================================================= */
+
+.card ::ng-deep .p-dialog .p-select {
+  width: 100%;
+
+  min-height: 43px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 10px;
+
+  color: var(--nexora-text);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card ::ng-deep .p-dialog .p-select:hover {
+  border-color: var(--nexora-primary);
+}
+
+.card ::ng-deep .p-dialog .p-select.p-focus {
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+
+/* =========================================================
+   DIALOG INPUT NUMBER
+   ========================================================= */
+
+.card ::ng-deep .p-dialog .p-inputnumber {
+  width: 100%;
+}
+
+.card ::ng-deep
+  .p-dialog .p-inputnumber-input {
+  width: 100%;
+
+  height: 43px;
+
+  padding: 0 12px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 10px;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card ::ng-deep
+  .p-dialog .p-inputnumber-input:hover {
+  border-color: var(--nexora-primary);
+}
+
+.card ::ng-deep
+  .p-dialog .p-inputnumber-input:focus {
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+
+/* =========================================================
+   DIALOG TEXTAREA
+   ========================================================= */
+
+.card ::ng-deep
+  .p-dialog textarea[pTextarea] {
+  width: 100%;
+
+  min-height: 95px;
+
+  padding: 12px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 10px;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  resize: vertical;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card ::ng-deep
+  .p-dialog textarea[pTextarea]::placeholder {
+  color: var(--nexora-text-muted);
+}
+
+.card ::ng-deep
+  .p-dialog textarea[pTextarea]:focus {
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+
+/* =========================================================
+   DIALOG BUTTONS
+   ========================================================= */
+
+.card ::ng-deep .p-dialog-footer .p-button {
+  min-width: 95px;
+
+  min-height: 39px;
+
+  padding: 0 15px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   DIALOG FORM SPACING
+   ========================================================= */
+
+.card ::ng-deep
+  .p-dialog .flex.flex-column {
+  gap: 18px !important;
+}
+
+.card ::ng-deep
+  .p-dialog .flex.flex-column > div {
+  width: 100%;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.card ::ng-deep .p-dialog-mask {
+  backdrop-filter: blur(5px);
+
+  background:
+    rgba(15, 23, 42, 0.42);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.card ::ng-deep
+  .p-datatable-wrapper::-webkit-scrollbar {
+  height: 7px;
+}
+
+.card ::ng-deep
+  .p-datatable-wrapper::-webkit-scrollbar-track {
+  background: var(--nexora-surface-soft);
+}
+
+.card ::ng-deep
+  .p-datatable-wrapper::-webkit-scrollbar-thumb {
+  background: var(--nexora-border);
+
+  border-radius: 20px;
+}
+
+.card ::ng-deep
+  .p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--nexora-text-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .card {
+    padding: 25px 22px;
+  }
+
+  .card h2 {
+    font-size: 25px;
+  }
+
+  .mt-4 {
+    overflow-x: auto;
+  }
+
+  .mt-4 ::ng-deep .p-datatable {
+    min-width: 950px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .card {
+    padding: 20px 15px;
+  }
+
+
+  /* Header */
+
+  .card > .flex:first-child {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  .card > .flex:first-child > div:last-child {
+    width: 100%;
+
+    justify-content: flex-end;
+  }
+
+
+  .card h2 {
+    font-size: 23px;
+  }
+
+
+  /* Status card */
+
+  .card ::ng-deep
+    .p-card:first-of-type
+    > .p-card-body
+    > .p-card-content
+    > .flex {
+    flex-direction: column;
+
+    align-items: flex-start !important;
+
+    gap: 18px;
+  }
+
+
+  /* Information grid */
+
+  .card ::ng-deep
+    .p-card .grid > div {
+    padding: 14px;
+  }
+
+
+  /* Parts heading */
+
+  .mt-4 > .flex:first-child {
+    align-items: flex-start;
+
+    gap: 14px;
+  }
+
+
+  .mt-4 > .flex:first-child
+    ::ng-deep .p-button {
+    flex-shrink: 0;
+
+    padding: 0 13px;
+  }
+
+
+  /* Dialog */
+
+  .card ::ng-deep .p-dialog {
+    width: calc(100vw - 28px) !important;
+
+    max-width: calc(100vw - 28px);
+  }
+
+  .card ::ng-deep .p-dialog-content {
+    padding: 20px;
+  }
+
+  .card ::ng-deep .p-dialog-footer {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  .card ::ng-deep
+    .p-dialog-footer .p-button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .card {
+    padding: 16px 12px;
+  }
+
+  .card > .flex:first-child
+    > div:first-child {
+    width: 100%;
+  }
+
+  .card > .flex:first-child
+    > div:last-child {
+    justify-content: stretch;
+  }
+
+  .card > .flex:first-child
+    > div:last-child
+    ::ng-deep .p-button {
+    width: 100%;
+  }
+
+  .card ::ng-deep .p-card {
+    border-radius: 13px;
+  }
+
+  .card ::ng-deep .p-card-body {
+    padding: 17px;
+  }
+
+  .card ::ng-deep .p-card-title {
+    font-size: 16px;
+  }
+
+  .mt-4 h3 {
+    font-size: 18px;
+  }
+}

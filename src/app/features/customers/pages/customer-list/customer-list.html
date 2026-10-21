@@ -1,0 +1,278 @@
+<p-toast></p-toast>
+
+<p-confirmdialog></p-confirmdialog>
+
+
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Customers</h1>
+
+      <p>
+        Manage your customers and their information.
+      </p>
+    </div>
+
+    <p-button
+      label="Add Customer"
+      icon="pi pi-plus"
+      (onClick)="createCustomer()"
+    ></p-button>
+
+  </div>
+
+
+  <!-- Filters -->
+  <div class="filter-card">
+
+    <div class="search-wrapper">
+
+      <i class="pi pi-search"></i>
+
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search customers..."
+      />
+
+    </div>
+
+
+    <p-select
+      [options]="customerTypeOptions"
+      [(ngModel)]="customerTypeFilter"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Customer Type"
+      [showClear]="false"
+    ></p-select>
+
+  </div>
+
+
+  <!-- Error -->
+  @if (error()) {
+
+    <div class="state-card error-state">
+
+      <i class="pi pi-exclamation-circle"></i>
+
+      <h3>Unable to load customers</h3>
+
+      <p>
+        Something went wrong while loading customers.
+      </p>
+
+      <p-button
+        label="Retry"
+        icon="pi pi-refresh"
+        [outlined]="true"
+        (onClick)="loadCustomers()"
+      ></p-button>
+
+    </div>
+
+  }
+
+
+  <!-- Loading -->
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>Loading customers...</h3>
+
+      <p>
+        Please wait while we fetch your customers.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- Table -->
+  @if (!loading() && !error()) {
+
+    <div class="table-card">
+
+      <p-table
+        [value]="filteredCustomers"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [tableStyle]="{ 'min-width': '900px' }"
+        responsiveLayout="scroll"
+        sortMode="multiple"
+        emptyMessage="No customers found."
+      >
+
+        <ng-template #header>
+
+          <tr>
+
+            <th pSortableColumn="name">
+              Customer
+              <p-sorticon field="name"></p-sorticon>
+            </th>
+
+            <th pSortableColumn="customerType">
+              Type
+              <p-sorticon field="customerType"></p-sorticon>
+            </th>
+
+            <th>Phone</th>
+
+            <th>Email</th>
+
+            <th>GST Number</th>
+
+            <th>Created</th>
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template
+          #body
+          let-customer
+        >
+
+          <tr>
+
+            <td>
+
+              <div class="customer-cell">
+
+                <div class="customer-avatar">
+                  {{ customer.name.charAt(0).toUpperCase() }}
+                </div>
+
+                <div class="customer-info">
+
+                  <span class="customer-name">
+                    {{ customer.name }}
+                  </span>
+
+                  <span class="customer-id">
+                    #{{ customer.id }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <p-tag
+                [value]="getCustomerTypeLabel(customer.customerType)"
+                [severity]="getCustomerTypeSeverity(customer.customerType)"
+              ></p-tag>
+
+            </td>
+
+
+            <td>
+              {{ customer.phone || '—' }}
+            </td>
+
+
+            <td>
+              {{ customer.email || '—' }}
+            </td>
+
+
+            <td>
+              {{ customer.gstNumber || '—' }}
+            </td>
+
+
+            <td>
+              {{ customer.createdAt | date:'dd MMM yyyy' }}
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <p-button
+                  icon="pi pi-eye"
+                  [text]="true"
+                  severity="secondary"
+                  pTooltip="View"
+                  tooltipPosition="top"
+                  (onClick)="viewCustomer(customer.id)"
+                ></p-button>
+
+                <p-button
+                  icon="pi pi-pencil"
+                  [text]="true"
+                  pTooltip="Edit"
+                  tooltipPosition="top"
+                  (onClick)="editCustomer(customer.id)"
+                ></p-button>
+
+                <p-button
+                  icon="pi pi-trash"
+                  [text]="true"
+                  severity="danger"
+                  pTooltip="Delete"
+                  tooltipPosition="top"
+                  (onClick)="deleteCustomer(customer)"
+                ></p-button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template pTemplate="emptymessage">
+
+          <tr>
+
+            <td colspan="7">
+
+              <div class="empty-table">
+
+                <i class="pi pi-users"></i>
+
+                <h3>No customers found</h3>
+
+                <p>
+                  Try changing your search or filters.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+  }
+
+</div>

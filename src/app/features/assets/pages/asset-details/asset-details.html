@@ -1,0 +1,451 @@
+<p-toast></p-toast>
+
+<p-confirmdialog></p-confirmdialog>
+
+<div class="details-page">
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="state-container">
+      <div class="loading-icon">
+        <i class="pi pi-spin pi-spinner"></i>
+      </div>
+
+      <h3>Loading asset details...</h3>
+      <p>Please wait while we fetch the asset information.</p>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (!loading() && error()) {
+    <div class="state-container error-state">
+
+      <div class="state-icon error-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+
+      <h3>Unable to load asset</h3>
+
+      <p>
+        {{ error() }}
+      </p>
+
+      <div class="state-actions">
+        <button
+          pButton
+          type="button"
+          label="Try Again"
+          icon="pi pi-refresh"
+          (click)="loadAsset()">
+        </button>
+
+        <button
+          pButton
+          type="button"
+          label="Back to Assets"
+          icon="pi pi-arrow-left"
+          severity="secondary"
+          [outlined]="true"
+          (click)="goBack()">
+        </button>
+      </div>
+
+    </div>
+  }
+
+  <!-- Content -->
+  @if (!loading() && !error() && asset()) {
+
+    <div class="details-content">
+
+      <!-- Header -->
+      <div class="page-header">
+
+        <div class="header-left">
+
+          <button
+            type="button"
+            class="back-button"
+            title="Back to Assets"
+            (click)="goBack()">
+
+            <i class="pi pi-arrow-left"></i>
+
+          </button>
+
+          <div class="header-icon">
+            <i class="pi pi-box"></i>
+          </div>
+
+          <div class="header-info">
+
+            <div class="breadcrumb">
+              Assets
+              <i class="pi pi-angle-right"></i>
+              Details
+            </div>
+
+            <h1>{{ asset()!.name }}</h1>
+
+            <div class="asset-code">
+              {{ asset()!.assetCode }}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="header-actions">
+
+          <button
+            pButton
+            type="button"
+            severity="secondary"
+            [outlined]="true"
+            (click)="editAsset()">
+
+            <i class="pi pi-pencil" pButtonIcon></i>
+            <span pButtonLabel>Edit</span>
+          </button>
+
+          <button
+            pButton
+            type="button"
+            severity="danger"
+            [outlined]="true"
+            (click)="deleteAsset()">
+
+            <i class="pi pi-trash" pButtonIcon></i>
+            <span pButtonLabel>Delete</span>
+
+        </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Status Banner -->
+      <div class="status-banner">
+
+        <div class="status-content">
+
+          <div class="status-title">
+            <span class="status-dot"></span>
+            Current Status
+          </div>
+
+          <p-tag
+            [value]="asset()!.status"
+            [severity]="getStatusSeverity(asset()!.status)">
+          </p-tag>
+
+        </div>
+
+        <div class="warranty-content">
+
+          <i class="pi pi-shield"></i>
+
+          <div>
+            <span class="warranty-label">Warranty</span>
+
+            <strong>
+              {{ getWarrantyLabel() }}
+            </strong>
+          </div>
+
+          @if (asset()!.warrantyEndDate) {
+            <p-tag
+              [value]="formatDate(asset()!.warrantyEndDate)"
+              [severity]="getWarrantySeverity()">
+            </p-tag>
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- Main Grid -->
+      <div class="details-grid">
+
+        <!-- Asset Information -->
+        <section class="details-card asset-card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <div class="card-icon">
+                <i class="pi pi-box"></i>
+              </div>
+
+              <div>
+                <h2>Asset Information</h2>
+                <p>Basic information about this asset</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="info-grid">
+
+            <div class="info-item">
+              <span class="info-label">Asset Code</span>
+              <strong>{{ asset()!.assetCode }}</strong>
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">Asset Name</span>
+              <strong>{{ asset()!.name }}</strong>
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">Category</span>
+              <strong>{{ asset()!.category || '—' }}</strong>
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">Brand</span>
+              <strong>{{ asset()!.brand || '—' }}</strong>
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">Model</span>
+              <strong>{{ asset()!.model || '—' }}</strong>
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">Serial Number</span>
+              <strong>{{ asset()!.serialNumber || '—' }}</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Location -->
+        <section class="details-card location-card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <div class="card-icon">
+                <i class="pi pi-map-marker"></i>
+              </div>
+
+              <div>
+                <h2>Location</h2>
+                <p>Customer and site assignment</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="relationship-list">
+
+            <div class="relationship-item">
+
+              <div class="relationship-icon customer-icon">
+                <i class="pi pi-user"></i>
+              </div>
+
+              <div class="relationship-info">
+
+                <span>Customer</span>
+
+                <strong>
+                  {{ customer()?.name || 'Loading...' }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="relationship-divider"></div>
+
+
+            <div class="relationship-item">
+
+              <div class="relationship-icon site-icon">
+                <i class="pi pi-building"></i>
+              </div>
+
+              <div class="relationship-info">
+
+                <span>Site</span>
+
+                <strong>
+                  {{ site()?.name || 'Loading...' }}
+                </strong>
+
+                @if (site()?.city || site()?.state) {
+                  <small>
+                    {{ site()?.city || '' }}
+                    @if (site()?.city && site()?.state) {
+                      , 
+                    }
+                    {{ site()?.state || '' }}
+                  </small>
+                }
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Installation & Warranty -->
+        <section class="details-card dates-card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <div class="card-icon">
+                <i class="pi pi-calendar"></i>
+              </div>
+
+              <div>
+                <h2>Important Dates</h2>
+                <p>Installation and warranty information</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="date-grid">
+
+            <div class="date-item">
+
+              <span class="info-label">
+                Installation Date
+              </span>
+
+              <div class="date-value">
+                <i class="pi pi-calendar-plus"></i>
+                <strong>
+                  {{ formatDate(asset()!.installationDate) }}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+              <span class="info-label">
+                Warranty End Date
+              </span>
+
+              <div class="date-value">
+                <i class="pi pi-shield"></i>
+                <strong>
+                  {{ formatDate(asset()!.warrantyEndDate) }}
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Notes -->
+        <section class="details-card notes-card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <div class="card-icon">
+                <i class="pi pi-file-edit"></i>
+              </div>
+
+              <div>
+                <h2>Notes</h2>
+                <p>Additional information</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="notes-content">
+
+            @if (asset()!.notes) {
+              <p>{{ asset()!.notes }}</p>
+            } @else {
+              <div class="empty-notes">
+                <i class="pi pi-info-circle"></i>
+                <span>No notes have been added for this asset.</span>
+              </div>
+            }
+
+          </div>
+
+        </section>
+
+
+        <!-- Audit Information -->
+        <section class="details-card audit-card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <div class="card-icon">
+                <i class="pi pi-history"></i>
+              </div>
+
+              <div>
+                <h2>Record Information</h2>
+                <p>Asset record timestamps</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="audit-grid">
+
+            <div class="audit-item">
+
+              <span>Created</span>
+
+              <strong>
+                {{ formatDateTime(asset()!.createdAt) }}
+              </strong>
+
+            </div>
+
+            <div class="audit-item">
+
+              <span>Last Updated</span>
+
+              <strong>
+                {{ formatDateTime(asset()!.updatedAt) }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+  }
+
+</div>

@@ -1,0 +1,1266 @@
+/* =========================================================
+   NEXORA - PART LIST
+   LIGHT + DARK THEME
+   Production Quality UI
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.parts-page {
+  width: 100%;
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background: var(--nexora-background) !important;
+  color: var(--nexora-text) !important;
+
+  animation: pageEnter 220ms ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 1.8rem;
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.page-header p {
+  margin: 0.4rem 0 0;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   FILTER AREA
+   ========================================================= */
+
+.filters {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  margin-bottom: 0;
+
+  padding: 0;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-box {
+  position: relative;
+
+  width: 315px;
+
+  margin-bottom: 0.5rem;
+}
+
+.search-box i {
+  position: absolute;
+
+  top: 50%;
+  left: 0.9rem;
+
+  z-index: 5;
+
+  color: var(--nexora-text-muted) !important;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.search-box:focus-within i {
+  color: var(--nexora-primary) !important;
+
+  transform:
+    translateY(-50%)
+    scale(1.05);
+}
+
+.search-box input {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 0.9rem 0 2.55rem;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.85rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  outline: none;
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.search-box input::placeholder {
+  color: var(--nexora-text-muted) !important;
+}
+
+.search-box input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    ) !important;
+
+  transform: translateY(-1px);
+}
+
+.search-box input:focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+/* =========================================================
+   PRIME SELECT
+   IMPORTANT:
+   No dependency on .parts-page/.filters.
+   ========================================================= */
+
+:host ::ng-deep .p-select {
+  min-width: 160px;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.75rem !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 160ms ease;
+}
+
+:host ::ng-deep .p-select:hover {
+  background: var(--nexora-surface) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 40%,
+      var(--nexora-border)
+    ) !important;
+
+  transform: translateY(-1px);
+}
+
+:host ::ng-deep .p-select.p-focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+/* Select text */
+
+:host ::ng-deep .p-select .p-select-label {
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep
+.p-select
+.p-select-label.p-placeholder {
+  color: var(--nexora-text-muted) !important;
+}
+
+/* Select arrow */
+
+:host ::ng-deep .p-select .p-select-dropdown {
+  background: transparent !important;
+
+  color: var(--nexora-text-muted) !important;
+}
+
+:host ::ng-deep .p-select:hover .p-select-dropdown {
+  color: var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   PRIME SELECT OVERLAY
+   The overlay is appended to BODY.
+   Therefore do NOT depend on .parts-page.
+   ========================================================= */
+
+:host ::ng-deep .p-select-overlay {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.75rem !important;
+
+  box-shadow: var(--nexora-shadow-md) !important;
+
+  overflow: hidden;
+
+  animation: overlayEnter 140ms ease-out;
+}
+
+@keyframes overlayEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-4px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+:host ::ng-deep .p-select-overlay .p-select-list {
+  padding: 0.35rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-option {
+  margin: 0.12rem 0;
+
+  padding: 0.65rem 0.75rem;
+
+  border-radius: 0.55rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+:host ::ng-deep
+.p-select-overlay
+.p-select-option:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transform: translateX(2px);
+}
+
+:host ::ng-deep
+.p-select-overlay
+.p-select-option.p-select-option-selected {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  font-weight: 650;
+}
+
+/* =========================================================
+   DATA TABLE
+   IMPORTANT:
+   Direct selectors — no parent dependency.
+   ========================================================= */
+
+:host ::ng-deep .p-datatable {
+  width: 100%;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border-radius: 0.75rem;
+
+  overflow: hidden;
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  border: 1px solid var(--nexora-border) !important;
+}
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+:host ::ng-deep .p-datatable-wrapper {
+  background: var(--nexora-surface) !important;
+
+  overflow-x: auto;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+:host ::ng-deep .p-datatable-table {
+  width: 100%;
+
+  background: var(--nexora-surface) !important;
+
+  border-collapse: separate;
+
+  border-spacing: 0;
+}
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+:host ::ng-deep .p-datatable-thead {
+  background: var(--nexora-surface-soft) !important;
+}
+
+:host ::ng-deep .p-datatable-thead > tr {
+  background: var(--nexora-surface-soft) !important;
+}
+
+:host ::ng-deep .p-datatable-thead > tr > th {
+  height: 48px;
+
+  padding: 0.8rem 1rem;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: none !important;
+
+  border-bottom:
+    1px solid var(--nexora-border) !important;
+
+  font-size: 0.73rem;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+:host ::ng-deep
+.p-datatable-thead
+> tr
+> th:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface-soft)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+:host ::ng-deep .p-datatable-tbody {
+  background: var(--nexora-surface) !important;
+}
+
+:host ::ng-deep .p-datatable-tbody > tr {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr
+> td {
+  height: 64px;
+
+  padding: 0.9rem 1rem;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: none !important;
+
+  border-bottom:
+    1px solid var(--nexora-border) !important;
+
+  vertical-align: middle;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+/* =========================================================
+   TABLE ROW HOVER
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+
+  box-shadow:
+    inset 3px 0 0
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 55%,
+      transparent
+    );
+}
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr:hover
+> td {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr:last-child
+> td {
+  border-bottom: none !important;
+}
+
+/* =========================================================
+   PART INFORMATION
+   ========================================================= */
+
+.part-info {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  min-width: 240px;
+}
+
+.part-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 0.75rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 16%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 5%,
+        transparent
+      )
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.part-info:hover .part-icon {
+  transform:
+    translateY(-2px)
+    scale(1.05);
+
+  box-shadow:
+    0 7px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      transparent
+    );
+}
+
+.part-info-text {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.part-info-text strong {
+  overflow: hidden;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 0.86rem;
+
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.part-info-text span {
+  margin-top: 0.2rem;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   PART CODE
+   ========================================================= */
+
+.part-code {
+  color: var(--nexora-primary) !important;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   SECONDARY TEXT
+   ========================================================= */
+
+.secondary-text {
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.82rem;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.part-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  padding: 0.35rem 0.65rem;
+
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.part-status:hover {
+  transform: translateY(-1px);
+}
+
+.part-status::before {
+  content: '';
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      currentColor 10%,
+      transparent
+    );
+}
+
+.part-status.active {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 12%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-success) !important;
+}
+
+.part-status.inactive {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 12%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-danger) !important;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions-cell {
+  width: 120px;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button {
+  width: 2.15rem !important;
+  height: 2.15rem !important;
+
+  min-width: 2.15rem !important;
+
+  padding: 0 !important;
+
+  margin: 0 0.1rem !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: 1px solid transparent !important;
+
+  border-radius: 0.65rem !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease !important;
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button:hover {
+  transform: translateY(-1px);
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button:active {
+  transform: scale(0.94) !important;
+}
+
+/* View */
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(1) {
+  color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(1):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+
+  box-shadow:
+    0 4px 10px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    ) !important;
+}
+
+/* Edit */
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(2) {
+  color: var(--nexora-text-muted) !important;
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(2):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 8%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 18%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-text) !important;
+}
+
+/* Delete */
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(3) {
+  color: var(--nexora-danger) !important;
+}
+
+:host ::ng-deep
+.actions-cell
+.p-button:nth-child(3):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 9%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      transparent
+    ) !important;
+
+  box-shadow:
+    0 4px 10px
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 8%,
+      transparent
+    ) !important;
+}
+
+/* =========================================================
+   PAGINATOR
+   ========================================================= */
+
+:host ::ng-deep .p-paginator {
+  min-height: 56px;
+
+  padding: 0.5rem 0.75rem;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border: none !important;
+
+  border-top:
+    1px solid var(--nexora-border) !important;
+
+  box-shadow: none !important;
+}
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-current {
+  color: var(--nexora-text-muted) !important;
+}
+
+/* Pagination buttons */
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-first,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-prev,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-next,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-last {
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+
+  min-width: 2.35rem !important;
+
+  margin: 0 0.1rem !important;
+
+  border: 1px solid transparent !important;
+
+  border-radius: 0.65rem !important;
+
+  background: transparent !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-first:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-prev:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-next:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-last:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transform: translateY(-1px);
+}
+
+/* Active page */
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page.p-paginator-page-selected {
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      var(--nexora-primary-hover)
+    ) !important;
+
+  color: #fff !important;
+
+  border-color: transparent !important;
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 24%,
+      transparent
+    ) !important;
+}
+
+/* =========================================================
+   ROWS PER PAGE SELECT
+   ========================================================= */
+
+:host ::ng-deep
+.p-paginator
+.p-select {
+  min-width: 82px !important;
+
+  height: 40px !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.65rem !important;
+}
+
+:host ::ng-deep
+.p-paginator
+.p-select:hover {
+  border-color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep
+.p-paginator
+.p-select
+.p-select-label {
+  color: var(--nexora-text) !important;
+
+  background: transparent !important;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 3.5rem 1rem;
+
+  text-align: center;
+}
+
+.empty-state > i {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  font-size: 1.5rem;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 1rem;
+}
+
+.empty-state p {
+  margin: 0.45rem 0 1.2rem;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.84rem;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+  min-height: 260px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.85rem;
+}
+
+.loading-state i {
+  color: var(--nexora-primary) !important;
+
+  font-size: 1.1rem;
+
+  animation: loadingSpin 1s linear infinite;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-track {
+  background: var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-thumb {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 28%,
+      transparent
+    );
+
+  border: 2px solid var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 55%,
+      var(--nexora-text-muted)
+    );
+}
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-button {
+  width: 0 !important;
+  height: 0 !important;
+
+  display: none !important;
+
+  background: transparent !important;
+}
+
+/* Firefox */
+
+:host ::ng-deep
+.p-datatable-wrapper {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 35%,
+      transparent
+    )
+    var(--nexora-surface-soft);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .parts-page {
+    padding: 1.25rem;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .parts-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+  }
+
+  .filters {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  :host ::ng-deep .p-select {
+    width: 100%;
+  }
+
+  :host ::ng-deep
+  .p-datatable-thead
+  > tr
+  > th,
+
+  :host ::ng-deep
+  .p-datatable-tbody
+  > tr
+  > td {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Parts page hierarchy and title treatment */
+.parts-page .page-heading { display:flex; align-items:flex-start; gap:1rem; }
+.parts-page .eyebrow { margin:0 0 .35rem; font-size:.72rem; font-weight:750; letter-spacing:.09em; color:var(--nexora-primary); }
+.parts-page .page-heading h1 { margin:0; }
+.parts-page .subtitle { margin-top:.45rem; }
+.parts-page .parts-card { overflow:hidden; border:1px solid var(--nexora-border); border-radius:1rem; background:var(--nexora-surface); box-shadow:var(--nexora-shadow-sm); }
+.parts-page .card-header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:1rem; padding:1.15rem 1.25rem; border-bottom:1px solid var(--nexora-border); }
+.parts-page .card-header h2 { display:flex; align-items:center; gap:.6rem; margin:0; color:var(--nexora-text); font-size:1.1rem; font-weight:750; }
+.parts-page .card-header h2 > i { color:var(--nexora-primary); font-size:1rem; }
+.parts-page .card-header p { margin:.4rem 0 0; color:var(--nexora-text-muted); font-size:.84rem; }
+.parts-page .table-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; }
+.parts-page .table-actions .search-box { margin:0; }
+.parts-page .parts-card .p-paginator { border-top:1px solid var(--nexora-border); border-radius:0 0 1rem 1rem; }
+.parts-page .page-actions :is(button,.p-button) { transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease; }
+.parts-page .page-actions :is(button,.p-button):hover { transform:translateY(-1px); box-shadow:var(--nexora-shadow-md); }
+@media(max-width:700px) { .parts-page .page-heading { gap:.75rem; } .parts-page .card-header { align-items:stretch; } .parts-page .table-actions { width:100%; } }
+
+.parts-page .page-heading h1 { display:flex; align-items:center; gap:.65rem; }
+.parts-page .page-heading h1 .title-icon { color:var(--nexora-primary); font-size:1.35rem; }
+
+
+/* Keep PrimeNG status tags readable instead of the low-contrast pastel default. */
+.parts-page ::ng-deep .p-tag-success { background:#d1fae5!important; color:#065f46!important; border:1px solid #a7f3d0!important; font-weight:700; }
+.parts-page ::ng-deep .p-tag-danger { background:#fee2e2!important; color:#991b1b!important; border:1px solid #fecaca!important; font-weight:700; }
+:host-context(html.dark) .parts-page ::ng-deep .p-tag-success { background:#064e3b!important; color:#d1fae5!important; border-color:#047857!important; }
+:host-context(html.dark) .parts-page ::ng-deep .p-tag-danger { background:#7f1d1d!important; color:#fee2e2!important; border-color:#b91c1c!important; }

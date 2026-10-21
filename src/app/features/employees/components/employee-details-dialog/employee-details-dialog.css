@@ -1,0 +1,967 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PRIME NG DIALOG
+   Theme-aware Light + Dark
+========================================================= */
+
+/*
+   The Employee Details component lives inside p-dialog.
+   PrimeNG creates the dialog structure outside the normal
+   component DOM, therefore ::ng-deep is required here.
+*/
+
+
+
+/* Dialog title */
+
+:host ::ng-deep .p-dialog .p-dialog-title {
+  color:
+    var(--nexora-text) !important;
+
+  font-size:
+    1.05rem !important;
+
+  font-weight:
+    750 !important;
+}
+
+
+/* Close button */
+
+:host ::ng-deep
+.p-dialog
+.p-dialog-header
+.p-dialog-header-icon {
+  width:
+    2.25rem !important;
+
+  height:
+    2.25rem !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  background:
+    transparent !important;
+
+  border:
+    1px solid
+    transparent !important;
+
+  border-radius:
+    50% !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+
+/* Close hover */
+
+:host ::ng-deep
+.p-dialog
+.p-dialog-header
+.p-dialog-header-icon:hover {
+  color:
+    var(--nexora-danger) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 9%,
+      transparent
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      transparent
+    ) !important;
+
+  transform:
+    rotate(3deg)
+    scale(1.04);
+}
+
+
+/* =========================================================
+   MAIN EMPLOYEE DETAILS
+========================================================= */
+
+.employee-details {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    1.25rem;
+
+  color:
+    var(--nexora-text);
+
+  background:
+    transparent;
+
+  animation:
+    employeeDetailsEnter 220ms ease-out;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.profile-header {
+  position:
+    relative;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    1rem;
+
+  padding:
+    1.25rem;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 8%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+
+/* Decorative glow */
+
+.profile-header::before {
+  content:
+    '';
+
+  position:
+    absolute;
+
+  width:
+    180px;
+
+  height:
+    180px;
+
+  top:
+    -110px;
+
+  right:
+    -70px;
+
+  border-radius:
+    50%;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  pointer-events:
+    none;
+}
+
+
+/* Accent line */
+
+.profile-header::after {
+  content:
+    '';
+
+  position:
+    absolute;
+
+  left:
+    1.25rem;
+
+  right:
+    1.25rem;
+
+  bottom:
+    0;
+
+  height:
+    2px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--nexora-primary),
+      var(--nexora-accent),
+      transparent
+    );
+
+  opacity:
+    0.65;
+}
+
+
+.profile-header:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 22%,
+      var(--nexora-border)
+    );
+
+  box-shadow:
+    var(--nexora-shadow-md);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar-large {
+  position:
+    relative;
+
+  width:
+    64px;
+
+  height:
+    64px;
+
+  flex-shrink:
+    0;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      var(--nexora-accent)
+    );
+
+  color:
+    #ffffff;
+
+  font-size:
+    1.5rem;
+
+  font-weight:
+    750;
+
+  box-shadow:
+    0 8px 20px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 22%,
+      transparent
+    );
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.profile-header:hover .avatar-large {
+  transform:
+    translateY(-2px)
+    scale(1.035);
+
+  box-shadow:
+    0 12px 26px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   PROFILE INFO
+========================================================= */
+
+.profile-info {
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  min-width:
+    0;
+}
+
+
+.profile-info h2 {
+  margin:
+    0;
+
+  color:
+    var(--nexora-text);
+
+  font-size:
+    1.3rem;
+
+  font-weight:
+    750;
+
+  line-height:
+    1.3;
+
+  letter-spacing:
+    -0.015em;
+}
+
+
+.profile-info p {
+  margin:
+    0.3rem 0 0.7rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size:
+    0.86rem;
+
+  line-height:
+    1.4;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    0.4rem;
+
+  padding:
+    0.38rem 0.7rem;
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    999px;
+
+  font-size:
+    0.72rem;
+
+  font-weight:
+    700;
+
+  line-height:
+    1;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.status::before {
+  content:
+    '';
+
+  width:
+    6px;
+
+  height:
+    6px;
+
+  border-radius:
+    50%;
+
+  background:
+    currentColor;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      currentColor 10%,
+      transparent
+    );
+}
+
+
+.status:hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 4px 10px
+    color-mix(
+      in srgb,
+      currentColor 10%,
+      transparent
+    );
+}
+
+
+.status.active {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 12%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 20%,
+      transparent
+    );
+
+  color:
+    var(--nexora-success);
+}
+
+
+.status.inactive {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 12%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 20%,
+      transparent
+    );
+
+  color:
+    var(--nexora-danger);
+}
+
+
+.status.on-leave {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 12%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 20%,
+      transparent
+    );
+
+  color:
+    var(--nexora-warning);
+}
+
+
+/* =========================================================
+   DETAILS SECTION
+========================================================= */
+
+.details-section {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    1rem;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    0.65rem;
+
+  padding-bottom:
+    0.75rem;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border);
+}
+
+
+.section-title i {
+  width:
+    30px;
+
+  height:
+    30px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size:
+    0.85rem;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
+
+.section-title:hover i {
+  transform:
+    translateY(-1px)
+    scale(1.04);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      transparent
+    );
+}
+
+
+.section-title h3 {
+  margin:
+    0;
+
+  color:
+    var(--nexora-text);
+
+  font-size:
+    0.9rem;
+
+  font-weight:
+    750;
+}
+
+
+/* =========================================================
+   DETAILS GRID
+========================================================= */
+
+.details-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    0.75rem;
+}
+
+
+/* =========================================================
+   DETAIL ITEM
+========================================================= */
+
+.detail-item {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    0.4rem;
+
+  min-width:
+    0;
+
+  padding:
+    0.85rem 0.9rem;
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    var(--nexora-radius-md);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-surface-soft) 55%,
+      transparent
+    );
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.detail-item:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface-soft)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      var(--nexora-border)
+    );
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.detail-label {
+  color:
+    var(--nexora-text-muted);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.065em;
+
+  transition:
+    color 160ms ease;
+}
+
+
+.detail-item:hover .detail-label {
+  color:
+    var(--nexora-primary);
+}
+
+
+/* =========================================================
+   VALUE
+========================================================= */
+
+.detail-value {
+  overflow:
+    hidden;
+
+  color:
+    var(--nexora-text);
+
+  font-size:
+    0.88rem;
+
+  font-weight:
+    600;
+
+  line-height:
+    1.45;
+
+  word-break:
+    break-word;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+/* Email / employee code emphasis */
+
+.detail-item:first-child .detail-value {
+  color:
+    var(--nexora-primary);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.employee-details {
+  max-height:
+    70vh;
+
+  overflow-y:
+    auto;
+
+  padding-right:
+    0.2rem;
+
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 35%,
+      transparent
+    )
+    transparent;
+}
+
+
+.employee-details::-webkit-scrollbar {
+  width:
+    5px;
+}
+
+
+.employee-details::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+
+.employee-details::-webkit-scrollbar-thumb {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-muted) 35%,
+      transparent
+    );
+
+  border-radius:
+    999px;
+}
+
+
+.employee-details::-webkit-scrollbar-thumb:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 50%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes employeeDetailsEnter {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(6px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  :host ::ng-deep
+  .p-dialog .p-dialog-content {
+    padding:
+      1rem !important;
+  }
+
+
+  .employee-details {
+    gap:
+      1rem;
+  }
+
+
+  .profile-header {
+    align-items:
+      flex-start;
+
+    padding:
+      1rem;
+  }
+
+
+  .avatar-large {
+    width:
+      54px;
+
+    height:
+      54px;
+
+    border-radius:
+      15px;
+
+    font-size:
+      1.25rem;
+  }
+
+
+  .profile-info h2 {
+    font-size:
+      1.1rem;
+  }
+
+
+  .details-grid {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .profile-header {
+    gap:
+      0.75rem;
+  }
+
+
+  .avatar-large {
+    width:
+      48px;
+
+    height:
+      48px;
+
+    border-radius:
+      13px;
+
+    font-size:
+      1.1rem;
+  }
+
+
+  .profile-info h2 {
+    font-size:
+      1rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .employee-details,
+  .profile-header,
+  .avatar-large,
+  .section-title i,
+  .detail-item,
+  .status,
+  .p-dialog-header-icon {
+    animation:
+      none !important;
+
+    transition:
+      none !important;
+  }
+}

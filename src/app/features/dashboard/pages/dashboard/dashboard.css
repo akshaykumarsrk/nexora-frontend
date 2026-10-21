@@ -1,0 +1,244 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+
+.dashboard-page {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+
+  padding: 1.5rem;
+
+  box-sizing: border-box;
+}
+
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+
+  color: var(--nexora-primary);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+
+h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 750;
+
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+
+.subtitle {
+  margin: 0.6rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.95rem;
+}
+
+
+/* ================================
+   STAT CARDS
+================================ */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 1.25rem;
+
+  min-width: 0;
+}
+
+
+.loading-card {
+  min-height: 150px;
+
+  padding: 1.35rem;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   LOWER DASHBOARD
+================================ */
+
+.dashboard-lower-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(0, 1fr);
+
+  gap: 1.25rem;
+
+  margin-top: 1.25rem;
+
+  min-width: 0;
+}
+
+
+.dashboard-chart-row {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 1.25rem;
+
+  margin-top: 1.25rem;
+
+  min-width: 0;
+}
+
+
+/* ================================
+   ERROR STATE
+================================ */
+
+.error-state {
+
+  min-height: 280px;
+
+  padding: 2rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px dashed var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+
+.error-state i {
+
+  margin-bottom: 1rem;
+
+  color: var(--nexora-danger);
+
+  font-size: 2.5rem;
+}
+
+
+.error-state h2 {
+
+  margin: 0 0 0.5rem;
+
+  color: var(--nexora-text);
+}
+
+
+.error-state p {
+
+  margin: 0 0 1.25rem;
+
+  color: var(--nexora-text-muted);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1200px) {
+
+  .stats-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+
+@media (max-width: 1000px) {
+
+  .dashboard-lower-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .dashboard-page {
+
+    padding: 1rem;
+
+  }
+
+
+  .page-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+
+  .stats-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

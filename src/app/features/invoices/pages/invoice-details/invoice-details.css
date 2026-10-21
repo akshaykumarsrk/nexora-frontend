@@ -1,0 +1,1367 @@
+/* =========================================================
+   NEXORA - INVOICE DETAILS
+   LIGHT + DARK THEME
+   ========================================================= */
+
+
+/* =========================================================
+   HOST
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.invoice-details-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background:
+    var(--nexora-background) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  animation:
+    pageEnter 220ms ease-out;
+}
+
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+
+.page-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.85rem;
+}
+
+
+.back-button {
+  width: 2.55rem;
+  height: 2.55rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-radius:
+    0.75rem;
+
+  background:
+    var(--nexora-surface);
+
+  color:
+    var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+
+.back-button:hover {
+  border-color:
+    var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      var(--nexora-surface)
+    );
+
+  color:
+    var(--nexora-primary);
+
+  transform:
+    translateX(-2px);
+}
+
+
+.title-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius:
+    0.85rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 16%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 6%,
+        transparent
+      )
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  font-size: 1.1rem;
+
+  box-shadow:
+    0 5px 15px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+}
+
+
+.breadcrumb {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  margin-bottom: 0.2rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.72rem;
+
+  font-weight: 500;
+}
+
+
+.breadcrumb i {
+  font-size: 0.62rem;
+}
+
+
+.breadcrumb-link {
+  cursor: pointer;
+
+  transition:
+    color 160ms ease;
+}
+
+
+.breadcrumb-link:hover {
+  color:
+    var(--nexora-primary);
+}
+
+
+.page-header h1 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 1.8rem;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+
+.page-header p {
+  margin: 0.35rem 0 0;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+  min-height: 280px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    var(--nexora-surface);
+
+  color:
+    var(--nexora-text-muted);
+}
+
+
+.loading-state i {
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.invoice-hero {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1.5rem;
+
+  margin-bottom: 1.25rem;
+
+  padding: 1.35rem 1.5rem;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-left:
+    3px solid
+    var(--nexora-primary);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 5%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.invoice-hero:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    );
+
+  box-shadow:
+    var(--nexora-shadow-md);
+}
+
+
+.hero-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.9rem;
+}
+
+
+.hero-icon {
+  width: 3.1rem;
+  height: 3.1rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    );
+
+  border-radius:
+    0.85rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.15rem;
+}
+
+
+.hero-label {
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.62rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.08em;
+}
+
+
+.hero-content h2 {
+  margin: 0;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 1.2rem;
+
+  font-weight: 750;
+}
+
+
+.hero-subtitle {
+  display: block;
+
+  margin-top: 0.25rem;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.72rem;
+}
+
+
+.hero-right {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.25rem;
+}
+
+
+.hero-total {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 0.15rem;
+}
+
+
+.hero-total span {
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.hero-total strong {
+  color:
+    var(--nexora-text);
+
+  font-size: 1.2rem;
+
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   STATUS TAG
+   ========================================================= */
+
+:host ::ng-deep
+.p-tag {
+  min-width: 72px;
+
+  justify-content: center;
+
+  padding:
+    0.35rem 0.65rem;
+
+  border-radius:
+    999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   DETAILS CARD
+   ========================================================= */
+
+.details-card {
+  overflow: hidden;
+
+  margin-bottom: 1.25rem;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    var(--nexora-surface);
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.details-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      var(--nexora-border)
+    );
+}
+
+
+.card-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.7rem;
+
+  padding:
+    1rem 1.15rem;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border);
+
+  background:
+    var(--nexora-surface-soft);
+}
+
+
+.card-icon {
+  width: 2.15rem;
+  height: 2.15rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius:
+    0.65rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 0.9rem;
+}
+
+
+.card-header h3 {
+  margin: 0 0 0.15rem;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+.card-header span {
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+}
+
+
+.detail-item {
+  min-height: 90px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 0.5rem;
+
+  padding:
+    1rem 1.15rem;
+
+  border-right:
+    1px solid
+    var(--nexora-border);
+
+  border-bottom:
+    1px solid
+    var(--nexora-border);
+}
+
+
+.detail-item:nth-child(4n) {
+  border-right: none;
+}
+
+
+.detail-item:nth-last-child(-n + 4) {
+  border-bottom: none;
+}
+
+
+.detail-label {
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.62rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+
+.detail-value {
+  color:
+    var(--nexora-text);
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+}
+
+
+.reference-button {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 0.82rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+
+.reference-button:hover {
+  text-decoration: underline;
+}
+
+
+.reference-button i {
+  font-size: 0.7rem;
+}
+
+
+.date-value {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 0.82rem;
+
+  font-weight: 500;
+}
+
+
+.date-value i {
+  color:
+    var(--nexora-primary);
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   AMOUNT BREAKDOWN
+   ========================================================= */
+
+.amount-content {
+  padding:
+    1.25rem 1.4rem;
+}
+
+
+.amount-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  min-height: 42px;
+
+  gap: 1.25rem;
+}
+
+
+.amount-row span {
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.8rem;
+}
+
+
+.amount-row strong {
+  color:
+    var(--nexora-text);
+
+  font-size: 0.8rem;
+
+  font-weight: 650;
+}
+
+
+.discount-row strong {
+  color:
+    var(--nexora-danger);
+}
+
+
+.amount-divider {
+  height: 1px;
+
+  margin:
+    0.5rem 0;
+
+  background:
+    var(--nexora-border);
+}
+
+
+.total-row {
+  min-height: 52px;
+
+  margin-top: 0.2rem;
+}
+
+
+.total-row span {
+  color:
+    var(--nexora-text);
+
+  font-size: 0.88rem;
+
+  font-weight: 750;
+}
+
+
+.total-row strong {
+  color:
+    var(--nexora-primary);
+
+  font-size: 1.15rem;
+
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   BOTTOM ACTIONS
+   ========================================================= */
+
+.bottom-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 0.75rem;
+
+  margin-top: 1.25rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .details-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .detail-item:nth-child(4n) {
+    border-right:
+      1px solid
+      var(--nexora-border);
+  }
+
+
+  .detail-item:nth-child(2n) {
+    border-right: none;
+  }
+
+
+  .detail-item:nth-last-child(-n + 4) {
+    border-bottom:
+      1px solid
+      var(--nexora-border);
+  }
+
+
+  .detail-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .invoice-details-page {
+    padding: 1rem;
+  }
+
+
+  .page-header {
+    margin-bottom: 1.25rem;
+  }
+
+
+  .page-heading {
+    align-items: flex-start;
+
+    gap: 0.65rem;
+  }
+
+
+  .title-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+
+  .back-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+
+  .page-header h1 {
+    font-size: 1.35rem;
+  }
+
+
+  .invoice-hero {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 1.15rem;
+  }
+
+
+  .hero-right {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+
+  .hero-total {
+    align-items: flex-end;
+  }
+
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .detail-item,
+  .detail-item:nth-child(2n),
+  .detail-item:nth-child(4n) {
+    border-right: none;
+
+    border-bottom:
+      1px solid
+      var(--nexora-border);
+  }
+
+
+  .detail-item:last-child {
+    border-bottom: none;
+  }
+
+
+  .card-header {
+    padding:
+      0.9rem 1rem;
+  }
+
+
+  .amount-content {
+    padding:
+      1rem;
+  }
+
+
+  .bottom-actions {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+
+  .bottom-actions .p-button {
+    width: 100%;
+  }
+
+}
+
+.bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-top: 24px;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+
+  .bottom-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .action-group {
+    flex-direction: column;
+  }
+
+  .bottom-actions p-button {
+    width: 100%;
+  }
+
+  .bottom-actions
+  :host ::ng-deep
+  .p-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+
+.payment-card {
+  margin-top: 18px;
+}
+
+.payment-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+
+  padding: 0 24px 22px;
+}
+
+.payment-metric {
+  min-height: 82px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 14px 16px;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 12px;
+
+  background: var(--nexora-surface-soft);
+}
+
+.payment-metric span {
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.payment-metric strong {
+  color: var(--nexora-text);
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.payment-metric .paid-value {
+  color: var(--nexora-success);
+}
+
+.payment-metric .remaining-value {
+  color: var(--nexora-warning);
+}
+
+.status-metric {
+  align-items: flex-start;
+}
+
+.payment-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 0 24px 24px;
+}
+
+@media (max-width: 900px) {
+
+  .payment-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+
+  .payment-summary {
+    grid-template-columns: 1fr;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .payment-actions-row {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* =========================================================
+   PAYMENT SECTION
+   ========================================================= */
+
+.payment-card {
+  margin-top: 1.25rem;
+}
+
+.payment-card .card-header {
+  margin-bottom: 1.25rem;
+}
+
+.payment-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.payment-card .card-title .card-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    transparent
+  );
+
+  color: var(--nexora-primary);
+}
+
+.payment-card .card-title .card-icon i {
+  font-size: 1.1rem;
+}
+
+.payment-card .card-title h2 {
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--nexora-text);
+}
+
+.payment-card .card-title p {
+  margin: 0.25rem 0 0;
+
+  font-size: 0.8rem;
+
+  color: var(--nexora-text-muted);
+}
+
+
+/* =========================================================
+   PAYMENT SUMMARY
+   ========================================================= */
+
+.payment-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  overflow: hidden;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 14px;
+
+  background: var(--nexora-surface-soft);
+}
+
+.payment-metric {
+  min-height: 90px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 0.35rem;
+
+  padding: 1rem 1.15rem;
+
+  border-right: 1px solid var(--nexora-border);
+}
+
+.payment-metric:last-child {
+  border-right: none;
+}
+
+.payment-metric > span {
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  color: var(--nexora-text-muted);
+}
+
+.payment-metric > strong {
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--nexora-text);
+}
+
+.payment-metric .paid-value {
+  color: var(--nexora-success);
+}
+
+.payment-metric .remaining-value {
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   PAYMENT STATUS
+   ========================================================= */
+
+.status-metric {
+  align-items: flex-start;
+}
+
+.status-metric p-tag {
+  margin-top: 0.15rem;
+}
+
+
+/* =========================================================
+   PAYMENT ACTIONS
+   ========================================================= */
+
+.payment-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 0.65rem;
+
+  margin-top: 1rem;
+}
+
+
+/* =========================================================
+   PAYMENT LOADING
+   ========================================================= */
+
+.payment-loading {
+  min-height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  color: var(--nexora-text-muted);
+}
+
+.payment-loading i {
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   PAYMENT STATUS BADGE
+   ========================================================= */
+
+:host ::ng-deep .payment-card .p-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   PAYMENT DIALOG
+   ========================================================= */
+
+:host ::ng-deep .payment-dialog {
+  width: min(520px, calc(100vw - 2rem));
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+
+  box-shadow: var(--nexora-shadow-md);
+
+  overflow: hidden;
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-header {
+  padding: 1.15rem 1.35rem;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-title {
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--nexora-text);
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-header-actions {
+  color: var(--nexora-text-muted);
+}
+
+:host ::ng-deep .payment-dialog .p-dialog-content {
+  padding: 0;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   PAYMENT DIALOG MASK
+   ========================================================= */
+
+:host ::ng-deep .p-dialog-mask {
+  backdrop-filter: blur(3px);
+}
+
+
+/* =========================================================
+   RESPONSIVE PAYMENT SUMMARY
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .payment-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .payment-metric:nth-child(2) {
+    border-right: none;
+  }
+
+  .payment-metric:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--nexora-border);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .payment-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-metric {
+    min-height: auto;
+
+    border-right: none;
+    border-bottom: 1px solid var(--nexora-border);
+  }
+
+  .payment-metric:last-child {
+    border-bottom: none;
+  }
+
+  .payment-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .payment-actions-row p-button {
+    width: 100%;
+  }
+}

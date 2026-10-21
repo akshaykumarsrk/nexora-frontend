@@ -1,0 +1,69 @@
+<div class="chart-card">
+
+  <div class="chart-header">
+
+    <div>
+      <p class="section-eyebrow">ANALYTICS</p>
+
+      <h2>Revenue Overview</h2>
+
+      <p class="chart-subtitle">
+        Revenue performance
+      </p>
+    </div>
+
+    <span class="chart-period">
+      This period
+      <i class="pi pi-chevron-down"></i>
+    </span>
+
+  </div>
+
+  <div class="chart-container">
+
+    @if (revenue.length > 0) {
+
+      <p-chart
+        type="line"
+        [data]="data"
+        [options]="options">
+      </p-chart>
+
+    } @else {
+
+      <div class="empty-chart">
+
+        <i class="pi pi-chart-line"></i>
+
+        <p>No revenue data available</p>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+<!--  RevenueChart.ts -->
+      <!-- │ -->
+      <!-- │ data + options -->
+      <!-- ↓ -->
+<!-- RevenueChart.html -->
+      <!-- │ -->
+      <!-- │ <p-chart> -->
+      <!-- ↓ -->
+<!-- PrimeNG Chart -->
+      <!-- │ -->
+      <!-- ↓ -->
+<!-- Actual line graph -->
+
+
+
+<!--  data -->
+ <!-- ↓ -->
+<!-- WHAT to show -->
+
+<!-- options -->
+ <!-- ↓ -->
+<!-- HOW to show it -->

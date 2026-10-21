@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.job-status-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  padding: 1.25rem;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+  box-shadow: var(--nexora-shadow-sm);
+
+  overflow: hidden;
+}
+
+.job-status-header {
+  margin-bottom: 0.75rem;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.4rem;
+
+  color: var(--nexora-primary);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.job-status-header h2 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.job-status-subtitle {
+  margin: 0.4rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.82rem;
+}
+
+/* =========================
+   CHART
+========================= */
+
+.chart-container {
+  width: 100%;
+  height: 330px;
+
+  min-width: 0;
+  position: relative;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.25rem 0 0.5rem;
+}
+
+.chart-container p-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .job-status-card {
+    padding: 1rem;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}

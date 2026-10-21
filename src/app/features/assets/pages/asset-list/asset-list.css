@@ -1,0 +1,1006 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 28px;
+
+  animation: pageEnter 0.35s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0 0 6px;
+
+  color: var(--nexora-text);
+
+  font-size: 30px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+:host ::ng-deep
+.page-header .p-button {
+  border-radius: 10px !important;
+
+  font-weight: 650 !important;
+
+  box-shadow:
+    0 5px 14px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+:host ::ng-deep
+.page-header .p-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 16px;
+
+  margin-bottom: 26px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-wrapper {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+.search-wrapper > i {
+  position: absolute;
+
+  left: 16px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--nexora-text-soft);
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.search-wrapper input {
+  width: 100%;
+
+  height: 48px;
+
+  padding-left: 44px !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 10px !important;
+
+  box-shadow: none !important;
+}
+
+.search-wrapper input::placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+.search-wrapper input:focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   SITE FILTER
+   ========================================================= */
+
+.site-filter {
+  width: 270px;
+
+  flex-shrink: 0;
+}
+
+:host ::ng-deep
+.site-filter .p-select {
+  width: 100%;
+
+  min-height: 48px;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 10px !important;
+}
+
+:host ::ng-deep
+.site-filter .p-select:hover {
+  border-color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep
+.site-filter .p-select.p-focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+:host ::ng-deep
+.site-filter .p-select-label {
+  color: var(--nexora-text) !important;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-card {
+  overflow: visible;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  animation: tableEnter 0.45s ease;
+}
+
+
+/* PrimeNG tokens */
+
+:host ::ng-deep
+.asset-table {
+
+  --p-datatable-background:
+    var(--nexora-surface);
+
+  --p-datatable-border-color:
+    var(--nexora-border);
+
+  --p-datatable-header-background:
+    var(--nexora-surface-soft);
+
+  --p-datatable-header-color:
+    var(--nexora-text-muted);
+
+  --p-datatable-header-cell-background:
+    var(--nexora-surface-soft);
+
+  --p-datatable-header-cell-color:
+    var(--nexora-text-muted);
+
+  --p-datatable-header-cell-border-color:
+    var(--nexora-border);
+
+  --p-datatable-row-background:
+    var(--nexora-surface);
+
+  --p-datatable-row-color:
+    var(--nexora-text);
+
+  --p-datatable-row-hover-background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    );
+
+  --p-datatable-body-cell-border-color:
+    var(--nexora-border);
+
+  --p-paginator-background:
+    var(--nexora-surface);
+
+  --p-paginator-color:
+    var(--nexora-text-muted);
+}
+
+
+/* Header */
+
+:host ::ng-deep
+.asset-table .p-datatable-thead > tr > th {
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border-color: var(--nexora-border) !important;
+
+  padding: 14px 16px !important;
+
+  font-size: 12px !important;
+
+  font-weight: 700 !important;
+
+  white-space: nowrap;
+}
+
+
+/* Body */
+
+:host ::ng-deep
+.asset-table .p-datatable-tbody > tr {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:host ::ng-deep
+.asset-table .p-datatable-tbody > tr > td {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border-color: var(--nexora-border) !important;
+
+  padding: 13px 16px !important;
+
+  font-size: 13px !important;
+}
+
+
+/* Row hover */
+
+:host ::ng-deep
+.asset-table .p-datatable-tbody > tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    ) !important;
+
+  box-shadow:
+    inset 3px 0 0 var(--nexora-primary);
+}
+
+:host ::ng-deep
+.asset-table .p-datatable-tbody > tr:hover > td {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface)
+    ) !important;
+}
+
+
+/* =========================================================
+   ASSET CELL
+   ========================================================= */
+
+.asset-cell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 180px;
+}
+
+.asset-avatar {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:host ::ng-deep
+.asset-table tbody tr:hover
+.asset-avatar {
+  transform:
+    translateY(-2px)
+    scale(1.05);
+
+  box-shadow:
+    0 7px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 13%,
+      transparent
+    );
+}
+
+.asset-name {
+  display: block;
+
+  color: var(--nexora-text);
+
+  font-weight: 650;
+
+  font-size: 13px;
+}
+
+.asset-code {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CUSTOMER / SITE
+   ========================================================= */
+
+.customer-cell,
+.site-cell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--nexora-text-muted);
+
+  white-space: nowrap;
+}
+
+.customer-cell i,
+.site-cell i {
+  color: var(--nexora-primary);
+
+  font-size: 12px;
+}
+
+.category-cell {
+  color: var(--nexora-text-muted);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.action-buttons {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 5px;
+}
+
+.action-button {
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.action-button i {
+  font-size: 14px;
+}
+
+
+/* View */
+
+.view-action {
+  color: var(--nexora-primary);
+}
+
+.view-action:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    );
+
+  transform: translateY(-2px);
+}
+
+
+/* Edit */
+
+.edit-action {
+  color: var(--nexora-success);
+}
+
+.edit-action:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 10%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 18%,
+      transparent
+    );
+
+  transform: translateY(-2px);
+}
+
+
+/* Delete */
+
+.delete-action {
+  color: var(--nexora-danger);
+}
+
+.delete-action:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      transparent
+    );
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+.state-card {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  gap: 8px;
+
+  padding: 40px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  animation: cardEnter 0.35s ease;
+}
+
+.state-card > i {
+  margin-bottom: 10px;
+
+  color: var(--nexora-primary);
+
+  font-size: 28px;
+}
+
+.state-card h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 17px;
+}
+
+.state-card p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+.error-state > i {
+  color: var(--nexora-danger);
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-cell {
+  padding: 50px 20px !important;
+
+  text-align: center;
+}
+
+.empty-state {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.empty-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 16px;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+}
+
+.empty-state h3 {
+  margin: 0 0 6px;
+
+  color: var(--nexora-text);
+
+  font-size: 16px;
+}
+
+.empty-state p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+/* =========================================
+   PAGINATOR ROWS-PER-PAGE DROPDOWN
+========================================= */
+
+:host ::ng-deep .p-paginator-rpp-dropdown {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border: 1px solid var(--nexora-border) !important;
+  box-shadow: var(--nexora-shadow-sm) !important;
+}
+
+:host ::ng-deep .p-paginator-rpp-dropdown .p-select-label {
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep .p-paginator-rpp-dropdown .p-select-dropdown {
+  color: var(--nexora-text-muted) !important;
+}
+
+:host ::ng-deep .p-paginator-rpp-dropdown:hover {
+  border-color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep .p-paginator-rpp-dropdown.p-focus {
+  border-color: var(--nexora-primary) !important;
+  box-shadow: 0 0 0 2px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    ) !important;
+}
+
+/* Dropdown overlay opened from the paginator */
+:host ::ng-deep .p-select-overlay {
+  background: var(--nexora-surface) !important;
+  border: 1px solid var(--nexora-border) !important;
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep .p-select-option {
+  color: var(--nexora-text) !important;
+  background: transparent !important;
+}
+
+:host ::ng-deep .p-select-option:hover {
+  background: var(--nexora-surface-soft) !important;
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep .p-select-option.p-select-option-selected {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+/* =========================================
+   PAGINATOR PAGE NUMBERS
+========================================= */
+
+:host ::ng-deep .p-paginator-page {
+  min-width: 2.5rem !important;
+  height: 2.5rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: var(--nexora-text) !important;
+  background: transparent !important;
+
+  border-radius: 50% !important;
+
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+/* Hover */
+:host ::ng-deep .p-paginator-page:hover {
+  background: var(--nexora-surface-soft) !important;
+  color: var(--nexora-primary) !important;
+  transform: translateY(-1px);
+}
+
+/* Currently selected page */
+:host ::ng-deep .p-paginator-page.p-paginator-page-selected {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  font-weight: 700 !important;
+
+  box-shadow: 0 0 0 1px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+/* Selected page hover */
+:host ::ng-deep .p-paginator-page.p-paginator-page-selected:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 18%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+/* =========================================
+   STATUS / WARRANTY TAGS
+   Light + Dark theme friendly
+========================================= */
+
+:host ::ng-deep .p-tag-success {
+  background: color-mix(
+    in srgb,
+    var(--nexora-success) 14%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: color-mix(
+    in srgb,
+    var(--nexora-success) 72%,
+    var(--nexora-text)
+  ) !important;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--nexora-success) 18%,
+    var(--nexora-border)
+  ) !important;
+
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+/* Small hover interaction */
+:host ::ng-deep .p-tag-success:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-success) 20%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: color-mix(
+    in srgb,
+    var(--nexora-success) 82%,
+    var(--nexora-text)
+  ) !important;
+
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-success) 35%,
+    var(--nexora-border)
+  ) !important;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .page-container {
+    padding: 22px;
+  }
+
+  .toolbar-card {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .site-filter {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 640px) {
+
+  .page-container {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  :host ::ng-deep
+  .page-header .p-button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes tableEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes cardEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}

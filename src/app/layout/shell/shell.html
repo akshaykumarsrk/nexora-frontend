@@ -1,0 +1,1 @@
+<div class="app-shell"><app-sidebar [open]="sidebarOpen()" (closed)="closeSidebar()" />@if(sidebarOpen()){<div class="sidebar-overlay" (click)="closeSidebar()"></div>}<div class="main-area"><app-topbar (menuClicked)="toggleSidebar()" /><main class="page-container"><router-outlet /></main></div></div>

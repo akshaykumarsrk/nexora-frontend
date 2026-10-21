@@ -1,0 +1,459 @@
+<p-toast />
+
+<div class="invoice-form-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        title="Back to Invoices"
+        aria-label="Back to Invoices"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+      <div class="page-title-content">
+
+        <div class="breadcrumb">
+          <span>Invoices</span>
+          <i class="pi pi-angle-right"></i>
+
+          <span>
+            {{ editMode() ? 'Edit' : 'Generate' }}
+          </span>
+        </div>
+
+        <h1>
+          {{ editMode() ? 'Edit Invoice' : 'Generate Invoice' }}
+        </h1>
+
+        <p>
+          Create a customer invoice from a completed job
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       FORM
+       ===================================================== -->
+
+  <form
+    class="invoice-form"
+    [formGroup]="invoiceForm"
+    (ngSubmit)="submit()"
+  >
+
+    <!-- ===================================================
+         JOB INFORMATION
+         =================================================== -->
+
+    <section class="invoice-section">
+
+      <div class="section-header">
+
+        <div class="section-icon">
+          <i class="pi pi-briefcase"></i>
+        </div>
+
+        <div class="section-heading">
+
+          <h2>Job Information</h2>
+
+          <p>
+            Select the job for this invoice
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="section-content">
+
+        <div class="form-grid single-column">
+
+          <div class="form-field">
+
+            <label for="jobId">
+              Job ID
+              <span class="required">*</span>
+            </label>
+
+            <p-inputnumber
+              inputId="jobId"
+              formControlName="jobId"
+              [useGrouping]="false"
+              placeholder="Enter Job ID"
+              styleClass="w-full"
+            />
+
+            @if (
+              invoiceForm.controls.jobId.invalid &&
+              invoiceForm.controls.jobId.touched
+            ) {
+
+              <small class="field-error">
+                <i class="pi pi-exclamation-circle"></i>
+                Please enter a valid Job ID.
+              </small>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CHARGES
+         =================================================== -->
+
+    <section class="invoice-section">
+
+      <div class="section-header">
+
+        <div class="section-icon">
+          <i class="pi pi-money-bill"></i>
+        </div>
+
+        <div class="section-heading">
+
+          <h2>Charges</h2>
+
+          <p>
+            Enter the charges applicable to this job
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="section-content">
+
+        <div class="form-grid">
+
+          <!-- Labour -->
+
+          <div class="form-field">
+
+            <label for="labourAmount">
+              Labour Amount
+            </label>
+
+            <p-inputnumber
+              inputId="labourAmount"
+              formControlName="labourAmount"
+              mode="currency"
+              currency="INR"
+              locale="en-IN"
+              styleClass="w-full"
+              (onInput)="updateCalculations()"
+            />
+
+          </div>
+
+
+          <!-- Parts -->
+
+          <div class="form-field">
+
+            <label>
+              Parts Amount
+            </label>
+
+            <div class="readonly-amount">
+
+              <span>
+                {{ formatCurrency(partsAmount()) }}
+              </span>
+
+              <i
+                class="pi pi-lock"
+                title="Calculated automatically"
+              ></i>
+
+            </div>
+
+            <small class="field-hint">
+              Calculated automatically from job parts
+            </small>
+
+          </div>
+
+
+          <!-- Other Charges -->
+
+          <div class="form-field">
+
+            <label for="otherCharges">
+              Other Charges
+            </label>
+
+            <p-inputnumber
+              inputId="otherCharges"
+              formControlName="otherCharges"
+              mode="currency"
+              currency="INR"
+              locale="en-IN"
+              styleClass="w-full"
+              (onInput)="updateCalculations()"
+            />
+
+          </div>
+
+
+          <!-- Discount -->
+
+          <div class="form-field">
+
+            <label for="discount">
+              Discount
+            </label>
+
+            <p-inputnumber
+              inputId="discount"
+              formControlName="discount"
+              mode="currency"
+              currency="INR"
+              locale="en-IN"
+              styleClass="w-full"
+              (onInput)="updateCalculations()"
+            />
+
+          </div>
+
+
+          <!-- Tax -->
+
+          <div class="form-field">
+
+            <label for="taxPercentage">
+              Tax Percentage
+            </label>
+
+            <p-inputnumber
+              inputId="taxPercentage"
+              formControlName="taxPercentage"
+              suffix=" %"
+              [min]="0"
+              [max]="100"
+              styleClass="w-full"
+              (onInput)="updateCalculations()"
+            />
+
+          </div>
+
+
+          <!-- Due Date -->
+
+          <div class="form-field">
+
+            <label for="dueDate">
+              Due Date
+            </label>
+
+            <p-datepicker
+              inputId="dueDate"
+              formControlName="dueDate"
+              [showIcon]="true"
+              [appendTo]="'body'"
+              dateFormat="dd M yy"
+              placeholder="Select due date"
+              styleClass="w-full"
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         INVOICE SUMMARY
+         =================================================== -->
+
+    <section class="invoice-section summary-section">
+
+      <div class="section-header">
+
+        <div class="section-icon">
+          <i class="pi pi-calculator"></i>
+        </div>
+
+        <div class="section-heading">
+
+          <h2>Invoice Summary</h2>
+
+          <p>
+            Review the calculated invoice amount
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="section-content summary-content">
+
+        <div class="summary">
+
+          <!-- Labour -->
+
+          <div class="summary-row">
+
+            <span>Labour</span>
+
+            <strong>
+              {{ formatCurrency(labourAmount()) }}
+            </strong>
+
+          </div>
+
+
+          <!-- Parts -->
+
+          <div class="summary-row">
+
+            <span>Parts</span>
+
+            <strong>
+              {{ formatCurrency(partsAmount()) }}
+            </strong>
+
+          </div>
+
+
+          <!-- Other Charges -->
+
+          <div class="summary-row">
+
+            <span>Other Charges</span>
+
+            <strong>
+              {{ formatCurrency(otherCharges()) }}
+            </strong>
+
+          </div>
+
+
+          <!-- Discount -->
+
+          <div class="summary-row discount-row">
+
+            <span>Discount</span>
+
+            <strong>
+              - {{ formatCurrency(discount()) }}
+            </strong>
+
+          </div>
+
+
+          <div class="summary-divider"></div>
+
+
+          <!-- Subtotal -->
+
+          <div class="summary-row">
+
+            <span>Subtotal</span>
+
+            <strong>
+              {{ formatCurrency(subtotal()) }}
+            </strong>
+
+          </div>
+
+
+          <!-- Tax -->
+
+          <div class="summary-row">
+
+            <span>
+              Tax ({{ taxPercentage() }}%)
+            </span>
+
+            <strong>
+              {{ formatCurrency(taxAmount()) }}
+            </strong>
+
+          </div>
+
+
+          <div class="summary-divider"></div>
+
+
+          <!-- Total -->
+
+          <div class="summary-total">
+
+            <div class="total-label">
+              Total Amount
+            </div>
+
+            <div class="total-value">
+              {{ formatCurrency(totalAmount()) }}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ACTIONS
+         =================================================== -->
+
+    <div class="form-actions">
+
+      <p-button
+        type="button"
+        label="Cancel"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="loading()"
+        (onClick)="goBack()"
+      />
+
+      <p-button
+        type="submit"
+        [label]="
+          editMode()
+            ? 'Save Changes'
+            : 'Generate Invoice'
+        "
+        icon="pi pi-file"
+        [loading]="loading()"
+        [disabled]="invoiceForm.invalid"
+      />
+
+    </div>
+
+  </form>
+
+</div>

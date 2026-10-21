@@ -1,0 +1,241 @@
+<p-dialog
+  [visible]="visible()"
+  (visibleChange)="!$event && close()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [dismissableMask]="false"
+  [style]="{ width: '520px' }"
+  styleClass="payment-dialog"
+  header="Record Payment"
+>
+
+  <div class="payment-form">
+
+    @if (loading()) {
+
+      <div class="loading-state">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span>Loading payment information...</span>
+      </div>
+
+    } @else if (summary(); as paymentSummary) {
+
+      <!-- Invoice Header -->
+
+      <div class="invoice-summary-header">
+
+        <div class="invoice-icon">
+          <i class="pi pi-file"></i>
+        </div>
+
+        <div class="invoice-heading">
+
+          <span class="section-label">
+            Invoice
+          </span>
+
+          <strong>
+            {{ paymentSummary.invoiceNumber }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Payment Summary -->
+
+      <div class="payment-summary">
+
+        <div class="summary-item">
+
+          <span>
+            Invoice Total
+          </span>
+
+          <strong>
+            {{ formatCurrency(paymentSummary.invoiceTotal) }}
+          </strong>
+
+        </div>
+
+        <div class="summary-item">
+
+          <span>
+            Paid
+          </span>
+
+          <strong class="paid-amount">
+            {{ formatCurrency(paymentSummary.paidAmount) }}
+          </strong>
+
+        </div>
+
+        <div class="summary-item remaining">
+
+          <span>
+            Remaining
+          </span>
+
+          <strong>
+            {{ formatCurrency(paymentSummary.remainingAmount) }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      @if (paymentSummary.remainingAmount <= 0) {
+
+        <div class="fully-paid-message">
+
+          <i class="pi pi-check-circle"></i>
+
+          <div>
+            <strong>Invoice Fully Paid</strong>
+
+            <span>
+              No payment is required for this invoice.
+            </span>
+          </div>
+
+        </div>
+
+      } @else {
+
+        <form
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+          class="payment-fields"
+        >
+
+          <!-- Amount -->
+
+          <div class="field">
+
+            <label for="paymentAmount">
+              Payment Amount
+              <span>*</span>
+            </label>
+
+            <p-inputnumber
+              inputId="paymentAmount"
+              formControlName="amount"
+              mode="currency"
+              currency="INR"
+              locale="en-IN"
+              [min]="0.01"
+              [max]="paymentSummary.remainingAmount"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [fluid]="true"
+              placeholder="Enter payment amount"
+            />
+
+            @if (
+              form.controls.amount.invalid &&
+              form.controls.amount.touched
+            ) {
+
+              <small class="field-error">
+                Enter a valid payment amount.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- Payment Method -->
+
+          <div class="field">
+
+            <label for="paymentMethod">
+              Payment Method
+              <span>*</span>
+            </label>
+
+            <p-select
+              inputId="paymentMethod"
+              formControlName="paymentMethod"
+              [options]="paymentMethods"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select payment method"
+              [fluid]="true"
+            />
+
+          </div>
+
+
+          <!-- Transaction Reference -->
+
+          <div class="field">
+
+            <label for="transactionReference">
+              Transaction Reference
+            </label>
+
+            <input
+              id="transactionReference"
+              type="text"
+              pInputText
+              formControlName="transactionReference"
+              placeholder="e.g. UPI-123456"
+            />
+
+          </div>
+
+
+          <!-- Notes -->
+
+          <div class="field">
+
+            <label for="paymentNotes">
+              Notes
+            </label>
+
+            <textarea
+              id="paymentNotes"
+              rows="3"
+              formControlName="notes"
+              placeholder="Add payment notes..."
+            ></textarea>
+
+          </div>
+
+
+          <!-- Actions -->
+
+          <div class="form-actions">
+
+            <p-button
+              label="Cancel"
+              severity="secondary"
+              [text]="true"
+              type="button"
+              (onClick)="close()"
+              [disabled]="saving()"
+            />
+
+            <p-button
+              label="Record Payment"
+              icon="pi pi-check"
+              type="submit"
+              [loading]="saving()"
+              [disabled]="saving()"
+            />
+
+          </div>
+
+        </form>
+
+      }
+
+    }
+
+  </div>
+
+</p-dialog>

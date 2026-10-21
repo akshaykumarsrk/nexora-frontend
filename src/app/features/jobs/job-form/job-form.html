@@ -1,0 +1,331 @@
+<div class="job-form-page">
+
+  <p-toast></p-toast>
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>
+        {{ isEditMode ? 'Edit Job' : 'Create Job' }}
+      </h2>
+
+      <p>
+        {{
+          isEditMode
+            ? 'Update job information'
+            : 'Create a new service job'
+        }}
+      </p>
+
+    </div>
+
+    <p-button
+      label="Back"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [outlined]="true"
+      (onClick)="goBack()">
+    </p-button>
+
+  </div>
+
+
+  @if (loading()) {
+
+    <div class="loading-container">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>
+        Loading job...
+      </span>
+
+    </div>
+
+  } @else {
+
+    <form
+      [formGroup]="jobForm"
+      (ngSubmit)="submit()">
+
+      <p-card>
+
+        <ng-template #title>
+
+          Job Information
+
+        </ng-template>
+
+
+        <ng-template #subtitle>
+
+          Select the service request and related entities.
+
+        </ng-template>
+
+
+        <div class="form-grid">
+
+
+          <!-- SERVICE REQUEST -->
+
+<!-- SERVICE REQUEST -->
+
+<div class="form-field">
+
+  <label>
+    Service Request
+    <span class="required">*</span>
+  </label>
+
+  <p-select
+    formControlName="serviceRequestId"
+    [options]="serviceRequests"
+    optionLabel="title"
+    optionValue="id"
+    placeholder="Select service request"
+    [filter]="true"
+    appendTo="body"
+    class="w-full">
+
+    <ng-template
+      let-request
+      #item
+    >
+
+      <div class="flex flex-column">
+
+        <span class="font-medium">
+          SR #{{ request.id }}
+        </span>
+
+        <small class="text-color-secondary">
+          {{ request.title }}
+        </small>
+
+      </div>
+
+    </ng-template>
+
+    <ng-template
+      let-request
+      #selectedItem
+    >
+
+      <span>
+        SR #{{ request.id }}
+        -
+        {{ request.title }}
+      </span>
+
+    </ng-template>
+
+  </p-select>
+
+
+  @if (
+    isInvalid('serviceRequestId')
+  ) {
+
+    <small class="error-text">
+      Service request is required.
+    </small>
+
+  }
+
+</div>
+
+
+          <!-- CUSTOMER -->
+
+          <div class="form-field">
+
+            <label>
+              Customer
+              <span class="required">*</span>
+            </label>
+
+            <p-select
+              formControlName="customerId"
+              [options]="customers"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select customer"
+              [filter]="true"
+              appendTo="body"
+              class="w-full">
+            </p-select>
+
+            @if (
+              isInvalid('customerId')
+            ) {
+
+              <small class="error-text">
+                Customer is required.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- SITE -->
+
+          <div class="form-field">
+
+            <label>
+              Site
+              <span class="required">*</span>
+            </label>
+
+            <p-select
+              formControlName="siteId"
+              [options]="sites"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select site"
+              [filter]="true"
+              appendTo="body"
+              class="w-full">
+            </p-select>
+
+            @if (
+              isInvalid('siteId')
+            ) {
+
+              <small class="error-text">
+                Site is required.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- ASSET -->
+
+          <div class="form-field">
+
+            <label>
+              Asset
+            </label>
+
+            <p-select
+              formControlName="assetId"
+              [options]="assets"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Select asset"
+              [filter]="true"
+              [showClear]="true"
+              appendTo="body"
+              class="w-full">
+            </p-select>
+
+          </div>
+
+
+          <!-- TECHNICIAN -->
+
+          <div class="form-field">
+
+            <label>
+              Technician
+            </label>
+
+            <p-select
+              formControlName="technicianId"
+              [options]="technicians"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Assign technician"
+              [filter]="true"
+              [showClear]="true"
+              appendTo="body"
+              class="w-full">
+            </p-select>
+
+            <small class="field-hint">
+              Leave empty to create the job without
+              technician assignment.
+            </small>
+
+          </div>
+
+
+          <!-- SCHEDULED AT -->
+
+          <div class="form-field">
+
+            <label>
+              Scheduled At
+            </label>
+
+            <p-datepicker
+              formControlName="scheduledAt"
+              [showTime]="true"
+              [showIcon]="true"
+              hourFormat="12"
+              appendTo="body"
+              placeholder="Select date and time"
+              class="w-full">
+            </p-datepicker>
+
+          </div>
+
+
+          <!-- WORK SUMMARY -->
+
+          <div class="form-field full-width">
+
+            <label>
+              Work Summary
+            </label>
+
+            <textarea
+              pTextarea
+              formControlName="workSummary"
+              rows="4"
+              placeholder="Enter work summary..."
+              class="w-full">
+            </textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+          <p-button
+            type="button"
+            label="Cancel"
+            severity="secondary"
+            [outlined]="true"
+            [disabled]="submitting"
+            (onClick)="goBack()">
+          </p-button>
+
+          <p-button
+            type="submit"
+            [label]="
+              isEditMode
+                ? 'Update Job'
+                : 'Create Job'
+            "
+            icon="pi pi-check"
+            [loading]="submitting">
+          </p-button>
+
+        </div>
+
+      </p-card>
+
+    </form>
+
+  }
+
+</div>

@@ -1,0 +1,460 @@
+<p-toast></p-toast>
+
+<p-confirmdialog></p-confirmdialog>
+
+
+<div class="page-container">
+
+  <!-- ===================================================
+       PAGE HEADER
+       =================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>Sites</h1>
+
+      <p>
+        Manage customer locations and site information.
+      </p>
+
+    </div>
+
+
+    <p-button
+      label="Add Site"
+      icon="pi pi-plus"
+      (onClick)="createSite()"
+    ></p-button>
+
+  </div>
+
+
+  <!-- ===================================================
+       FILTER BAR
+       =================================================== -->
+
+  <div class="filter-card">
+
+    <div class="search-wrapper">
+
+      <i class="pi pi-search"></i>
+
+      <input
+        pInputText
+        type="text"
+        placeholder="Search sites..."
+        [value]="searchTerm()"
+        (input)="onSearch($any($event.target).value)"
+      />
+
+    </div>
+
+
+    <div class="customer-filter">
+
+      <p-select
+        [options]="customerOptions()"
+        optionLabel="label"
+        optionValue="value"
+        [ngModel]="selectedCustomerId()"
+        (ngModelChange)="onCustomerChange($event)"
+        placeholder="All Customers"
+        [showClear]="false"
+        appendTo="body"
+      ></p-select>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       LOADING
+       =================================================== -->
+
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>Loading sites...</h3>
+
+      <p>
+        Please wait while we fetch your sites.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       ERROR
+       =================================================== -->
+
+  @if (!loading() && error()) {
+
+    <div class="state-card error-state">
+
+      <i class="pi pi-exclamation-circle"></i>
+
+      <h3>Unable to load sites</h3>
+
+      <p>
+        Something went wrong while loading the sites.
+      </p>
+
+      <p-button
+        label="Try Again"
+        icon="pi pi-refresh"
+        (onClick)="loadSites()"
+      ></p-button>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       EMPTY
+       =================================================== -->
+
+  @if (
+    !loading() &&
+    !error() &&
+    filteredSites().length === 0
+  ) {
+
+    <div class="state-card">
+
+      <i class="pi pi-building"></i>
+
+      @if (
+        searchTerm() ||
+        selectedCustomerId() !== null
+      ) {
+
+        <h3>No matching sites</h3>
+
+        <p>
+          Try changing your search or customer filter.
+        </p>
+
+        <p-button
+          label="Clear Filters"
+          icon="pi pi-filter-slash"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="searchTerm.set(''); selectedCustomerId.set(null)"
+        ></p-button>
+
+      } @else {
+
+        <h3>No sites yet</h3>
+
+        <p>
+          Create your first customer site to get started.
+        </p>
+
+        <p-button
+          label="Add Site"
+          icon="pi pi-plus"
+          (onClick)="createSite()"
+        ></p-button>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       TABLE
+       =================================================== -->
+
+  @if (
+    !loading() &&
+    !error() &&
+    filteredSites().length > 0
+  ) {
+
+    <div class="table-card">
+
+      <p-table
+        class="site-table"
+        styleClass="site-table"
+
+        [value]="filteredSites()"
+
+        [paginator]="true"
+
+        [rows]="10"
+
+        [rowsPerPageOptions]="[10, 20, 50]"
+
+        [paginatorDropdownAppendTo]="'body'"
+
+        [paginatorDropdownScrollHeight]="'220px'"
+
+        [showCurrentPageReport]="true"
+
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} sites"
+
+        [tableStyle]="{ 'min-width': '100%' }"
+      >
+
+        <!-- ================= TABLE HEADER ================= -->
+
+        <ng-template #header>
+
+          <tr>
+
+            <th pSortableColumn="name">
+              Site
+              <p-sorticon field="name"></p-sorticon>
+            </th>
+
+
+            <th>
+              Customer
+            </th>
+
+
+            <th>
+              Location
+            </th>
+
+
+            <th>
+              Contact
+            </th>
+
+
+            <th>
+              Created
+            </th>
+
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- ================= TABLE BODY ================= -->
+
+        <ng-template
+          #body
+          let-site
+        >
+
+          <tr>
+
+            <!-- SITE -->
+
+            <td>
+
+              <div class="site-cell">
+
+                <div class="site-avatar">
+
+                  {{ site.name.charAt(0).toUpperCase() }}
+
+                </div>
+
+
+                <div class="site-info">
+
+                  <span class="site-name">
+                    {{ site.name }}
+                  </span>
+
+                  <span class="site-id">
+                    #{{ site.id }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- CUSTOMER -->
+
+            <td>
+
+              <div class="customer-cell">
+
+                <i class="pi pi-user"></i>
+
+                <span>
+                  {{ getCustomerName(site.customerId) }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- LOCATION -->
+
+            <td>
+
+              <div class="location-cell">
+
+                @if (site.city) {
+
+                  <span class="city">
+                    {{ site.city }}
+                  </span>
+
+                }
+
+                @if (site.state) {
+
+                  <span class="state">
+                    {{ site.state }}
+                  </span>
+
+                }
+
+                @if (
+                  !site.city &&
+                  !site.state
+                ) {
+
+                  <span class="muted">
+                    Not specified
+                  </span>
+
+                }
+
+              </div>
+
+            </td>
+
+
+            <!-- CONTACT -->
+
+            <td>
+
+              @if (site.contactName) {
+
+                <div class="contact-cell">
+
+                  <span class="contact-name">
+                    {{ site.contactName }}
+                  </span>
+
+                  @if (site.contactPhone) {
+
+                    <span class="contact-phone">
+                      {{ site.contactPhone }}
+                    </span>
+
+                  }
+
+                </div>
+
+              } @else {
+
+                <span class="muted">
+                  Not specified
+                </span>
+
+              }
+
+            </td>
+
+
+            <!-- CREATED -->
+
+            <td>
+
+              <span class="date-value">
+
+                {{ site.createdAt | date:'dd MMM yyyy' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="action-button view-action"
+                  title="View"
+                  (click)="viewSite(site.id)"
+                >
+                  <i class="pi pi-eye"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="action-button edit-action"
+                  title="Edit"
+                  (click)="editSite(site.id)"
+                >
+                  <i class="pi pi-pencil"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="action-button delete-action"
+                  title="Delete"
+                  (click)="deleteSite(site)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+
+        <!-- ================= EMPTY TABLE ================= -->
+
+        <ng-template #emptymessage>
+
+          <tr>
+
+            <td
+              colspan="6"
+              class="table-empty"
+            >
+
+              No sites found.
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+  }
+
+</div>

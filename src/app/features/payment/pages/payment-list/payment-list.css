@@ -1,0 +1,1402 @@
+/* =========================================================
+   NEXORA PAYMENT PAGE
+   ========================================================= */
+
+.payment-page {
+  width: 100%;
+  min-width: 0;
+
+  padding: 28px 32px 48px;
+
+  box-sizing: border-box;
+
+  color: var(--nexora-text);
+
+  animation:
+    payment-page-enter
+    0.28s
+    ease
+    both;
+}
+
+
+/* =========================================================
+   PAGE ANIMATION
+   ========================================================= */
+
+@keyframes payment-page-enter {
+
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.page-icon {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      var(--nexora-border)
+    );
+
+  border-radius: 12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 17px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.page-icon:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      var(--nexora-surface)
+    );
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.page-heading-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 4px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.breadcrumb i {
+  color: var(--nexora-text-soft);
+
+  font-size: 9px;
+}
+
+.page-heading-content h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  letter-spacing: -0.4px;
+}
+
+.page-heading-content p {
+  margin: 5px 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.payment-card {
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.payment-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-border)
+    );
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.payment-toolbar {
+  min-height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 12px 16px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background: var(--nexora-surface-soft);
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.payment-search {
+  position: relative;
+
+  width: 340px;
+  max-width: 100%;
+}
+
+.payment-search > i {
+  position: absolute;
+
+  top: 50%;
+  left: 13px;
+
+  transform: translateY(-50%);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+.payment-search input {
+  width: 100%;
+  height: 38px;
+
+  display: block;
+
+  padding: 0 38px 0 36px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.payment-search input::placeholder {
+  color: var(--nexora-text-soft);
+}
+
+.payment-search input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 45%,
+      var(--nexora-border)
+    );
+}
+
+.payment-search input:focus {
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+.clear-search {
+  position: absolute;
+
+  top: 50%;
+  right: 8px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.clear-search:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+.refresh-button {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 8px;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.refresh-button:hover:not(:disabled) {
+  border-color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  transform: translateY(-1px);
+}
+
+.refresh-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.payment-loading {
+  min-height: 340px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+
+  border: 3px solid var(--nexora-border);
+
+  border-top-color: var(--nexora-primary);
+
+  border-radius: 50%;
+
+  animation:
+    payment-spinner
+    0.75s
+    linear
+    infinite;
+}
+
+@keyframes payment-spinner {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+.table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--nexora-border)
+    var(--nexora-surface-soft);
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: var(--nexora-surface-soft);
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--nexora-border);
+
+  border: 2px solid var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.payment-table {
+  width: 100%;
+  min-width: 1100px;
+
+  table-layout: fixed;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+   ========================================================= */
+
+.payment-table .date-column {
+  width: 120px;
+}
+
+.payment-table .invoice-column {
+  width: 180px;
+}
+
+.payment-table .amount-column {
+  width: 140px;
+}
+
+.payment-table .method-column {
+  width: 165px;
+}
+
+.payment-table .reference-column {
+  width: 220px;
+}
+
+.payment-table .notes-column {
+  width: 210px;
+}
+
+.payment-table .action-column {
+  width: 80px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.payment-table thead {
+  background: var(--nexora-surface-soft);
+}
+
+.payment-table thead tr {
+  background: var(--nexora-surface-soft);
+}
+
+.payment-table thead th {
+  height: 48px;
+
+  padding: 0 16px;
+
+  box-sizing: border-box;
+
+  border: 0;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  text-align: left;
+
+  vertical-align: middle;
+
+  white-space: nowrap;
+}
+
+.payment-table thead th.action-column {
+  text-align: center;
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+.payment-table tbody tr {
+  background: var(--nexora-surface);
+
+  transition:
+    background 0.16s ease;
+}
+
+.payment-table tbody tr:hover {
+  background: var(--nexora-surface-soft);
+}
+
+.payment-table tbody td {
+  height: 58px;
+
+  padding: 10px 16px;
+
+  box-sizing: border-box;
+
+  border: 0;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background: transparent;
+
+  color: var(--nexora-text);
+
+  font-size: 12px;
+
+  vertical-align: middle;
+}
+
+.payment-table tbody tr:hover td {
+  background: var(--nexora-surface-soft);
+}
+
+.payment-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date-value {
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   INVOICE
+   ========================================================= */
+
+.invoice-link {
+  max-width: 100%;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 5px 7px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--nexora-primary);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.invoice-link:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  transform: translateX(2px);
+}
+
+.invoice-icon {
+  width: 27px;
+  height: 27px;
+
+  flex: 0 0 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+.invoice-icon i {
+  font-size: 11px;
+}
+
+.invoice-number {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   AMOUNT
+   ========================================================= */
+
+.amount-value {
+  color: var(--nexora-text);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PAYMENT METHOD
+   ========================================================= */
+
+.payment-method {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 78px;
+
+  padding: 5px 9px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 6px;
+
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text-muted);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.payment-method.method-upi {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 30%,
+      var(--nexora-border)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 9%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-success);
+}
+
+.payment-method.method-cash {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 30%,
+      var(--nexora-border)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 9%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-warning);
+}
+
+.payment-method.method-card {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+}
+
+.payment-method.method-bank {
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text);
+}
+
+.payment-method.method-cheque {
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text-muted);
+}
+
+
+/* =========================================================
+   REFERENCE
+   ========================================================= */
+
+.reference-value {
+  display: block;
+
+  max-width: 190px;
+
+  overflow: hidden;
+
+  color: var(--nexora-text-muted);
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.muted-value {
+  color: var(--nexora-text-soft);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.notes-value {
+  display: block;
+
+  max-width: 180px;
+
+  overflow: hidden;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.view-button {
+  width: 32px;
+  height: 32px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.view-button:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      transparent
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  min-height: 340px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 40px 20px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 7px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 15px;
+
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text-soft);
+
+  font-size: 20px;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.empty-state:hover .empty-icon {
+  transform: translateY(-2px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      var(--nexora-surface-soft)
+    );
+
+  color: var(--nexora-primary);
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 14px;
+
+  font-weight: 650;
+}
+
+.empty-state p {
+  max-width: 360px;
+
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   EMPTY ACTION
+   ========================================================= */
+
+.empty-action {
+  margin-top: 7px;
+
+  padding: 7px 12px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      var(--nexora-border)
+    );
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.empty-action:hover {
+  border-color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      var(--nexora-surface)
+    );
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.pagination {
+  min-height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 10px 16px;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid var(--nexora-border);
+
+  background: var(--nexora-surface-soft);
+}
+
+
+/* =========================================================
+   PAGINATION INFO
+   ========================================================= */
+
+.pagination-info {
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.pagination-info strong {
+  color: var(--nexora-text);
+
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   PAGINATION CONTROLS
+   ========================================================= */
+
+.pagination-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+}
+
+.pagination-button {
+  min-width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 8px;
+
+  border: 1px solid transparent;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--nexora-text-muted);
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+}
+
+.pagination-button.active {
+  border-color: var(--nexora-primary);
+
+  background: var(--nexora-primary);
+
+  color: #ffffff;
+
+  font-weight: 650;
+}
+
+.pagination-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+.pagination-arrow {
+  border-color: var(--nexora-border);
+}
+
+
+/* =========================================================
+   ROWS SELECTOR
+   ========================================================= */
+
+.rows-selector {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 11px;
+}
+
+.rows-selector select {
+  height: 30px;
+
+  padding: 0 25px 0 8px;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.rows-selector select:hover {
+  border-color: var(--nexora-primary);
+}
+
+.rows-selector select:focus {
+  border-color: var(--nexora-primary);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .payment-page {
+    padding: 24px 20px 40px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .payment-page {
+    padding: 20px 16px 36px;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+  }
+
+  .page-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .page-heading-content h1 {
+    font-size: 22px;
+  }
+
+  .payment-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 12px;
+  }
+
+  .payment-search {
+    width: 100%;
+  }
+
+  .refresh-button {
+    align-self: flex-end;
+  }
+
+  .pagination {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .pagination-controls {
+    align-self: center;
+  }
+
+  .rows-selector {
+    align-self: flex-end;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .payment-page,
+  .page-icon,
+  .invoice-link,
+  .empty-icon,
+  .view-button,
+  .refresh-button,
+  .payment-method,
+  .empty-action,
+  .loading-spinner {
+    animation: none !important;
+
+    transition: none !important;
+
+    transform: none !important;
+  }
+
+}
+
+.receipt-button {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 6px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+  color: var(--nexora-danger);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.16s ease,
+    color 0.16s ease,
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.receipt-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 8%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      var(--nexora-border)
+    );
+}
+
+.receipt-button i {
+  font-size: 13px;
+}

@@ -1,0 +1,98 @@
+<div class="employee-details">
+
+  @if (employee) {
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+
+      <div class="avatar-large">
+        {{ employee.name.charAt(0) }}
+      </div>
+
+      <div class="profile-info">
+        <h2>{{ employee.name }}</h2>
+
+        <p>{{ employee.designation }}</p>
+
+        <span
+          [class]="'status ' + employee.status.toLowerCase().replace(' ', '-')"
+        >
+          {{ employee.status }}
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Contact Information -->
+    <section class="details-section">
+
+      <div class="section-title">
+        <i class="pi pi-user"></i>
+        <h3>Personal Information</h3>
+      </div>
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+          <span class="detail-label">Email</span>
+          <span class="detail-value">
+            {{ employee.email }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Employee Code</span>
+          <span class="detail-value">
+            {{ employee.employeeCode }}
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Employment Information -->
+    <section class="details-section">
+
+      <div class="section-title">
+        <i class="pi pi-briefcase"></i>
+        <h3>Employment Information</h3>
+      </div>
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+          <span class="detail-label">Department</span>
+          <span class="detail-value">
+            {{ employee.department }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Designation</span>
+          <span class="detail-value">
+            {{ employee.designation }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Joining Date</span>
+          <span class="detail-value">
+            {{ employee.joiningDate }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">
+            {{ employee.status }}
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

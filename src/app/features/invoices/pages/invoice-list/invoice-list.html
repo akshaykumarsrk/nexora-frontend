@@ -1,0 +1,318 @@
+<div class="invoice-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-heading">
+
+      <div class="title-icon">
+        <i class="pi pi-file"></i>
+      </div>
+
+      <div>
+        <h1>Invoices</h1>
+
+        <p>
+          Manage customer invoices and payments.
+        </p>
+      </div>
+
+    </div>
+
+    <p-button
+      label="Generate Invoice"
+      icon="pi pi-plus"
+      (onClick)="createInvoice()"
+    />
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+       ===================================================== -->
+
+  <p-toast />
+
+
+  <!-- =====================================================
+       MAIN CARD
+       ===================================================== -->
+
+  <div class="invoice-card">
+
+    <!-- ===================================================
+         TOOLBAR
+         =================================================== -->
+
+    <div class="toolbar">
+
+      <div class="search-box">
+
+        <i class="pi pi-search"></i>
+
+        <input
+          pInputText
+          type="text"
+          placeholder="Search invoice, job, customer..."
+          [value]="searchTerm()"
+          (input)="onSearch($event)"
+        />
+
+      </div>
+
+
+      <p-button
+        icon="pi pi-refresh"
+        severity="secondary"
+        [text]="true"
+        [rounded]="true"
+        [loading]="loading()"
+        pTooltip="Refresh"
+        tooltipPosition="top"
+        (onClick)="loadInvoices()"
+      />
+
+    </div>
+
+
+    <!-- ===================================================
+         TABLE
+         =================================================== -->
+
+    <p-table
+      [value]="filteredInvoices()"
+      [loading]="loading()"
+      [paginator]="filteredInvoices().length > 10"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      dataKey="id"
+      responsiveLayout="scroll"
+    >
+
+      <!-- =================================================
+           HEADER
+           ================================================= -->
+
+      <ng-template #header>
+
+        <tr>
+
+          <th>
+            Invoice #
+          </th>
+
+          <th>
+            Job #
+          </th>
+
+          <th>
+            Customer
+          </th>
+
+          <th>
+            Total
+          </th>
+
+          <th>
+            Issued
+          </th>
+
+          <th>
+            Due Date
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th class="actions-column">
+            Action
+          </th>
+
+        </tr>
+
+      </ng-template>
+
+
+      <!-- =================================================
+           BODY
+           ================================================= -->
+
+      <ng-template
+        #body
+        let-invoice
+      >
+
+        <tr>
+
+          <!-- INVOICE -->
+
+          <td>
+
+            <div class="invoice-number">
+
+              <div class="invoice-icon">
+                <i class="pi pi-file"></i>
+              </div>
+
+              <span>
+                {{ invoice.invoiceNumber }}
+              </span>
+
+            </div>
+
+          </td>
+
+
+          <!-- JOB -->
+
+          <td>
+
+            <span class="job-number">
+              {{ invoice.jobNumber || '-' }}
+            </span>
+
+          </td>
+
+
+          <!-- CUSTOMER -->
+
+          <td>
+
+            <span class="customer-name">
+              {{ invoice.customerName || '-' }}
+            </span>
+
+          </td>
+
+
+          <!-- TOTAL -->
+
+          <td>
+
+            <span class="amount">
+              {{ formatCurrency(invoice.totalAmount) }}
+            </span>
+
+          </td>
+
+
+          <!-- ISSUED -->
+
+          <td>
+
+            <span class="secondary-text">
+              {{ formatDate(invoice.issuedAt) }}
+            </span>
+
+          </td>
+
+
+          <!-- DUE -->
+
+          <td>
+
+            <span class="secondary-text">
+              {{ formatDate(invoice.dueDate) }}
+            </span>
+
+          </td>
+
+
+          <!-- STATUS -->
+
+          <td>
+
+            <p-tag
+              [value]="invoice.status"
+              [severity]="getStatusSeverity(invoice.status)"
+            />
+
+          </td>
+
+
+          <!-- ACTION -->
+
+          <td class="actions-cell">
+
+            <p-button
+              icon="pi pi-eye"
+              [text]="true"
+              [rounded]="true"
+              severity="info"
+              pTooltip="View Invoice"
+              tooltipPosition="top"
+              (onClick)="viewInvoice(invoice)"
+            />
+
+          </td>
+
+        </tr>
+
+      </ng-template>
+
+
+      <!-- =================================================
+           EMPTY
+           ================================================= -->
+
+      <ng-template #emptymessage>
+
+        <tr>
+
+          <td
+            colspan="8"
+            class="empty-cell"
+          >
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                <i class="pi pi-file"></i>
+              </div>
+
+              <h3>
+                No invoices found
+              </h3>
+
+              <p>
+
+                @if (searchTerm()) {
+
+                  No invoices match your search.
+
+                } @else {
+
+                  No invoices have been created yet.
+
+                }
+
+              </p>
+
+              @if (!searchTerm()) {
+
+                <p-button
+                  label="Generate Invoice"
+                  icon="pi pi-plus"
+                  (onClick)="createInvoice()"
+                />
+
+              }
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+
+  </div>
+
+</div>

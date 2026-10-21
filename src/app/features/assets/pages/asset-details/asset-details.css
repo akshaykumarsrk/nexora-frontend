@@ -1,0 +1,847 @@
+:host {
+  display: block;
+}
+
+.details-page {
+  min-height: 100%;
+  padding: 1.5rem;
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+/* ================================
+   LOADING / ERROR STATES
+================================ */
+
+.state-container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 0.35s ease;
+}
+
+.state-container h3 {
+  margin: 1rem 0 0.4rem;
+  color: var(--nexora-text);
+  font-size: 1.2rem;
+}
+
+.state-container p {
+  margin: 0;
+  color: var(--nexora-text-muted);
+}
+
+.loading-icon,
+.state-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+.loading-icon {
+  color: var(--nexora-primary);
+  font-size: 1.5rem;
+}
+
+.error-icon {
+  color: var(--nexora-danger);
+  font-size: 1.4rem;
+}
+
+.error-state p {
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.state-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.details-content {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.back-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--nexora-border);
+  border-radius: 0.75rem;
+  background: var(--nexora-surface);
+  color: var(--nexora-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  color: var(--nexora-primary);
+  border-color: var(--nexora-primary);
+  background: var(--nexora-surface-soft);
+  transform: translateX(-2px);
+}
+
+.header-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    var(--nexora-surface)
+  );
+  color: var(--nexora-primary);
+  font-size: 1.4rem;
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    );
+}
+
+.header-info {
+  min-width: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--nexora-text-soft);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.breadcrumb i {
+  font-size: 0.7rem;
+}
+
+.header-info h1 {
+  margin: 0;
+  color: var(--nexora-text);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asset-code {
+  margin-top: 0.25rem;
+  color: var(--nexora-text-muted);
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+/* =========================================
+   HEADER ACTION BUTTONS
+========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 0 0 auto;
+}
+
+.header-actions button {
+  min-width: 6rem !important;
+  min-height: 2.5rem !important;
+  flex: 0 0 auto !important;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 0.75rem !important;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease !important;
+}
+
+/* -----------------------------------------
+   EDIT BUTTON
+----------------------------------------- */
+
+.header-actions button:first-child {
+  color: var(--nexora-primary) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-primary) 45%,
+    var(--nexora-border)
+  ) !important;
+}
+
+.header-actions button:first-child:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 9%,
+    var(--nexora-surface)
+  ) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 6px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      transparent
+    ) !important;
+
+  transform: translateY(-2px);
+}
+
+.header-actions button:first-child:hover .p-button-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* -----------------------------------------
+   DELETE BUTTON
+----------------------------------------- */
+
+.header-actions button:last-child {
+  color: var(--nexora-danger) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-danger) 45%,
+    var(--nexora-border)
+  ) !important;
+}
+
+.header-actions button:last-child:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-danger) 8%,
+    var(--nexora-surface)
+  ) !important;
+
+  border-color: var(--nexora-danger) !important;
+
+  box-shadow:
+    0 6px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 16%,
+      transparent
+    ) !important;
+
+  transform: translateY(-2px);
+}
+
+.header-actions button:last-child:hover .p-button-icon {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+/* -----------------------------------------
+   ICON ANIMATION
+----------------------------------------- */
+
+.header-actions button .p-button-icon {
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+
+/* -----------------------------------------
+   LABEL
+----------------------------------------- */
+
+.header-actions button .p-button-label {
+  white-space: nowrap;
+  transition: color 0.22s ease;
+}
+
+/* -----------------------------------------
+   CLICK / PRESS ANIMATION
+----------------------------------------- */
+
+.header-actions button:active {
+  transform: translateY(0) scale(0.97) !important;
+
+  box-shadow:
+    0 2px 7px
+    color-mix(
+      in srgb,
+      var(--nexora-text) 10%,
+      transparent
+    ) !important;
+}
+
+/* -----------------------------------------
+   KEYBOARD FOCUS
+----------------------------------------- */
+
+.header-actions button:focus-visible {
+  outline: none !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      transparent
+    ) !important;
+}
+
+/* =========================================
+   ASSET DETAILS - SUCCESS TAG
+========================================= */
+
+:host ::ng-deep .p-tag-success {
+  background: color-mix(
+    in srgb,
+    var(--nexora-success) 14%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: color-mix(
+    in srgb,
+    var(--nexora-success) 85%,
+    var(--nexora-text)
+  ) !important;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--nexora-success) 22%,
+    var(--nexora-border)
+  ) !important;
+
+  font-weight: 700 !important;
+}
+
+/* -----------------------------------------
+   MOBILE
+----------------------------------------- */
+
+@media (max-width: 700px) {
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1 1 0 !important;
+  }
+}
+
+/* ================================
+   STATUS BANNER
+================================ */
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+  animation: slideUp 0.35s ease;
+}
+
+.status-content,
+.warranty-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--nexora-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--nexora-success);
+  box-shadow: 0 0 0 4px
+    color-mix(
+      in srgb,
+      var(--nexora-success) 12%,
+      transparent
+    );
+}
+
+.warranty-content {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--nexora-border);
+}
+
+.warranty-content > i {
+  color: var(--nexora-primary);
+  font-size: 1.1rem;
+}
+
+.warranty-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.warranty-label {
+  color: var(--nexora-text-soft);
+  font-size: 0.72rem;
+}
+
+.warranty-content strong {
+  color: var(--nexora-text);
+  font-size: 0.85rem;
+}
+
+/* ================================
+   DETAILS GRID
+================================ */
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.details-card {
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+  overflow: hidden;
+  animation: slideUp 0.4s ease both;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.details-card:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--nexora-primary) 25%,
+    var(--nexora-border)
+  );
+  box-shadow: var(--nexora-shadow-md);
+  transform: translateY(-1px);
+}
+
+.card-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  );
+  color: var(--nexora-primary);
+}
+
+.card-title h2 {
+  margin: 0;
+  color: var(--nexora-text);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.card-title p {
+  margin: 0.2rem 0 0;
+  color: var(--nexora-text-muted);
+  font-size: 0.78rem;
+}
+
+/* ================================
+   INFORMATION GRID
+================================ */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.info-item {
+  min-width: 0;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+.info-item:nth-child(odd) {
+  border-right: 1px solid var(--nexora-border);
+}
+
+.info-item:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.info-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--nexora-text-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.info-item strong {
+  display: block;
+  color: var(--nexora-text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ================================
+   RELATIONSHIPS
+================================ */
+
+.relationship-list {
+  padding: 0.5rem 1.25rem;
+}
+
+.relationship-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 0;
+}
+
+.relationship-icon {
+  width: 2.7rem;
+  height: 2.7rem;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+}
+
+.customer-icon {
+  color: var(--nexora-primary);
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  );
+}
+
+.site-icon {
+  color: var(--nexora-success);
+  background: color-mix(
+    in srgb,
+    var(--nexora-success) 10%,
+    var(--nexora-surface)
+  );
+}
+
+.relationship-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.relationship-info span {
+  color: var(--nexora-text-soft);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.relationship-info strong {
+  color: var(--nexora-text);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.relationship-info small {
+  color: var(--nexora-text-muted);
+  font-size: 0.78rem;
+}
+
+.relationship-divider {
+  height: 1px;
+  background: var(--nexora-border);
+}
+
+/* ================================
+   DATES
+================================ */
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.date-item {
+  padding: 1.25rem;
+}
+
+.date-item + .date-item {
+  border-left: 1px solid var(--nexora-border);
+}
+
+.date-value {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--nexora-text);
+}
+
+.date-value i {
+  color: var(--nexora-primary);
+}
+
+.date-value strong {
+  font-size: 0.88rem;
+}
+
+/* ================================
+   NOTES
+================================ */
+
+.notes-content {
+  min-height: 130px;
+  padding: 1.25rem;
+}
+
+.notes-content p {
+  margin: 0;
+  color: var(--nexora-text-muted);
+  line-height: 1.7;
+  font-size: 0.88rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.empty-notes {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--nexora-text-soft);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ================================
+   AUDIT
+================================ */
+
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.audit-item {
+  padding: 1.25rem;
+}
+
+.audit-item + .audit-item {
+  border-left: 1px solid var(--nexora-border);
+}
+
+.audit-item span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--nexora-text-soft);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.audit-item strong {
+  color: var(--nexora-text);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* ================================
+   PRIME TAG
+================================ */
+
+:host ::ng-deep .p-tag {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+/* ================================
+   ANIMATIONS
+================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .details-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header-left {
+    width: 100%;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+  }
+
+  .status-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .warranty-content {
+    width: 100%;
+    padding-left: 0;
+    padding-top: 1rem;
+    border-left: none;
+    border-top: 1px solid var(--nexora-border);
+  }
+}
+
+@media (max-width: 520px) {
+  .header-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .header-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .info-grid,
+  .date-grid,
+  .audit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item:nth-child(odd) {
+    border-right: none;
+  }
+
+  .info-item:nth-last-child(-n + 2) {
+    border-bottom: 1px solid var(--nexora-border);
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .date-item + .date-item,
+  .audit-item + .audit-item {
+    border-left: none;
+    border-top: 1px solid var(--nexora-border);
+  }
+
+  .status-content {
+    flex-wrap: wrap;
+  }
+}

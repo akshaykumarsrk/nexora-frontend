@@ -1,0 +1,327 @@
+<!-- MessageService sends the message, but <p-toast> is the component that displays it. -->
+<p-toast />
+<p-confirm-dialog />
+
+<div class="employees-page">
+
+    <div class="page-header">
+        <div>
+            <p class="eyebrow">PEOPLE</p>
+
+            <h1>Employees</h1>
+
+            <p class="subtitle">
+                Manage your organization's employees and their information.
+            </p>
+        </div>
+
+        <p-button
+         label="Export"
+         icon="pi pi-download"
+         severity="secondary"
+         [outlined]="true"
+         (onClick)="exportEmployees()"
+        />
+
+        @if (authService.isAdmin()) {
+
+            <p-button
+            label="Add Employee"
+            icon="pi pi-plus"
+            (onClick)="openEmployeeDialog()"
+            />
+        }
+    </div>
+
+    <div class="employee-card">
+
+        <div class="card-header">
+            <div>
+                <h2>All Employees</h2>
+                <p>{{ employees().length }} employees found</p>
+            </div>
+
+            <div class="table-actions">
+
+                @if (authService.isAdmin() && selectedEmployees().length > 0) {
+
+                    <div class="selection-info">
+
+                        <span>
+                            {{ selectedEmployees().length }}
+                            {{ selectedEmployees().length === 1 ? 'employee' : 'employees' }}
+                            selected
+                        </span>
+
+                        <p-button
+                        label="Clear"
+                        icon="pi pi-times"
+                        severity="secondary"
+                        [text]="true"
+                        size="small"
+                        (onClick)="clearSelection()"
+                        />
+
+                        <p-button
+                        label="Delete Selected"
+                        icon="pi pi-trash"
+                        severity="danger"
+                        [outlined]="true"
+                        (onClick)="deleteSelectedEmployees()"
+                        />
+                    </div>
+                }
+                <div class="search-box">
+                    <i class="pi pi-search"></i>
+                    <input 
+                        type="text"
+                        placeholder="Search employees..."
+                        (input)="onSearch($event)"
+                    />
+                </div>
+
+                <p-select
+                   [options]="departmentOptions"
+                   [(ngModel)]="selectedDepartment"
+                   optionLabel="label"
+                   optionValue="value"
+                   placeholder="Filter department"
+                   (onChange)="onDepartmentChange()"
+                />
+
+                <p-select
+                   [options]="statusOptions"
+                   [(ngModel)]="selectedStatus"
+                   optionLabel="label"
+                   optionValue="value"
+                   placeholder="Filter status"
+                   (onChange)="onStatusChange()"
+                />
+            </div>
+        </div>
+
+        @if (error()) {
+            <div class="error-state">
+                <i class="pi pi-exclamation-triangle"></i>
+
+                <h3>Something went wrong</h3>
+
+                <p>{{ error() }}</p>
+
+                <p-button
+                label="Try Again"
+                icon="pi pi-refresh"
+                severity="secondary"
+                [outlined]="true"
+                (onClick)="loadEmployees()"
+                />
+            </div>
+        }
+
+        <!-- So now PrimeNG knows: #employeeTable is the table that our @ViewChild is looking for. -->
+         <!-- Why [globalFilterFields] because When you type engineering so PrimeNG checks: -->
+          <!-- name, email, employeeCode, department, designation, status. If any of these fields contain engineering, then show that employee. -->
+        <p-table 
+          #employeeTable 
+          [value]="employees()" 
+          [(selection)]="selectedEmployees"
+          [loading]="loading()"
+          [globalFilterFields]="[
+            'name',
+            'email',
+            'employeeCode',
+            'department',
+            'designation',
+            'status'
+          ]"
+          [paginator]="true"
+          [rows]="5"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          [tableStyle]="{ 'min-width': '900px' }"
+        >
+
+            <ng-template #header>
+                <tr>
+                    @if (authService.isAdmin()) {
+                        <th class="selection-column">
+                            <p-table-header-checkbox />
+                        </th>
+                    }
+                    <!-- This tells PrimeNG: "When the user clicks this column, sort the table using the employee's name property." -->
+                    <th pSortableColumn="name">
+                        Employee
+                        <!-- This displays the sorting icon: -->
+                        <p-sorticon field="name" /> 
+                    </th>
+                    <th pSortableColumn="employeeCode">
+                        Employee Code
+                        <p-sorticon field="employeeCode" />
+                    </th>
+                    <th pSortableColumn="department">
+                        Department
+                        <p-sorticon field="department" />
+                    </th>
+
+                    <th pSortableColumn="designation">
+                        Designation
+                        <p-sorticon field="designation" />
+                    </th>
+
+                    <th pSortableColumn="status">
+                        Status
+                        <p-sorticon field="status" />
+                    </th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </ng-template>
+
+            <!-- Body is where PrimeNG gives us one employee at a time. -->
+            <ng-template #body let-employee>
+                <tr>
+                    @if (authService.isAdmin()) {
+                        <td class="selection-column">
+                            <p-table-checkbox [value]="employee" />
+                        </td>
+                    }
+
+                    <td>
+                        <div class="employee-info">
+
+                            <div class="avatar">
+                                {{ employee.name.charAt(0) }}
+                            </div>
+
+                            <div>
+                                <strong>{{ employee.name }}</strong>
+                                <span>{{ employee.email }}</span>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="employee-code">
+                            {{ employee.employeeCode }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ employee.department }}
+                    </td>
+
+                    <td>
+                        {{ employee.designation }}
+                    </td>
+
+                    <td>
+                        <span [class]="'status ' + employee.status.toLowerCase().replace(' ', '-')">
+                            {{ employee.status }}
+                        </span>
+                    </td>
+
+                    <td class="actions-cell">
+
+                        <p-button 
+                           icon="pi pi-eye"
+                           severity="secondary"
+                           [text]="true"
+                           [rounded]="true"
+                           size="small"
+                           ariaLabel="View employee"
+                           (onClick)="viewEmployee(employee)"
+                        />
+
+                        @if (authService.isAdmin()) {
+                            <p-button
+                                icon="pi pi-pencil"
+                                severity="secondary"
+                                [text]="true"
+                                [rounded]="true"
+                                size="small"
+                                ariaLabel="Edit employee"
+                                (onClick)="editEmployee(employee)"
+                            />
+
+                            <p-button
+                                icon="pi pi-trash"
+                                severity="danger"
+                                [text]="true"
+                                [rounded]="true"
+                                size="small"
+                                ariaLabel="Delete employee"
+                                (onClick)="deleteEmployee(employee)"
+                            />
+                        }
+                    </td>
+
+                </tr>
+            </ng-template>
+
+            <ng-template #emptymessage>
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-state">
+                            <i class="pi pi-users"></i>
+                            <h3>No employees found</h3>
+                            <p>
+                                Try changing your search or filters.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+    </div>
+
+    <!-- [(visible)]="showEmployeeDialog" connects the PrimeNG dialog with our Angular signal. -->
+    <!-- When: this.showEmployeeDialog.set(true); -> the dialog opens -->
+    <!-- When: this.showEmployeeDialog.set(false); -> the dialog closes -->
+    <!-- Update the form title/button FROM header="Add Employee" TO [header]="selectedEmployee() ? 'Edit Employee' : 'Add Employee'"-->
+    <p-dialog
+     [header]="selectedEmployee() ? 'Edit Employee' : 'Add Employee'"
+     [(visible)]="showEmployeeDialog"
+     [modal]="true"
+     [style]="{ width: '700px' }"
+     [draggable]="false"
+     [resizable]="false"
+     (onHide)="closeEmployeeDialog()"
+     >
+
+        <!-- And this is the child component: -->
+        <!-- We're putting our form inside the PrimeNG dialog. -->
+        <!-- Remember we created this in the form component: -->
+        <!-- @Output() saved = new EventEmitter<void>(); -->
+        <!-- When the form is submitted this.saved.emit(); -->
+        <!-- The parent listens: (saved)="onEmployeeSaved()" -->
+        <app-employee-form-dialog 
+            [employee]="selectedEmployee()"
+            [saving] = saving()
+            (saved)="onEmployeeSaved($event)"   
+            (cancelled)="closeEmployeeDialog()"
+        />
+
+    </p-dialog>
+
+    <!-- Why [visible] instead of [(visible)]? -->
+    <!-- We're using a signal -->
+    <!-- showDetailsDialog = signal(false); -->
+    <!-- So this explicit form is very clear: -->
+     <!-- visibleChange doesn't just mean "close"; it can emit both true and false. -->
+    <p-dialog
+        header="Employee Details"
+        [visible]="showDetailsDialog()"
+        [modal]="true"
+        [style]="{ width: '650px' }"
+        [draggable]="false"
+        [resizable]="false"
+        styleClass="nexora-employee-details-dialog"
+        (visibleChange)="onDetailsDialogVisibleChange($event)"
+        >
+        <app-employee-details-dialog
+            [employee]="selectedEmployee()"
+        />
+    </p-dialog>
+
+</div>

@@ -1,0 +1,148 @@
+<p-toast position="top-right" />
+
+<div class="dashboard-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        OVERVIEW
+      </p>
+
+      <h1>
+        Dashboard
+      </h1>
+
+      <p class="subtitle">
+        Monitor your organization's operations,
+        jobs and financial performance.
+      </p>
+
+    </div>
+
+
+    <p-button
+      label="Refresh"
+      icon="pi pi-refresh"
+      severity="secondary"
+      [outlined]="true"
+      [loading]="dashboardState().status === 'loading'"
+      (onClick)="loadDashboard()"
+    />
+
+  </div>
+
+
+  <!-- LOADING -->
+  @if (dashboardState().status === 'loading') {
+
+    <div class="stats-grid">
+
+      @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
+
+        <div class="loading-card">
+
+          <p-skeleton
+            width="45%"
+            height="1rem"
+          />
+
+          <p-skeleton
+            width="70%"
+            height="2rem"
+          />
+
+          <p-skeleton
+            width="55%"
+            height="0.8rem"
+          />
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- ERROR -->
+  @else if (dashboardState().status === 'error') {
+
+    <div class="error-state">
+
+      <i class="pi pi-exclamation-triangle"></i>
+
+      <h2>
+        Unable to load dashboard
+      </h2>
+
+      <p>
+        Something went wrong while loading
+        the dashboard information.
+      </p>
+
+      <p-button
+        label="Try Again"
+        icon="pi pi-refresh"
+        (onClick)="loadDashboard()"
+      />
+
+    </div>
+
+  }
+
+
+  <!-- SUCCESS -->
+  @else {
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+
+      @for (
+        card of statCards();
+        track card.title
+      ) {
+
+        <app-stat-card
+          [title]="card.title"
+          [value]="card.value"
+          [icon]="card.icon"
+          [description]="card.description"
+        />
+
+      }
+
+    </div>
+
+
+    <!-- ACTIVITY + REVENUE -->
+    <div class="dashboard-lower-grid">
+
+      <app-recent-activity />
+
+      <app-revenue-chart
+        [revenue]="
+          dashboardState().data?.revenue ?? []
+        "
+      />
+
+    </div>
+
+
+    <!-- JOB STATUS -->
+    <div class="dashboard-chart-row">
+
+      <app-job-status-chart
+        [jobStatus]="
+          dashboardState().data?.jobStatus ?? []
+        "
+      />
+
+    </div>
+
+  }
+
+</div>

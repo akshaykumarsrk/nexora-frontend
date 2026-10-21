@@ -1,0 +1,33 @@
+<div class="job-status-card">
+
+  <div class="job-status-header">
+    <p class="section-eyebrow">JOBS</p>
+
+    <h2>Job Status</h2>
+
+    <p class="job-status-subtitle">
+      Current job distribution
+    </p>
+  </div>
+
+  @if (jobStatus.length > 0) {
+
+    <div class="chart-container">
+      <p-chart
+        type="doughnut"
+        [data]="data"
+        [options]="options"
+      />
+    </div>
+
+  } @else {
+
+    <div class="empty-state">
+      <i class="pi pi-chart-pie"></i>
+
+      <p>No job status data available</p>
+    </div>
+
+  }
+
+</div>

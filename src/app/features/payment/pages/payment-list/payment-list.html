@@ -1,0 +1,514 @@
+<p-toast />
+
+<div class="payment-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div class="page-heading">
+
+      <div class="page-icon">
+        <i class="pi pi-wallet"></i>
+      </div>
+
+      <div class="page-heading-content">
+
+        <div class="breadcrumb">
+          <span>Finance</span>
+          <i class="pi pi-angle-right"></i>
+          <span>Payments</span>
+        </div>
+
+        <h1>
+          Payments
+        </h1>
+
+        <p>
+          Track and manage customer payments
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       PAYMENT CARD
+       ===================================================== -->
+
+  <section class="payment-card">
+
+    <!-- ===================================================
+         TOOLBAR
+         =================================================== -->
+
+    <div class="payment-toolbar">
+
+      <div class="payment-search">
+
+        <i class="pi pi-search"></i>
+
+        <input
+          type="text"
+          placeholder="Search payments..."
+          [value]="searchTerm()"
+          (input)="onSearch($event)"
+        />
+
+        @if (searchTerm()) {
+
+          <button
+            type="button"
+            class="clear-search"
+            aria-label="Clear search"
+            title="Clear search"
+            (click)="clearSearch()"
+          >
+
+            <i class="pi pi-times"></i>
+
+          </button>
+
+        }
+
+      </div>
+
+
+      <button
+        type="button"
+        class="refresh-button"
+        [disabled]="loading()"
+        title="Refresh payments"
+        aria-label="Refresh payments"
+        (click)="loadPayments()"
+      >
+
+        <i
+          class="pi pi-refresh"
+          [class.pi-spin]="loading()"
+        ></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================
+         CONTENT
+         =================================================== -->
+
+    @if (loading()) {
+
+      <div class="payment-loading">
+
+        <div class="loading-spinner"></div>
+
+        <span>
+          Loading payments...
+        </span>
+
+      </div>
+
+    } @else if (filteredPayments().length === 0) {
+
+      <!-- ================================================
+           EMPTY STATE
+           ================================================ -->
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          <i class="pi pi-wallet"></i>
+        </div>
+
+        <h3>
+          No payments found
+        </h3>
+
+        @if (searchTerm()) {
+
+          <p>
+            No payments match your search.
+          </p>
+
+          <button
+            type="button"
+            class="empty-action"
+            (click)="clearSearch()"
+          >
+            Clear Search
+          </button>
+
+        } @else {
+
+          <p>
+            Payments recorded against invoices
+            will appear here.
+          </p>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <!-- ================================================
+           TABLE
+           ================================================ -->
+
+      <div class="table-wrapper">
+
+        <table class="payment-table">
+
+          <thead>
+
+            <tr>
+
+              <th class="date-column">
+                Date
+              </th>
+
+              <th class="invoice-column">
+                Invoice
+              </th>
+
+              <th class="amount-column">
+                Amount
+              </th>
+
+              <th class="method-column">
+                Payment Method
+              </th>
+
+              <th class="reference-column">
+                Transaction Reference
+              </th>
+
+              <th class="notes-column">
+                Notes
+              </th>
+
+              <th class="action-column">
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              payment of filteredPayments();
+              track payment.id
+            ) {
+
+              <tr>
+
+                <!-- DATE -->
+
+                <td class="date-column">
+
+                  <span class="date-value">
+                    {{ formatDate(payment.paymentDate) }}
+                  </span>
+
+                </td>
+
+
+                <!-- INVOICE -->
+
+                <td class="invoice-column">
+
+                  <button
+                    type="button"
+                    class="invoice-link"
+                    (click)="viewInvoice(payment)"
+                  >
+
+                    <span class="invoice-icon">
+                      <i class="pi pi-file"></i>
+                    </span>
+
+                    <span class="invoice-number">
+                      {{ payment.invoiceNumber }}
+                    </span>
+
+                  </button>
+
+                  
+
+                </td>
+
+
+                <!-- AMOUNT -->
+
+                <td class="amount-column">
+
+                  <span class="amount-value">
+                    {{ formatCurrency(payment.amount) }}
+                  </span>
+
+                </td>
+
+
+                <!-- PAYMENT METHOD -->
+
+                <td class="method-column">
+
+                  <span
+                    class="payment-method"
+                    [class.method-upi]="
+                      payment.paymentMethod
+                        ?.toUpperCase() === 'UPI'
+                    "
+                    [class.method-cash]="
+                      payment.paymentMethod
+                        ?.toUpperCase() === 'CASH'
+                    "
+                    [class.method-card]="
+                      payment.paymentMethod
+                        ?.toUpperCase() === 'CARD'
+                    "
+                    [class.method-bank]="
+                      payment.paymentMethod
+                        ?.toUpperCase() === 'BANK_TRANSFER'
+                    "
+                    [class.method-cheque]="
+                      payment.paymentMethod
+                        ?.toUpperCase() === 'CHEQUE'
+                    "
+                  >
+                    {{ formatPaymentMethod(
+                      payment.paymentMethod
+                    ) }}
+                  </span>
+
+                </td>
+
+
+                <!-- REFERENCE -->
+
+                <td class="reference-column">
+
+                  @if (
+                    payment.transactionReference
+                  ) {
+
+                    <span
+                      class="reference-value"
+                      [title]="
+                        payment.transactionReference
+                      "
+                    >
+                      {{
+                        payment.transactionReference
+                      }}
+                    </span>
+
+                  } @else {
+
+                    <span class="muted-value">
+                      —
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- NOTES -->
+
+                <td class="notes-column">
+
+                  @if (payment.notes) {
+
+                    <span
+                      class="notes-value"
+                      [title]="payment.notes"
+                    >
+                      {{ payment.notes }}
+                    </span>
+
+                  } @else {
+
+                    <span class="muted-value">
+                      —
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- ACTION -->
+
+                <td class="action-column">
+
+                    <!-- View Invoice -->
+                    <button
+                        type="button"
+                        class="view-button"
+                        title="View Invoice"
+                        aria-label="View Invoice"
+                        (click)="viewInvoice(payment)"
+                    >
+                        <i class="pi pi-eye"></i>
+                    </button>
+
+                    <!-- Download Receipt -->
+                    <button
+                        type="button"
+                        class="receipt-button"
+                        title="Download Payment Receipt"
+                        aria-label="Download Payment Receipt"
+                        (click)="downloadReceipt(payment.id)"
+                    >
+                        <i class="pi pi-file-pdf"></i>
+                    </button>
+
+                    </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- =================================================
+           PAGINATION
+           ================================================= -->
+
+      @if (totalElements() > 0) {
+
+        <div class="pagination">
+
+          <div class="pagination-info">
+
+            Showing
+
+            <strong>
+              {{ paginationStart() }}
+            </strong>
+
+            to
+
+            <strong>
+              {{ paginationEnd() }}
+            </strong>
+
+            of
+
+            <strong>
+              {{ totalElements() }}
+            </strong>
+
+            payments
+
+          </div>
+
+
+          <div class="pagination-controls">
+
+            <button
+              type="button"
+              class="pagination-button pagination-arrow"
+              [disabled]="currentPage() === 1"
+              title="Previous page"
+              aria-label="Previous page"
+              (click)="previousPage()"
+            >
+
+              <i class="pi pi-chevron-left"></i>
+
+            </button>
+
+
+            @for (
+              page of pageNumbers();
+              track page
+            ) {
+
+              <button
+                type="button"
+                class="pagination-button"
+                [class.active]="currentPage() === page"
+                [disabled]="loading()"
+                [attr.aria-label]="'Go to page ' + (page + 1)"
+                [attr.aria-current]="
+                  currentPage() === page ? 'page' : null
+                "
+                (click)="goToPage(page)"
+              >
+                {{ page + 1 }}
+              </button>
+
+            }
+
+
+            <button
+              type="button"
+              class="pagination-button pagination-arrow"
+              [disabled]="
+                totalPages() === 0 ||
+                currentPage() >= totalPages() - 1 ||
+                loading()
+              "
+              title="Next page"
+              aria-label="Next page"
+              (click)="nextPage()"
+            >
+              <i class="pi pi-chevron-right"></i>
+            </button>
+
+          </div>
+
+
+          <div class="rows-selector">
+
+            <label for="rowsPerPage">
+              Rows
+            </label>
+
+            <select
+              id="rowsPerPage"
+              [value]="rowsPerPage()"
+              (change)="onRowsPerPageChange($event)"
+            >
+
+              <option value="10">
+                10
+              </option>
+
+              <option value="25">
+                25
+              </option>
+
+              <option value="50">
+                50
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      }
+
+    }
+
+  </section>
+
+</div>

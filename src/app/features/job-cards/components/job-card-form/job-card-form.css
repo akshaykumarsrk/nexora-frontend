@@ -1,0 +1,678 @@
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.job-card-form-page {
+  width: 100%;
+  padding: 28px 32px 48px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+:host-context(.dark) .job-card-form-page {
+  color: #dce3f2;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+:host-context(.dark) .back-button {
+  border-color: #293653;
+  background: #111a2d;
+  color: #9aa9c7;
+}
+
+:host-context(.dark) .back-button:hover {
+  background: #18233b;
+  color: #ffffff;
+  border-color: #465783;
+}
+
+:host-context(.dark) .breadcrumb {
+  color: #657594;
+}
+
+:host-context(.dark) .page-title-content h1 {
+  color: #f5f7ff;
+}
+
+:host-context(.dark) .page-title-content p {
+  color: #7182a4;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+:host-context(.dark) .error-card {
+  border-color: #55303a;
+  background: #1b151d;
+}
+
+:host-context(.dark) .error-icon {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+:host-context(.dark) .error-card h3 {
+  color: #f1f4ff;
+}
+
+:host-context(.dark) .error-card p {
+  color: #8b9ab5;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+:host-context(.dark) .form-card {
+  border-color: #293650;
+  background: #111a2c;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+:host-context(.dark) .card-header {
+  border-bottom-color: #243149;
+  background: #111a2c;
+}
+
+:host-context(.dark) .card-icon {
+  background: rgba(99, 102, 241, 0.08);
+  color: #7178ff;
+}
+
+:host-context(.dark) .card-header h2 {
+  color: #f1f4ff;
+}
+
+:host-context(.dark) .card-header span {
+  color: #697b9e;
+}
+
+
+/* =========================================================
+   JOB REFERENCE
+   ========================================================= */
+
+:host-context(.dark) .job-reference {
+  background: #111a2c;
+}
+
+:host-context(.dark) .field-label {
+  color: #627493;
+}
+
+:host-context(.dark) .job-id {
+  border-color: #303d61;
+  background: #111a30;
+  color: #8e98ff;
+}
+
+
+/* =========================================================
+   FORM CONTENT
+   ========================================================= */
+
+:host-context(.dark) .form-content {
+  background: #111a2c;
+}
+
+:host-context(.dark) .form-field label {
+  color: #9aa9c4;
+}
+
+:host-context(.dark) .required {
+  color: #f87171;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+:host-context(.dark) .form-field textarea {
+  border-color: #303d59;
+
+  background: #0e1729;
+  color: #dce3f2;
+}
+
+:host-context(.dark) .form-field textarea::placeholder {
+  color: #52627f;
+}
+
+:host-context(.dark) .form-field textarea:hover {
+  border-color: #3b4a6b;
+}
+
+:host-context(.dark) .form-field textarea:focus {
+  border-color: #6366f1;
+
+  background: #101a2e;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+:host-context(.dark) .field-error {
+  color: #f87171;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+:host-context(.dark) .secondary-button {
+  border-color: #303d59;
+  background: #111a2c;
+  color: #9aa9c4;
+}
+
+:host-context(.dark) .secondary-button:hover:not(:disabled) {
+  background: #172139;
+  color: #e5e9f3;
+}
+
+:host-context(.dark) .primary-button {
+  background: #6366f1;
+  color: #ffffff;
+}
+
+:host-context(.dark) .primary-button:hover:not(:disabled) {
+  background: #7073f7;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.back-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d9deea;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #53627d;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  background: #f5f7fb;
+  color: #1f2937;
+  border-color: #c5ccda;
+  transform: translateX(-2px);
+}
+
+.page-title-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #71809a;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.breadcrumb i {
+  font-size: 10px;
+}
+
+.page-title-content h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.page-title-content p {
+  margin: 2px 0 0;
+
+  color: #71809a;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-bottom: 18px;
+  padding: 20px;
+
+  border: 1px solid #fecaca;
+  border-radius: 13px;
+
+  background: #fff7f7;
+}
+
+.error-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.error-card h3 {
+  margin: 0 0 4px;
+
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.error-card p {
+  margin: 0;
+
+  color: #6b7280;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.form-card {
+  margin-bottom: 18px;
+
+  border: 1px solid #dfe4ed;
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 8px rgba(31, 41, 55, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e5e9f0;
+
+  background: #ffffff;
+}
+
+.card-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  background: #eef0ff;
+  color: #6366f1;
+
+  font-size: 14px;
+}
+
+.card-header h2 {
+  margin: 0 0 3px;
+
+  color: #172033;
+
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.card-header span {
+  color: #71809a;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   JOB REFERENCE
+   ========================================================= */
+
+.job-reference {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 20px;
+}
+
+.field-label {
+  color: #687892;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.job-id {
+  padding: 5px 10px;
+
+  border: 1px solid #d8dded;
+  border-radius: 7px;
+
+  background: #f5f6ff;
+  color: #6366f1;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM CONTENT
+   ========================================================= */
+
+.form-content {
+  padding: 22px 20px;
+
+  background: #ffffff;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  color: #4b5870;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  resize: vertical;
+  min-height: 100px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #d5dbe7;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #263247;
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-field textarea::placeholder {
+  color: #9aa6ba;
+}
+
+.form-field textarea:hover {
+  border-color: #b8c1d1;
+}
+
+.form-field textarea:focus {
+  border-color: #6366f1;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-field textarea.invalid {
+  border-color: #ef4444;
+}
+
+.field-error {
+  color: #dc2626;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.secondary-button,
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 40px;
+
+  padding: 0 16px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.secondary-button {
+  border: 1px solid #d5dbe7;
+
+  background: #ffffff;
+  color: #596780;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #f6f7fa;
+  color: #27344a;
+}
+
+.primary-button {
+  border: none;
+
+  background: #6366f1;
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 24px rgba(99, 102, 241, 0.18);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #5558e8;
+
+  transform: translateY(-1px);
+}
+
+.secondary-button:disabled,
+.primary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .job-card-form-page {
+    padding: 20px 16px 36px;
+  }
+
+  .page-header {
+    margin-bottom: 20px;
+  }
+
+  .page-title-content h1 {
+    font-size: 21px;
+  }
+
+  .breadcrumb {
+    font-size: 10px;
+  }
+
+  .form-content {
+    padding: 18px 16px;
+  }
+
+  .card-header {
+    padding: 15px 16px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .secondary-button,
+  .primary-button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-container {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+
+  border: 3px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      transparent
+    );
+
+  border-top-color:
+    var(--nexora-primary);
+
+  border-radius: 50%;
+
+  animation:
+    job-card-form-spin
+    0.8s linear infinite;
+}
+
+@keyframes job-card-form-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}

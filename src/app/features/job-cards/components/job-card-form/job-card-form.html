@@ -1,0 +1,494 @@
+<div class="job-card-form-page">
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        aria-label="Go back"
+        title="Back"
+        (click)="cancel()"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+      <div class="page-title-content">
+
+        <div class="breadcrumb">
+
+          <span>Jobs</span>
+
+          <i class="pi pi-angle-right"></i>
+
+          <span>Job Details</span>
+
+          <i class="pi pi-angle-right"></i>
+
+        <span>
+          {{ editing() ? 'Edit Job Card' : 'New Job Card' }}
+        </span>
+
+        </div>
+
+        <h1>
+          {{ editing() ? 'Edit Job Card' : 'New Job Card' }}
+        </h1>
+
+        <p>
+          {{
+            editing()
+              ? 'Update technician work and service details'
+              : 'Record technician work and service details'
+          }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =======================================================
+      LOADING
+  ======================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-container">
+
+      <div class="loading-spinner"></div>
+
+      <span>
+        Loading job card...
+      </span>
+
+    </div>
+
+  }
+
+
+  <!-- =======================================================
+       ERROR
+  ======================================================== -->
+
+  @if (!loading() && errorMessage()) {
+
+    <div class="error-card">
+
+      <div class="error-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+
+      <div>
+
+        <h3>
+          {{
+            editing()
+              ? 'Unable to edit job card'
+              : 'Unable to create job card'
+          }}
+        </h3>
+
+        <p>
+          {{ errorMessage() }}
+        </p>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- =======================================================
+       FORM
+  ======================================================== -->
+
+  @if (!loading() && jobId() && !errorMessage()) {
+
+    <form
+      class="job-card-form"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+
+      <!-- ===================================================
+           JOB INFORMATION
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-briefcase"></i>
+          </div>
+
+          <div>
+
+            <h2>Job Information</h2>
+
+            <span>
+              Job associated with this work record
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="job-reference">
+
+          <span class="field-label">
+            JOB ID
+          </span>
+
+          <span class="job-id">
+            #{{ jobId() }}
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           PROBLEM
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-exclamation-circle"></i>
+          </div>
+
+          <div>
+
+            <h2>Problem Reported</h2>
+
+            <span>
+              Describe the issue reported for this job
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="problemReported">
+              Problem Reported
+              <span class="required">*</span>
+            </label>
+
+            <textarea
+              id="problemReported"
+              rows="4"
+              formControlName="problemReported"
+              placeholder="Describe the problem reported by the customer..."
+              [class.invalid]="isInvalid('problemReported')"
+            ></textarea>
+
+            @if (isInvalid('problemReported')) {
+
+              <small class="field-error">
+                Problem reported is required.
+              </small>
+
+            }
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           DIAGNOSIS
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-search"></i>
+          </div>
+
+          <div>
+
+            <h2>Diagnosis</h2>
+
+            <span>
+              Technician's diagnosis of the issue
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="diagnosis">
+              Diagnosis
+            </label>
+
+            <textarea
+              id="diagnosis"
+              rows="4"
+              formControlName="diagnosis"
+              placeholder="Enter the diagnosis..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           WORK PERFORMED
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-wrench"></i>
+          </div>
+
+          <div>
+
+            <h2>Work Performed</h2>
+
+            <span>
+              Describe the work completed by the technician
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="workPerformed">
+              Work Performed
+            </label>
+
+            <textarea
+              id="workPerformed"
+              rows="5"
+              formControlName="workPerformed"
+              placeholder="Describe the repair, maintenance, or other work performed..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           FINDINGS
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-list"></i>
+          </div>
+
+          <div>
+
+            <h2>Findings</h2>
+
+            <span>
+              Record observations and technical findings
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="findings">
+              Findings
+            </label>
+
+            <textarea
+              id="findings"
+              rows="4"
+              formControlName="findings"
+              placeholder="Enter technical findings..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           TECHNICIAN REMARKS
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-user"></i>
+          </div>
+
+          <div>
+
+            <h2>Technician Remarks</h2>
+
+            <span>
+              Additional remarks from the technician
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="technicianRemarks">
+              Technician Remarks
+            </label>
+
+            <textarea
+              id="technicianRemarks"
+              rows="4"
+              formControlName="technicianRemarks"
+              placeholder="Add any additional technician remarks..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CUSTOMER REMARKS
+      ==================================================== -->
+
+      <section class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="pi pi-comments"></i>
+          </div>
+
+          <div>
+
+            <h2>Customer Remarks</h2>
+
+            <span>
+              Remarks provided by the customer
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="form-content">
+
+          <div class="form-field">
+
+            <label for="customerRemarks">
+              Customer Remarks
+            </label>
+
+            <textarea
+              id="customerRemarks"
+              rows="4"
+              formControlName="customerRemarks"
+              placeholder="Enter customer remarks..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           ACTIONS
+      ==================================================== -->
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          [disabled]="saving()"
+          (click)="cancel()"
+        >
+          <i class="pi pi-times"></i>
+          <span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="saving()"
+        >
+
+          @if (saving()) {
+
+            <i class="pi pi-spin pi-spinner"></i>
+
+            <span>
+              {{ editing() ? 'Updating...' : 'Creating...' }}
+            </span>
+
+          } @else {
+
+            <i class="pi pi-check"></i>
+
+            <span>
+              {{ editing() ? 'Update Job Card' : 'Create Job Card' }}
+            </span>
+
+          }
+
+        </button>
+
+      </div>
+
+    </form>
+
+  }
+
+</div>

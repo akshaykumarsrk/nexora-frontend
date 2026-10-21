@@ -1,0 +1,56 @@
+
+<section class="invite-page">
+  <div class="invite-card">
+    <h2>Invite an employee</h2>
+    <p class="subtitle">
+      Send a secure invitation so your team member can set their own password.
+    </p>
+
+    <div class="message error" *ngIf="errorMessage()">
+      {{ errorMessage() }}
+    </div>
+
+    <div class="message success" *ngIf="successMessage()">
+      {{ successMessage() }}
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label for="email">Employee email</label>
+      <input id="email" type="email" formControlName="email"
+             placeholder="employee@company.com" autocomplete="email" />
+
+      <label for="username">Username</label>
+      <input id="username" formControlName="username"
+             placeholder="Enter username" autocomplete="off" />
+
+      <label for="role">Role</label>
+      <select id="role" formControlName="role">
+        <option value="STAFF">Staff</option>
+        <option value="MANAGER">Manager</option>
+        <option value="TECHNICIAN">Technician</option>
+      </select>
+
+      <ng-container *ngIf="form.controls.role.value === 'TECHNICIAN'">
+        <label for="technicianId">Technician profile</label>
+
+        <p *ngIf="loadingTechnicians()">Loading technician profiles...</p>
+
+        <select id="technicianId" formControlName="technicianId">
+          <option [ngValue]="0">Select technician</option>
+          <option *ngFor="let technician of technicians()"
+                  [ngValue]="technician.id">
+            {{ technician.name }} — #{{ technician.id }}
+          </option>
+        </select>
+
+        <p *ngIf="!loadingTechnicians() && technicians().length === 0">
+          No active technician profiles available.
+        </p>
+      </ng-container>
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Sending invitation...' : 'Send invitation' }}
+      </button>
+    </form>
+  </div>
+</section>

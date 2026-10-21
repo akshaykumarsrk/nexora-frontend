@@ -1,0 +1,45 @@
+<section class="catalog-page">
+  <header class="catalog-heading"><div class="catalog-title-icon"><i class="pi pi-tags"></i></div><div><p class="eyebrow">PRODUCT CONFIGURATION</p><h1>Brands &amp; Models</h1><p class="subtitle">Configure the brands and equipment models your organization services.</p></div></header>
+  @if(error()){<p class="feedback error" role="alert">{{ error() }}</p>} @if(success()){<p class="feedback success" role="status">{{ success() }}</p>}
+  <div class="catalog-grid">
+    <section class="catalog-card">
+      <div class="card-heading"><i class="pi pi-tag"></i><div><h2>Brands</h2><p>Add brands used in your service catalog.</p></div></div>
+      @if (canManageCatalog()) {
+        <form (ngSubmit)="addBrand()"><label for="brandName">Brand name *</label><input id="brandName" name="brandName" [(ngModel)]="brandName" required maxlength="100" placeholder="e.g. Voltas"><label for="brandDescription">Description</label><textarea id="brandDescription" name="brandDescription" [(ngModel)]="brandDescription" maxlength="500" rows="3" placeholder="Optional details"></textarea><button class="primary" type="submit" [disabled]="!brandName.trim() || savingBrand()">{{ savingBrand() ? 'Saving…' : 'Add brand' }}</button></form>
+      } @else {<p class="muted">Only Admin and Manager roles can manage brands.</p>}
+      <div class="catalog-list"><h3>Existing brands <span>{{ brands().length }}</span></h3>
+        @if(loading()){<p class="muted">Loading brands…</p>} @else if(!brands().length){<p class="muted">No brands configured yet.</p>} @else {
+          @for(brand of brands(); track brand.id){
+            <div class="list-row"><div class="row-content">
+              @if(editingBrandId() === brand.id){
+                <div class="inline-editor"><label [for]="'brand-edit-name-' + brand.id">Brand name</label><input [id]="'brand-edit-name-' + brand.id" name="editBrandName" [(ngModel)]="editBrandName" required maxlength="100"><label [for]="'brand-edit-description-' + brand.id">Description</label><textarea [id]="'brand-edit-description-' + brand.id" name="editBrandDescription" [(ngModel)]="editBrandDescription" maxlength="500" rows="2"></textarea><label class="check-label"><input type="checkbox" name="editBrandActive" [(ngModel)]="editBrandActive"> Active for new records</label><div class="row-actions"><button class="primary small" type="button" [disabled]="!editBrandName.trim() || savingBrand()" (click)="saveBrand(brand)">Save</button><button class="secondary small" type="button" (click)="cancelEditBrand()">Cancel</button></div></div>
+              } @else {<strong>{{ brand.name }}</strong>@if(brand.description){<small>{{ brand.description }}</small>}
+                @if(canManageCatalog()){<div class="row-actions"><button class="secondary small" type="button" (click)="startEditBrand(brand)">Edit</button><button class="secondary small" type="button" (click)="toggleBrandActive(brand)">{{ brand.active === false ? 'Activate' : 'Deactivate' }}</button></div>}
+              }
+            </div><span class="status" [class.inactive]="brand.active === false">{{ brand.active === false ? 'Inactive' : 'Active' }}</span></div>
+          }
+        }
+      </div>
+    </section>
+    <section class="catalog-card">
+      <div class="card-heading"><i class="pi pi-box"></i><div><h2>Equipment models</h2><p>Add model numbers and connect them to a brand.</p></div></div>
+      @if (canManageCatalog()) {
+        <form (ngSubmit)="addModel()"><label for="modelBrand">Brand *</label><select id="modelBrand" name="modelBrandId" [(ngModel)]="modelBrandId" required><option value="">Select a brand</option>@for(brand of brands(); track brand.id){@if(brand.active !== false){<option [value]="brand.id">{{ brand.name }}</option>}}</select><label for="productType">Product type *</label><input id="productType" name="modelType" [(ngModel)]="modelType" required maxlength="100" placeholder="e.g. Split AC, Washing Machine"><label for="modelNumber">Model number *</label><input id="modelNumber" name="modelNumber" [(ngModel)]="modelNumber" required maxlength="100" placeholder="e.g. 183V Vectra"><label for="modelDescription">Description</label><textarea id="modelDescription" name="modelDescription" [(ngModel)]="modelDescription" maxlength="500" rows="2" placeholder="Optional details"></textarea><button class="primary" type="submit" [disabled]="!modelBrandId || !modelType.trim() || !modelNumber.trim() || savingModel()">{{ savingModel() ? 'Saving…' : 'Add model' }}</button></form>
+      } @else {<p class="muted">Only Admin and Manager roles can manage equipment models.</p>}
+      <div class="catalog-list"><h3>Existing models <span>{{ models().length }}</span></h3>
+        @if(loading()){<p class="muted">Loading models…</p>} @else if(!models().length){<p class="muted">No models configured yet.</p>} @else {
+          @for(model of models(); track model.id){
+            <div class="list-row"><div class="row-content">
+              @if(editingModelId() === model.id){
+                <div class="inline-editor"><label [for]="'model-edit-brand-' + model.id">Brand</label><select [id]="'model-edit-brand-' + model.id" name="editModelBrandId" [(ngModel)]="editModelBrandId" required>@for(brand of brands(); track brand.id){@if(brand.active !== false || brand.id === model.brandId){<option [value]="brand.id">{{ brand.name }}</option>}}</select><label [for]="'model-edit-type-' + model.id">Product type</label><input [id]="'model-edit-type-' + model.id" name="editModelType" [(ngModel)]="editModelType" required maxlength="100"><label [for]="'model-edit-number-' + model.id">Model number</label><input [id]="'model-edit-number-' + model.id" name="editModelNumber" [(ngModel)]="editModelNumber" required maxlength="100"><label [for]="'model-edit-description-' + model.id">Description</label><textarea [id]="'model-edit-description-' + model.id" name="editModelDescription" [(ngModel)]="editModelDescription" maxlength="500" rows="2"></textarea><label class="check-label"><input type="checkbox" name="editModelActive" [(ngModel)]="editModelActive"> Active for new records</label><div class="row-actions"><button class="primary small" type="button" [disabled]="!editModelBrandId || !editModelType.trim() || !editModelNumber.trim() || savingModel()" (click)="saveModel(model)">Save</button><button class="secondary small" type="button" (click)="cancelEditModel()">Cancel</button></div></div>
+              } @else {<strong>{{ model.modelNumber }}</strong><small>{{ model.brandName || 'Equipment' }}{{ model.productType ? ' · ' + model.productType : '' }}</small>@if(model.description){<small>{{ model.description }}</small>}
+                @if(canManageCatalog()){<div class="row-actions"><button class="secondary small" type="button" (click)="startEditModel(model)">Edit</button><button class="secondary small" type="button" (click)="toggleModelActive(model)">{{ model.active === false ? 'Activate' : 'Deactivate' }}</button></div>}
+              }
+            </div><span class="status" [class.inactive]="model.active === false">{{ model.active === false ? 'Inactive' : 'Active' }}</span></div>
+          }
+        }
+      </div>
+    </section>
+  </div>
+  <p class="catalog-note"><i class="pi pi-shield"></i> Only Admin and Manager roles can create, edit, or deactivate catalog records. Deactivation preserves historical references; part creation remains separate on the Parts page.</p>
+</section>

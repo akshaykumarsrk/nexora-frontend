@@ -1,0 +1,346 @@
+<p-toast></p-toast>
+
+<div class="part-form-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <p class="eyebrow">
+        INVENTORY
+      </p>
+
+      <h1>
+        {{ isEditMode ? 'Edit Part' : 'Add Part' }}
+      </h1>
+
+      <p class="subtitle">
+        {{
+          isEditMode
+            ? 'Update part information and specifications.'
+            : 'Add a new spare part to your inventory catalog.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="state-container">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>
+        Loading part...
+      </h3>
+
+      <p>
+        Please wait while we load the part information.
+      </p>
+
+    </div>
+
+  }
+
+  @else {
+
+    <form
+      [formGroup]="partForm"
+      (ngSubmit)="submit()"
+      novalidate
+    >
+
+      <p-card>
+
+        <div class="form-content">
+
+          <!-- =================================================
+               BASIC INFORMATION
+               ================================================= -->
+
+          <div class="section-header">
+
+            <div class="section-icon">
+              <i class="pi pi-box"></i>
+            </div>
+
+            <div>
+
+              <h2>
+                Part Information
+              </h2>
+
+              <p>
+                Basic identification and catalog information.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+
+            <!-- Part Code -->
+
+            <div class="form-field">
+
+              <label for="partCode">
+
+                Part Code
+
+                <span class="required">
+                  *
+                </span>
+
+              </label>
+
+              <input
+                id="partCode"
+                pInputText
+                type="text"
+                formControlName="partCode"
+                placeholder="e.g. COMP-001"
+                autocomplete="off"
+              />
+
+              @if (
+                getError('partCode')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('partCode') }}
+
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Part Name -->
+
+            <div class="form-field">
+
+              <label for="name">
+
+                Part Name
+
+                <span class="required">
+                  *
+                </span>
+
+              </label>
+
+              <input
+                id="name"
+                pInputText
+                type="text"
+                formControlName="name"
+                placeholder="e.g. Compressor"
+              />
+
+              @if (
+                getError('name')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('name') }}
+
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Category -->
+
+            <div class="form-field">
+
+              <label for="category">
+                Category
+              </label>
+
+              <input
+                id="category"
+                pInputText
+                type="text"
+                formControlName="category"
+                placeholder="e.g. Electrical"
+              />
+
+              @if (
+                getError('category')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('category') }}
+
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Brand -->
+
+            <div class="form-field">
+
+              <label for="brand">
+                Brand
+              </label>
+
+              <input
+                id="brand"
+                pInputText
+                type="text"
+                formControlName="brand"
+                placeholder="e.g. Daikin"
+              />
+
+              @if (
+                getError('brand')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('brand') }}
+
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Unit -->
+
+            <div class="form-field">
+
+              <label for="unit">
+                Unit
+              </label>
+
+              <input
+                id="unit"
+                pInputText
+                type="text"
+                formControlName="unit"
+                placeholder="e.g. Piece"
+              />
+
+              @if (
+                getError('unit')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('unit') }}
+
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-field full-width">
+
+              <label for="description">
+                Description
+              </label>
+
+              <textarea
+                id="description"
+                pTextarea
+                formControlName="description"
+                rows="5"
+                placeholder="Describe the part, specifications or additional information..."
+              ></textarea>
+
+              @if (
+                getError('description')
+              ) {
+
+                <small class="error-message">
+
+                  <i class="pi pi-exclamation-circle"></i>
+
+                  {{ getError('description') }}
+
+                </small>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               ACTIONS
+               ================================================= -->
+
+          <div class="form-actions">
+
+            <p-button
+              type="button"
+              label="Cancel"
+              icon="pi pi-times"
+              severity="secondary"
+              [outlined]="true"
+              (onClick)="cancel()"
+            />
+
+            <p-button
+              type="submit"
+              [label]="
+                isEditMode
+                  ? 'Update Part'
+                  : 'Create Part'
+              "
+              icon="pi pi-check"
+              [loading]="isSubmitting"
+              [disabled]="isSubmitting"
+            />
+
+          </div>
+
+        </div>
+
+      </p-card>
+
+    </form>
+
+  }
+
+</div>

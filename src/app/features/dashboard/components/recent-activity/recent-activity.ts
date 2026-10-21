@@ -1,0 +1,7 @@
+import { Component, OnInit, signal, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { NotificationService } from '../../../../core/services/notification';
+import { NotificationResponse } from '../../../../core/models/notification';
+@Component({imports:[DatePipe],selector:'app-recent-activity',styleUrl:'./recent-activity.css',templateUrl:'./recent-activity.html'})
+export class RecentActivity implements OnInit { private readonly service=inject(NotificationService); readonly router=inject(Router); readonly activities=signal<NotificationResponse[]>([]); readonly failed=signal(false); ngOnInit(){this.service.getAllNotifications().subscribe({next:v=>this.activities.set(v.slice(0,5)),error:()=>{this.failed.set(true);this.activities.set([])}})} icon(type:string){if(type.toUpperCase().includes('PAYMENT'))return 'pi pi-wallet';if(type.toUpperCase().includes('JOB'))return 'pi pi-briefcase';if(type.toUpperCase().includes('ERROR'))return 'pi pi-exclamation-triangle';if(type.toUpperCase().includes('SUCCESS'))return 'pi pi-check-circle';return 'pi pi-bell'} open(n:NotificationResponse){if(n.referenceId){const routes:Record<string,string>={JOB:'/jobs',SERVICE_REQUEST:'/service-requests',INVOICE:'/invoices',PAYMENT:'/payments',CUSTOMER:'/customers',SITE:'/sites',ASSET:'/assets'};const base=routes[(n.referenceType||'').toUpperCase()];if(base)this.router.navigate([base,n.referenceId]);else this.router.navigate(['/notifications'])}else this.router.navigate(['/notifications'])}}

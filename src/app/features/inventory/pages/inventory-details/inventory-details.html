@@ -1,0 +1,533 @@
+<div class="inventory-details-page">
+
+  <p-toast />
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>
+        Loading inventory()?...
+      </span>
+
+    </div>
+
+  }
+
+
+  @else if (inventory()) {
+
+    <!-- ===================================================
+         HEADER
+         =================================================== -->
+
+    <div class="page-header">
+
+      <div>
+
+        <div class="breadcrumb">
+
+          <span
+            class="breadcrumb-link"
+            (click)="goBack()"
+          >
+            Inventory
+          </span>
+
+          <i class="pi pi-angle-right"></i>
+
+          <span>
+            {{ inventory()?.partName }}
+          </span>
+
+        </div>
+
+        <div class="title-row">
+
+          <div class="title-icon">
+            <i class="pi pi-database"></i>
+          </div>
+
+          <div>
+
+            <h1>
+              {{ inventory()?.partName }}
+            </h1>
+
+            <p>
+              {{ inventory()?.partCode }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <p-button
+          label="Back"
+          icon="pi pi-arrow-left"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="goBack()"
+        />
+
+        <p-button
+          label="Movement History"
+          icon="pi pi-history"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="viewStockMovements()"
+        />
+
+        <p-button
+          label="Adjust Stock"
+          icon="pi pi-plus-circle"
+          (onClick)="adjustStock()"
+        />
+
+        <p-button
+          label="Edit"
+          icon="pi pi-pencil"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="editInventory()"
+        />
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         STATUS BANNER
+         =================================================== -->
+
+    <div
+      class="status-banner"
+      [class]="getStockClass()"
+    >
+
+      <div class="status-banner-icon">
+
+        @if (getStockClass() === 'in-stock') {
+
+          <i class="pi pi-check-circle"></i>
+
+        }
+        @else if (getStockClass() === 'low-stock') {
+
+          <i class="pi pi-exclamation-triangle"></i>
+
+        }
+        @else {
+
+          <i class="pi pi-times-circle"></i>
+
+        }
+
+      </div>
+
+      <div>
+
+        <strong>
+          {{ getStockLabel() }}
+        </strong>
+
+        <span>
+          @if (inventory()?.lowStock) {
+            Stock has reached the configured reorder level.
+          } @else {
+            Inventory is currently above the reorder level.
+          }
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         STOCK OVERVIEW
+         =================================================== -->
+
+    <section class="overview-grid">
+
+      <!-- TOTAL -->
+
+      <div class="metric-card">
+
+        <div class="metric-icon primary">
+          <i class="pi pi-box"></i>
+        </div>
+
+        <div class="metric-content">
+
+          <span>
+            Total Stock
+          </span>
+
+          <strong>
+            {{ inventory()?.quantity }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- RESERVED -->
+
+      <div class="metric-card">
+
+        <div class="metric-icon warning">
+          <i class="pi pi-lock"></i>
+        </div>
+
+        <div class="metric-content">
+
+          <span>
+            Reserved
+          </span>
+
+          <strong>
+            {{ inventory()?.reservedQuantity }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- AVAILABLE -->
+
+      <div class="metric-card">
+
+        <div class="metric-icon success">
+          <i class="pi pi-check"></i>
+        </div>
+
+        <div class="metric-content">
+
+          <span>
+            Available
+          </span>
+
+          <strong>
+            {{ inventory()?.availableQuantity }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- REORDER -->
+
+      <div class="metric-card">
+
+        <div class="metric-icon danger">
+          <i class="pi pi-refresh"></i>
+        </div>
+
+        <div class="metric-content">
+
+          <span>
+            Reorder Level
+          </span>
+
+          <strong>
+            {{ inventory()?.reorderLevel }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         DETAILS
+         =================================================== -->
+
+    <div class="details-grid">
+
+
+      <!-- =================================================
+           PART INFORMATION
+           ================================================= -->
+
+      <section class="details-card">
+
+        <div class="section-header">
+
+          <div class="section-icon">
+            <i class="pi pi-cog"></i>
+          </div>
+
+          <div>
+
+            <h2>
+              Part Information
+            </h2>
+
+            <p>
+              Part associated with this inventory record.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-list">
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Part Name
+            </span>
+
+            <strong class="detail-value">
+              {{ inventory()?.partName }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Part Code
+            </span>
+
+            <strong class="detail-value primary">
+              {{ inventory()?.partCode }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Part ID
+            </span>
+
+            <span class="detail-value">
+              #{{ inventory()?.partId }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="card-footer">
+
+          <p-button
+            label="View Part"
+            icon="pi pi-external-link"
+            [text]="true"
+            (onClick)="viewPart()"
+          />
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           INVENTORY INFORMATION
+           ================================================= -->
+
+      <section class="details-card">
+
+        <div class="section-header">
+
+          <div class="section-icon">
+            <i class="pi pi-database"></i>
+          </div>
+
+          <div>
+
+            <h2>
+              Inventory Information
+            </h2>
+
+            <p>
+              Current inventory configuration.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-list">
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Status
+            </span>
+
+            <span
+              class="inventory-status"
+              [class]="getStockClass()"
+            >
+
+              <span class="status-dot"></span>
+
+              {{ getStockLabel() }}
+
+            </span>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Active
+            </span>
+
+            <span
+              class="active-status"
+              [class.inactive]="!inventory()?.active"
+            >
+              {{ inventory()?.active ? 'Active' : 'Inactive' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Reorder Level
+            </span>
+
+            <strong class="detail-value">
+              {{ inventory()?.reorderLevel }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           SYSTEM INFORMATION
+           ================================================= -->
+
+      <section class="details-card full-width">
+
+        <div class="section-header">
+
+          <div class="section-icon">
+            <i class="pi pi-clock"></i>
+          </div>
+
+          <div>
+
+            <h2>
+              System Information
+            </h2>
+
+            <p>
+              Inventory record timestamps.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-list horizontal">
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Inventory ID
+            </span>
+
+            <strong class="detail-value">
+              #{{ inventory()?.id }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Created At
+            </span>
+
+            <span class="detail-value">
+              {{ inventory()?.createdAt | date:'medium' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <span class="detail-label">
+              Last Updated
+            </span>
+
+            <span class="detail-value">
+              {{ inventory()?.updatedAt | date:'medium' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  }
+
+  @else {
+
+    <div class="state-container">
+
+      <div class="state-icon error">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+
+      <h3>
+        Inventory not found
+      </h3>
+
+      <p>
+        The requested inventory record could not be found.
+      </p>
+
+      <p-button
+        label="Back to Inventory"
+        icon="pi pi-arrow-left"
+        (onClick)="goBack()"
+      />
+
+    </div>
+
+  }
+
+</div>

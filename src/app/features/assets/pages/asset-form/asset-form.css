@@ -1,0 +1,944 @@
+/* =========================================================
+   NEXORA — ASSET FORM
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 28px;
+
+  animation: pageEnter 0.35s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.back-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  border: 1px solid transparent;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: var(--nexora-primary);
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      transparent
+    );
+
+  transform: translateX(-2px);
+}
+
+.page-header h1 {
+  margin: 14px 0 6px;
+
+  color: var(--nexora-text);
+
+  font-size: 30px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.form-card {
+  width: 100%;
+
+  padding: 28px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  animation: cardEnter 0.4s ease;
+
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.form-card:hover {
+  box-shadow: var(--nexora-shadow-md);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding-bottom: 22px;
+
+  margin-bottom: 24px;
+
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+.section-header-spaced {
+  margin-top: 34px;
+}
+
+.section-icon {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  color: var(--nexora-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 17%,
+      transparent
+    );
+
+  font-size: 18px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.section-header:hover .section-icon {
+  transform:
+    translateY(-2px)
+    scale(1.04);
+
+  box-shadow:
+    0 8px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+}
+
+.section-header-spaced .section-icon {
+  color: var(--nexora-success);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 10%,
+      var(--nexora-surface)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 17%,
+      transparent
+    );
+}
+
+.section-header-spaced:hover .section-icon {
+  box-shadow:
+    0 8px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-success) 12%,
+      transparent
+    );
+}
+
+.notes-icon {
+  color: var(--nexora-warning) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 10%,
+      var(--nexora-surface)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 17%,
+      transparent
+    ) !important;
+}
+
+.section-header h2 {
+  margin: 0 0 5px;
+
+  color: var(--nexora-text);
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.section-header p {
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px 22px;
+}
+
+.form-field {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.form-field label {
+  color: var(--nexora-text);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.required {
+  margin-left: 2px;
+
+  color: var(--nexora-danger);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+:host ::ng-deep
+.form-field .p-inputtext {
+
+  width: 100% !important;
+
+  min-height: 44px;
+
+  padding: 10px 13px !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 9px !important;
+
+  box-shadow: none !important;
+
+  outline: none !important;
+
+  font-size: 13px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:host ::ng-deep
+.form-field .p-inputtext:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 28%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field .p-inputtext:focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field .p-inputtext::placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+:host ::ng-deep
+.form-field textarea.p-textarea {
+
+  width: 100% !important;
+
+  min-height: 120px;
+
+  padding: 11px 13px !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 9px !important;
+
+  box-shadow: none !important;
+
+  resize: vertical;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:host ::ng-deep
+.form-field textarea.p-textarea:focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field textarea.p-textarea::placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+:host ::ng-deep
+.form-field .p-select {
+
+  width: 100% !important;
+
+  min-height: 44px !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 9px !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:host ::ng-deep
+.form-field .p-select:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 28%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field .p-select.p-focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field .p-select-label {
+  color: var(--nexora-text) !important;
+
+  padding: 10px 13px !important;
+
+  font-size: 13px !important;
+}
+
+:host ::ng-deep
+.form-field .p-select-label.p-placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+:host ::ng-deep
+.form-field .p-select-dropdown {
+  color: var(--nexora-text-muted) !important;
+}
+
+
+/* =========================================================
+   SELECT OVERLAY
+   ========================================================= */
+
+:host ::ng-deep
+.p-select-overlay {
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 11px !important;
+
+  box-shadow: var(--nexora-shadow-md) !important;
+
+  overflow: hidden !important;
+
+  z-index: 99999 !important;
+}
+
+:host ::ng-deep
+.p-select-overlay .p-select-list {
+  padding: 6px !important;
+
+  max-height: 280px !important;
+
+  overflow-y: auto !important;
+
+  scrollbar-width: thin;
+}
+
+:host ::ng-deep
+.p-select-overlay .p-select-option {
+
+  min-height: 40px !important;
+
+  padding: 10px 12px !important;
+
+  border-radius: 8px !important;
+
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 13px !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+:host ::ng-deep
+.p-select-overlay .p-select-option:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transform: translateX(2px);
+}
+
+:host ::ng-deep
+.p-select-overlay
+.p-select-option.p-select-option-selected {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  font-weight: 650 !important;
+}
+
+
+/* =========================================================
+   DATE PICKER
+   ========================================================= */
+
+:host ::ng-deep
+.form-field .p-datepicker {
+
+  width: 100% !important;
+}
+
+:host ::ng-deep
+.form-field .p-datepicker-input {
+
+  width: 100% !important;
+
+  min-height: 44px !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 9px !important;
+
+  box-shadow: none !important;
+
+  font-size: 13px !important;
+}
+
+:host ::ng-deep
+.form-field .p-datepicker-input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 28%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.form-field .p-datepicker-input:focus {
+  background: var(--nexora-surface) !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel {
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 12px !important;
+
+  box-shadow: var(--nexora-shadow-md) !important;
+
+  overflow: hidden !important;
+
+  z-index: 99999 !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-header {
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border-bottom: 1px solid var(--nexora-border) !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-day {
+
+  color: var(--nexora-text) !important;
+
+  border-radius: 8px !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-day:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-day-selected {
+
+  background: var(--nexora-primary) !important;
+
+  color: white !important;
+}
+
+
+/* =========================================================
+   CHARACTER COUNT
+   ========================================================= */
+
+.character-count {
+
+  align-self: flex-end;
+
+  margin-top: -2px;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-message {
+
+  color: var(--nexora-danger);
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  animation: errorEnter 0.18s ease;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.form-footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 30px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid var(--nexora-border);
+}
+
+:host ::ng-deep
+.form-footer .p-button {
+
+  min-height: 42px !important;
+
+  border-radius: 9px !important;
+
+  font-weight: 650 !important;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+:host ::ng-deep
+.form-footer .p-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+.state-card {
+
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 40px;
+
+  background: var(--nexora-surface);
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  animation: cardEnter 0.35s ease;
+}
+
+.state-card > i {
+
+  margin-bottom: 14px;
+
+  color: var(--nexora-primary);
+
+  font-size: 28px;
+}
+
+.state-card h3 {
+
+  margin: 0 0 6px;
+
+  color: var(--nexora-text);
+
+  font-size: 17px;
+}
+
+.state-card p {
+
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .page-container {
+    padding: 22px;
+  }
+
+  .form-card {
+    padding: 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full-width {
+    grid-column: auto;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .page-container {
+    padding: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .form-card {
+    padding: 18px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+  }
+
+  .form-footer {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  :host ::ng-deep
+  .form-footer .p-button {
+    width: 100% !important;
+  }
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,401 @@
+<header class="topbar">
+
+  <!-- =====================================================
+       LEFT
+       ===================================================== -->
+
+  <div class="topbar-left">
+
+    <!-- Mobile / Tablet Menu -->
+
+    <button
+      type="button"
+      class="mobile-menu"
+      aria-label="Open navigation"
+      (click)="menuClicked.emit()"
+    >
+      <i class="pi pi-bars"></i>
+    </button>
+
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+      <span>
+        Workspace
+      </span>
+
+      <i class="pi pi-angle-right"></i>
+
+      <strong>
+        {{ currentPage() }}
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       RIGHT
+       ===================================================== -->
+
+  <div class="topbar-right">
+
+
+    <!-- ===================================================
+         SEARCH
+         =================================================== -->
+
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Search workspace"
+      title="Search workspace"
+      (click)="openSearch($event, searchPopover)"
+    >
+      <i class="pi pi-search"></i>
+    </button>
+
+    <p-popover #searchPopover styleClass="nexora-search-popover">
+      <div class="search-panel">
+        <label for="workspace-search">Search workspace</label>
+        <div class="search-input-wrap">
+          <i class="pi pi-search"></i>
+          <input id="workspace-search" type="search" placeholder="Search pages..." [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" autofocus />
+        </div>
+        <div class="search-results">
+          @for (item of searchItems(); track item.route) {
+            <button type="button" class="search-result" (click)="navigateFromSearch(item.route, searchPopover)">
+              <i [class]="item.icon"></i><span>{{ item.label }}</span><i class="pi pi-arrow-up-left result-arrow"></i>
+            </button>
+          } @empty {
+            <p class="search-empty">No matching pages. Try another search.</p>
+          }
+        </div>
+        <small>Results depend on your role and permissions.</small>
+      </div>
+    </p-popover>
+
+
+    <!-- ===================================================
+         THEME
+         =================================================== -->
+
+    <button
+      type="button"
+      class="icon-button"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+    >
+      <i
+        class="pi"
+        [class.pi-moon]="theme.isDark()"
+        [class.pi-sun]="!theme.isDark()"
+      ></i>
+    </button>
+
+
+    <button type="button" class="icon-button" aria-label="Help and support" title="Help and support" (click)="openHelp($event, helpPopover)">
+      <i class="pi pi-question-circle"></i>
+    </button>
+
+    <!-- ===================================================
+         NOTIFICATIONS
+         =================================================== -->
+
+    <div class="notification-wrapper">
+
+      <button
+        type="button"
+        class="icon-button notification"
+        [class.has-unread]="unreadCount() > 0"
+        aria-label="Notifications"
+        (click)="openNotifications($event, notificationPopover)"
+      >
+
+        <i class="pi pi-bell"></i>
+
+        @if (unreadCount() > 0) {
+
+          <span class="notification-badge">
+
+            @if (unreadCount() > 99) {
+              99+
+            } @else {
+              {{ unreadCount() }}
+            }
+
+          </span>
+
+        }
+
+      </button>
+
+
+      <!-- Notification Popup -->
+
+      <p-popover
+        #notificationPopover
+        styleClass="nexora-notification-popover"
+      >
+
+        <div class="notification-panel">
+
+
+          <!-- HEADER -->
+
+          <div class="notification-header">
+
+            <div class="notification-header-left">
+
+              <div class="notification-title-icon">
+                <i class="pi pi-bell"></i>
+              </div>
+
+              <div>
+
+                <h3>
+                  Notifications
+                </h3>
+
+                <span class="notification-subtitle">
+                  Stay updated with your workspace
+                </span>
+
+              </div>
+
+              @if (unreadCount() > 0) {
+
+                <span class="notification-count">
+                  {{ unreadCount() }}
+                </span>
+
+              }
+
+            </div>
+
+
+            <button
+              type="button"
+              class="mark-all-read"
+              [disabled]="unreadCount() === 0"
+              (click)="markAllAsRead()"
+            >
+
+              <i class="pi pi-check"></i>
+
+              <span>
+                Mark all read
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <div class="notification-divider"></div>
+
+
+          <!-- LOADING -->
+
+          @if (notificationsLoading()) {
+
+            <div class="notification-state">
+
+              <div class="notification-state-icon loading">
+                <i class="pi pi-spin pi-spinner"></i>
+              </div>
+
+              <strong>
+                Loading notifications
+              </strong>
+
+              <span>
+                Please wait...
+              </span>
+
+            </div>
+
+          }
+
+
+          <!-- EMPTY -->
+
+          @else if (notifications().length === 0) {
+
+            <div class="notification-state">
+
+              <div class="notification-state-icon empty">
+                <i class="pi pi-bell-slash"></i>
+              </div>
+
+              <strong>
+                You're all caught up
+              </strong>
+
+              <span>
+                No new notifications right now.
+              </span>
+
+            </div>
+
+          }
+
+
+          <!-- LIST -->
+
+          @else {
+
+            <div class="notification-list">
+
+              @for (
+                notification of notifications();
+                track notification.id
+              ) {
+
+                <button
+                  type="button"
+                  class="notification-item"
+                  [class.unread]="!notification.read"
+                  [class]="getNotificationTypeClass(notification.type)"
+                  (click)="handleNotificationClick(
+                    notification,
+                    notificationPopover
+                  )"
+                >
+
+                  <!-- ICON -->
+
+                  <div class="notification-icon">
+
+                    <i
+                      [class]="getNotificationIcon(
+                        notification.type
+                      )"
+                    ></i>
+
+                  </div>
+
+
+                  <!-- CONTENT -->
+
+                  <div class="notification-content">
+
+                    <div class="notification-item-header">
+
+                      <strong>
+                        {{ notification.title }}
+                      </strong>
+
+                      @if (!notification.read) {
+
+                        <span class="unread-label">
+                          NEW
+                        </span>
+
+                      }
+
+                    </div>
+
+
+                    <span class="notification-message">
+                      {{ notification.message }}
+                    </span>
+
+
+                    <div class="notification-meta">
+
+                      <i class="pi pi-clock"></i>
+
+                      <small>
+                        {{ formatNotificationDate(
+                          notification.createdAt
+                        ) }}
+                      </small>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- UNREAD DOT -->
+
+                  @if (!notification.read) {
+
+                    <span class="unread-dot"></span>
+
+                  }
+
+                </button>
+
+              }
+
+            </div>
+
+          }
+
+        </div>
+
+      </p-popover>
+
+    </div>
+
+
+    <p-popover #helpPopover styleClass="nexora-help-popover">
+      <div class="help-panel">
+        <strong>How can we help?</strong>
+        <p>Open the AI assistant for field-service troubleshooting, or visit notifications and settings.</p>
+        <button type="button" (click)="openHelpRoute('/ai-assistant', helpPopover)"><i class="pi pi-sparkles"></i> AI Technician Assistant</button>
+        <button type="button" (click)="openHelpRoute('/notifications', helpPopover)"><i class="pi pi-bell"></i> Notifications</button>
+        <button type="button" (click)="openHelpRoute('/settings', helpPopover)"><i class="pi pi-cog"></i> Workspace settings</button>
+        <small>For account access or billing support, contact your organization administrator.</small>
+      </div>
+    </p-popover>
+
+    <!-- ===================================================
+         PROFILE
+         =================================================== -->
+
+    <div class="profile-menu">
+
+      <button
+        type="button"
+        class="profile"
+        aria-label="Open profile menu"
+        (click)="profileMenu.toggle($event)"
+      >
+
+        <div class="profile-avatar">
+          {{ avatarInitial() }}
+        </div>
+
+        <div class="profile-details">
+
+          <strong>
+            {{ displayName() }}
+          </strong>
+
+          <span>
+            {{ displayRole() }}
+          </span>
+
+        </div>
+
+        <i class="pi pi-chevron-down"></i>
+
+      </button>
+
+
+      <p-menu
+        #profileMenu
+        [model]="profileMenuItems"
+        [popup]="true"
+      />
+
+    </div>
+
+  </div>
+
+</header>

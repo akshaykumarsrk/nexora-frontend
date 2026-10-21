@@ -1,0 +1,394 @@
+<div class="service-request-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-title-row">
+
+      <div class="page-title-icon">
+        <i class="pi pi-wrench"></i>
+      </div>
+
+      <div class="page-title-content">
+
+        <div class="page-title-line">
+          <h2 class="page-title">
+            Service Requests
+          </h2>
+
+          <span class="request-count">
+            {{ serviceRequests().length }}
+          </span>
+        </div>
+
+        <p class="page-subtitle">
+          Manage and track customer service requests
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="new-request-button"
+      (click)="createServiceRequest()"
+    >
+      <i class="pi pi-plus"></i>
+      <span>New Service Request</span>
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-container">
+
+      <div class="loading-spinner"></div>
+
+      <div class="loading-text">
+        Loading service requests...
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+
+  @if (!loading()) {
+
+    <div class="table-card">
+
+      <!-- =================================================
+           CARD HEADER
+           ================================================= -->
+
+      <div class="table-card-header">
+
+        <div class="table-heading">
+
+          <div class="table-heading-icon">
+            <i class="pi pi-list"></i>
+          </div>
+
+          <div>
+
+            <h3>
+              Service Requests
+            </h3>
+
+            <span>
+              {{ serviceRequests().length }}
+              request{{ serviceRequests().length === 1 ? '' : 's' }}
+              in your workspace
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-header-status">
+
+          <span class="live-dot"></span>
+
+          <span>
+            Live
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           TABLE
+           ================================================= -->
+
+      <div class="table-scroll">
+
+  <table class="service-request-table">
+
+    <thead>
+      <tr>
+        <th class="id-column">ID</th>
+        <th class="title-column">Request</th>
+        <th>Customer</th>
+        <th>Site</th>
+        <th>Asset</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Requested At</th>
+        <th class="actions-column">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      @for (
+        request of serviceRequests();
+        track request.id
+      ) {
+
+        <tr>
+
+          <td>
+            <span class="request-id">
+              #{{ request.id }}
+            </span>
+          </td>
+
+
+          <td>
+            <div class="request-info">
+
+              <div class="request-title">
+                {{ request.title }}
+              </div>
+
+              @if (request.description) {
+                <div class="request-description">
+                  {{ request.description }}
+                </div>
+              }
+
+            </div>
+          </td>
+
+
+          <td>
+            <span class="reference-id">
+              #{{ request.customerId }}
+            </span>
+          </td>
+
+
+          <td>
+            <span class="reference-id">
+              #{{ request.siteId }}
+            </span>
+          </td>
+
+
+          <td>
+
+            @if (request.assetId) {
+
+              <span class="reference-id">
+                #{{ request.assetId }}
+              </span>
+
+            } @else {
+
+              <span class="reference-empty">
+                —
+              </span>
+
+            }
+
+          </td>
+
+
+          <!-- PRIORITY -->
+
+          <td>
+
+            <span
+              class="status-badge priority-badge"
+
+              [class.priority-high]="
+                request.priority === 'HIGH'
+              "
+
+              [class.priority-medium]="
+                request.priority === 'MEDIUM'
+              "
+
+              [class.priority-low]="
+                request.priority === 'LOW'
+              "
+            >
+
+              <span class="badge-dot"></span>
+
+              <span>
+                {{ request.priority }}
+              </span>
+
+            </span>
+
+          </td>
+
+
+          <!-- STATUS -->
+
+          <td>
+
+            <span
+              class="status-badge status-badge-type"
+
+              [class.status-open]="
+                request.status === 'OPEN'
+              "
+
+              [class.status-pending]="
+                request.status === 'PENDING'
+              "
+
+              [class.status-in-progress]="
+                request.status === 'IN_PROGRESS'
+              "
+
+              [class.status-resolved]="
+                request.status === 'RESOLVED'
+              "
+
+              [class.status-completed]="
+                request.status === 'COMPLETED'
+              "
+
+              [class.status-cancelled]="
+                request.status === 'CANCELLED'
+              "
+
+              [class.status-canceled]="
+                request.status === 'CANCELED'
+              "
+            >
+
+              <span class="badge-dot"></span>
+
+              <span>
+                {{ request.status }}
+              </span>
+
+            </span>
+
+          </td>
+
+
+          <!-- DATE -->
+
+          <td>
+
+            <span class="requested-date">
+
+            <i class="pi pi-calendar"></i>
+
+            <span>
+              {{
+                request.requestedAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+            </span>
+
+          </span>
+
+          </td>
+
+
+          <!-- ACTIONS -->
+
+          <td>
+
+            <div class="actions">
+
+              <button
+                type="button"
+                class="table-action-button view"
+                aria-label="View service request"
+                title="View"
+                (click)="viewServiceRequest(request)"
+              >
+                <i class="pi pi-eye"></i>
+              </button>
+
+
+              <button
+                type="button"
+                class="table-action-button edit"
+                aria-label="Edit service request"
+                title="Edit"
+                (click)="editServiceRequest(request)"
+              >
+                <i class="pi pi-pencil"></i>
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      }
+
+
+      <!-- EMPTY -->
+
+      @if (serviceRequests().length === 0) {
+
+        <tr>
+
+          <td
+            colspan="9"
+            class="empty-cell"
+          >
+
+            <div class="empty-state">
+
+              <div class="empty-state-icon">
+                <i class="pi pi-inbox"></i>
+              </div>
+
+              <h3>
+                No service requests found
+              </h3>
+
+              <p>
+                Create a service request to get started.
+              </p>
+
+              <button
+                type="button"
+                class="empty-action-button"
+                (click)="createServiceRequest()"
+              >
+
+                <i class="pi pi-plus"></i>
+
+                Create Service Request
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>
+
+    </div>
+
+  }
+
+</div>

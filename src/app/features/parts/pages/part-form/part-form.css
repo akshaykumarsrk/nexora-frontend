@@ -1,0 +1,584 @@
+/* =========================================================
+   NEXORA PART FORM
+   LIGHT + DARK THEME
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.part-form-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background: var(--nexora-background);
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-content {
+  max-width: 760px;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+
+  color: var(--nexora-primary);
+
+  font-size: 0.72rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.12em;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.8rem;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  margin: 0.4rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.9rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+:host ::ng-deep
+.part-form-page
+.p-card {
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg) !important;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  box-shadow:
+    var(--nexora-shadow-sm) !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease !important;
+}
+
+:host ::ng-deep
+.part-form-page
+.p-card:hover {
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    var(--nexora-shadow-md) !important;
+}
+
+
+/* =========================================================
+   FORM CONTENT
+   ========================================================= */
+
+.form-content {
+  padding: 0.25rem;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.85rem;
+
+  margin-bottom: 1.5rem;
+
+  padding-bottom: 1rem;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border);
+}
+
+.section-icon {
+  width: 2.65rem;
+  height: 2.65rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.8rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  color:
+    var(--nexora-primary);
+
+  font-size: 1rem;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.section-header:hover .section-icon {
+
+  transform:
+    translateY(-2px)
+    scale(1.04);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      transparent
+    );
+
+  box-shadow:
+    0 6px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+}
+
+.section-header h2 {
+  margin: 0;
+
+  color:
+    var(--nexora-text);
+
+  font-size: 1rem;
+
+  font-weight: 700;
+}
+
+.section-header p {
+  margin: 0.25rem 0 0;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1.25rem 1rem;
+}
+
+
+/* =========================================================
+   FORM FIELD
+   ========================================================= */
+
+.form-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.45rem;
+
+  min-width: 0;
+}
+
+.form-field.full-width {
+
+  grid-column:
+    1 / -1;
+}
+
+.form-field label {
+
+  color:
+    var(--nexora-text);
+
+  font-size:
+    0.82rem;
+
+  font-weight:
+    650;
+}
+
+.required {
+
+  margin-left:
+    0.2rem;
+
+  color:
+    var(--nexora-danger);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.form-field input,
+.form-field textarea {
+
+  width:
+    100% !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  background:
+    var(--nexora-surface) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-md) !important;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    transform 150ms ease !important;
+}
+
+.form-field input {
+
+  min-height:
+    42px;
+}
+
+.form-field textarea {
+
+  resize:
+    vertical;
+
+  min-height:
+    120px;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  opacity:
+    0.7;
+}
+
+
+/* =========================================================
+   INPUT HOVER
+   ========================================================= */
+
+.form-field input:hover,
+.form-field textarea:hover {
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    ) !important;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.form-field input:focus,
+.form-field textarea:focus {
+
+  border-color:
+    var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  outline:
+    none !important;
+}
+
+
+/* =========================================================
+   VALIDATION ERROR
+   ========================================================= */
+
+.error-message {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  color:
+    var(--nexora-danger);
+
+  font-size:
+    0.74rem;
+
+  line-height:
+    1.3;
+
+  animation:
+    error-enter 160ms ease;
+}
+
+.error-message i {
+
+  font-size:
+    0.7rem;
+}
+
+@keyframes error-enter {
+
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-top: 1.75rem;
+
+  padding-top: 1.25rem;
+
+  border-top:
+    1px solid
+    var(--nexora-border);
+}
+
+
+/* =========================================================
+   BUTTON POLISH
+   ========================================================= */
+
+.form-actions p-button {
+
+  transition:
+    transform 150ms ease,
+    filter 150ms ease;
+}
+
+.form-actions p-button:hover {
+
+  transform:
+    translateY(-1px);
+}
+
+.form-actions p-button:active {
+
+  transform:
+    scale(0.97);
+}
+
+
+/* =========================================================
+   LOADING / STATE
+   ========================================================= */
+
+.state-container {
+
+  min-height:
+    280px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 2rem;
+
+  text-align: center;
+
+  border:
+    1px solid
+    var(--nexora-border);
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  background:
+    var(--nexora-surface);
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+}
+
+.state-container > i {
+
+  margin-bottom:
+    0.8rem;
+
+  color:
+    var(--nexora-primary);
+
+  font-size:
+    1.8rem;
+}
+
+.state-container h3 {
+
+  margin:
+    0;
+
+  color:
+    var(--nexora-text);
+
+  font-size:
+    1rem;
+}
+
+.state-container p {
+
+  margin:
+    0.4rem 0 0;
+
+  color:
+    var(--nexora-text-muted);
+
+  font-size:
+    0.82rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .part-form-page {
+
+    padding:
+      1rem;
+  }
+
+  .form-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .form-field.full-width {
+
+    grid-column:
+      auto;
+  }
+
+  .form-actions {
+
+    flex-direction:
+      column-reverse;
+
+    align-items:
+      stretch;
+  }
+
+  .form-actions p-button {
+
+    width:
+      100%;
+  }
+}

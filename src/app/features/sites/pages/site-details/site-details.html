@@ -1,0 +1,449 @@
+<p-toast></p-toast>
+
+
+<div class="page-container">
+
+  <!-- ===================================================
+       HEADER
+       =================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <button
+        type="button"
+        class="back-button icon-back-button"
+        aria-label="Back to sites"
+        title="Back to sites"
+        (click)="onBack()"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+
+      <h1>
+        Site Details
+      </h1>
+
+      <p>
+        View site information and contact details.
+      </p>
+
+    </div>
+
+
+    @if (site()) {
+
+      <div class="header-actions">
+
+        <p-button
+          label="Edit Site"
+          icon="pi pi-pencil"
+          (onClick)="onEdit()"
+        ></p-button>
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- ===================================================
+       LOADING
+       =================================================== -->
+
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <div class="state-icon">
+
+        <i class="pi pi-spin pi-spinner"></i>
+
+      </div>
+
+      <h3>
+        Loading site...
+      </h3>
+
+      <p>
+        Please wait while we fetch the site details.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       ERROR
+       =================================================== -->
+
+  @if (!loading() && error()) {
+
+    <div class="state-card error-state">
+
+      <div class="state-icon">
+
+        <i class="pi pi-exclamation-triangle"></i>
+
+      </div>
+
+      <h3>
+        Unable to load site
+      </h3>
+
+      <p>
+        Something went wrong while loading the site.
+      </p>
+
+      <p-button
+        label="Try Again"
+        icon="pi pi-refresh"
+        [outlined]="true"
+        (onClick)="onRetry()"
+      ></p-button>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       DETAILS
+       =================================================== -->
+
+  @if (!loading() && !error() && site()) {
+
+    <div class="details-layout">
+
+
+      <!-- =================================================
+           SITE OVERVIEW
+           ================================================= -->
+
+      <div class="details-card overview-card">
+
+        <div class="card-header">
+
+          <div class="site-icon">
+
+            <i class="pi pi-building"></i>
+
+          </div>
+
+
+          <div>
+
+            <span class="eyebrow">
+              SITE
+            </span>
+
+            <h2>
+              {{ site()!.name }}
+            </h2>
+
+            <p>
+              {{ customerName() }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="overview-divider"></div>
+
+
+        <div class="overview-item">
+
+          <span>
+            <i class="pi pi-map-marker"></i>
+            Location
+          </span>
+
+          <strong>
+            {{ site()!.city || '—' }}
+            @if (site()!.state) {
+              , {{ site()!.state }}
+            }
+          </strong>
+
+        </div>
+
+
+        <div class="overview-item">
+
+          <span>
+            <i class="pi pi-calendar"></i>
+            Created
+          </span>
+
+          <strong>
+            {{ formatDate(site()!.createdAt) }}
+          </strong>
+
+        </div>
+
+
+        <div class="overview-item">
+
+          <span>
+            <i class="pi pi-refresh"></i>
+            Last Updated
+          </span>
+
+          <strong>
+            {{ formatDate(site()!.updatedAt) }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           LOCATION INFORMATION
+           ================================================= -->
+
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <div class="title-icon">
+
+            <i class="pi pi-map-marker"></i>
+
+          </div>
+
+
+          <div>
+
+            <h3>
+              Location Information
+            </h3>
+
+            <p>
+              Site address and location details.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-item full-width">
+
+            <span>
+              Address
+            </span>
+
+            <strong>
+              {{ site()!.address || '—' }}
+            </strong>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              City
+            </span>
+
+            <strong>
+              {{ site()!.city || '—' }}
+            </strong>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              State
+            </span>
+
+            <strong>
+              {{ site()!.state || '—' }}
+            </strong>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              Pincode
+            </span>
+
+            <strong>
+              {{ site()!.pincode || '—' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTACT INFORMATION
+           ================================================= -->
+
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <div class="title-icon contact-icon">
+
+            <i class="pi pi-phone"></i>
+
+          </div>
+
+
+          <div>
+
+            <h3>
+              Contact Information
+            </h3>
+
+            <p>
+              Primary contact for this site.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-item">
+
+            <span>
+              Contact Name
+            </span>
+
+            <strong>
+              {{ site()!.contactName || '—' }}
+            </strong>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              Phone
+            </span>
+
+            @if (site()!.contactPhone) {
+
+              <a
+                [href]="'tel:' + site()!.contactPhone"
+              >
+                {{ site()!.contactPhone }}
+              </a>
+
+            } @else {
+
+              <strong>—</strong>
+
+            }
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              Email
+            </span>
+
+            @if (site()!.contactEmail) {
+
+              <a
+                [href]="'mailto:' + site()!.contactEmail"
+              >
+                {{ site()!.contactEmail }}
+              </a>
+
+            } @else {
+
+              <strong>—</strong>
+
+            }
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span>
+              Customer
+            </span>
+
+            <strong>
+              {{ customerName() }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           NOTES
+           ================================================= -->
+
+      @if (site()!.notes) {
+
+        <div class="details-card notes-card">
+
+          <div class="card-title">
+
+            <div class="title-icon notes-icon">
+
+              <i class="pi pi-file-edit"></i>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+                Notes
+              </h3>
+
+              <p>
+                Additional information about this site.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="notes-content">
+
+            {{ site()!.notes }}
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

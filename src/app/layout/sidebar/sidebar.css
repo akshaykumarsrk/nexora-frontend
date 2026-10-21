@@ -1,0 +1,296 @@
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  width: var(--nx-sidebar-width);
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px 12px;
+
+  background: var(--nexora-surface);
+
+  border-right: 1px solid var(--nexora-border);
+
+  box-sizing: border-box;
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 4px 10px 22px;
+
+  margin-bottom: 12px;
+
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: var(--nexora-primary);
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 25%,
+      transparent
+    );
+}
+
+.brand-name {
+  color: var(--nexora-text);
+
+  font-size: 17px;
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.navigation {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  scrollbar-width: none;
+}
+
+.navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.nav-section-title {
+  padding: 0 12px;
+
+  margin: 8px 0 8px;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.nav-item {
+  position: relative;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 12px;
+
+  border-radius: var(--nexora-radius-md);
+
+  color: var(--nexora-text-muted);
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.nav-item i {
+  width: 18px;
+
+  font-size: 15px;
+
+  text-align: center;
+
+  flex-shrink: 0;
+
+  transition: transform 150ms ease;
+}
+
+
+/* Hover */
+
+.nav-item:hover {
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text);
+
+  transform: translateX(2px);
+}
+
+.nav-item:hover i {
+  transform: scale(1.08);
+}
+
+
+/* Active */
+
+.nav-item.active {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    );
+
+  color: var(--nexora-primary);
+
+  font-weight: 600;
+}
+
+
+/* Active left indicator */
+
+.nav-item.active::before {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+
+  width: 3px;
+
+  border-radius: 0 4px 4px 0;
+
+  background: var(--nexora-primary);
+}
+
+
+/* =========================================================
+   SYSTEM SECTION
+   ========================================================= */
+
+.bottom-section {
+  margin-top: auto;
+
+  padding-top: 18px;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 260px;
+    height: 100dvh;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+
+    transform: translateX(-105%);
+
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+
+    box-shadow:
+      10px 0 40px
+      rgb(0 0 0 / 25%);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .sidebar {
+    width: min(280px, 85vw);
+
+    padding: 18px 10px;
+  }
+
+  .brand {
+    padding-left: 8px;
+  }
+
+  .nav-item {
+    height: 44px;
+  }
+}
+@media (max-width: 1100px) { .sidebar { position: fixed; inset: 0 auto 0 0; height: 100dvh; max-height: 100dvh; } }

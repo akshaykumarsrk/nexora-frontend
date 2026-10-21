@@ -1,0 +1,1035 @@
+/* =========================================================
+   NEXORA - INVOICE LIST
+   LIGHT + DARK THEME
+   ========================================================= */
+
+
+/* =========================================================
+   HOST
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.invoice-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background:
+    var(--nexora-background) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  animation:
+    pageEnter 220ms ease-out;
+}
+
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+
+.page-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.85rem;
+}
+
+
+.title-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.85rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 16%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 6%,
+        transparent
+      )
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  font-size: 1.1rem;
+
+  box-shadow:
+    0 5px 15px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.title-icon:hover {
+  transform:
+    translateY(-2px)
+    scale(1.04);
+
+  box-shadow:
+    0 8px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      transparent
+    );
+}
+
+
+.page-header h1 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 1.8rem;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+
+.page-header p {
+  margin: 0.35rem 0 0;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   HEADER BUTTON
+   ========================================================= */
+
+:host ::ng-deep
+.page-header
+.p-button {
+  border-radius:
+    0.75rem !important;
+
+  box-shadow:
+    0 5px 14px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      transparent
+    ) !important;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+:host ::ng-deep
+.page-header
+.p-button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 24%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.invoice-card {
+  overflow: hidden;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg) !important;
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.invoice-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    var(--nexora-shadow-md);
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding:
+    1rem;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-box {
+  position: relative;
+
+  width: 360px;
+}
+
+
+.search-box i {
+  position: absolute;
+
+  top: 50%;
+  left: 0.85rem;
+
+  z-index: 2;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  transform:
+    translateY(-50%);
+
+  pointer-events: none;
+
+  transition:
+    color 180ms ease;
+}
+
+
+.search-box:focus-within i {
+  color:
+    var(--nexora-primary) !important;
+}
+
+
+.search-box input {
+  width: 100%;
+
+  height: 42px;
+
+  padding:
+    0 0.85rem 0 2.4rem;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    0.75rem !important;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.search-box input::placeholder {
+  color:
+    var(--nexora-text-muted) !important;
+}
+
+
+.search-box input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 30%,
+      var(--nexora-border)
+    ) !important;
+}
+
+
+.search-box input:focus {
+  border-color:
+    var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable {
+  width: 100%;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border-top:
+    1px solid
+    var(--nexora-border) !important;
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper {
+  background:
+    var(--nexora-surface) !important;
+
+  overflow-x: auto;
+}
+
+
+:host ::ng-deep
+.p-datatable-table {
+  width: 100%;
+
+  border-collapse:
+    separate;
+
+  border-spacing: 0;
+
+  background:
+    var(--nexora-surface) !important;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable-thead {
+  background:
+    var(--nexora-surface-soft) !important;
+}
+
+
+:host ::ng-deep
+.p-datatable-thead
+> tr {
+  background:
+    var(--nexora-surface-soft) !important;
+}
+
+
+:host ::ng-deep
+.p-datatable-thead
+> tr
+> th {
+  height: 48px;
+
+  padding:
+    0.8rem 1rem;
+
+  background:
+    var(--nexora-surface-soft) !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  border: none !important;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border) !important;
+
+  font-size: 0.73rem;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable-tbody {
+  background:
+    var(--nexora-surface) !important;
+}
+
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr {
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr
+> td {
+  height: 64px;
+
+  padding:
+    0.85rem 1rem;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border: none !important;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border) !important;
+
+  vertical-align: middle;
+
+  white-space: nowrap;
+}
+
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+
+  box-shadow:
+    inset 3px 0 0
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 55%,
+      transparent
+    );
+}
+
+
+:host ::ng-deep
+.p-datatable-tbody
+> tr:hover
+> td {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 3.5%,
+      var(--nexora-surface)
+    ) !important;
+
+  color:
+    var(--nexora-text) !important;
+}
+
+
+/* =========================================================
+   INVOICE NUMBER
+   ========================================================= */
+
+.invoice-number {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.65rem;
+}
+
+
+.invoice-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.7rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  font-size: 0.9rem;
+}
+
+
+.invoice-number span {
+  color:
+    var(--nexora-text) !important;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   JOB NUMBER
+   ========================================================= */
+
+.job-number {
+  color:
+    var(--nexora-primary) !important;
+
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   CUSTOMER
+   ========================================================= */
+
+.customer-name {
+  color:
+    var(--nexora-text) !important;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   AMOUNT
+   ========================================================= */
+
+.amount {
+  color:
+    var(--nexora-text) !important;
+
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   SECONDARY TEXT
+   ========================================================= */
+
+.secondary-text {
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+:host ::ng-deep
+.p-tag {
+  min-width: 72px;
+
+  justify-content: center;
+
+  padding:
+    0.35rem 0.65rem;
+
+  border-radius:
+    999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions-column {
+  width: 100px;
+
+  text-align: center !important;
+}
+
+
+.actions-cell {
+  width: 100px;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+:host ::ng-deep
+.actions-cell
+.p-button {
+  width: 2.15rem !important;
+
+  height: 2.15rem !important;
+
+  min-width: 2.15rem !important;
+
+  padding: 0 !important;
+
+  border-radius:
+    0.65rem !important;
+
+  background:
+    transparent !important;
+
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+
+:host ::ng-deep
+.actions-cell
+.p-button:hover {
+  transform:
+    translateY(-1px);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-cell {
+  height: 300px;
+
+  padding: 2rem !important;
+
+  background:
+    var(--nexora-surface) !important;
+}
+
+
+.empty-state {
+  min-height: 250px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+.empty-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-bottom: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  font-size: 1.4rem;
+}
+
+
+.empty-state h3 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 1rem;
+}
+
+
+.empty-state p {
+  margin:
+    0.45rem 0 1.2rem;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.84rem;
+}
+
+
+/* =========================================================
+   PAGINATOR
+   ========================================================= */
+
+:host ::ng-deep
+.p-paginator {
+  min-height: 56px;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  border: none !important;
+
+  border-top:
+    1px solid
+    var(--nexora-border) !important;
+}
+
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-first,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-prev,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-next,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-last {
+  width: 2.3rem !important;
+
+  height: 2.3rem !important;
+
+  min-width: 2.3rem !important;
+
+  margin:
+    0 0.1rem !important;
+
+  border-radius:
+    0.6rem !important;
+
+  background:
+    transparent !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-first:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-prev:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-next:hover,
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-last:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+:host ::ng-deep
+.p-paginator
+.p-paginator-page.p-paginator-page-selected {
+  background:
+    linear-gradient(
+      135deg,
+      var(--nexora-primary),
+      var(--nexora-primary-hover)
+    ) !important;
+
+  color:
+    #fff !important;
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 24%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+:host ::ng-deep
+.p-datatable-wrapper,
+:host ::ng-deep
+.p-datatable-table-container {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--nexora-border)
+    var(--nexora-surface-soft);
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar,
+:host ::ng-deep
+.p-datatable-table-container::-webkit-scrollbar {
+  width: 8px;
+
+  height: 8px;
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-track,
+:host ::ng-deep
+.p-datatable-table-container::-webkit-scrollbar-track {
+  background:
+    var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-thumb,
+:host ::ng-deep
+.p-datatable-table-container::-webkit-scrollbar-thumb {
+  background:
+    var(--nexora-border);
+
+  border:
+    2px solid
+    var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-thumb:hover,
+:host ::ng-deep
+.p-datatable-table-container::-webkit-scrollbar-thumb:hover {
+  background:
+    var(--nexora-primary);
+}
+
+
+:host ::ng-deep
+.p-datatable-wrapper::-webkit-scrollbar-button,
+:host ::ng-deep
+.p-datatable-table-container::-webkit-scrollbar-button {
+  width: 0 !important;
+
+  height: 0 !important;
+
+  display: none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .invoice-page {
+    padding: 1.25rem;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .invoice-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .page-header .p-button {
+    width: 100%;
+  }
+
+  .toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .toolbar .p-button {
+    align-self: flex-end;
+  }
+}

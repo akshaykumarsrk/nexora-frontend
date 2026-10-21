@@ -1,0 +1,1163 @@
+/* =========================================================
+   NEXORA — INVOICE CREATE
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.invoice-form-page {
+  width: 100%;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 1.5rem 1.75rem 3rem;
+
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+
+  animation: page-enter 220ms ease-out;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+
+  gap: 0.9rem;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-button {
+  width: 2.7rem;
+  height: 2.7rem;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid var(--nexora-border);
+  border-radius: 0.7rem;
+
+  background: var(--nexora-surface);
+  color: var(--nexora-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.back-button:hover {
+  color: var(--nexora-primary);
+
+  background: var(--nexora-surface-soft);
+
+  border-color: var(--nexora-primary);
+
+  transform: translateX(-2px);
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+}
+
+.back-button:active {
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.page-title-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.15rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+
+  gap: 0.4rem;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.breadcrumb i {
+  font-size: 0.6rem;
+
+  color: var(--nexora-text-soft);
+}
+
+.page-title-content h1 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 1.6rem;
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  letter-spacing: -0.025em;
+}
+
+.page-title-content p {
+  margin: 0.15rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.invoice-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.invoice-section {
+  width: 100%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: var(--nexora-radius-lg);
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  box-shadow: var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+
+  animation: section-enter 260ms ease-out both;
+}
+
+.invoice-section:nth-child(1) {
+  animation-delay: 30ms;
+}
+
+.invoice-section:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.invoice-section:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.invoice-section:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    );
+
+  box-shadow: var(--nexora-shadow-md);
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+  display: flex;
+  align-items: center;
+
+  gap: 0.8rem;
+
+  padding: 1rem 1.2rem;
+
+  background: var(--nexora-surface-soft);
+
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+.section-icon {
+  width: 2.3rem;
+  height: 2.3rem;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0.65rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      var(--nexora-surface)
+    );
+
+  color: var(--nexora-primary);
+
+  font-size: 0.9rem;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.invoice-section:hover .section-icon {
+  transform: scale(1.04);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-surface)
+    );
+}
+
+.section-heading {
+  min-width: 0;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 0.9rem;
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+.section-heading p {
+  margin: 0.2rem 0 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   SECTION CONTENT
+   ========================================================= */
+
+.section-content {
+  padding: 1.25rem 1.2rem;
+
+  background: var(--nexora-surface);
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1.25rem;
+}
+
+.form-grid.single-column {
+  grid-template-columns:
+    minmax(0, 1fr);
+}
+
+.form-grid.single-column
+.form-field {
+  max-width: 50%;
+}
+
+
+/* =========================================================
+   FORM FIELD
+   ========================================================= */
+
+.form-field {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.4rem;
+}
+
+.form-field label {
+  display: block;
+
+  margin: 0;
+
+  color: var(--nexora-text-muted);
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+.required {
+  margin-left: 0.15rem;
+
+  color: var(--nexora-danger);
+}
+
+
+/* =========================================================
+   INPUT NUMBER
+   ========================================================= */
+
+:host ::ng-deep
+.invoice-form-page .p-inputnumber {
+  display: block;
+
+  width: 100%;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-inputnumber-input {
+  width: 100% !important;
+
+  min-height: 2.65rem;
+
+  box-sizing: border-box;
+
+  padding: 0.65rem 0.8rem !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.65rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 0.8rem;
+
+  box-shadow: none !important;
+
+  outline: none !important;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-inputnumber-input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      var(--nexora-border)
+    ) !important;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-inputnumber-input:focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 11%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   DATEPICKER
+   ========================================================= */
+
+:host ::ng-deep
+.invoice-form-page .p-datepicker {
+  display: flex;
+
+  width: 100%;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-datepicker-input {
+  width: 100% !important;
+
+  min-height: 2.65rem;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.65rem 0 0 0.65rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  box-shadow: none !important;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-datepicker-input:focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 11%,
+      transparent
+    ) !important;
+
+  outline: none !important;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-datepicker-dropdown {
+  width: 2.65rem !important;
+
+  min-width: 2.65rem !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-left: 0 !important;
+
+  border-radius: 0 0.65rem 0.65rem 0 !important;
+
+  background: var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.p-datepicker-dropdown:hover {
+  color: var(--nexora-primary) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 8%,
+      var(--nexora-surface-soft)
+    ) !important;
+
+  border-color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   DATEPICKER PANEL
+   ========================================================= */
+
+:host ::ng-deep
+.p-datepicker-panel {
+  z-index: 9999 !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 0.75rem !important;
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  box-shadow: var(--nexora-shadow-md) !important;
+
+  overflow: hidden;
+}
+
+
+/* Calendar header */
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-header {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border-bottom: 1px solid var(--nexora-border) !important;
+}
+
+
+/* Month / year text */
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-title {
+  color: var(--nexora-text) !important;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-select-month,
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-select-year {
+  color: var(--nexora-text) !important;
+}
+
+
+/* Previous / next buttons */
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-prev,
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-next {
+  color: var(--nexora-text-muted) !important;
+
+  border-radius: 0.45rem;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-prev:hover,
+:host ::ng-deep
+.p-datepicker-panel .p-datepicker-next:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* Weekday names */
+
+:host ::ng-deep
+.p-datepicker-panel table th {
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 0.72rem;
+}
+
+
+/* Calendar dates */
+
+:host ::ng-deep
+.p-datepicker-panel table td > span {
+  color: var(--nexora-text) !important;
+
+  border-radius: 0.45rem;
+
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+
+/* Hover */
+
+:host ::ng-deep
+.p-datepicker-panel table td > span:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  transform: scale(1.04);
+}
+
+
+/* Selected date */
+
+:host ::ng-deep
+.p-datepicker-panel table td > span.p-highlight {
+  background: var(--nexora-primary) !important;
+
+  color: var(--nexora-surface) !important;
+}
+
+
+/* Today */
+
+:host ::ng-deep
+.p-datepicker-panel table td.p-datepicker-today > span {
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 35%,
+      transparent
+    );
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* Disabled dates */
+
+:host ::ng-deep
+.p-datepicker-panel table td > span.p-disabled {
+  color: var(--nexora-text-soft) !important;
+
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   READONLY PARTS
+   ========================================================= */
+
+.readonly-amount {
+  width: 100%;
+
+  min-height: 2.65rem;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.65rem 0.8rem;
+
+  border: 1px solid var(--nexora-border);
+
+  border-radius: 0.65rem;
+
+  background: var(--nexora-surface-soft);
+
+  color: var(--nexora-text);
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+
+  font-variant-numeric: tabular-nums;
+
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.readonly-amount i {
+  color: var(--nexora-text-soft);
+
+  font-size: 0.7rem;
+}
+
+.readonly-amount:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 28%,
+      var(--nexora-border)
+    );
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   HINT
+   ========================================================= */
+
+.field-hint {
+  margin: 0;
+
+  color: var(--nexora-text-soft);
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.field-error {
+  display: flex;
+  align-items: center;
+
+  gap: 0.3rem;
+
+  margin: 0;
+
+  color: var(--nexora-danger);
+
+  font-size: 0.68rem;
+
+  animation: error-enter 150ms ease-out;
+}
+
+@keyframes error-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.summary {
+  width: 100%;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  min-height: 2.5rem;
+
+  padding: 0 0.25rem;
+
+  color: var(--nexora-text);
+
+  font-size: 0.8rem;
+
+  border-radius: 0.4rem;
+
+  transition:
+    background 150ms ease,
+    padding 150ms ease;
+}
+
+.summary-row:not(.discount-row):not(.total-row):hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 4%,
+      transparent
+    );
+
+  padding-left: 0.55rem;
+  padding-right: 0.55rem;
+}
+
+.summary-row span {
+  color: var(--nexora-text-muted);
+}
+
+.summary-row strong {
+  color: var(--nexora-text);
+
+  font-weight: 650;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.discount-row strong {
+  color: var(--nexora-danger);
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.summary-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 0.55rem 0;
+
+  background: var(--nexora-border);
+}
+
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
+.summary-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-top: 0.7rem;
+
+  padding: 0.9rem 1rem;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    );
+
+  border-radius: 0.75rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      var(--nexora-surface)
+    );
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.summary-total:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    );
+}
+
+.total-label {
+  color: var(--nexora-text);
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+.total-value {
+  color: var(--nexora-primary);
+
+  font-size: 1.15rem;
+
+  font-weight: 800;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 0.65rem;
+
+  padding-top: 0.2rem;
+
+  animation: actions-enter 260ms ease-out 100ms both;
+}
+
+@keyframes actions-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+:host ::ng-deep
+.invoice-form-page .form-actions .p-button {
+  min-height: 2.5rem;
+
+  border-radius: 0.65rem !important;
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:host ::ng-deep
+.invoice-form-page
+.form-actions
+.p-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+:host ::ng-deep
+.invoice-form-page
+.form-actions
+.p-button[type="submit"] {
+  min-width: 9.5rem;
+
+  box-shadow:
+    0 4px 12px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 16%,
+      transparent
+    );
+}
+
+:host ::ng-deep
+.invoice-form-page
+.form-actions
+.p-button[type="submit"]:hover {
+  box-shadow:
+    0 7px 18px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 23%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.invoice-form-page {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--nexora-border)
+    var(--nexora-surface-soft);
+}
+
+.invoice-form-page::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.invoice-form-page::-webkit-scrollbar-track {
+  background: var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+.invoice-form-page::-webkit-scrollbar-thumb {
+  background: var(--nexora-border);
+
+  border: 2px solid var(--nexora-surface-soft);
+
+  border-radius: 999px;
+}
+
+.invoice-form-page::-webkit-scrollbar-thumb:hover {
+  background: var(--nexora-primary);
+}
+
+.invoice-form-page::-webkit-scrollbar-button {
+  display: none;
+
+  width: 0;
+  height: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .invoice-form-page {
+    padding: 1.25rem 1.25rem 2.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid.single-column .form-field {
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .invoice-form-page {
+    padding: 1rem 0.85rem 2rem;
+  }
+
+  .header-left {
+    gap: 0.65rem;
+  }
+
+  .back-button {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .page-title-content h1 {
+    font-size: 1.35rem;
+  }
+
+  .page-title-content p {
+    font-size: 0.72rem;
+  }
+
+  .section-header {
+    padding: 0.9rem 1rem;
+  }
+
+  .section-content {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    gap: 1rem;
+  }
+
+  .summary-total {
+    padding: 0.8rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  :host ::ng-deep
+  .invoice-form-page
+  .form-actions
+  .p-button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .invoice-form-page,
+  .invoice-section,
+  .form-actions,
+  .field-error {
+    animation: none !important;
+  }
+
+  .invoice-section,
+  .back-button,
+  .section-icon,
+  .readonly-amount,
+  .summary-total,
+  :host ::ng-deep .p-button {
+    transition: none !important;
+  }
+}

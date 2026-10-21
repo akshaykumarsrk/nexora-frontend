@@ -1,0 +1,932 @@
+/* =========================================================
+   NEXORA - INVENTORY DETAILS
+   LIGHT + DARK THEME
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.inventory-details-page {
+  min-height: 100%;
+
+  padding: 1.5rem;
+
+  background:
+    var(--nexora-background) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  animation:
+    pageEnter 220ms ease-out;
+}
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.25rem;
+}
+
+.breadcrumb {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  margin-bottom: 0.6rem;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.78rem;
+}
+
+.breadcrumb i {
+  font-size: 0.65rem;
+}
+
+.breadcrumb-link {
+  color:
+    var(--nexora-primary) !important;
+
+  cursor: pointer;
+
+  transition:
+    color 150ms ease;
+}
+
+.breadcrumb-link:hover {
+  color:
+    var(--nexora-primary-hover) !important;
+}
+
+.title-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.85rem;
+}
+
+.title-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.85rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 16%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 6%,
+        transparent
+      )
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+
+  box-shadow:
+    0 5px 15px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    );
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 1.75rem;
+
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.title-row p {
+  margin:
+    0.25rem 0 0;
+
+  color:
+    var(--nexora-primary) !important;
+
+  font-size: 0.78rem;
+
+  font-weight: 650;
+}
+
+.header-actions {
+  display: flex;
+
+  gap: 0.6rem;
+}
+
+:host ::ng-deep
+.header-actions
+.p-button {
+  border-radius:
+    0.7rem !important;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:host ::ng-deep
+.header-actions
+.p-button:hover {
+  transform:
+    translateY(-1px);
+}
+
+/* =========================================================
+   STATUS BANNER
+   ========================================================= */
+
+.status-banner {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.85rem;
+
+  padding:
+    0.9rem 1rem;
+
+  margin-bottom: 1.25rem;
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    0.85rem;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.status-banner:hover {
+  transform:
+    translateY(-1px);
+}
+
+.status-banner.in-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 18%,
+      var(--nexora-border)
+    ) !important;
+
+  color:
+    var(--nexora-success) !important;
+}
+
+.status-banner.low-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 9%,
+      var(--nexora-surface)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 20%,
+      var(--nexora-border)
+    ) !important;
+
+  color:
+    var(--nexora-warning) !important;
+}
+
+.status-banner.out-of-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 8%,
+      var(--nexora-surface)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 18%,
+      var(--nexora-border)
+    ) !important;
+
+  color:
+    var(--nexora-danger) !important;
+}
+
+.status-banner-icon {
+  font-size: 1.15rem;
+}
+
+.status-banner strong {
+  display: block;
+
+  color:
+    currentColor !important;
+
+  font-size: 0.85rem;
+}
+
+.status-banner span {
+  display: block;
+
+  margin-top: 0.15rem;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.76rem;
+}
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.overview-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 1rem;
+
+  margin-bottom: 1.25rem;
+}
+
+.metric-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  padding: 1.1rem;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.metric-card:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 18%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    var(--nexora-shadow-md);
+}
+
+.metric-icon {
+  width: 2.65rem;
+  height: 2.65rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.75rem;
+
+  font-size: 1rem;
+}
+
+.metric-icon.primary {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+}
+
+.metric-icon.warning {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-warning) !important;
+}
+
+.metric-icon.success {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-success) !important;
+}
+
+.metric-icon.danger {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-danger) !important;
+}
+
+.metric-content {
+  min-width: 0;
+}
+
+.metric-content span {
+  display: block;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.73rem;
+}
+
+.metric-content strong {
+  display: block;
+
+  margin-top: 0.2rem;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 1.35rem;
+
+  font-weight: 750;
+}
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1rem;
+}
+
+.details-card {
+  padding: 1.35rem;
+
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid var(--nexora-border) !important;
+
+  border-radius:
+    var(--nexora-radius-lg);
+
+  box-shadow:
+    var(--nexora-shadow-sm);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.details-card:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 15%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    var(--nexora-shadow-md);
+}
+
+.details-card.full-width {
+  grid-column:
+    1 / -1;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 0.75rem;
+
+  padding-bottom: 1rem;
+
+  margin-bottom: 1rem;
+
+  border-bottom:
+    1px solid var(--nexora-border);
+}
+
+.section-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 0.7rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+}
+
+.section-header h2 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+}
+
+.section-header p {
+  margin:
+    0.25rem 0 0;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+.details-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0;
+}
+
+.details-list.horizontal {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding:
+    0.75rem 0;
+
+  border-bottom:
+    1px solid var(--nexora-border);
+}
+
+.details-list.horizontal
+.detail-item {
+  border-bottom: none;
+
+  padding: 0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.76rem;
+}
+
+.detail-value {
+  color:
+    var(--nexora-text) !important;
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+
+  text-align: right;
+}
+
+.detail-value.primary {
+  color:
+    var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.inventory-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  padding:
+    0.35rem 0.65rem;
+
+  border-radius:
+    999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    currentColor;
+}
+
+.inventory-status.in-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 12%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-success) !important;
+}
+
+.inventory-status.low-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-warning) 13%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-warning) !important;
+}
+
+.inventory-status.out-of-stock {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 12%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-danger) !important;
+}
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.active-status {
+  padding:
+    0.3rem 0.6rem;
+
+  border-radius:
+    999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-success) 11%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-success) !important;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+}
+
+.active-status.inactive {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 11%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-danger) !important;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.card-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 1rem;
+
+  padding-top: 0.75rem;
+
+  border-top:
+    1px solid var(--nexora-border);
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+  min-height: 400px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  color:
+    var(--nexora-text-muted) !important;
+}
+
+.loading-state i {
+  color:
+    var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   EMPTY / ERROR
+   ========================================================= */
+
+.state-container {
+  min-height: 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.state-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-bottom: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 9%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-primary) !important;
+}
+
+.state-icon.error {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-danger) !important;
+}
+
+.state-container h3 {
+  margin: 0;
+
+  color:
+    var(--nexora-text) !important;
+}
+
+.state-container p {
+  margin:
+    0.45rem 0 1.2rem;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  font-size: 0.82rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .overview-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .inventory-details-page {
+    padding: 1.25rem;
+  }
+
+  .details-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .details-card.full-width {
+    grid-column: auto;
+  }
+
+  .details-list.horizontal {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .inventory-details-page {
+    padding: 1rem;
+  }
+
+  .page-header {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions
+  .p-button {
+    flex: 1;
+  }
+
+  .overview-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .detail-item {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 0.25rem;
+  }
+
+  .detail-value {
+    text-align: left;
+  }
+
+}
+/* Shared action motion: consistent across details and movement screens. */
+.back-button, .icon-back-button, .header-actions .p-button, .header-actions button, .movements-page button, .p-button { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.back-button:hover, .icon-back-button:hover, .header-actions .p-button:hover, .header-actions button:hover, .movements-page button:hover, .p-button:not(:disabled):hover { transform: translateY(-1px); }
+.back-button:focus-visible, .icon-back-button:focus-visible, .header-actions button:focus-visible, .movements-page button:focus-visible { outline: 2px solid var(--nexora-primary); outline-offset: 2px; }
+.icon-back-button { display:inline-grid; place-items:center; width:2.35rem; height:2.35rem; padding:0; border:1px solid var(--nexora-border); border-radius:10px; background:var(--nexora-surface); color:var(--nexora-text-muted); cursor:pointer; }
+.icon-back-button:hover { color:var(--nexora-primary); background:color-mix(in srgb,var(--nexora-primary) 8%,var(--nexora-surface)); border-color:color-mix(in srgb,var(--nexora-primary) 35%,var(--nexora-border)); box-shadow:var(--nexora-shadow-sm); }

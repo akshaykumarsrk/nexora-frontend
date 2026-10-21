@@ -1,0 +1,973 @@
+/* =========================================================
+   NEXORA - JOB LIST
+   Production UI
+   Light + Dark Theme
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.job-page {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-soft: #eef2ff;
+
+  --success: #10b981;
+  --success-soft: #ecfdf5;
+
+  --warning: #f59e0b;
+  --warning-soft: #fff7ed;
+
+  --danger: #ef4444;
+  --danger-soft: #fef2f2;
+
+  --page-bg: #f5f7fb;
+  --card-bg: #ffffff;
+  --surface-bg: #ffffff;
+  --surface-soft: #f8fafc;
+
+  --border: #e5e7eb;
+  --border-light: #edf0f4;
+
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  min-height: calc(100vh - 70px);
+  padding: 28px 32px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(99, 102, 241, 0.07),
+      transparent 28%
+    ),
+    var(--page-bg);
+
+  color: var(--text-primary);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.job-page .page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.job-page .page-header h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.job-page .page-header p {
+  margin: 7px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CREATE JOB BUTTON
+   ========================================================= */
+
+.job-page .page-header .p-button {
+  min-height: 40px;
+
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #4f46e5
+  );
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  box-shadow:
+    0 6px 16px rgba(79, 70, 229, 0.22);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.job-page .page-header .p-button:hover {
+  background: linear-gradient(
+    135deg,
+    #5859e8,
+    #4338ca
+  );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 9px 22px rgba(79, 70, 229, 0.28);
+}
+
+.job-page .page-header .p-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   FILTER CARD
+   ========================================================= */
+
+.job-page .filter-card {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+  padding: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  background: var(--card-bg);
+
+  box-shadow:
+    0 4px 18px rgba(15, 23, 42, 0.045);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.job-page .filter-group {
+  width: 225px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.job-page .filter-group label {
+  display: block;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 750;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+   ========================================================= */
+
+.job-page .filter-group .p-inputtext {
+  width: 100%;
+  min-height: 40px;
+
+  padding: 0 12px;
+
+  border: 1px solid #dce2ec;
+  border-radius: 9px;
+
+  background: var(--surface-bg);
+  color: var(--text-primary);
+
+  font-size: 13px;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.job-page .filter-group .p-inputtext::placeholder {
+  color: #94a3b8;
+}
+
+.job-page .filter-group .p-inputtext:hover {
+  border-color: #b8c0d0;
+}
+
+.job-page .filter-group .p-inputtext:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.11);
+
+  outline: none;
+}
+
+
+/* =========================================================
+   STATUS SELECT
+   ========================================================= */
+
+.job-page .filter-group .p-select {
+  width: 100%;
+  min-height: 40px;
+
+  border: 1px solid #dce2ec;
+  border-radius: 9px;
+
+  background: var(--surface-bg);
+  color: var(--text-primary);
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.job-page .filter-group .p-select:hover {
+  border-color: #b8c0d0;
+}
+
+.job-page .filter-group .p-select.p-focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.11);
+}
+
+
+/* =========================================================
+   TABLE CARD
+   ========================================================= */
+
+.job-page .table-card {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--card-bg);
+
+  box-shadow:
+    0 6px 24px rgba(15, 23, 42, 0.055);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.job-page .job-loading {
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--card-bg);
+}
+
+.job-page ::ng-deep .p-progressspinner {
+  width: 40px;
+  height: 40px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.job-page ::ng-deep .p-datatable {
+  width: 100%;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.job-page ::ng-deep .p-datatable-thead > tr > th {
+  height: 48px;
+
+  padding: 0 16px;
+
+  border: none;
+  border-bottom: 1px solid var(--border);
+
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+
+  font-size: 10.5px;
+  font-weight: 750;
+
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+.job-page ::ng-deep .p-datatable-tbody > tr {
+  background: var(--card-bg);
+
+  transition:
+    background 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.job-page ::ng-deep .p-datatable-tbody > tr:hover {
+  background: #fafbff;
+
+  box-shadow:
+    inset 3px 0 0 var(--primary);
+}
+
+.job-page ::ng-deep .p-datatable-tbody > tr > td {
+  height: 60px;
+
+  padding: 0 16px;
+
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-size: 13px;
+
+  vertical-align: middle;
+}
+
+.job-page ::ng-deep .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   JOB NUMBER
+   ========================================================= */
+
+.job-page ::ng-deep .job-number {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.job-page ::ng-deep .job-number:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   STATUS TAGS
+   ========================================================= */
+
+.job-page ::ng-deep .p-tag {
+  min-width: 78px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 11px;
+
+  border-radius: 999px;
+
+  font-size: 10.5px;
+  font-weight: 750;
+
+  letter-spacing: 0.01em;
+
+  border: 1px solid transparent;
+
+  box-sizing: border-box;
+}
+
+
+/* ON HOLD */
+
+.job-page ::ng-deep .p-tag-warning {
+  background: #fff7ed;
+  border-color: #fed7aa;
+
+  color: #c2410c;
+}
+
+
+/* COMPLETED */
+
+.job-page ::ng-deep .p-tag-success {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+
+  color: #047857;
+}
+
+
+/* CANCELLED */
+
+.job-page ::ng-deep .p-tag-danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+
+  color: #b91c1c;
+}
+
+
+/* INFO */
+
+.job-page ::ng-deep .p-tag-info {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+
+  color: #1d4ed8;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.job-page ::ng-deep .action-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.job-page ::ng-deep .action-buttons .p-button {
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.job-page ::ng-deep .action-buttons .p-button:hover {
+  background: #f1f3ff;
+
+  border-color: #e0e3ff;
+
+  color: var(--primary);
+
+  transform: translateY(-1px);
+}
+
+
+/* INFO / ASSIGN / SCHEDULE */
+
+.job-page ::ng-deep .action-buttons .p-button-info:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+
+/* SUCCESS / START / RESUME */
+
+.job-page ::ng-deep .action-buttons .p-button-success:hover {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #059669;
+}
+
+
+/* WARNING / HOLD */
+
+.job-page ::ng-deep .action-buttons .p-button-warn:hover {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #d97706;
+}
+
+
+/* DANGER */
+
+.job-page ::ng-deep .action-buttons .p-button-danger:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.job-page ::ng-deep .p-paginator {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 14px;
+
+  border: none;
+  border-top: 1px solid var(--border);
+
+  border-radius: 0 0 16px 16px;
+
+  background: var(--card-bg);
+  color: var(--text-secondary);
+
+  box-sizing: border-box;
+}
+
+
+/* Pagination buttons */
+
+.job-page ::ng-deep .p-paginator .p-paginator-element {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+
+  margin: 0 2px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.job-page ::ng-deep .p-paginator .p-paginator-element:hover {
+  background: var(--primary-soft);
+
+  border-color: #e0e3ff;
+
+  color: var(--primary);
+}
+
+
+/* Active page */
+
+.job-page ::ng-deep .p-paginator .p-paginator-page.p-highlight {
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #4f46e5
+  );
+
+  border-color: transparent;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 10px rgba(79, 70, 229, 0.22);
+}
+
+
+/* Rows per page */
+
+.job-page ::ng-deep .p-paginator .p-select {
+  min-height: 34px;
+  width: auto;
+  min-width: 68px;
+
+  margin-left: 6px;
+
+  border: 1px solid #dce2ec;
+  border-radius: 8px;
+
+  background: var(--surface-bg);
+  color: var(--text-primary);
+}
+
+
+/* =========================================================
+   EMPTY TABLE
+   ========================================================= */
+
+.job-page ::ng-deep .p-datatable-emptymessage > tr > td {
+  height: 180px;
+
+  border-bottom: none;
+
+  background: var(--card-bg);
+  color: var(--text-muted);
+
+  text-align: center;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   SELECT / DROPDOWN OVERLAY
+   IMPORTANT:
+   PrimeNG overlays can be appended outside component.
+   ========================================================= */
+
+:host ::ng-deep .p-select-overlay {
+  min-width: 100%;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 35px rgba(15, 23, 42, 0.15);
+
+  overflow: hidden;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-list {
+  padding: 6px;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-option {
+  min-height: 38px;
+
+  padding: 9px 11px;
+
+  border-radius: 7px;
+
+  background: transparent;
+  color: #334155;
+
+  font-size: 13px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-option:hover {
+  background: #f1f3ff;
+  color: #4338ca;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-option.p-select-option-selected {
+  background: #eef2ff;
+  color: #4338ca;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   SELECT SEARCH INPUT
+   ========================================================= */
+
+:host ::ng-deep .p-select-overlay .p-select-filter {
+  width: calc(100% - 12px);
+
+  margin: 6px;
+
+  min-height: 36px;
+
+  border: 1px solid #dce2ec;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #172033;
+}
+
+:host ::ng-deep .p-select-overlay .p-select-filter:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.10);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .job-page {
+    padding: 24px 20px;
+  }
+
+  .job-page .filter-card {
+    flex-wrap: wrap;
+  }
+
+  .job-page .filter-group {
+    flex: 1 1 220px;
+  }
+
+  .job-page ::ng-deep .p-datatable {
+    overflow-x: auto;
+  }
+
+  .job-page ::ng-deep .p-datatable-table {
+    min-width: 1000px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .job-page {
+    padding: 18px 14px;
+  }
+
+  .job-page .page-header {
+    flex-direction: column;
+  }
+
+  .job-page .page-header .p-button {
+    width: 100%;
+  }
+
+  .job-page .filter-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .job-page .filter-group {
+    width: 100%;
+  }
+
+  .job-page ::ng-deep .p-paginator {
+    overflow-x: auto;
+  }
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+/*
+   This works when your application's dark-mode class
+   is applied to body/html as ".dark".
+*/
+
+:host-context(.dark) .job-page,
+:host-context(.dark-theme) .job-page,
+:host-context([data-theme="dark"]) .job-page {
+
+  --page-bg: #0f172a;
+  --card-bg: #111827;
+  --surface-bg: #111827;
+  --surface-soft: #182233;
+
+  --border: #263244;
+  --border-light: #202b3b;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(99, 102, 241, 0.13),
+      transparent 30%
+    ),
+    var(--page-bg);
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-datatable-thead > tr > th,
+:host-context(.dark-theme) .job-page ::ng-deep .p-datatable-thead > tr > th,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-datatable-thead > tr > th {
+
+  background: #182233;
+  color: #94a3b8;
+
+  border-color: #263244;
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-datatable-tbody > tr,
+:host-context(.dark-theme) .job-page ::ng-deep .p-datatable-tbody > tr,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-datatable-tbody > tr {
+
+  background: #111827;
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-datatable-tbody > tr:hover,
+:host-context(.dark-theme) .job-page ::ng-deep .p-datatable-tbody > tr:hover,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-datatable-tbody > tr:hover {
+
+  background: #182233;
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-datatable-tbody > tr > td,
+:host-context(.dark-theme) .job-page ::ng-deep .p-datatable-tbody > tr > td,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-datatable-tbody > tr > td {
+
+  color: #dbe4f0;
+  border-color: #202b3b;
+}
+
+
+/* Dark mode paginator */
+
+:host-context(.dark) .job-page ::ng-deep .p-paginator,
+:host-context(.dark-theme) .job-page ::ng-deep .p-paginator,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-paginator {
+
+  background: #111827;
+  color: #94a3b8;
+
+  border-color: #263244;
+}
+
+
+/* Dark mode filter */
+
+:host-context(.dark) .job-page .filter-card,
+:host-context(.dark-theme) .job-page .filter-card,
+:host-context([data-theme="dark"]) .job-page .filter-card {
+
+  background: #111827;
+  border-color: #263244;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.20);
+}
+
+
+:host-context(.dark) .job-page .filter-group .p-inputtext,
+:host-context(.dark-theme) .job-page .filter-group .p-inputtext,
+:host-context([data-theme="dark"]) .job-page .filter-group .p-inputtext {
+
+  background: #182233;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+
+:host-context(.dark) .job-page .filter-group .p-select,
+:host-context(.dark-theme) .job-page .filter-group .p-select,
+:host-context([data-theme="dark"]) .job-page .filter-group .p-select {
+
+  background: #182233;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+
+/* Dark mode action buttons */
+
+:host-context(.dark) .job-page ::ng-deep .action-buttons .p-button:hover,
+:host-context(.dark-theme) .job-page ::ng-deep .action-buttons .p-button:hover,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .action-buttons .p-button:hover {
+
+  background: #202b3b;
+  border-color: #334155;
+}
+
+
+/* =========================================================
+   DARK MODE STATUS TAGS
+   ========================================================= */
+
+:host-context(.dark) .job-page ::ng-deep .p-tag-warning,
+:host-context(.dark-theme) .job-page ::ng-deep .p-tag-warning,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-tag-warning {
+
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.30);
+  color: #fbbf24;
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-tag-success,
+:host-context(.dark-theme) .job-page ::ng-deep .p-tag-success,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-tag-success {
+
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.30);
+  color: #34d399;
+}
+
+
+:host-context(.dark) .job-page ::ng-deep .p-tag-danger,
+:host-context(.dark-theme) .job-page ::ng-deep .p-tag-danger,
+:host-context([data-theme="dark"]) .job-page ::ng-deep .p-tag-danger {
+
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.30);
+  color: #f87171;
+}

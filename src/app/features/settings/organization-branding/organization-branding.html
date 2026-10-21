@@ -1,0 +1,51 @@
+<section class="branding-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">ORGANIZATION SETTINGS</p>
+      <h1>Invoice & receipt branding</h1>
+      <p class="subtitle">Control how your company appears on customer-facing financial documents.</p>
+      @if (!canManageBranding) { <p class="read-only-note" role="status">You can view these settings, but only an organization administrator can change them.</p> }
+    </div>
+    <span class="access-badge"><i class="pi pi-shield" aria-hidden="true"></i> {{ canManageBranding ? 'Organization admin' : 'Read-only access' }}</span>
+  </header>
+
+  @if (loading()) {
+    <div class="state-card" role="status"><span class="spinner" aria-hidden="true"></span> Loading branding settings…</div>
+  } @else if (errorMessage()) {
+    <div class="state-card error-state" role="alert">
+      <i class="pi pi-exclamation-circle" aria-hidden="true"></i>
+      <div><strong>We couldn't load these settings</strong><p>{{ errorMessage() }}</p><button class="btn btn-secondary" type="button" (click)="loadSettings()">Try again</button></div>
+    </div>
+  } @else {
+    <div class="branding-grid">
+      <article class="settings-card logo-card">
+        <div class="card-heading"><div><h2>Company logo</h2><p>Use your brand on invoices and payment receipts.</p></div><span class="icon-tile"><i class="pi pi-image" aria-hidden="true"></i></span></div>
+        <div class="logo-preview" [class.logo-preview-empty]="!logoPreviewUrl()">
+          @if (logoPreviewUrl()) {
+            <img [src]="logoPreviewUrl()" alt="Company logo preview" />
+          } @else {
+            <div class="text-logo"><span class="logo-monogram">{{ (settings()?.organizationName || 'N').slice(0, 1).toUpperCase() }}</span><strong>{{ settings()?.organizationName || 'Your company' }}</strong><small>Company name will appear when no logo is used</small></div>
+          }
+        </div>
+        <div class="upload-actions">
+          <label class="btn btn-secondary file-button">Choose logo<input type="file" accept="image/png,image/jpeg" (change)="onLogoSelected($event)" [disabled]="!canManageBranding" /></label>
+          <button class="btn btn-primary" type="button" [disabled]="!canManageBranding || !hasSelectedFile()" (click)="uploadLogo()">{{ uploading() ? 'Uploading…' : 'Upload logo' }}</button>
+          <button class="btn btn-quiet" type="button" [disabled]="!canManageBranding || !logoPreviewUrl() || removingLogo()" (click)="removeLogo()">{{ removingLogo() ? 'Removing…' : 'Remove' }}</button>
+        </div>
+        <p class="hint">PNG or JPEG · Maximum 2 MB. Use a clear, high-resolution logo with a transparent or white background.</p>
+        <label class="toggle-row"><span><strong>Show company logo on documents</strong><small>If disabled, your company name and details remain visible.</small></span><input type="checkbox" [(ngModel)]="useCompanyLogo" [disabled]="!canManageBranding" /></label>
+      </article>
+
+      <article class="settings-card footer-card">
+        <div class="card-heading"><div><h2>Document footer</h2><p>Add useful notes to invoices and receipts.</p></div><span class="icon-tile"><i class="pi pi-file-edit" aria-hidden="true"></i></span></div>
+        <div class="field-group"><label for="invoiceFooter">Invoice footer text <span>Optional</span></label><textarea id="invoiceFooter" rows="4" maxlength="500" [(ngModel)]="invoiceFooterText" [disabled]="!canManageBranding" placeholder="Thank you for choosing our services."></textarea><div class="field-meta"><small>Printed at the bottom of invoices.</small><small>{{ invoiceFooterText.length }}/500</small></div></div>
+        <div class="field-group"><label for="receiptFooter">Payment receipt footer text <span>Optional</span></label><textarea id="receiptFooter" rows="4" maxlength="500" [(ngModel)]="receiptFooterText" [disabled]="!canManageBranding" placeholder="We appreciate your payment."></textarea><div class="field-meta"><small>Printed at the bottom of payment receipts.</small><small>{{ receiptFooterText.length }}/500</small></div></div>
+        <label class="toggle-row"><span><strong>Show “Powered by NEXORA”</strong><small>A small platform attribution in the document footer.</small></span><input type="checkbox" [(ngModel)]="showNexoraAttribution" [disabled]="!canManageBranding" /></label>
+      </article>
+    </div>
+
+    <section class="preview-note"><i class="pi pi-info-circle" aria-hidden="true"></i><div><strong>Keep your business identity clear</strong><p>Your organization remains the issuer of its invoices and receipts. If no company logo is enabled, NEXORA will not replace it with the NEXORA logo; the company name and business details will be shown instead.</p></div></section>
+
+    <div class="save-bar"><span>Changes apply to newly generated documents after they are saved.</span>@if (canManageBranding) { <button class="btn btn-primary save-button" type="button" [disabled]="saving()" (click)="saveSettings()"><i class="pi pi-check" aria-hidden="true"></i> {{ saving() ? 'Saving…' : 'Save branding settings' }}</button> } </div>
+  }
+</section>

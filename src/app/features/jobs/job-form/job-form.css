@@ -1,0 +1,524 @@
+/* =========================================================
+   NEXORA - JOB FORM
+   Production UI - Light + Dark Theme
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.job-form-page {
+  min-height: calc(100vh - 70px);
+  padding: 30px 34px;
+  background: var(--nexora-background);
+  box-sizing: border-box;
+  color: var(--nexora-text);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.page-header > div:first-child {
+  position: relative;
+  padding-left: 1px;
+}
+
+.page-header > div:first-child::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 4px;
+  margin-bottom: 13px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #3b82f6,
+    #10b981
+  );
+}
+
+.page-header h2 {
+  margin: 0;
+  color: var(--nexora-text);
+  font-size: 29px;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+  color: var(--nexora-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Back button */
+
+.page-header ::ng-deep .p-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.page-header ::ng-deep .p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgb(15 23 42 / 8%);
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-container {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  color: var(--nexora-text-muted);
+  font-size: 14px;
+}
+
+.loading-container i {
+  color: #6366f1;
+  font-size: 30px;
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.job-form-page ::ng-deep .p-card {
+  position: relative;
+  overflow: visible;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 35px rgb(15 23 42 / 6%),
+    0 2px 8px rgb(15 23 42 / 3%);
+}
+
+/* Gradient top border */
+
+.job-form-page ::ng-deep .p-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #3b82f6 50%,
+    #10b981 100%
+  );
+}
+
+/* Card body */
+
+.job-form-page ::ng-deep .p-card-body {
+  padding: 30px 26px 24px;
+}
+
+.job-form-page ::ng-deep .p-card-title {
+  color: var(--nexora-text);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.job-form-page ::ng-deep .p-card-subtitle {
+  margin-top: 5px;
+  color: var(--nexora-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 23px 24px;
+  margin-top: 26px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: var(--nexora-text);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.required {
+  margin-left: 3px;
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.form-field ::ng-deep .p-select {
+  width: 100%;
+  min-height: 42px;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: 9px;
+  color: var(--nexora-text);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 2%);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.form-field ::ng-deep .p-select:hover {
+  border-color: #aeb9d1;
+  background: var(--nexora-surface);
+}
+
+.form-field ::ng-deep .p-select.p-focus {
+  border-color: #6366f1;
+  box-shadow:
+    0 0 0 3px rgb(99 102 241 / 11%),
+    0 2px 5px rgb(99 102 241 / 5%);
+}
+
+.form-field ::ng-deep .p-select-label {
+  color: var(--nexora-text);
+  font-size: 14px;
+}
+
+.form-field ::ng-deep .p-select-label.p-placeholder {
+  color: var(--nexora-text-soft);
+}
+
+.form-field ::ng-deep .p-select-dropdown {
+  color: var(--nexora-text-muted);
+}
+
+/* =========================================================
+   DATE PICKER INPUT
+   ========================================================= */
+
+.form-field ::ng-deep .p-datepicker {
+  width: 100%;
+}
+
+.form-field ::ng-deep .p-datepicker-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: 9px;
+  color: var(--nexora-text);
+  font-size: 14px;
+  box-shadow: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.form-field ::ng-deep .p-datepicker-input:hover {
+  border-color: #aeb9d1;
+}
+
+.form-field ::ng-deep .p-datepicker-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 10%);
+}
+
+/* Calendar button */
+
+.form-field ::ng-deep .p-datepicker-dropdown {
+  width: 42px;
+  height: 42px;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-left: 0;
+  border-radius: 0 9px 9px 0;
+  color: var(--nexora-text-muted);
+}
+
+.form-field ::ng-deep .p-datepicker-dropdown:hover {
+  background: #f1f3ff;
+  color: #4f46e5;
+}
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.form-field ::ng-deep textarea[pTextarea] {
+  width: 100%;
+  min-height: 108px;
+  padding: 12px 13px;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: 9px;
+  color: var(--nexora-text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.form-field ::ng-deep textarea[pTextarea]::placeholder {
+  color: var(--nexora-text-soft);
+}
+
+.form-field ::ng-deep textarea[pTextarea]:hover {
+  border-color: #aeb9d1;
+}
+
+.form-field ::ng-deep textarea[pTextarea]:focus {
+  border-color: #6366f1;
+  box-shadow:
+    0 0 0 3px rgb(99 102 241 / 11%);
+}
+
+/* =========================================================
+   HINT / ERROR
+   ========================================================= */
+
+.field-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  color: var(--nexora-text-muted);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.error-text {
+  display: block;
+  margin-top: 1px;
+  color: #dc2626;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+  margin-top: 30px;
+  padding-top: 21px;
+  border-top: 1px solid var(--nexora-border);
+}
+
+.form-actions ::ng-deep .p-button {
+  min-width: 112px;
+  min-height: 40px;
+  padding: 0 17px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 650;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.form-actions ::ng-deep .p-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.form-actions ::ng-deep .p-button[type="submit"] {
+  box-shadow: 0 5px 14px rgb(99 102 241 / 18%);
+}
+
+.form-actions ::ng-deep .p-button[type="submit"]:hover {
+  box-shadow: 0 7px 18px rgb(99 102 241 / 25%);
+}
+
+/* =========================================================
+   DARK THEME - JOB FORM
+   ========================================================= */
+
+:host-context(html.dark) .job-form-page {
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .page-header h2 {
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .page-header p {
+  color: var(--nexora-text-muted);
+}
+
+:host-context(html.dark) .job-form-page ::ng-deep .p-card {
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+  box-shadow: var(--nexora-shadow-md);
+}
+
+:host-context(html.dark) .job-form-page ::ng-deep .p-card-title {
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .job-form-page ::ng-deep .p-card-subtitle {
+  color: var(--nexora-text-muted);
+}
+
+:host-context(html.dark) .form-field label {
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-select {
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-select:hover {
+  background: var(--nexora-surface);
+  border-color: #475569;
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-select-label {
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-select-label.p-placeholder {
+  color: var(--nexora-text-soft);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-select-dropdown {
+  color: var(--nexora-text-muted);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-datepicker-input {
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-datepicker-dropdown {
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+  color: var(--nexora-text-muted);
+}
+
+:host-context(html.dark) .form-field ::ng-deep .p-datepicker-dropdown:hover {
+  background: #20283a;
+  color: #a5b4fc;
+}
+
+:host-context(html.dark) .form-field ::ng-deep textarea[pTextarea] {
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+  color: var(--nexora-text);
+}
+
+:host-context(html.dark) .form-field ::ng-deep textarea[pTextarea]::placeholder {
+  color: var(--nexora-text-soft);
+}
+
+:host-context(html.dark) .field-hint {
+  color: var(--nexora-text-muted);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .job-form-page {
+    padding: 24px 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .form-field.full-width {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .job-form-page {
+    padding: 20px 15px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .page-header h2 {
+    font-size: 25px;
+  }
+
+  .page-header > .p-button {
+    width: 100%;
+  }
+
+  .job-form-page ::ng-deep .p-card-body {
+    padding: 24px 18px 20px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .form-actions ::ng-deep .p-button {
+    width: 100%;
+  }
+}

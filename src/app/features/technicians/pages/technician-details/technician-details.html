@@ -1,0 +1,216 @@
+<p-toast></p-toast>
+
+<div class="technician-details-page">
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>Loading technician...</span>
+
+    </div>
+
+  } @else if (technician(); as technician) {
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+      <div class="header-left">
+
+        <p-button
+          icon="pi pi-arrow-left"
+          [text]="true"
+          severity="secondary"
+          (onClick)="goBack()">
+        </p-button>
+
+        <div>
+
+          <h1>
+            {{ technician.name }}
+          </h1>
+
+          <p>
+            Technician Details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <p-button
+          label="Edit"
+          icon="pi pi-pencil"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="editTechnician()">
+        </p-button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Profile -->
+
+    <div class="details-grid">
+
+      <p-card>
+
+        <div class="profile">
+
+          <div class="avatar">
+            {{ technician.name.charAt(0).toUpperCase() }}
+          </div>
+
+          <div class="profile-info">
+
+            <h2>
+              {{ technician.name }}
+            </h2>
+
+            <p>
+              {{ technician.specialization || 'General Maintenance' }}
+            </p>
+
+            <p-tag
+              [value]="formatStatus(technician.status)"
+              [severity]="getStatusSeverity(technician.status)">
+            </p-tag>
+
+          </div>
+
+        </div>
+
+      </p-card>
+
+
+      <!-- Contact -->
+
+      <p-card header="Contact Information">
+
+        <div class="info-list">
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-phone"></i>
+              Phone
+            </span>
+
+            <span class="value">
+              {{ technician.phone }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-envelope"></i>
+              Email
+            </span>
+
+            <span class="value">
+              {{ technician.email || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-id-card"></i>
+              Employee Code
+            </span>
+
+            <span class="value">
+              {{ technician.employeeCode || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-wrench"></i>
+              Specialization
+            </span>
+
+            <span class="value">
+              {{ technician.specialization || 'General Maintenance' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </p-card>
+
+
+      <!-- Notes -->
+
+      <p-card
+        header="Notes"
+        styleClass="notes-card">
+
+        <p class="notes">
+
+          {{ technician.notes || 'No notes available.' }}
+
+        </p>
+
+      </p-card>
+
+
+      <!-- Record Information -->
+
+      <p-card header="Record Information">
+
+        <div class="info-list">
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-calendar"></i>
+              Created At
+            </span>
+
+            <span class="value">
+              {{ formatDate(technician.createdAt) }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              <i class="pi pi-refresh"></i>
+              Last Updated
+            </span>
+
+            <span class="value">
+              {{ formatDate(technician.updatedAt) }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </p-card>
+
+    </div>
+
+  }
+
+</div>

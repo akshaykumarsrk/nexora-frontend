@@ -1,0 +1,232 @@
+<p-toast></p-toast>
+
+<div class="technician-page">
+
+  <!-- Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Technicians</h1>
+      <p>
+        Manage field technicians and their specializations.
+      </p>
+    </div>
+
+    <p-button
+      label="Add Technician"
+      icon="pi pi-plus"
+      (onClick)="createTechnician()">
+    </p-button>
+
+  </div>
+
+
+  <!-- Main Card -->
+  <p-card>
+
+    <!-- Filters -->
+    <div class="filters">
+
+      <div class="search-box">
+
+        <i class="pi pi-search"></i>
+
+        <input
+          pInputText
+          type="text"
+          placeholder="Search technicians..."
+          [(ngModel)]="searchTerm"
+        />
+
+      </div>
+
+
+      <p-select
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Filter by status"
+        class="status-filter">
+      </p-select>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading()) {
+
+      <div class="loading-state">
+
+        <i class="pi pi-spin pi-spinner"></i>
+
+        <span>Loading technicians...</span>
+
+      </div>
+
+    }
+
+
+    <!-- Empty -->
+    @else if (filteredTechnicians.length === 0) {
+
+      <div class="empty-state">
+
+        <i class="pi pi-users"></i>
+
+        <h3>No technicians found</h3>
+
+        <p>
+          No technicians match your current filters.
+        </p>
+
+        <p-button
+          label="Add Technician"
+          icon="pi pi-plus"
+          (onClick)="createTechnician()">
+        </p-button>
+
+      </div>
+
+    }
+
+
+    <!-- Table -->
+    @else {
+
+      <p-table
+        [value]="filteredTechnicians"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        responsiveLayout="scroll"
+        dataKey="id">
+
+        <ng-template #header>
+
+          <tr>
+
+            <th>Name</th>
+
+            <th>Employee Code</th>
+
+            <th>Phone</th>
+
+            <th>Specialization</th>
+
+            <th>Status</th>
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template
+          #body
+          let-technician>
+
+          <tr>
+
+            <td>
+
+              <div class="technician-name">
+
+                <div class="avatar">
+                  {{ technician.name.charAt(0).toUpperCase() }}
+                </div>
+
+                <div>
+                  <strong>
+                    {{ technician.name }}
+                  </strong>
+
+                  @if (technician.email) {
+                    <small>
+                      {{ technician.email }}
+                    </small>
+                  }
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <td>
+              {{ technician.employeeCode || '—' }}
+            </td>
+
+
+            <td>
+              {{ technician.phone }}
+            </td>
+
+
+            <td>
+              {{ technician.specialization || 'General' }}
+            </td>
+
+
+            <td>
+
+              <p-tag
+                [value]="formatStatus(technician.status)"
+                [severity]="getStatusSeverity(technician.status)">
+              </p-tag>
+
+            </td>
+
+
+            <td>
+
+              <div class="actions">
+
+                <p-button
+                    icon="pi pi-eye"
+                    [text]="true"
+                    severity="secondary"
+                    pTooltip="View technician"
+                    tooltipPosition="top"
+                    ariaLabel="View technician"
+                    (onClick)="viewTechnician(technician)">
+                </p-button>
+
+                <p-button
+                    icon="pi pi-pencil"
+                    [text]="true"
+                    severity="secondary"
+                    pTooltip="Edit technician"
+                    tooltipPosition="top"
+                    ariaLabel="Edit technician"
+                    (onClick)="editTechnician(technician)">
+                </p-button>
+
+                <p-button
+                    icon="pi pi-trash"
+                    [text]="true"
+                    severity="danger"
+                    pTooltip="Delete technician"
+                    tooltipPosition="top"
+                    ariaLabel="Delete technician"
+                    (onClick)="deleteTechnician(technician)">
+                </p-button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </p-card>
+
+</div>

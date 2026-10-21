@@ -1,0 +1,474 @@
+<div class="page-container">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="cancel()"
+      >
+        <i class="pi pi-arrow-left"></i>
+
+        <span>Assets</span>
+      </button>
+
+
+      <h1>
+        {{ editing() ? 'Edit Asset' : 'Add Asset' }}
+      </h1>
+
+      <p>
+        {{
+          editing()
+            ? 'Update asset and equipment information.'
+            : 'Register equipment installed at a customer site.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>Loading Asset</h3>
+
+      <p>
+        Please wait while we load the asset information.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       FORM
+       ===================================================== -->
+
+  @else {
+
+    <form
+      class="form-card"
+      [formGroup]="assetForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <!-- =================================================
+           ASSET INFORMATION
+           ================================================= -->
+
+      <div class="section-header">
+
+        <div class="section-icon">
+          <i class="pi pi-box"></i>
+        </div>
+
+        <div>
+
+          <h2>Asset Information</h2>
+
+          <p>
+            Basic identification and equipment details.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <!-- Site -->
+
+        <div class="form-field">
+
+          <label for="siteId">
+            Site
+            <span class="required">*</span>
+          </label>
+
+          <p-select
+            inputId="siteId"
+            formControlName="siteId"
+            [options]="siteOptions()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select site"
+            [loading]="sitesLoading()"
+            [filter]="true"
+            filterBy="label"
+            appendTo="body"
+            [invalid]="isInvalid('siteId')"
+          ></p-select>
+
+          @if (isInvalid('siteId')) {
+
+            <small class="error-message">
+              {{ getErrorMessage('siteId') }}
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- Asset Code -->
+
+        <div class="form-field">
+
+          <label for="assetCode">
+            Asset Code
+            <span class="required">*</span>
+          </label>
+
+          <input
+            pInputText
+            id="assetCode"
+            formControlName="assetCode"
+            placeholder="e.g. AST-001"
+            maxlength="50"
+            [class.ng-invalid]="isInvalid('assetCode')"
+            [class.ng-touched]="isInvalid('assetCode')"
+          />
+
+          @if (isInvalid('assetCode')) {
+
+            <small class="error-message">
+              {{ getErrorMessage('assetCode') }}
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- Asset Name -->
+
+        <div class="form-field">
+
+          <label for="name">
+            Asset Name
+            <span class="required">*</span>
+          </label>
+
+          <input
+            pInputText
+            id="name"
+            formControlName="name"
+            placeholder="e.g. Central AC Unit"
+            maxlength="150"
+            [class.ng-invalid]="isInvalid('name')"
+            [class.ng-touched]="isInvalid('name')"
+          />
+
+          @if (isInvalid('name')) {
+
+            <small class="error-message">
+              {{ getErrorMessage('name') }}
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="form-field">
+
+          <label for="status">
+            Status
+            <span class="required">*</span>
+          </label>
+
+          <p-select
+            inputId="status"
+            formControlName="status"
+            [options]="statusOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select status"
+            appendTo="body"
+            [invalid]="isInvalid('status')"
+          ></p-select>
+
+          @if (isInvalid('status')) {
+
+            <small class="error-message">
+              {{ getErrorMessage('status') }}
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- Category -->
+
+        <div class="form-field">
+
+          <label for="category">
+            Category
+          </label>
+
+          <input
+            pInputText
+            id="category"
+            formControlName="category"
+            placeholder="e.g. HVAC"
+            maxlength="150"
+          />
+
+        </div>
+
+
+        <!-- Brand -->
+
+        <div class="form-field">
+
+          <label for="brand">
+            Brand
+          </label>
+
+          <input
+            pInputText
+            id="brand"
+            formControlName="brand"
+            placeholder="e.g. Daikin"
+            maxlength="150"
+          />
+
+        </div>
+
+
+        <!-- Model -->
+
+        <div class="form-field">
+
+          <label for="model">
+            Model
+          </label>
+
+          <input
+            pInputText
+            id="model"
+            formControlName="model"
+            placeholder="e.g. VRV-X"
+            maxlength="150"
+          />
+
+        </div>
+
+
+        <!-- Serial Number -->
+
+        <div class="form-field">
+
+          <label for="serialNumber">
+            Serial Number
+          </label>
+
+          <input
+            pInputText
+            id="serialNumber"
+            formControlName="serialNumber"
+            placeholder="Enter serial number"
+            maxlength="150"
+          />
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           INSTALLATION & WARRANTY
+           ================================================= -->
+
+      <div class="section-header section-header-spaced">
+
+        <div class="section-icon">
+
+          <i class="pi pi-calendar"></i>
+
+        </div>
+
+        <div>
+
+          <h2>Installation & Warranty</h2>
+
+          <p>
+            Track installation and warranty dates.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <!-- Installation Date -->
+
+        <div class="form-field">
+
+          <label for="installationDate">
+            Installation Date
+          </label>
+
+          <p-datepicker
+            inputId="installationDate"
+            formControlName="installationDate"
+            dateFormat="dd M yy"
+            placeholder="Select installation date"
+            [showIcon]="true"
+            iconDisplay="input"
+            [showButtonBar]="true"
+            appendTo="body"
+          ></p-datepicker>
+
+        </div>
+
+
+        <!-- Warranty End -->
+
+        <div class="form-field">
+
+          <label for="warrantyEndDate">
+            Warranty End Date
+          </label>
+
+          <p-datepicker
+            inputId="warrantyEndDate"
+            formControlName="warrantyEndDate"
+            dateFormat="dd M yy"
+            placeholder="Select warranty end date"
+            [showIcon]="true"
+            iconDisplay="input"
+            [showButtonBar]="true"
+            appendTo="body"
+          ></p-datepicker>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           NOTES
+           ================================================= -->
+
+      <div class="section-header section-header-spaced">
+
+        <div class="section-icon notes-icon">
+
+          <i class="pi pi-file-edit"></i>
+
+        </div>
+
+        <div>
+
+          <h2>Additional Information</h2>
+
+          <p>
+            Add notes or important information about this asset.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-field full-width">
+
+          <label for="notes">
+            Notes
+          </label>
+
+          <textarea
+            pTextarea
+            id="notes"
+            formControlName="notes"
+            rows="5"
+            maxlength="1000"
+            placeholder="Enter additional information..."
+          ></textarea>
+
+          <div class="character-count">
+
+            {{
+              assetForm.get('notes')?.value?.length || 0
+            }}
+            / 1000
+
+          </div>
+
+          @if (isInvalid('notes')) {
+
+            <small class="error-message">
+              {{ getErrorMessage('notes') }}
+            </small>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           FOOTER
+           ================================================= -->
+
+      <div class="form-footer">
+
+        <p-button
+          type="button"
+          label="Cancel"
+          severity="secondary"
+          [outlined]="true"
+          [disabled]="saving()"
+          (onClick)="cancel()"
+        ></p-button>
+
+
+        <p-button
+          type="submit"
+          [label]="
+            editing()
+              ? 'Update Asset'
+              : 'Create Asset'
+          "
+          icon="pi pi-check"
+          [loading]="saving()"
+          [disabled]="saving()"
+        ></p-button>
+
+      </div>
+
+    </form>
+
+  }
+
+</div>
+
+
+<p-toast></p-toast>

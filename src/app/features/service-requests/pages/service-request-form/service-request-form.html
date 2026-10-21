@@ -1,0 +1,335 @@
+<div class="service-request-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-header-content">
+
+      <h2 class="page-title">
+
+        @if (isEditMode()) {
+          Edit Service Request
+        } @else {
+          New Service Request
+        }
+
+      </h2>
+
+      <small class="page-subtitle">
+        Create and manage customer service requests
+      </small>
+
+    </div>
+
+
+    <p-button
+      class="back-button"
+      label="Back"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [text]="true"
+      (onClick)="cancel()"
+    />
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-container">
+
+      <p-progressspinner
+        strokeWidth="4"
+        [style]="{
+          width: '40px',
+          height: '40px'
+        }"
+      />
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       FORM
+       ===================================================== -->
+
+  @if (!loading()) {
+
+    <div class="form-card">
+
+      <div class="form-content">
+
+        <div class="grid form-grid">
+
+          <!-- =================================================
+               CUSTOMER
+               ================================================= -->
+
+          <div class="col-12 md:col-6 form-field">
+
+            <label class="field-label">
+
+              Customer
+
+              <span class="required">*</span>
+
+            </label>
+
+
+            <p-select
+              [options]="customers()"
+              optionLabel="name"
+              optionValue="id"
+              [ngModel]="customerId()"
+              (ngModelChange)="onCustomerChange($event)"
+              placeholder="Select Customer"
+              [showClear]="true"
+              class="w-full"
+            />
+
+          </div>
+
+
+          <!-- =================================================
+               SITE
+               ================================================= -->
+
+          <div class="col-12 md:col-6 form-field">
+
+            <label class="field-label">
+
+              Site
+
+              <span class="required">*</span>
+
+            </label>
+
+
+            <p-select
+              [options]="sites()"
+              optionLabel="name"
+              optionValue="id"
+              [ngModel]="siteId()"
+              (ngModelChange)="onSiteChange($event)"
+              placeholder="Select Site"
+              [showClear]="true"
+              [loading]="loadingSites()"
+              [disabled]="!customerId()"
+              class="w-full"
+            />
+
+          </div>
+
+
+          <!-- =================================================
+               ASSET
+               ================================================= -->
+
+          <div class="col-12 md:col-6 form-field">
+
+            <label class="field-label">
+              Asset
+            </label>
+
+
+            <p-select
+              [options]="assets()"
+              optionLabel="name"
+              optionValue="id"
+              [ngModel]="assetId()"
+              (ngModelChange)="assetId.set($event)"
+              placeholder="Select Asset (Optional)"
+              [showClear]="true"
+              [loading]="loadingAssets()"
+              [disabled]="!siteId()"
+              class="w-full"
+            >
+
+              <ng-template
+                #item
+                let-asset
+              >
+
+                <div class="asset-option">
+
+                  <div class="asset-option-name">
+                    {{ asset.name }}
+                  </div>
+
+                  <small class="asset-option-code">
+                    {{ asset.assetCode }}
+                  </small>
+
+                </div>
+
+              </ng-template>
+
+
+              <ng-template
+                #selectedItem
+                let-asset
+              >
+
+                @if (asset) {
+
+                  <div class="selected-asset">
+
+                    <span>
+                      {{ asset.name }}
+                    </span>
+
+                    <small class="selected-asset-code">
+                      ({{ asset.assetCode }})
+                    </small>
+
+                  </div>
+
+                }
+
+              </ng-template>
+
+            </p-select>
+
+          </div>
+
+
+          <!-- =================================================
+               PRIORITY
+               ================================================= -->
+
+          <div class="col-12 md:col-6 form-field">
+
+            <label class="field-label">
+
+              Priority
+
+              <span class="required">*</span>
+
+            </label>
+
+
+            <p-select
+              [options]="priorities"
+              optionLabel="label"
+              optionValue="value"
+              [ngModel]="priority()"
+              (ngModelChange)="priority.set($event)"
+              placeholder="Select Priority"
+              class="w-full"
+            />
+
+          </div>
+
+
+          <!-- =================================================
+               TITLE
+               ================================================= -->
+
+          <div class="col-12 form-field">
+
+            <label
+              for="title"
+              class="field-label"
+            >
+
+              Title
+
+              <span class="required">*</span>
+
+            </label>
+
+
+            <input
+              pInputText
+              id="title"
+              [ngModel]="title()"
+              (ngModelChange)="title.set($event)"
+              maxlength="200"
+              placeholder="Enter service request title"
+              class="w-full"
+            />
+
+          </div>
+
+
+          <!-- =================================================
+               DESCRIPTION
+               ================================================= -->
+
+          <div class="col-12 form-field">
+
+            <label
+              for="description"
+              class="field-label"
+            >
+              Description
+            </label>
+
+
+            <textarea
+              pTextarea
+              id="description"
+              [ngModel]="description()"
+              (ngModelChange)="description.set($event)"
+              rows="5"
+              maxlength="2000"
+              placeholder="Describe the service request..."
+              class="w-full"
+            ></textarea>
+
+
+            <small class="character-count">
+              {{ description().length }}/2000
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             ACTIONS
+             =================================================== -->
+
+        <div class="form-actions">
+
+          <p-button
+            class="cancel-button"
+            label="Cancel"
+            severity="secondary"
+            [text]="true"
+            (onClick)="cancel()"
+          />
+
+
+          <p-button
+            class="save-button"
+            [label]="
+              isEditMode()
+                ? 'Update Request'
+                : 'Create Request'
+            "
+            icon="pi pi-check"
+            [loading]="saving()"
+            [disabled]="saving()"
+            (onClick)="save()"
+          />
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

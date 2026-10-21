@@ -1,0 +1,673 @@
+<div class="invoice-details-page">
+
+  <p-toast />
+
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-heading">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        aria-label="Back to invoices"
+        title="Back"
+      >
+        <i class="pi pi-arrow-left"></i>
+      </button>
+
+
+      <div class="title-icon">
+        <i class="pi pi-file"></i>
+      </div>
+
+
+      <div>
+
+        <div class="breadcrumb">
+
+          <span
+            class="breadcrumb-link"
+            (click)="goBack()"
+          >
+            Invoices
+          </span>
+
+          <i class="pi pi-angle-right"></i>
+
+          <span>
+            Details
+          </span>
+
+        </div>
+
+
+        <h1>
+          Invoice Details
+        </h1>
+
+
+        <p>
+          View invoice information and payment details.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>
+        Loading invoice...
+      </span>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       INVOICE
+       ===================================================== -->
+
+  @if (!loading() && invoice(); as inv) {
+
+
+    <!-- ===================================================
+         INVOICE HERO
+         =================================================== -->
+
+    <section class="invoice-hero">
+
+      <div class="hero-left">
+
+        <div class="hero-icon">
+          <i class="pi pi-file"></i>
+        </div>
+
+
+        <div class="hero-content">
+
+          <span class="hero-label">
+            INVOICE
+          </span>
+
+          <h2>
+            {{ inv.invoiceNumber }}
+          </h2>
+
+          <span class="hero-subtitle">
+            Job {{ inv.jobNumber || '-' }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-right">
+
+        <p-tag
+          [value]="inv.status"
+          [severity]="getStatusSeverity(inv.status)"
+        />
+
+        <div class="hero-total">
+
+          <span>
+            Total Amount
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.totalAmount) }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         INVOICE INFORMATION
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-icon">
+          <i class="pi pi-info-circle"></i>
+        </div>
+
+
+        <div>
+
+          <h3>
+            Invoice Information
+          </h3>
+
+          <span>
+            Basic invoice and customer details
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+
+        <!-- Invoice Number -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Invoice Number
+          </span>
+
+          <span class="detail-value">
+            {{ inv.invoiceNumber }}
+          </span>
+
+        </div>
+
+
+        <!-- Job Number -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Job Number
+          </span>
+
+          <button
+            type="button"
+            class="reference-button"
+            (click)="viewJob()"
+          >
+
+            <i class="pi pi-briefcase"></i>
+
+            {{ inv.jobNumber || '-' }}
+
+          </button>
+
+        </div>
+
+
+        <!-- Customer -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Customer
+          </span>
+
+          <span class="detail-value">
+            {{ inv.customerName || '-' }}
+          </span>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Status
+          </span>
+
+          <p-tag
+            [value]="inv.status"
+            [severity]="getStatusSeverity(inv.status)"
+          />
+
+        </div>
+
+
+        <!-- Issued -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Issued Date
+          </span>
+
+          <span class="date-value">
+
+            <i class="pi pi-calendar"></i>
+
+            {{ formatDate(inv.issuedAt) }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Due -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Due Date
+          </span>
+
+          <span class="date-value">
+
+            <i class="pi pi-calendar"></i>
+
+            {{ formatDate(inv.dueDate) }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Created -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Created
+          </span>
+
+          <span class="date-value">
+
+            <i class="pi pi-clock"></i>
+
+            {{ formatDate(inv.createdAt) }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Updated -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Last Updated
+          </span>
+
+          <span class="date-value">
+
+            <i class="pi pi-history"></i>
+
+            {{ formatDate(inv.updatedAt) }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         AMOUNT BREAKDOWN
+         =================================================== -->
+
+    <section class="details-card">
+
+      <div class="card-header">
+
+        <div class="card-icon">
+          <i class="pi pi-wallet"></i>
+        </div>
+
+
+        <div>
+
+          <h3>
+            Amount Breakdown
+          </h3>
+
+          <span>
+            Invoice charges, discount and tax
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="amount-content">
+
+
+        <!-- Labour -->
+
+        <div class="amount-row">
+
+          <span>
+            Labour Amount
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.labourAmount) }}
+          </strong>
+
+        </div>
+
+
+        <!-- Parts -->
+
+        <div class="amount-row">
+
+          <span>
+            Parts Amount
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.partsAmount) }}
+          </strong>
+
+        </div>
+
+
+        <!-- Other -->
+
+        <div class="amount-row">
+
+          <span>
+            Other Charges
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.otherCharges) }}
+          </strong>
+
+        </div>
+
+
+        <!-- Discount -->
+
+        <div class="amount-row discount-row">
+
+          <span>
+            Discount
+          </span>
+
+          <strong>
+            - {{ formatCurrency(inv.discount) }}
+          </strong>
+
+        </div>
+
+
+        <div class="amount-divider"></div>
+
+
+        <!-- Subtotal -->
+
+        <div class="amount-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.subtotal) }}
+          </strong>
+
+        </div>
+
+
+        <!-- Tax -->
+
+        <div class="amount-row">
+
+          <span>
+            Tax
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.taxAmount) }}
+          </strong>
+
+        </div>
+
+
+        <div class="amount-divider"></div>
+
+
+        <!-- Total -->
+
+        <div class="amount-row total-row">
+
+          <span>
+            Total Amount
+          </span>
+
+          <strong>
+            {{ formatCurrency(inv.totalAmount) }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+     PAYMENT SECTION
+     ===================================================== -->
+
+    <section class="invoice-card payment-card">
+
+      <div class="card-header">
+
+        <div class="card-title">
+
+          <div class="card-icon">
+            <i class="pi pi-wallet"></i>
+          </div>
+
+          <div>
+
+            <h2>Payment</h2>
+
+            <p>
+              Track payments received for this invoice
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      @if (paymentLoading()) {
+
+        <div class="payment-loading">
+
+          <i class="pi pi-spin pi-spinner"></i>
+
+          <span>
+            Loading payment information...
+          </span>
+
+        </div>
+
+      } @else if (paymentSummary(); as summary) {
+
+        <div class="payment-summary">
+
+          <div class="payment-metric">
+
+            <span>
+              Invoice Total
+            </span>
+
+            <strong>
+              {{ formatCurrency(summary.invoiceTotal) }}
+            </strong>
+
+          </div>
+
+
+          <div class="payment-metric">
+
+            <span>
+              Paid Amount
+            </span>
+
+            <strong class="paid-value">
+              {{ formatCurrency(summary.paidAmount) }}
+            </strong>
+
+          </div>
+
+
+          <div class="payment-metric">
+
+            <span>
+              Remaining
+            </span>
+
+            <strong class="remaining-value">
+              {{ formatCurrency(summary.remainingAmount) }}
+            </strong>
+
+          </div>
+
+
+          <div class="payment-metric status-metric">
+
+            <span>
+              Payment Status
+            </span>
+
+            <p-tag
+              [value]="summary.paymentStatus"
+              [severity]="
+                getPaymentStatusSeverity(
+                  summary.paymentStatus
+                )
+              "
+            />
+
+          </div>
+
+        </div>
+
+
+        <div class="payment-actions-row">
+
+          @if (summary.remainingAmount > 0) {
+
+            <p-button
+              label="Record Payment"
+              icon="pi pi-plus"
+              (onClick)="recordPayment()"
+            />
+
+          } @else {
+
+            <p-button
+              label="Fully Paid"
+              icon="pi pi-check"
+              severity="success"
+              [disabled]="true"
+            />
+
+          }
+
+
+          <p-button
+            label="View Payments"
+            icon="pi pi-list"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="viewPayments(inv.id)"
+          />
+
+        </div>
+
+      } @else {
+
+        <div class="payment-loading">
+
+          <i class="pi pi-exclamation-circle"></i>
+
+          <span>
+            Payment information is unavailable.
+          </span>
+
+        </div>
+
+      }
+
+    </section>
+
+    <app-payment-form
+      [visible]="paymentDialogVisible()"
+      [invoiceId]="inv.id"
+      [invoiceNumber]="inv.invoiceNumber"
+      (closed)="paymentDialogVisible.set(false)"
+      (paymentCreated)="onPaymentCreated()"
+    />
+
+
+    <!-- ===================================================
+         ACTIONS
+         =================================================== -->
+
+    <div class="bottom-actions">
+
+      <p-button
+        label="Back to Invoices"
+        icon="pi pi-arrow-left"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="loading()"
+        (onClick)="goBack()"
+      />
+
+      <div class="action-group">
+
+        <p-button
+          label="Download PDF"
+          icon="pi pi-download"
+          severity="secondary"
+          [outlined]="true"
+          [loading]="loading()"
+          (onClick)="downloadPdf()"
+        />
+
+        <p-button
+          label="View Job"
+          icon="pi pi-briefcase"
+          [disabled]="loading()"
+          (onClick)="viewJob()"
+        />
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

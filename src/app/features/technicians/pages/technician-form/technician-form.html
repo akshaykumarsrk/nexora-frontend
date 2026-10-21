@@ -1,0 +1,273 @@
+<p-toast></p-toast>
+
+<div class="technician-form-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>
+        {{ isEditMode ? 'Edit Technician' : 'Add Technician' }}
+      </h1>
+
+      <p>
+        {{
+          isEditMode
+            ? 'Update technician information and availability.'
+            : 'Add a new field technician to your organization.'
+        }}
+      </p>
+    </div>
+
+  </div>
+
+
+  @if (loading()) {
+
+    <div class="loading-state">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <span>Loading technician...</span>
+
+    </div>
+
+  } @else {
+
+    <form
+      [formGroup]="technicianForm"
+      (ngSubmit)="submit()">
+
+      <p-card>
+
+        <div class="form-grid">
+
+          <!-- Name -->
+
+          <div class="field">
+
+            <label for="name">
+              Technician Name
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="name"
+              pInputText
+              formControlName="name"
+              placeholder="Enter technician name"
+              class="w-full"
+            />
+
+            @if (
+              technicianForm.get('name')?.touched &&
+              technicianForm.get('name')?.hasError('required')
+            ) {
+              <small class="error">
+                Technician name is required.
+              </small>
+            }
+
+            @if (
+              technicianForm.get('name')?.touched &&
+              technicianForm.get('name')?.hasError('maxlength')
+            ) {
+              <small class="error">
+                Name cannot exceed 150 characters.
+              </small>
+            }
+
+          </div>
+
+
+          <!-- Phone -->
+
+          <div class="field">
+
+            <label for="phone">
+              Phone
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="phone"
+              pInputText
+              formControlName="phone"
+              placeholder="Enter phone number"
+              class="w-full"
+            />
+
+            @if (
+              technicianForm.get('phone')?.touched &&
+              technicianForm.get('phone')?.hasError('required')
+            ) {
+              <small class="error">
+                Phone number is required.
+              </small>
+            }
+
+          </div>
+
+
+          <!-- Email -->
+
+          <div class="field">
+
+            <label for="email">
+              Email <span class="required">*</span>
+            </label>
+
+            <input
+              id="email"
+              pInputText
+              type="email"
+              formControlName="email"
+              placeholder="technician@example.com"
+              class="w-full"
+            />
+
+            @if (technicianForm.get('email')?.touched && technicianForm.get('email')?.hasError('required')) {
+              <small class="error">Email is required to send the technician their secure portal invitation.</small>
+            }
+            @if (technicianForm.get('email')?.touched && technicianForm.get('email')?.hasError('email')) {
+              <small class="error">Please enter a valid email address.</small>
+            }
+
+          </div>
+
+
+          <!-- Employee Code -->
+
+          <div class="field">
+
+            <label for="employeeCode">
+              Employee Code
+            </label>
+
+            <input
+              id="employeeCode"
+              pInputText
+              formControlName="employeeCode"
+              placeholder="e.g. TECH-001"
+              class="w-full"
+            />
+
+            @if (
+              technicianForm.get('employeeCode')?.touched &&
+              technicianForm.get('employeeCode')?.hasError('maxlength')
+            ) {
+              <small class="error">
+                Employee code cannot exceed 50 characters.
+              </small>
+            }
+
+          </div>
+
+
+          <!-- Specialization -->
+
+          <div class="field">
+
+            <label for="specialization">
+              Specialization
+            </label>
+
+            <p-select
+              id="specialization"
+              formControlName="specialization"
+              [options]="specializationOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select specialization"
+              [showClear]="true"
+              class="w-full">
+            </p-select>
+
+          </div>
+
+
+          <!-- Status -->
+
+          <div class="field">
+
+            <label for="status">
+              Status
+              <span class="required">*</span>
+            </label>
+
+            <p-select
+              id="status"
+              formControlName="status"
+              [options]="statusOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select status"
+              class="w-full">
+            </p-select>
+
+          </div>
+
+
+          <!-- Notes -->
+
+          <div class="field full-width">
+
+            <label for="notes">
+              Notes
+            </label>
+
+            <textarea
+              id="notes"
+              pTextarea
+              formControlName="notes"
+              rows="5"
+              placeholder="Add any additional notes..."
+              class="w-full">
+            </textarea>
+
+            @if (
+              technicianForm.get('notes')?.touched &&
+              technicianForm.get('notes')?.hasError('maxlength')
+            ) {
+              <small class="error">
+                Notes cannot exceed 1000 characters.
+              </small>
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="form-actions">
+
+          <p-button
+            type="button"
+            label="Cancel"
+            icon="pi pi-times"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="cancel()">
+          </p-button>
+
+          <p-button
+            type="submit"
+            [label]="
+              isEditMode
+                ? 'Update Technician'
+                : 'Create Technician'
+            "
+            icon="pi pi-check"
+            [loading]="isSubmitting">
+          </p-button>
+
+        </div>
+
+      </p-card>
+
+    </form>
+
+  }
+
+</div>

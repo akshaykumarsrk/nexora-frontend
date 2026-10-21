@@ -1,0 +1,526 @@
+<p-toast></p-toast>
+
+
+<div class="page-container">
+
+  <!-- ===================================================
+       HEADER
+       =================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <div class="breadcrumb">
+
+        <button
+          type="button"
+          class="back-button"
+          (click)="onCancel()"
+        >
+          <i class="pi pi-arrow-left"></i>
+
+          Sites
+        </button>
+
+      </div>
+
+
+      <h1>
+        {{
+          editing()
+            ? 'Edit Site'
+            : 'Create Site'
+        }}
+      </h1>
+
+
+      <p>
+        {{
+          editing()
+            ? 'Update site and contact information.'
+            : 'Add a new site for your customer.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       LOADING
+       =================================================== -->
+
+  @if (loading()) {
+
+    <div class="state-card">
+
+      <i class="pi pi-spin pi-spinner"></i>
+
+      <h3>
+        Loading site...
+      </h3>
+
+      <p>
+        Please wait.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- ===================================================
+       FORM
+       =================================================== -->
+
+  @if (!loading()) {
+
+    <form
+      [formGroup]="siteForm"
+      (ngSubmit)="onSubmit()"
+      class="form-card"
+    >
+
+      <!-- =================================================
+           SITE INFORMATION
+           ================================================= -->
+
+      <div class="section-header">
+
+        <div class="section-icon">
+
+          <i class="pi pi-building"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+            Site Information
+          </h2>
+
+          <p>
+            Basic information about the customer site.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- CUSTOMER -->
+
+        <div class="form-field">
+
+          <label for="customerId">
+
+            Customer
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+
+          <p-select
+            inputId="customerId"
+            formControlName="customerId"
+            [options]="customerOptions()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select customer"
+            [showClear]="false"
+            [loading]="customersLoading()"
+            appendTo="body"
+          ></p-select>
+
+
+          @if (
+            isInvalid('customerId')
+          ) {
+
+            <small class="error-message">
+
+              Customer is required.
+
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- SITE NAME -->
+
+        <div class="form-field">
+
+          <label for="name">
+
+            Site Name
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+
+          <input
+            pInputText
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Enter site name"
+            maxlength="150"
+          />
+
+
+          @if (
+            isInvalid('name')
+          ) {
+
+            <small class="error-message">
+
+              @if (
+                siteForm
+                  .get('name')
+                  ?.hasError('required')
+              ) {
+
+                Site name is required.
+
+              }
+
+
+              @if (
+                siteForm
+                  .get('name')
+                  ?.hasError('maxlength')
+              ) {
+
+                Site name cannot exceed
+                150 characters.
+
+              }
+
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- ADDRESS -->
+
+        <div class="form-field full-width">
+
+          <label for="address">
+            Address
+          </label>
+
+
+          <textarea
+            pTextarea
+            id="address"
+            formControlName="address"
+            rows="3"
+            maxlength="500"
+            placeholder="Enter complete site address..."
+          ></textarea>
+
+
+          @if (
+            isInvalid('address')
+          ) {
+
+            <small class="error-message">
+
+              Address cannot exceed
+              500 characters.
+
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- CITY -->
+
+        <div class="form-field">
+
+          <label for="city">
+            City
+          </label>
+
+
+          <input
+            pInputText
+            id="city"
+            type="text"
+            formControlName="city"
+            placeholder="Enter city"
+            maxlength="100"
+          />
+
+        </div>
+
+
+        <!-- STATE -->
+
+        <div class="form-field">
+
+          <label for="state">
+            State
+          </label>
+
+
+          <input
+            pInputText
+            id="state"
+            type="text"
+            formControlName="state"
+            placeholder="Enter state"
+            maxlength="100"
+          />
+
+        </div>
+
+
+        <!-- PINCODE -->
+
+        <div class="form-field">
+
+          <label for="pincode">
+            Pincode
+          </label>
+
+
+          <input
+            pInputText
+            id="pincode"
+            type="text"
+            inputmode="numeric"
+            formControlName="pincode"
+            placeholder="Enter 6-digit pincode"
+            maxlength="6"
+          />
+
+
+          @if (
+            isInvalid('pincode')
+          ) {
+
+            <small class="error-message">
+
+              Pincode must contain
+              exactly 6 digits.
+
+            </small>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTACT INFORMATION
+           ================================================= -->
+
+      <div class="section-header section-header-spaced">
+
+        <div class="section-icon">
+
+          <i class="pi pi-phone"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+            Contact Information
+          </h2>
+
+          <p>
+            Primary contact details for this site.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- CONTACT NAME -->
+
+        <div class="form-field">
+
+          <label for="contactName">
+            Contact Name
+          </label>
+
+
+          <input
+            pInputText
+            id="contactName"
+            type="text"
+            formControlName="contactName"
+            placeholder="Enter contact name"
+            maxlength="150"
+          />
+
+        </div>
+
+
+        <!-- CONTACT PHONE -->
+
+        <div class="form-field">
+
+          <label for="contactPhone">
+            Contact Phone
+          </label>
+
+
+          <input
+            pInputText
+            id="contactPhone"
+            type="tel"
+            inputmode="numeric"
+            formControlName="contactPhone"
+            placeholder="Enter 10-digit phone number"
+            maxlength="10"
+          />
+
+
+          @if (
+            isInvalid('contactPhone')
+          ) {
+
+            <small class="error-message">
+
+              Phone number must contain
+              exactly 10 digits.
+
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- CONTACT EMAIL -->
+
+        <div class="form-field">
+
+          <label for="contactEmail">
+            Contact Email
+          </label>
+
+
+          <input
+            pInputText
+            id="contactEmail"
+            type="email"
+            formControlName="contactEmail"
+            placeholder="Enter contact email"
+          />
+
+
+          @if (
+            isInvalid('contactEmail')
+          ) {
+
+            <small class="error-message">
+
+              Please enter a valid email address.
+
+            </small>
+
+          }
+
+        </div>
+
+
+        <!-- NOTES -->
+
+        <div class="form-field full-width">
+
+          <label for="notes">
+            Notes
+          </label>
+
+
+          <textarea
+            pTextarea
+            id="notes"
+            formControlName="notes"
+            rows="4"
+            maxlength="1000"
+            placeholder="Add any additional notes..."
+          ></textarea>
+
+
+          @if (
+            isInvalid('notes')
+          ) {
+
+            <small class="error-message">
+
+              Notes cannot exceed
+              1000 characters.
+
+            </small>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           FOOTER
+           ================================================= -->
+
+      <div class="form-footer">
+
+        <p-button
+          type="button"
+          label="Cancel"
+          severity="secondary"
+          [outlined]="true"
+          [disabled]="saving()"
+          (onClick)="onCancel()"
+        ></p-button>
+
+
+        <p-button
+          type="submit"
+          [label]="
+            editing()
+              ? 'Update Site'
+              : 'Create Site'
+          "
+          icon="pi pi-check"
+          [loading]="saving()"
+        ></p-button>
+
+      </div>
+
+    </form>
+
+  }
+
+</div>

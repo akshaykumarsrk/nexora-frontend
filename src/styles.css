@@ -1,0 +1,1872 @@
+/* =====================================================
+   NEXORA DESIGN SYSTEM
+   Global styles and design tokens
+   ===================================================== */
+
+:root {
+  /* Brand colors */
+  --nexora-primary: #6366f1;
+  --nexora-primary-hover: #4f46e5;
+  --nexora-accent: #06b6d4;
+
+  /* Application surfaces */
+  --nexora-background: #f5f7fb;
+  --nexora-surface: #ffffff;
+  --nexora-surface-soft: #f8fafc;
+
+  /* Text */
+  --nexora-text: #172033;
+  --nexora-text-muted: #64748b;
+  --nexora-text-soft: #94a3b8;
+
+  /* Borders */
+  --nexora-border: #e5e7eb;
+
+  /* Status colors */
+  --nexora-success: #10b981;
+  --nexora-warning: #f59e0b;
+  --nexora-danger: #ef4444;
+
+  /* Radius */
+  --nexora-radius-sm: 0.5rem;
+  --nexora-radius-md: 0.75rem;
+  --nexora-radius-lg: 1rem;
+  --nexora-radius-xl: 1.25rem;
+
+  /* Shadows */
+  --nexora-shadow-sm: 0 2px 8px rgb(15 23 42 / 5%);
+  --nexora-shadow-md: 0 8px 24px rgb(15 23 42 / 8%);
+  --nexora-shadow-lg: 0 16px 40px rgb(15 23 42 / 12%);
+
+  /* Layout */
+  --nx-sidebar-width: 250px;
+  --nx-topbar-height: 68px;
+}
+
+/* =====================================================
+   Dark theme
+   ===================================================== */
+
+html.dark {
+  --nexora-background: #0b1120;
+  --nexora-surface: #111827;
+  --nexora-surface-soft: #172033;
+
+  --nexora-text: #f8fafc;
+  --nexora-text-muted: #94a3b8;
+  --nexora-text-soft: #64748b;
+
+  --nexora-border: #263244;
+
+  --nexora-shadow-sm: 0 2px 8px rgb(0 0 0 / 20%);
+  --nexora-shadow-md: 0 8px 24px rgb(0 0 0 / 25%);
+  --nexora-shadow-lg: 0 16px 40px rgb(0 0 0 / 35%);
+}
+
+/* =====================================================
+   Toast customization
+   ===================================================== */
+
+.p-toast {
+  z-index: 2000;
+}
+
+.p-toast-message {
+  border-radius: var(--nexora-radius-md);
+  box-shadow: var(--nexora-shadow-md);
+}
+
+.p-toast-summary {
+  font-weight: 700;
+}
+
+.p-toast-detail {
+  line-height: 1.5;
+}
+
+/* =====================================================
+   Global reset
+   ===================================================== */
+
+/* =========================================================
+   NEXORA - PREVENT LAYOUT SHIFT FROM PRIMENG OVERLAYS
+   ========================================================= */
+
+/*
+   PrimeNG popup/menu overlays must never change
+   the width of the application when they open.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  background: var(--nexora-background);
+  color: var(--nexora-text);
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================
+   Employee Details Dialog
+   ========================= */
+
+.employee-details-dialog .p-dialog-content {
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+}
+
+.employee-details-dialog .p-dialog-header {
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+  border-bottom: 1px solid var(--nexora-border);
+}
+
+/* =========================================================
+   NEXORA NOTIFICATION POPOVER
+   ========================================================= */
+
+/*
+  IMPORTANT:
+
+  PrimeNG appends this popup directly to <body>.
+
+  That means component-scoped CSS from topbar.css
+  cannot reliably control the popup.
+
+  So the popup shell is styled globally here.
+*/
+
+.nexora-notification-popover {
+
+  width: 400px;
+  max-width: calc(100vw - 2rem);
+
+  padding: 0 !important;
+
+  background: var(--nexora-surface) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 18px 45px rgb(0 0 0 / 16%),
+    0 4px 14px rgb(0 0 0 / 8%) !important;
+
+  overflow: hidden;
+
+  color: var(--nexora-text);
+
+  backdrop-filter: blur(12px);
+}
+
+
+/*
+  PrimeNG adds its own content wrapper.
+
+  Remove the default padding so our
+  notification panel controls the spacing.
+*/
+
+.nexora-notification-popover .p-popover-content {
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  color: var(--nexora-text);
+}
+
+
+/* =========================================================
+   NOTIFICATION PANEL
+   ========================================================= */
+
+.nexora-notification-popover .notification-panel {
+
+  width: 100%;
+
+  background: var(--nexora-surface);
+
+  color: var(--nexora-text);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NOTIFICATION HEADER
+   ========================================================= */
+
+.nexora-notification-popover .notification-header {
+
+  min-height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 0.85rem 1rem;
+
+  border-bottom: 1px solid var(--nexora-border);
+
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 3%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    );
+
+  box-sizing: border-box;
+}
+
+
+.nexora-notification-popover .notification-header-left {
+
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.55rem;
+}
+
+
+.nexora-notification-popover .notification-header h3 {
+
+  margin: 0;
+
+  color: var(--nexora-text);
+
+  font-size: 0.92rem;
+  font-weight: 750;
+
+  letter-spacing: -0.01em;
+}
+
+
+.nexora-notification-popover .notification-count {
+
+  min-width: 20px;
+  height: 20px;
+
+  padding: 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  background: var(--nexora-primary);
+
+  color: #ffffff;
+
+  font-size: 0.62rem;
+  font-weight: 750;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NOTIFICATION SCROLLBAR
+   ========================================================= */
+
+.nexora-notification-popover .notification-list::-webkit-scrollbar {
+
+  width: 6px;
+}
+
+
+.nexora-notification-popover .notification-list::-webkit-scrollbar-track {
+
+  background: transparent;
+}
+
+
+.nexora-notification-popover .notification-list::-webkit-scrollbar-thumb {
+
+  border-radius: 999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text-soft) 45%,
+      transparent
+    );
+}
+
+
+.nexora-notification-popover .notification-list::-webkit-scrollbar-thumb:hover {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 55%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+/*
+  In dark mode we keep the same structure,
+  but reduce the visual brightness of the panel.
+
+  The important part is that text remains readable.
+*/
+
+.dark .nexora-notification-popover,
+.dark .nexora-notification-popover .p-popover-content,
+.dark .nexora-notification-popover .notification-panel {
+
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+}
+
+
+.dark .nexora-notification-popover {
+
+  border-color: var(--nexora-border) !important;
+
+  box-shadow:
+    0 22px 50px rgb(0 0 0 / 45%),
+    0 5px 18px rgb(0 0 0 / 30%) !important;
+}
+
+/* =========================================================
+   NEXORA - GLOBAL PRIMENG OVERLAY THEME
+   Angular 22 + PrimeNG 22
+   ========================================================= */
+
+
+/* =========================================================
+   SELECT / DROPDOWN
+   ========================================================= */
+
+.p-select-overlay,
+.p-dropdown-panel {
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 12px !important;
+
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  box-shadow: var(--nexora-shadow-lg) !important;
+
+  overflow: hidden;
+}
+
+
+/* Select list */
+
+.p-select-overlay .p-select-list {
+  background: var(--nexora-surface) !important;
+  padding: 6px !important;
+}
+
+
+/* Select option */
+
+.p-select-overlay .p-select-option {
+  min-height: 40px !important;
+
+  padding: 10px 12px !important;
+
+  border-radius: 7px !important;
+
+  background: transparent !important;
+  color: var(--nexora-text) !important;
+
+  font-size: 13px !important;
+}
+
+
+/* Select option hover */
+
+.p-select-overlay .p-select-option:hover,
+.p-select-overlay .p-select-option.p-focus {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary-hover) !important;
+}
+
+
+/* Selected option */
+
+.p-select-overlay .p-select-option.p-select-option-selected {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 14%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary-hover) !important;
+
+  font-weight: 600 !important;
+}
+
+
+/* Select search */
+
+.p-select-overlay .p-select-filter {
+  width: 100% !important;
+
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 8px !important;
+}
+
+
+.p-select-overlay .p-select-filter:focus {
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px color-mix(
+      in srgb,
+      var(--nexora-primary) 12%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   DATEPICKER
+   PrimeNG 22
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Panel
+   --------------------------------------------------------- */
+
+.p-datepicker-panel {
+  width: auto;
+
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 14px !important;
+
+  box-shadow: var(--nexora-shadow-lg) !important;
+
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Header
+   --------------------------------------------------------- */
+
+.p-datepicker-panel .p-datepicker-header {
+  padding: 14px 16px !important;
+
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  border-bottom: 1px solid var(--nexora-border) !important;
+}
+
+
+/* Month / Year */
+
+.p-datepicker-panel .p-datepicker-title {
+  color: var(--nexora-text) !important;
+
+  font-weight: 700 !important;
+}
+
+
+/* ---------------------------------------------------------
+   Previous / Next buttons
+   --------------------------------------------------------- */
+
+.p-datepicker-panel .p-datepicker-prev-button,
+.p-datepicker-panel .p-datepicker-next-button {
+  width: 32px !important;
+  height: 32px !important;
+
+  border-radius: 8px !important;
+
+  color: var(--nexora-text-muted) !important;
+}
+
+
+.p-datepicker-panel .p-datepicker-prev-button:hover,
+.p-datepicker-panel .p-datepicker-next-button:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* ---------------------------------------------------------
+   Weekday names
+   --------------------------------------------------------- */
+
+.p-datepicker-panel .p-datepicker-weekday {
+  color: var(--nexora-text-muted) !important;
+
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+
+/* ---------------------------------------------------------
+   Date cell
+   --------------------------------------------------------- */
+
+.p-datepicker-panel .p-datepicker-day-cell {
+  padding: 3px !important;
+}
+
+
+/* ---------------------------------------------------------
+   Date
+   --------------------------------------------------------- */
+
+.p-datepicker-panel .p-datepicker-day {
+  width: 34px !important;
+  height: 34px !important;
+
+  border-radius: 9px !important;
+
+  background: transparent !important;
+
+  color: var(--nexora-text) !important;
+
+  font-size: 12px !important;
+}
+
+
+/* ---------------------------------------------------------
+   Date hover
+   --------------------------------------------------------- */
+
+.p-datepicker-panel
+  .p-datepicker-day:not(.p-datepicker-day-selected):hover {
+
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   TODAY
+   ========================================================= */
+
+/*
+   IMPORTANT:
+
+   Today is NOT the selected date.
+
+   Therefore today gets NO dark/black background.
+
+   It is simply normal text.
+*/
+
+.p-datepicker-panel
+  .p-datepicker-today
+  > .p-datepicker-day {
+
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 12%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--nexora-primary) 35%,
+    transparent
+  ) !important;
+
+  font-weight: 750 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   SELECTED DATE
+   ========================================================= */
+
+/*
+   Only the date actually selected by the user
+   gets the purple background.
+*/
+
+.p-datepicker-panel .p-datepicker-day-selected {
+
+  background: linear-gradient(
+    135deg,
+    var(--nexora-primary),
+    var(--nexora-primary-hover)
+  ) !important;
+
+  color: #ffffff !important;
+
+  border: none !important;
+
+  box-shadow:
+    0 4px 10px
+    rgb(79 70 229 / 20%) !important;
+}
+
+
+/* =========================================================
+   TODAY + SELECTED DATE
+   ========================================================= */
+
+/*
+   If today is also the selected date,
+   selected styling wins.
+*/
+
+.p-datepicker-panel
+  .p-datepicker-today
+  > .p-datepicker-day-selected {
+
+  background: linear-gradient(
+    135deg,
+    var(--nexora-primary),
+    var(--nexora-primary-hover)
+  ) !important;
+
+  color: #ffffff !important;
+
+  border: none !important;
+
+  box-shadow:
+    0 4px 10px
+    rgb(79 70 229 / 20%) !important;
+}
+
+
+/* =========================================================
+   TIME PICKER
+   ========================================================= */
+
+.p-datepicker-panel .p-datepicker-time-picker {
+
+  border-top: 1px solid var(--nexora-border) !important;
+
+  background: var(--nexora-surface) !important;
+}
+
+
+.p-datepicker-panel
+  .p-datepicker-time-picker
+  span {
+
+  color: var(--nexora-text) !important;
+
+  font-weight: 600 !important;
+}
+
+
+.p-datepicker-panel
+  .p-datepicker-time-picker
+  button {
+
+  color: var(--nexora-text-muted) !important;
+
+  border-radius: 7px !important;
+}
+
+
+.p-datepicker-panel
+  .p-datepicker-time-picker
+  button:hover {
+
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   DATEPICKER INPUT
+   ========================================================= */
+
+.p-datepicker-input {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text) !important;
+
+  border-color: var(--nexora-border) !important;
+}
+
+
+.p-datepicker-input::placeholder {
+  color: var(--nexora-text-soft) !important;
+}
+
+
+/* =========================================================
+   DATEPICKER DROPDOWN BUTTON
+   ========================================================= */
+
+.p-datepicker-dropdown {
+  background: var(--nexora-surface) !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  border-color: var(--nexora-border) !important;
+}
+
+
+.p-datepicker-dropdown:hover {
+  background: color-mix(
+    in srgb,
+    var(--nexora-primary) 10%,
+    var(--nexora-surface)
+  ) !important;
+
+  color: var(--nexora-primary) !important;
+}
+
+/* =========================================================
+   THEME SWITCH - PRIME NG CONTROLS
+   Prevent light/dark animation on form controls
+   ========================================================= */
+
+.p-select,
+.p-select-overlay,
+.p-datepicker,
+.p-datepicker-panel,
+.p-datepicker-input,
+.p-datepicker-dropdown,
+.p-inputtext,
+.p-button {
+  transition: none !important;
+}
+
+/*
+   Prevent PrimeNG overlay opening from causing
+   horizontal layout movement.
+*/
+
+body.p-overflow-hidden {
+  padding-right: 0 !important;
+}
+
+/*
+   PrimeNG popup menus should not participate
+   in the normal page layout.
+*/
+
+.p-menu.p-menu-overlay {
+  position: fixed !important;
+  max-width: calc(100vw - 24px) !important;
+  box-sizing: border-box !important;
+}
+
+/*
+   Make sure popup itself cannot create horizontal
+   overflow.
+*/
+
+.p-menu.p-menu-overlay,
+.p-popover {
+  overflow-x: hidden !important;
+}
+
+/*
+   The application itself should never horizontally
+   move because of an overlay.
+*/
+
+app-root {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* =========================================================
+   DISABLE PRIME NG / THEME ANIMATIONS
+   ========================================================= */
+
+/* html,
+body,
+html *,
+body * {
+  animation: none !important;
+  transition: none !important;
+} */
+
+/* =========================================================
+   INSTANT LIGHT / DARK THEME SWITCH
+   ========================================================= */
+
+/* html.theme-switching,
+html.theme-switching * {
+  transition: none !important;
+  animation: none !important;
+} */
+
+/* =========================================================
+   NEXORA - EMPLOYEE DETAILS DIALOG
+   Global PrimeNG Dialog Theme
+========================================================= */
+
+.nexora-employee-details-dialog {
+  overflow: hidden !important;
+
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: var(--nexora-radius-lg) !important;
+
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.nexora-employee-details-dialog .p-dialog-header {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  border-bottom: 1px solid var(--nexora-border) !important;
+
+  padding: 1rem 1.25rem !important;
+}
+
+
+.nexora-employee-details-dialog .p-dialog-title {
+  color: var(--nexora-text) !important;
+
+  font-size: 1.05rem !important;
+  font-weight: 750 !important;
+}
+
+/* =========================================================
+   NEXORA EMPLOYEE DIALOG - CLOSE BUTTON
+   PrimeNG 22 uses .p-dialog-header-close-button
+========================================================= */
+
+/*
+   IMPORTANT:
+   PrimeNG 22 does not reliably use .p-dialog-header-icon
+   for the actual close button.
+
+   The actual button is:
+   .p-dialog-header-close-button
+
+   We target both selectors so this remains compatible with
+   PrimeNG versions that use the older class.
+*/
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon {
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+
+  min-width: 2.25rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: var(--nexora-text-muted) !important;
+
+  /*
+     LIGHT MODE:
+     Soft surface instead of PrimeNG's black button.
+
+     DARK MODE:
+     Automatically becomes a dark soft surface because
+     the variables change under html.dark.
+  */
+  background: var(--nexora-surface-soft) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 50% !important;
+
+  box-shadow: var(--nexora-shadow-sm) !important;
+
+  opacity: 1 !important;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON - HOVER
+========================================================= */
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button:hover,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon:hover {
+  color: var(--nexora-danger) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 10%,
+      var(--nexora-surface)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 28%,
+      var(--nexora-border)
+    ) !important;
+
+  box-shadow:
+    0 6px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 12%,
+      transparent
+    ) !important;
+
+  transform: scale(1.05) !important;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON - ACTIVE
+========================================================= */
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button:active,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon:active {
+  color: var(--nexora-danger) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 16%,
+      var(--nexora-surface)
+    ) !important;
+
+  transform: scale(0.94) !important;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON - KEYBOARD FOCUS
+========================================================= */
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button:focus-visible,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon:focus-visible {
+  outline: none !important;
+
+  border-color: var(--nexora-primary) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 14%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   CLOSE ICON
+========================================================= */
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button
+.p-icon,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon
+.p-icon {
+  width: 1rem !important;
+  height: 1rem !important;
+
+  transition:
+    transform 180ms ease,
+    color 180ms ease !important;
+}
+
+
+.nexora-employee-details-dialog
+.p-dialog-header-close-button:hover
+.p-icon,
+
+.nexora-employee-details-dialog
+.p-dialog-header-icon:hover
+.p-icon {
+  transform: rotate(8deg) scale(1.05);
+}
+
+
+/* =========================================================
+   DARK MODE REFINEMENT
+========================================================= */
+
+html.dark
+.nexora-employee-details-dialog
+.p-dialog-header-close-button,
+
+html.dark
+.nexora-employee-details-dialog
+.p-dialog-header-icon {
+  background: var(--nexora-surface-soft) !important;
+  border-color: var(--nexora-border) !important;
+  color: var(--nexora-text-muted) !important;
+}
+
+
+html.dark
+.nexora-employee-details-dialog
+.p-dialog-header-close-button:hover,
+
+html.dark
+.nexora-employee-details-dialog
+.p-dialog-header-icon:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 12%,
+      var(--nexora-surface-soft)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-danger) 30%,
+      var(--nexora-border)
+    ) !important;
+
+  color: var(--nexora-danger) !important;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.nexora-employee-details-dialog .p-dialog-content {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+
+  padding: 1.25rem !important;
+}
+
+
+/* =========================================================
+   EMPLOYEE DETAILS ROOT
+========================================================= */
+
+.nexora-employee-details-dialog .employee-details {
+  background: transparent !important;
+  color: var(--nexora-text) !important;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.nexora-employee-details-dialog .profile-header {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--nexora-primary) 8%,
+        var(--nexora-surface)
+      ),
+      var(--nexora-surface)
+    ) !important;
+
+  color: var(--nexora-text) !important;
+
+  border: 1px solid var(--nexora-border) !important;
+}
+
+
+.nexora-employee-details-dialog .profile-info h2 {
+  color: var(--nexora-text) !important;
+}
+
+
+.nexora-employee-details-dialog .profile-info p {
+  color: var(--nexora-text-muted) !important;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.nexora-employee-details-dialog .section-title {
+  color: var(--nexora-text) !important;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border) !important;
+}
+
+
+.nexora-employee-details-dialog .section-title h3 {
+  color: var(--nexora-text) !important;
+}
+
+
+.nexora-employee-details-dialog .section-title i {
+  color: var(--nexora-primary) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 10%,
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   DETAIL CARDS
+========================================================= */
+
+.nexora-employee-details-dialog .detail-item {
+  background:
+    var(--nexora-surface-soft) !important;
+
+  color: var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease !important;
+}
+
+
+.nexora-employee-details-dialog .detail-item:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 5%,
+      var(--nexora-surface-soft)
+    ) !important;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 20%,
+      var(--nexora-border)
+    ) !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 16px
+    color-mix(
+      in srgb,
+      var(--nexora-primary) 7%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.nexora-employee-details-dialog .detail-label {
+  color:
+    var(--nexora-text-muted) !important;
+}
+
+
+/* =========================================================
+   VALUE
+========================================================= */
+
+.nexora-employee-details-dialog .detail-value {
+  color:
+    var(--nexora-text) !important;
+}
+
+
+/* =========================================================
+   EMAIL / EMPLOYEE CODE
+========================================================= */
+
+.nexora-employee-details-dialog
+.details-section:first-of-type
+.detail-item:first-child
+.detail-value {
+  color:
+    var(--nexora-primary) !important;
+}
+
+
+/* =========================================================
+   MODAL MASK
+========================================================= */
+
+.nexora-employee-details-dialog
+~ .p-dialog-mask {
+  background:
+    rgb(15 23 42 / 42%) !important;
+
+  backdrop-filter:
+    blur(3px);
+}
+
+/* =========================================================
+   NEXORA - EMPLOYEE DIALOG
+   LIGHT + DARK THEME
+   ========================================================= */
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+html:not(.dark) .p-dialog {
+  background:
+    #ffffff !important;
+
+  color:
+    #1e293b !important;
+
+  border:
+    1px solid
+    #dce3ef !important;
+
+  border-radius:
+    16px !important;
+
+  box-shadow:
+    0 20px 60px
+    rgba(15, 23, 42, 0.18) !important;
+
+  overflow:
+    hidden;
+}
+
+
+/* Dialog header */
+
+html:not(.dark) .p-dialog .p-dialog-header {
+  background:
+    #ffffff !important;
+
+  color:
+    #1e293b !important;
+
+  border-bottom:
+    1px solid
+    #e2e8f0 !important;
+
+  padding:
+    1.15rem 1.25rem !important;
+}
+
+
+/* Dialog title */
+
+html:not(.dark) .p-dialog .p-dialog-title {
+  color:
+    #1e293b !important;
+
+  font-weight:
+    750 !important;
+}
+
+
+/* Dialog content */
+
+html:not(.dark) .p-dialog .p-dialog-content {
+  background:
+    #ffffff !important;
+
+  color:
+    #1e293b !important;
+}
+
+
+/* Dialog footer */
+
+html:not(.dark) .p-dialog .p-dialog-footer {
+  background:
+    #ffffff !important;
+
+  color:
+    #1e293b !important;
+
+  border-top:
+    1px solid
+    #e2e8f0 !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - CLOSE BUTTON
+   ========================================================= */
+
+html:not(.dark) .p-dialog .p-dialog-close-button {
+  background:
+    transparent !important;
+
+  color:
+    #64748b !important;
+
+  border:
+    1px solid transparent !important;
+
+  border-radius:
+    50% !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+
+html:not(.dark) .p-dialog .p-dialog-close-button:hover {
+  background:
+    #f1f5f9 !important;
+
+  color:
+    #334155 !important;
+
+  border-color:
+    #e2e8f0 !important;
+
+  transform:
+    rotate(90deg) !important;
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+html.dark .p-dialog {
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border:
+    1px solid
+    var(--nexora-border) !important;
+
+  border-radius:
+    16px !important;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0, 0, 0, 0.45) !important;
+
+  overflow:
+    hidden;
+}
+
+
+/* Dialog header */
+
+html.dark .p-dialog .p-dialog-header {
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border-bottom:
+    1px solid
+    var(--nexora-border) !important;
+
+  padding:
+    1.15rem 1.25rem !important;
+}
+
+
+/* Dialog title */
+
+html.dark .p-dialog .p-dialog-title {
+  color:
+    var(--nexora-text) !important;
+
+  font-weight:
+    750 !important;
+}
+
+
+/* Dialog content */
+
+html.dark .p-dialog .p-dialog-content {
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+}
+
+
+/* Dialog footer */
+
+html.dark .p-dialog .p-dialog-footer {
+  background:
+    var(--nexora-surface) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border-top:
+    1px solid
+    var(--nexora-border) !important;
+}
+
+
+/* =========================================================
+   DARK THEME - CLOSE BUTTON
+   ========================================================= */
+
+html.dark .p-dialog .p-dialog-close-button {
+  background:
+    transparent !important;
+
+  color:
+    var(--nexora-text-muted) !important;
+
+  border:
+    1px solid transparent !important;
+
+  border-radius:
+    50% !important;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+
+html.dark .p-dialog .p-dialog-close-button:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--nexora-text) 8%,
+      transparent
+    ) !important;
+
+  color:
+    var(--nexora-text) !important;
+
+  border-color:
+    var(--nexora-border) !important;
+
+  transform:
+    rotate(90deg) !important;
+}
+
+
+/* =========================================================
+   NEXORA SHARED UI PRIMITIVES (incremental adoption)
+   Use these classes for new/refactored feature pages so visual
+   consistency improves without changing existing components.
+   ========================================================= */
+
+:root {
+  --nx-control-height: 2.75rem;
+  --nx-control-radius: var(--nexora-radius-md);
+  --nx-transition-fast: 160ms ease;
+  --nx-transition-normal: 220ms ease;
+  --nx-focus-ring: 0 0 0 3px color-mix(in srgb, var(--nexora-primary) 22%, transparent);
+  --nx-content-max: 1440px;
+}
+
+.nx-page {
+  width: 100%;
+  max-width: var(--nx-content-max);
+  margin-inline: auto;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  color: var(--nexora-text);
+}
+
+.nx-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.nx-page-title {
+  margin: 0;
+  color: var(--nexora-text);
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.nx-page-subtitle {
+  margin: 0.45rem 0 0;
+  color: var(--nexora-text-muted);
+  line-height: 1.6;
+}
+
+.nx-card {
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  color: var(--nexora-text);
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+.nx-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem 1.25rem;
+}
+
+.nx-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.nx-field > label {
+  color: var(--nexora-text);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.nx-field .p-inputtext,
+.nx-field .p-textarea,
+.nx-field .p-select,
+.nx-field .p-datepicker,
+.nx-field .p-inputnumber,
+.nx-field .p-password,
+.nx-field input,
+.nx-field textarea,
+.nx-field select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.nx-field .p-inputtext,
+.nx-field input,
+.nx-field select {
+  min-height: var(--nx-control-height);
+  border-radius: var(--nx-control-radius);
+}
+
+.nx-field .p-inputtext:focus,
+.nx-field input:focus,
+.nx-field textarea:focus,
+.nx-field select:focus {
+  box-shadow: var(--nx-focus-ring);
+}
+
+.nx-field-hint {
+  color: var(--nexora-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.nx-field-error {
+  color: var(--nexora-danger);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.nx-form-actions,
+.nx-page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nx-form-actions {
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--nexora-border);
+}
+
+.nx-table-shell {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--nexora-surface);
+  border: 1px solid var(--nexora-border);
+  border-radius: var(--nexora-radius-lg);
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+.nx-table-shell .p-datatable-table-container {
+  border-radius: inherit;
+}
+
+.nx-interactive {
+  transition:
+    background-color var(--nx-transition-fast),
+    border-color var(--nx-transition-fast),
+    box-shadow var(--nx-transition-fast),
+    color var(--nx-transition-fast),
+    transform var(--nx-transition-fast);
+}
+
+.nx-interactive:focus-visible,
+button:focus-visible,
+a:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid var(--nexora-primary);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nx-card.nx-interactive:hover {
+    border-color: color-mix(in srgb, var(--nexora-primary) 35%, var(--nexora-border));
+    box-shadow: var(--nexora-shadow-md);
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 768px) {
+  .nx-page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nx-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nx-page-actions,
+  .nx-form-actions {
+    justify-content: stretch;
+  }
+
+  .nx-page-actions > *,
+  .nx-form-actions > * {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Final shared interaction and viewport rules */
+html, body { min-height:100%; }
+body { margin:0; overflow:hidden; }
+.page-container { scrollbar-width:thin; scrollbar-color: color-mix(in srgb, var(--nexora-primary) 35%, var(--nexora-border)) var(--nexora-background); }
+.page-container::-webkit-scrollbar { width:8px; height:0; }
+.page-container::-webkit-scrollbar-track { background:var(--nexora-background); }
+.page-container::-webkit-scrollbar-thumb { background:color-mix(in srgb, var(--nexora-primary) 35%, var(--nexora-border)); border-radius:999px; border:2px solid var(--nexora-background); }
+.page-container::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb, var(--nexora-primary) 60%, var(--nexora-border)); }
+button, a, .p-button, .page-header-icon, .header-icon, .module-icon { transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, .p-button:focus-visible { outline:2px solid var(--nexora-primary); outline-offset:2px; }
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
+
+/* Keep horizontal scrolling inside data tables; the document itself must never scroll sideways. */
+html, body { width:100%; max-width:100%; overflow-x:hidden; }
+app-root { display:block; width:100%; max-width:100%; overflow:hidden; }
+.p-button:not(:disabled) { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease; }
+@media (hover:hover) and (prefers-reduced-motion:no-preference) { .p-button:not(:disabled):hover { transform:translateY(-1px); } }
+
+/* Back controls use the same quiet brand hover as other secondary actions. */
+.back-button:not(:disabled):hover,
+.p-button.p-button-text:not(:disabled):hover,
+.p-button.p-button-outlined:not(:disabled):hover {
+  color: var(--nexora-primary);
+  background: color-mix(in srgb, var(--nexora-primary) 8%, var(--nexora-surface));
+  border-color: color-mix(in srgb, var(--nexora-primary) 35%, var(--nexora-border));
+  box-shadow: var(--nexora-shadow-sm);
+}
+
+
+/* NEXORA GLOBAL OVERLAY THEME FIX — overlays render under document body */
+/* PrimeNG overlays are appended outside app-topbar; global selectors are required. */
+.p-popover.nexora-search-popover,
+.p-popover.nexora-help-popover,
+.p-popover.nexora-notification-popover {
+  color: var(--nexora-text) !important;
+  background: var(--nexora-surface) !important;
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: var(--nexora-radius-lg, 14px) !important;
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+.p-popover.nexora-search-popover .p-popover-content,
+.p-popover.nexora-help-popover .p-popover-content,
+.p-popover.nexora-notification-popover .p-popover-content {
+  color: var(--nexora-text) !important;
+  background: var(--nexora-surface) !important;
+  padding: 1rem !important;
+  border-radius: inherit;
+}
+.p-popover.nexora-search-popover .search-panel,
+.p-popover.nexora-search-popover .search-panel label,
+.p-popover.nexora-search-popover .search-panel small,
+.p-popover.nexora-help-popover .help-panel,
+.p-popover.nexora-help-popover .help-panel strong,
+.p-popover.nexora-help-popover .help-panel p,
+.p-popover.nexora-help-popover .help-panel small {
+  color: var(--nexora-text) !important;
+}
+.p-popover.nexora-search-popover .search-panel small,
+.p-popover.nexora-help-popover .help-panel p,
+.p-popover.nexora-help-popover .help-panel small { color: var(--nexora-text-muted) !important; }
+.p-popover.nexora-search-popover .search-input-wrap {
+  background: var(--nexora-surface-soft) !important;
+  border: 1px solid var(--nexora-border) !important;
+}
+.p-popover.nexora-search-popover .search-input-wrap input {
+  color: var(--nexora-text) !important;
+  background: transparent !important;
+}
+.p-popover.nexora-search-popover .search-result,
+.p-popover.nexora-help-popover .help-panel button {
+  color: var(--nexora-text) !important;
+  background: transparent !important;
+  border-color: transparent;
+}
+.p-popover.nexora-search-popover .search-result:hover,
+.p-popover.nexora-search-popover .search-result:focus-visible,
+.p-popover.nexora-help-popover .help-panel button:hover,
+.p-popover.nexora-help-popover .help-panel button:focus-visible {
+  color: var(--nexora-primary) !important;
+  background: color-mix(in srgb, var(--nexora-primary) 10%, var(--nexora-surface)) !important;
+  border-color: color-mix(in srgb, var(--nexora-primary) 22%, var(--nexora-border)) !important;
+  outline: none;
+}
+/* PrimeNG popup profile menu: force theme-aware normal, hover, and focus states. */
+body .p-menu.p-menu-overlay {
+  color: var(--nexora-text) !important;
+  background: var(--nexora-surface) !important;
+  border: 1px solid var(--nexora-border) !important;
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+body .p-menu.p-menu-overlay .p-menu-item-content,
+body .p-menu.p-menu-overlay .p-menu-item-link {
+  background: transparent !important;
+  color: var(--nexora-text) !important;
+  border-radius: 8px !important;
+}
+body .p-menu.p-menu-overlay .p-menu-item-content:hover,
+body .p-menu.p-menu-overlay .p-menu-item-link:hover,
+body .p-menu.p-menu-overlay .p-menu-item-link:focus-visible {
+  background: color-mix(in srgb, var(--nexora-primary) 11%, var(--nexora-surface)) !important;
+  color: var(--nexora-primary) !important;
+  outline: none;
+}
+body .p-menu.p-menu-overlay .p-menu-item-link:hover .p-menu-item-label,
+body .p-menu.p-menu-overlay .p-menu-item-link:focus-visible .p-menu-item-label,
+body .p-menu.p-menu-overlay .p-menu-item-link:hover .p-menu-item-icon,
+body .p-menu.p-menu-overlay .p-menu-item-link:focus-visible .p-menu-item-icon {
+  color: var(--nexora-primary) !important;
+}
+body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover,
+body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:focus-visible {
+  color: var(--nexora-danger) !important;
+  background: color-mix(in srgb, var(--nexora-danger) 9%, var(--nexora-surface)) !important;
+}
+body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover .p-menu-item-label,
+body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover .p-menu-item-icon { color: var(--nexora-danger) !important; }
