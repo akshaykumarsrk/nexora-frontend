@@ -11,7 +11,7 @@ import { AuthService } from '../../core/services/auth';
     <main class="profile-page">
       <header class="page-heading">
         <div class="eyebrow"><i class="pi pi-user" aria-hidden="true"></i> ACCOUNT &amp; SECURITY</div>
-        <h1>My profile</h1>
+        <h1>My Profile</h1>
         <p>Manage your sign-in security and review your workspace identity.</p>
       </header>
 
@@ -83,7 +83,7 @@ import { AuthService } from '../../core/services/auth';
     :host{display:block;color:var(--nexora-text,#172033)}
     .profile-page{width:min(100%,1040px);box-sizing:border-box;margin:0 auto;padding:34px 28px 52px}
     .page-heading{margin-bottom:26px}.eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;font-weight:800;color:var(--nexora-primary,#625bff);margin-bottom:11px}
-    .page-heading h1{font-size:clamp(27px,3vw,34px);line-height:1.15;letter-spacing:-.035em;margin:0 0 9px;font-weight:800}.page-heading>p,.section-heading p{color:var(--nexora-text-muted,#68758d);margin:0;line-height:1.6}
+    .page-heading h1{font-size:clamp(27px,3vw,34px);line-height:1.15;letter-spacing:-.035em;margin:0 0 9px}.page-heading>p,.section-heading p{color:var(--nexora-text-muted,#68758d);margin:0;line-height:1.6}
     .profile-card{background:var(--nexora-surface,#fff);border:1px solid var(--nexora-border,#e2e7ef);border-radius:18px;padding:25px;margin-bottom:20px;box-shadow:0 5px 20px #17203308}
     .section-heading{display:flex;align-items:center;gap:14px;margin-bottom:23px;min-width:0}.heading-copy{min-width:0;flex:1}.section-heading h2{font-size:17px;letter-spacing:-.015em;margin:0 0 5px;font-weight:750}.section-heading p{font-size:13px}
     .avatar,.section-icon{width:48px;height:48px;flex:0 0 48px;border-radius:15px;display:grid;place-items:center;background:color-mix(in srgb,var(--nexora-primary,#625bff) 12%,var(--nexora-surface,#fff));color:var(--nexora-primary,#625bff);font-weight:800;font-size:19px}.section-icon{font-size:17px}
