@@ -462,6 +462,7 @@ export const routes: Routes = [
       },
 
       // Keep the Settings navigation entry useful; branding is the current settings area.
+      { path: 'profile', canActivate: [authGuard], loadComponent: () => import('./features/profile/profile-page').then(m => m.ProfilePage) },
       { path: 'settings', canActivate: [authGuard], loadComponent: () => import('./features/settings/settings-home/settings-home').then(m => m.SettingsHome) },
       { path: 'subscription', canActivate: [authGuard], loadComponent: () => import('./features/subscriptions/subscription-page').then(m => m.SubscriptionPage) },
       { path: 'user-access', canActivate: [authGuard], loadComponent: () => import('./features/user-access/user-access').then(m => m.UserAccess) },

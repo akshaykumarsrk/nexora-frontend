@@ -103,12 +103,12 @@ export class Topbar implements OnInit, OnDestroy {
   readonly profileMenuItems = [
 
     {
-      label: 'Profile',
+      label: 'My Profile',
 
       icon: 'pi pi-user',
 
       command: () => {
-        console.log('Profile clicked');
+        void this.router.navigate(['/profile']);
       }
     },
 
@@ -205,7 +205,7 @@ export class Topbar implements OnInit, OnDestroy {
       '/service-requests': 'Service Requests', '/jobs': 'Jobs', '/job-cards': 'Job Cards',
       '/parts': 'Parts', '/inventory': 'Inventory', '/stock-movements': 'Stock Movements',
       '/catalog': 'Brands & Models', '/invoices': 'Invoices', '/payments': 'Payments',
-      '/settings': 'Settings', '/settings/branding': 'Organization Branding',
+      '/settings': 'Settings', '/profile': 'My Profile', '/settings/branding': 'Organization Branding',
       '/notifications': 'Notifications', '/ai-assistant': 'AI Technician Assistant'
     };
     const match = Object.keys(labels).sort((a, b) => b.length - a.length).find(key => path === key || path.startsWith(`${key}/`));

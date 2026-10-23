@@ -53,6 +53,11 @@ export class AuthService {
         });
     }
 
+    /** Changes the signed-in user's password through the authenticated backend endpoint. */
+    changeOwnPassword(request: { currentPassword: string; newPassword: string }): Observable<void> {
+        return this.http.patch<void>(`${API_CONFIG.baseUrl}/users/me/password`, request);
+    }
+
     logout(): void {
         localStorage.removeItem('accessToken');
     }
