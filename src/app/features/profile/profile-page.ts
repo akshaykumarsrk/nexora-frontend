@@ -37,7 +37,7 @@ import { AuthService } from '../../core/services/auth';
         </div>
         <div class="info-note">
           <i class="pi pi-info-circle" aria-hidden="true"></i>
-          <p>Your username and role come from your authenticated session. Profile-name and email editing are not enabled because this frontend currently has no confirmed backend endpoint for updating those fields. Contact your organization administrator if either needs to change.</p>
+          <p>Your account details and workspace access are managed securely according to your organization’s permissions.</p>
         </div>
       </section>
 
