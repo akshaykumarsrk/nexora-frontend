@@ -1459,3 +1459,36 @@
   border-radius: 6px;
   object-fit: contain;
 }
+
+
+/* Profile menu: theme-aware, explicit Angular click handlers */
+:host ::ng-deep .nexora-profile-popover {
+  min-width: 210px;
+  padding: 0 !important;
+  overflow: hidden;
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border: 1px solid var(--nexora-border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--nexora-shadow-lg) !important;
+}
+:host ::ng-deep .nexora-profile-popover .p-popover-content {
+  padding: 7px !important;
+  background: var(--nexora-surface) !important;
+}
+.profile-panel { display: grid; gap: 3px; min-width: 195px; color: var(--nexora-text); }
+.profile-action {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  min-height: 43px; padding: 0 12px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--nexora-text); text-align: left;
+  font: inherit; font-size: 13px; cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.profile-action i { width: 16px; color: var(--nexora-text-muted); }
+.profile-action:hover { background: var(--nexora-surface-soft); color: var(--nexora-primary); }
+.profile-action:hover i { color: var(--nexora-primary); }
+.profile-divider { height: 1px; margin: 5px 0; background: var(--nexora-border); }
+.profile-action.logout-action, .profile-action.logout-action i { color: var(--nexora-danger, #dc2626); }
+.profile-action.logout-action:hover { background: color-mix(in srgb, var(--nexora-danger, #dc2626) 8%, var(--nexora-surface)); }
+.profile-action:focus-visible { outline: 2px solid var(--nexora-primary); outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) { .profile-action { transition: none; } }

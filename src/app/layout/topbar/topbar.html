@@ -389,11 +389,23 @@
       </button>
 
 
-      <p-menu
-        #profileMenu
-        [model]="profileMenuItems"
-        [popup]="true"
-      />
+      <p-popover #profileMenu styleClass="nexora-profile-popover">
+        <div class="profile-panel">
+          <button type="button" class="profile-action" (click)="openProfileRoute('/profile', profileMenu)">
+            <i class="pi pi-user" aria-hidden="true"></i>
+            <span>My Profile</span>
+          </button>
+          <button type="button" class="profile-action" (click)="openProfileRoute('/settings', profileMenu)">
+            <i class="pi pi-cog" aria-hidden="true"></i>
+            <span>Settings</span>
+          </button>
+          <div class="profile-divider"></div>
+          <button type="button" class="profile-action logout-action" (click)="logoutFromProfile(profileMenu)">
+            <i class="pi pi-sign-out" aria-hidden="true"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </p-popover>
 
     </div>
 

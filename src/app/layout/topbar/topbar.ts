@@ -10,7 +10,6 @@ import {
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-import { Menu } from 'primeng/menu';
 import { Popover } from 'primeng/popover';
 
 import { interval, Subscription } from 'rxjs';
@@ -26,10 +25,7 @@ import { NAVIGATION_ITEMS } from '../navigation/navigation.config';
 @Component({
   selector: 'app-topbar',
 
-  imports: [
-    Menu,
-    Popover
-  ],
+  imports: [Popover],
 
   templateUrl: './topbar.html',
 
@@ -97,46 +93,18 @@ export class Topbar implements OnInit, OnDestroy {
 
 
   // =========================================================
-  // PROFILE MENU
+  // PROFILE MENU NAVIGATION
   // =========================================================
 
-  readonly profileMenuItems = [
+  openProfileRoute(route: string, popover: Popover): void {
+    popover.hide();
+    void this.router.navigateByUrl(route);
+  }
 
-    {
-      label: 'My Profile',
-
-      icon: 'pi pi-user',
-
-      command: () => {
-        void this.router.navigate(['/profile']);
-      }
-    },
-
-    {
-      label: 'Settings',
-
-      icon: 'pi pi-cog',
-
-      command: () => {
-        this.router.navigate(['/settings']);
-      }
-    },
-
-    {
-      separator: true
-    },
-
-    {
-      label: 'Logout',
-
-      icon: 'pi pi-sign-out',
-
-      command: () => {
-        this.logout();
-      }
-    }
-
-  ];
+  logoutFromProfile(popover: Popover): void {
+    popover.hide();
+    this.logout();
+  }
 
 
   // =========================================================
