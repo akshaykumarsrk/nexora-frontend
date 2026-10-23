@@ -518,6 +518,12 @@ export const routes: Routes = [
         .then(m => m.VerifyEmail)
   },
 
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/auth/register/register').then(m => m.Register)
+  },
+
   // =========================================================
   // LOGIN
   // =========================================================

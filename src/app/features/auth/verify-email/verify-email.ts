@@ -42,8 +42,21 @@ export class VerifyEmail {
     .pipe(finalize(() => this.loading.set(false)))
     .subscribe({
       next: (response) => {
+        // A Vercel SPA fallback can return index.html with HTTP 200 when
+        // an API URL is misconfigured. Never treat HTML as verification success.
+        const normalizedResponse = (response ?? '').trim();
+        if (/<(?:!doctype\s+html|html|head|body|script|style)\b/i.test(normalizedResponse)) {
+          this.status.set('error');
+          this.message.set(
+            'The verification service returned a webpage instead of an API response. Please contact support or try again later.'
+          );
+          return;
+        }
+
         this.status.set('success');
-        this.message.set(response || 'Your email has been verified successfully.');
+        this.message.set(
+          normalizedResponse || 'Your email has been verified successfully.'
+        );
       },
       error: (error: HttpErrorResponse) => {
         this.status.set('error');

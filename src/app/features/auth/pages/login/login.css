@@ -495,3 +495,7 @@ html.dark :host ::ng-deep .form-field .p-password-input:focus {
 .login-recovery-link { display:flex; justify-content:flex-end; margin:.25rem 0 1rem; }
 .login-recovery-link a { color:var(--nexora-primary, #4f46e5); font-size:.9rem; font-weight:600; text-decoration:none; }
 .login-recovery-link a:hover { text-decoration:underline; }
+
+.register-prompt { margin: 1.25rem 0 0; text-align: center; color: var(--nexora-text-muted); font-size: .86rem; }
+.register-prompt a { color: var(--nexora-primary); font-weight: 700; text-decoration: none; }
+.register-prompt a:hover { text-decoration: underline; }
