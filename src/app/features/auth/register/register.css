@@ -51,3 +51,7 @@ html.dark .form-field input { background: var(--nexora-surface-soft); border-col
 html.dark .form-field input:focus { background: var(--nexora-surface); }
 @media (max-width: 520px) { .register-page { padding: 1rem; } .register-card { padding: 1.6rem 1.25rem; border-radius: var(--nexora-radius-lg); } .register-header h1 { font-size: 1.45rem; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+
+/* Shared NEXORA brand asset */
+.brand-logo img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }

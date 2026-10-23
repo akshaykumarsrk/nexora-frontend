@@ -66,20 +66,15 @@
 
   border-radius: 10px;
 
-  background: var(--nexora-primary);
+  background: transparent;
+  overflow: hidden;
+}
 
-  color: #ffffff;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  box-shadow:
-    0 4px 12px
-    color-mix(
-      in srgb,
-      var(--nexora-primary) 25%,
-      transparent
-    );
+.brand-logo img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
 .brand-name {

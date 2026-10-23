@@ -122,6 +122,20 @@
   font-weight: 500;
 }
 
+.breadcrumb .workspace-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.workspace-brand img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
 
 .breadcrumb i {
   color: var(--nexora-text-soft);
