@@ -757,7 +757,7 @@ export class JobForm implements OnInit {
         formValue.notes ?? null,
 
       workSummary:
-        formValue.workSummary ?? undefined
+        String(formValue.workSummary ?? '').trim() || null
     };
 
 

@@ -30,7 +30,12 @@ export const appConfig: ApplicationConfig = {
   // Your theme is being configured here instead:
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          // Keep PrimeNG's color scheme aligned with NEXORA's html.dark toggle.
+          // Without this, PrimeNG defaults to the operating system dark-mode preference.
+          darkModeSelector: '.dark'
+        }
       }
     })
   ]

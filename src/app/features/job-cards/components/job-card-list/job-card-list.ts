@@ -29,8 +29,8 @@ import {
 })
 export class JobCardList implements OnInit {
 
-  @Input({ required: true })
-  jobId!: number;
+  @Input()
+  jobId?: number;
 
   @Input()
   embedded = false;
@@ -65,12 +65,6 @@ export class JobCardList implements OnInit {
 
   loadJobCards(): void {
 
-    if (!this.jobId) {
-      this.jobCards.set([]);
-      this.loading.set(false);
-      return;
-    }
-
     this.loading.set(true);
 
     this.jobCardService
@@ -79,11 +73,11 @@ export class JobCardList implements OnInit {
 
         next: (jobCards) => {
 
-          const cardForJob = jobCards.filter(
-            card => card.jobId === this.jobId
-          );
+          const visibleCards = this.jobId == null
+            ? (jobCards ?? [])
+            : (jobCards ?? []).filter(card => card.jobId === this.jobId);
 
-          this.jobCards.set(cardForJob);
+          this.jobCards.set(visibleCards);
 
           this.loading.set(false);
 
@@ -113,18 +107,15 @@ export class JobCardList implements OnInit {
 
   createJobCard(): void {
 
-    if (!this.jobId) {
+    if (this.jobId != null) {
+      this.router.navigate(['/job-cards/new'], {
+        queryParams: { jobId: this.jobId }
+      });
       return;
     }
 
-    this.router.navigate(
-      ['/job-cards/new'],
-      {
-        queryParams: {
-          jobId: this.jobId
-        }
-      }
-    );
+    // Global list: the form will let the user choose an eligible job.
+    this.router.navigate(['/job-cards/new']);
   }
 
 

@@ -110,7 +110,7 @@
        FORM
   ======================================================== -->
 
-  @if (!loading() && jobId() && !errorMessage()) {
+  @if (!loading() && (jobId() || availableJobs().length > 0) && !errorMessage()) {
 
     <form
       class="job-card-form"
@@ -142,17 +142,33 @@
 
         </div>
 
-        <div class="job-reference">
+        @if (!editing() && !jobId()) {
+          <div class="form-content">
+            <div class="form-field">
+              <label for="jobSelector">Select job <span class="required">*</span></label>
+              <select
+                id="jobSelector"
+                class="job-selector"
+                [value]="selectedJobId() ?? ''"
+                (change)="selectJob($event)"
+                required
+              >
+                <option value="">Choose an assigned job</option>
+                @for (job of availableJobs(); track job.id) {
+                  <option [value]="job.id">{{ job.jobNumber }} · {{ job.status }}</option>
+                }
+              </select>
+              <small>Select the job this work record belongs to. Jobs with an existing job card are excluded.</small>
+            </div>
+          </div>
+        }
 
-          <span class="field-label">
-            JOB ID
-          </span>
-
-          <span class="job-id">
-            #{{ jobId() }}
-          </span>
-
-        </div>
+        @if (jobId()) {
+          <div class="job-reference">
+            <span class="field-label">JOB NUMBER / ID</span>
+            <span class="job-id">#{{ jobId() }}</span>
+          </div>
+        }
 
       </section>
 

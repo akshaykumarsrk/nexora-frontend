@@ -33,6 +33,8 @@ import {
   InputNumberModule
 } from 'primeng/inputnumber';
 
+import { SelectModule } from 'primeng/select';
+
 import {
   DatePickerModule
 } from 'primeng/datepicker';
@@ -53,6 +55,9 @@ import {
   Invoice
 } from '../../models/invoice';
 
+import { Job } from '../../../jobs/models/job';
+import { JobService } from '../../../jobs/services/job';
+
 
 @Component({
   selector: 'app-invoice-form',
@@ -65,6 +70,7 @@ import {
     ButtonModule,
     CardModule,
     InputNumberModule,
+    SelectModule,
     DatePickerModule,
     ToastModule
   ],
@@ -83,6 +89,9 @@ export class InvoiceCreate implements OnInit {
 
   private readonly invoiceService =
     inject(InvoiceService);
+
+  private readonly jobService =
+    inject(JobService);
 
   private readonly route =
     inject(ActivatedRoute);
@@ -109,6 +118,9 @@ export class InvoiceCreate implements OnInit {
 
   readonly jobId =
     signal<number | null>(null);
+
+  readonly eligibleJobs = signal<Job[]>([]);
+  readonly jobSelectionError = signal('');
 
 
   // =========================================================
@@ -256,16 +268,63 @@ export class InvoiceCreate implements OnInit {
      * CREATE MODE
      */
 
-    if (queryJobId) {
+    this.loadEligibleJobs(queryJobId > 0 ? queryJobId : null);
 
-      this.jobId.set(queryJobId);
+  }
 
-      this.invoiceForm.patchValue({
-        jobId: queryJobId
-      });
+  private loadEligibleJobs(requestedJobId: number | null): void {
+    this.loading.set(true);
+    this.jobSelectionError.set('');
 
-    }
+    this.jobService.getAllJobs().subscribe({
+      next: jobs => {
+        this.invoiceService.getAllInvoices().subscribe({
+          next: invoices => {
+            const invoicedJobIds = new Set((invoices ?? []).map(invoice => invoice.jobId));
+            const eligible = (jobs ?? []).filter(job =>
+              String(job.status).toUpperCase() === 'COMPLETED'
+              && !invoicedJobIds.has(job.id)
+            );
+            this.eligibleJobs.set(eligible);
+            this.loading.set(false);
 
+            if (requestedJobId) {
+              const selected = eligible.find(job => job.id === requestedJobId);
+              if (!selected) {
+                this.jobSelectionError.set(
+                  'This job is not available for invoicing. It may not be completed, or an invoice may already exist.'
+                );
+                this.invoiceForm.patchValue({ jobId: 0 });
+                this.jobId.set(null);
+                return;
+              }
+              this.jobId.set(selected.id);
+              this.invoiceForm.patchValue({ jobId: selected.id });
+            } else if (eligible.length === 1) {
+              this.jobId.set(eligible[0].id);
+              this.invoiceForm.patchValue({ jobId: eligible[0].id });
+            }
+          },
+          error: error => {
+            console.error('Unable to load existing invoices', error);
+            this.loading.set(false);
+            this.jobSelectionError.set('Unable to verify existing invoices. Refresh the page before generating an invoice.');
+          }
+        });
+      },
+      error: error => {
+        console.error('Unable to load completed jobs', error);
+        this.loading.set(false);
+        this.jobSelectionError.set(error?.error?.message ?? 'Unable to load completed jobs for invoicing.');
+      }
+    });
+  }
+
+  onJobSelected(jobId: number | null): void {
+    const selected = this.eligibleJobs().find(job => job.id === Number(jobId));
+    this.jobId.set(selected?.id ?? null);
+    this.invoiceForm.patchValue({ jobId: selected?.id ?? 0 });
+    this.jobSelectionError.set('');
   }
 
 

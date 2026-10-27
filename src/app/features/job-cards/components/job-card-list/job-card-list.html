@@ -37,19 +37,16 @@
     </div>
 
 
-    <button
-      type="button"
-      class="new-job-card-button"
-      (click)="createJobCard()"
-    >
-
-      <i class="pi pi-plus"></i>
-
-      <span>
-        New Job Card
-      </span>
-
-    </button>
+    @if (jobId == null || (!loading() && jobCards().length === 0)) {
+      <button
+        type="button"
+        class="new-job-card-button"
+        (click)="createJobCard()"
+      >
+        <i class="pi pi-plus"></i>
+        <span>New Job Card</span>
+      </button>
+    }
 
   </div>
 

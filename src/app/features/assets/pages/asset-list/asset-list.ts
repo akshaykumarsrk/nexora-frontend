@@ -332,6 +332,12 @@ export class AssetList implements OnInit {
   }
 
 
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.selectedSiteId.set(null);
+  }
+
+
   /* ======================================================
      SITE FILTER
      ====================================================== */

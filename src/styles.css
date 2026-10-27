@@ -1870,3 +1870,118 @@ body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:focus-visi
 }
 body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover .p-menu-item-label,
 body .p-menu.p-menu-overlay .p-menu-item:last-child .p-menu-item-link:hover .p-menu-item-icon { color: var(--nexora-danger) !important; }
+
+
+/* PrimeNG DatePicker month/year chooser contrast in both themes.
+   These selectors cover the views opened by clicking the month/year title. */
+.p-datepicker-panel .p-datepicker-year-view,
+.p-datepicker-panel .p-datepicker-month-view,
+.p-datepicker-panel .p-datepicker-decade,
+.p-datepicker-panel .p-datepicker-year,
+.p-datepicker-panel .p-datepicker-month {
+  background: var(--nexora-surface, #fff) !important;
+  color: var(--nexora-text, #172033) !important;
+}
+
+.p-datepicker-panel .p-datepicker-year,
+.p-datepicker-panel .p-datepicker-month {
+  color: var(--nexora-text, #172033) !important;
+  border-radius: .65rem !important;
+}
+
+.p-datepicker-panel .p-datepicker-year:hover,
+.p-datepicker-panel .p-datepicker-month:hover {
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 10%, var(--nexora-surface, #fff)) !important;
+  color: var(--nexora-primary, #6366f1) !important;
+}
+
+.p-datepicker-panel .p-datepicker-year:focus-visible,
+.p-datepicker-panel .p-datepicker-month:focus-visible {
+  outline: 2px solid var(--nexora-primary, #6366f1) !important;
+  outline-offset: 1px;
+}
+
+html.dark .p-datepicker-panel .p-datepicker-year-view,
+html.dark .p-datepicker-panel .p-datepicker-month-view,
+html.dark .p-datepicker-panel .p-datepicker-decade,
+html.dark .p-datepicker-panel .p-datepicker-year,
+html.dark .p-datepicker-panel .p-datepicker-month {
+  background: var(--nexora-surface, #111827) !important;
+  color: var(--nexora-text, #f8fafc) !important;
+}
+
+html.dark .p-datepicker-panel .p-datepicker-year:hover,
+html.dark .p-datepicker-panel .p-datepicker-month:hover {
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 18%, var(--nexora-surface, #111827)) !important;
+  color: var(--nexora-text, #f8fafc) !important;
+}
+
+
+/* NEXORA global overlay calendar theme.
+   PrimeNG datepickers are appended to body, so component-scoped styles cannot reliably reach them. */
+.p-datepicker-panel,
+.p-datepicker-panel .p-datepicker-header,
+.p-datepicker-panel .p-datepicker-calendar-container,
+.p-datepicker-panel .p-datepicker-year-view,
+.p-datepicker-panel .p-datepicker-month-view,
+.p-datepicker-panel .p-datepicker-decade-view {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border-color: var(--nexora-border) !important;
+}
+.p-datepicker-panel .p-datepicker-title,
+.p-datepicker-panel .p-datepicker-select-month,
+.p-datepicker-panel .p-datepicker-select-year,
+.p-datepicker-panel .p-datepicker-day,
+.p-datepicker-panel .p-datepicker-month,
+.p-datepicker-panel .p-datepicker-year,
+.p-datepicker-panel table th {
+  color: var(--nexora-text) !important;
+}
+.p-datepicker-panel .p-datepicker-day,
+.p-datepicker-panel .p-datepicker-month,
+.p-datepicker-panel .p-datepicker-year {
+  border-radius: 0.5rem;
+}
+.p-datepicker-panel .p-datepicker-day:hover,
+.p-datepicker-panel .p-datepicker-month:hover,
+.p-datepicker-panel .p-datepicker-year:hover,
+.p-datepicker-panel .p-datepicker-prev:hover,
+.p-datepicker-panel .p-datepicker-next:hover {
+  background: color-mix(in srgb, var(--nexora-primary) 12%, var(--nexora-surface)) !important;
+  color: var(--nexora-primary) !important;
+}
+.p-datepicker-panel .p-datepicker-day-selected,
+.p-datepicker-panel .p-datepicker-month-selected,
+.p-datepicker-panel .p-datepicker-year-selected,
+.p-datepicker-panel .p-highlight {
+  background: var(--nexora-primary) !important;
+  color: #fff !important;
+}
+.p-datepicker-panel .p-datepicker-day-other {
+  color: var(--nexora-text-soft) !important;
+  opacity: .65;
+}
+.p-datepicker-panel .p-disabled {
+  color: var(--nexora-text-soft) !important;
+  opacity: .4;
+}
+.p-datepicker-panel .p-datepicker-prev,
+.p-datepicker-panel .p-datepicker-next {
+  color: var(--nexora-text-muted) !important;
+}
+
+
+/* Theme-aware overlays for invoice job-number selects (appended to document body). */
+.p-select-overlay,
+.p-select-overlay .p-select-list,
+.p-select-overlay .p-select-option {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border-color: var(--nexora-border) !important;
+}
+.p-select-overlay .p-select-option:hover,
+.p-select-overlay .p-select-option.p-focus {
+  background: color-mix(in srgb, var(--nexora-primary) 10%, var(--nexora-surface)) !important;
+  color: var(--nexora-primary) !important;
+}

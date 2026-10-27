@@ -275,21 +275,26 @@
           </div>
 
 
-          <!-- WORK SUMMARY -->
+          <!-- INITIAL WORK SUMMARY / INSTRUCTIONS -->
 
           <div class="form-field full-width">
 
             <label>
-              Work Summary
+              Work Summary / Service Instructions
             </label>
 
             <textarea
               pTextarea
               formControlName="workSummary"
               rows="4"
-              placeholder="Enter work summary..."
+              maxlength="2000"
+              placeholder="Add initial work details or instructions (optional)..."
               class="w-full">
             </textarea>
+
+            <small class="field-hint">
+              Enter the service instructions before scheduling. A work summary is required to schedule this job; the technician will record the actual work performed at completion.
+            </small>
 
           </div>
 

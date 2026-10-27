@@ -406,6 +406,10 @@
 
     <p-card header="Job Actions">
 
+      @if (scheduleError()) {
+        <p class="schedule-error" role="alert">{{ scheduleError() }}</p>
+      }
+
       <div class="flex flex-wrap gap-2">
 
         @if (canAssign()) {
@@ -473,7 +477,7 @@
             label="Complete Job"
             icon="pi pi-check"
             severity="success"
-            (onClick)="completeJob()"
+            (onClick)="openCompleteDialog()"
           />
 
         }
@@ -496,6 +500,50 @@
 
   }
 
+
+  <p-dialog
+    header="Complete Job"
+    [visible]="showCompleteDialog()"
+    (visibleChange)="showCompleteDialog.set($event)"
+    [modal]="true"
+    [closable]="!actionLoading"
+    [style]="{ width: 'min(36rem, 95vw)' }"
+    [breakpoints]="{ '640px': '95vw' }"
+  >
+    <div class="completion-dialog-content">
+      <p>Record the actual work performed before marking this job complete.</p>
+      <label for="completionWorkSummary">Work summary <span aria-hidden="true">*</span></label>
+      <textarea
+        id="completionWorkSummary"
+        pTextarea
+        [ngModel]="workSummaryInput()"
+        (ngModelChange)="workSummaryInput.set($event)"
+        rows="5"
+        maxlength="2000"
+        placeholder="Describe the repair, parts replaced, tests performed, and final result..."
+        class="w-full"
+      ></textarea>
+      @if (completionError()) {
+        <p class="completion-error" role="alert">{{ completionError() }}</p>
+      }
+    </div>
+    <div class="completion-dialog-actions">
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="actionLoading"
+        (onClick)="showCompleteDialog.set(false)"
+      />
+      <p-button
+        label="Confirm Completion"
+        icon="pi pi-check"
+        [loading]="actionLoading"
+        [disabled]="actionLoading || !workSummaryInput().trim()"
+        (onClick)="completeJob()"
+      />
+    </div>
+  </p-dialog>
 
   <!-- =====================================================
        JOB PARTS

@@ -38,6 +38,36 @@
   <p-toast />
 
 
+  <section class="ready-invoice-section" aria-labelledby="readyInvoiceHeading">
+    <div class="ready-invoice-heading">
+      <div>
+        <h2 id="readyInvoiceHeading">Completed jobs ready to invoice</h2>
+        <p>Completed jobs without an invoice appear here automatically.</p>
+      </div>
+      <span class="ready-count">{{ readyJobs().length }}</span>
+    </div>
+
+    @if (jobsLoading()) {
+      <p class="ready-invoice-state">Checking completed jobs…</p>
+    } @else if (readyJobs().length) {
+      <div class="ready-invoice-grid">
+        @for (job of readyJobs(); track job.id) {
+          <article class="ready-invoice-job">
+            <div class="ready-job-icon"><i class="pi pi-briefcase" aria-hidden="true"></i></div>
+            <div class="ready-job-info">
+              <strong>{{ job.jobNumber }}</strong>
+              <span>Customer #{{ job.customerId ?? '—' }}</span>
+              <small>Completed {{ job.completedAt ? (job.completedAt | date:'dd MMM yyyy') : 'job' }}</small>
+            </div>
+            <p-button label="Generate" icon="pi pi-file" size="small" (onClick)="invoiceCompletedJob(job)" />
+          </article>
+        }
+      </div>
+    } @else {
+      <p class="ready-invoice-state">No completed jobs are waiting for an invoice.</p>
+    }
+  </section>
+
   <!-- =====================================================
        MAIN CARD
        ===================================================== -->

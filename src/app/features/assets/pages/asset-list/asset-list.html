@@ -344,32 +344,24 @@
              ================================================= -->
 
         <ng-template #emptymessage>
-
           <tr>
-
-            <td
-              colspan="7"
-              class="empty-cell"
-            >
-
-              <div class="empty-state">
-
-                <div class="empty-icon">
-                  <i class="pi pi-box"></i>
-                </div>
-
-                <h3>No assets found</h3>
-
+            <td colspan="7">
+              <div class="asset-empty-state">
+                <div class="asset-empty-icon"><i class="pi pi-box" aria-hidden="true"></i></div>
+                <h3>{{ searchTerm() || selectedSiteId() ? 'No matching assets' : 'No assets yet' }}</h3>
                 <p>
-                  Try changing your search or site filter.
+                  {{ searchTerm() || selectedSiteId()
+                    ? 'Try changing your search or site filter.'
+                    : 'Register equipment installed at a customer site to start tracking its status and warranty.' }}
                 </p>
-
+                @if (!searchTerm() && !selectedSiteId()) {
+                  <p-button label="Add Asset" icon="pi pi-plus" (onClick)="createAsset()" />
+                } @else {
+                  <p-button label="Clear Filters" icon="pi pi-filter-slash" [outlined]="true" (onClick)="clearFilters()" />
+                }
               </div>
-
             </td>
-
           </tr>
-
         </ng-template>
 
       </p-table>

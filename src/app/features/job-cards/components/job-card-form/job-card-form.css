@@ -676,3 +676,28 @@
   }
 
 }
+
+/* Theme-aware job selector for the global New Job Card workflow. */
+.job-selector {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: .7rem .85rem;
+  border: 1px solid var(--nexora-border, #dbe2ee);
+  border-radius: .65rem;
+  background: var(--nexora-surface, #fff);
+  color: var(--nexora-text, #172033);
+  font: inherit;
+}
+.job-selector:focus-visible {
+  outline: 2px solid var(--nexora-primary, #6366f1);
+  outline-offset: 2px;
+}
+:host-context(html.dark) .job-selector {
+  background: var(--nexora-surface, #111827);
+  color: var(--nexora-text, #f8fafc);
+  border-color: var(--nexora-border, #334155);
+}
+:host-context(html.dark) .job-selector option {
+  background: var(--nexora-surface, #111827);
+  color: var(--nexora-text, #f8fafc);
+}

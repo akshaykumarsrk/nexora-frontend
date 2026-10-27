@@ -1004,3 +1004,41 @@
     transform: translateY(0);
   }
 }
+
+/* Deliberate empty state instead of PrimeNG's tiny default empty-table message. */
+:host ::ng-deep .asset-table .asset-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  min-height: 260px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--nexora-text, #172033);
+}
+:host ::ng-deep .asset-table .asset-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 12%, var(--nexora-surface, #fff));
+  color: var(--nexora-primary, #6366f1);
+  font-size: 1.5rem;
+}
+:host ::ng-deep .asset-table .asset-empty-state h3 {
+  margin: .25rem 0 0;
+  font-size: 1.05rem;
+  color: var(--nexora-text, #172033);
+}
+:host ::ng-deep .asset-table .asset-empty-state p {
+  max-width: 30rem;
+  margin: 0;
+  line-height: 1.65;
+  color: var(--nexora-text-muted, #64748b);
+}
+:host-context(html.dark) ::ng-deep .asset-table .asset-empty-state,
+:host-context(html.dark) ::ng-deep .asset-table .asset-empty-state h3 {
+  color: var(--nexora-text, #f8fafc);
+}

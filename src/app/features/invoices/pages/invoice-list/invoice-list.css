@@ -1033,3 +1033,88 @@
     align-self: flex-end;
   }
 }
+
+.ready-invoice-section {
+  margin: 0 0 1.25rem;
+  padding: 1.15rem;
+  border: 1px solid var(--nexora-border, #e2e8f0);
+  border-radius: 1rem;
+  background: var(--nexora-surface, #fff);
+  color: var(--nexora-text, #172033);
+  box-shadow: var(--nexora-shadow-sm, 0 2px 8px #1720330a);
+}
+.ready-invoice-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .9rem;
+}
+.ready-invoice-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--nexora-text, #172033);
+}
+.ready-invoice-heading p {
+  margin: .35rem 0 0;
+  color: var(--nexora-text-muted, #64748b);
+  font-size: .84rem;
+}
+.ready-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 .5rem;
+  border-radius: 999px;
+  color: var(--nexora-primary, #6366f1);
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 12%, var(--nexora-surface, #fff));
+  font-weight: 800;
+}
+.ready-invoice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: .75rem;
+}
+.ready-invoice-job {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-width: 0;
+  padding: .85rem;
+  border: 1px solid var(--nexora-border, #e2e8f0);
+  border-radius: .8rem;
+  background: var(--nexora-surface-soft, #f8fafc);
+}
+.ready-job-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 2.5rem;
+  height: 2.5rem;
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 12%, var(--nexora-surface, #fff));
+  color: var(--nexora-primary, #6366f1);
+}
+.ready-job-info {
+  display: grid;
+  gap: .18rem;
+  flex: 1;
+  min-width: 0;
+}
+.ready-job-info strong { color: var(--nexora-text, #172033); }
+.ready-job-info span,
+.ready-job-info small { color: var(--nexora-text-muted, #64748b); font-size: .78rem; }
+.ready-invoice-state {
+  margin: 0;
+  padding: 1rem .25rem;
+  color: var(--nexora-text-muted, #64748b);
+  font-size: .88rem;
+}
+html.dark .ready-invoice-section,
+html.dark .ready-invoice-heading h2,
+html.dark .ready-job-info strong {
+  color: var(--nexora-text, #f8fafc);
+}
+html.dark .ready-invoice-job {
+  background: var(--nexora-surface-soft, #172033);
+}

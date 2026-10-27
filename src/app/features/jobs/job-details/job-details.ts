@@ -97,6 +97,11 @@ export class JobDetails implements OnInit {
 
   actionLoading = false;
 
+  readonly showCompleteDialog = signal(false);
+  readonly workSummaryInput = signal('');
+  readonly completionError = signal('');
+  readonly scheduleError = signal('');
+
 
   // =========================================================
   // JOB PARTS
@@ -570,6 +575,12 @@ export class JobDetails implements OnInit {
       return;
     }
 
+    if (!job.workSummary?.trim()) {
+      this.scheduleError.set('Add a work summary or service instructions before scheduling this job. Edit the job to enter the summary, then schedule it.');
+      return;
+    }
+
+    this.scheduleError.set('');
     this.actionLoading = true;
 
     this.jobService
@@ -580,16 +591,18 @@ export class JobDetails implements OnInit {
 
           this.job.set(updatedJob);
 
+          this.scheduleError.set('');
           this.actionLoading = false;
         },
 
-        error: (error: unknown) => {
+        error: (error: any) => {
 
           console.error(
             'Failed to schedule job',
             error
           );
 
+          this.scheduleError.set(error?.error?.message ?? 'Unable to schedule this job. Check its work summary, technician, and scheduled date.');
           this.actionLoading = false;
         }
 
@@ -718,50 +731,44 @@ export class JobDetails implements OnInit {
   // COMPLETE JOB
   // =========================================================
 
-  completeJob(): void {
-
+  openCompleteDialog(): void {
     const job = this.job();
+    if (!job) return;
 
-    if (!job) {
+    this.workSummaryInput.set(job.workSummary ?? '');
+    this.completionError.set('');
+    this.showCompleteDialog.set(true);
+  }
+
+  completeJob(): void {
+    const job = this.job();
+    const workSummary = this.workSummaryInput().trim();
+
+    if (!job || this.actionLoading) return;
+
+    if (!workSummary) {
+      this.completionError.set('Enter a work summary before completing this job.');
       return;
     }
 
-    /*
-     * JobService.completeJob() requires
-     * a workSummary.
-     *
-     * Your current JobDetails page does not
-     * have a work-summary input yet.
-     */
-    const workSummary = job.workSummary ?? '';
-
+    this.completionError.set('');
     this.actionLoading = true;
 
-    this.jobService
-      .completeJob(
-        job.id,
-        workSummary
-      )
-      .subscribe({
-
-        next: (updatedJob: Job) => {
-
-          this.job.set(updatedJob);
-
-          this.actionLoading = false;
-        },
-
-        error: (error: unknown) => {
-
-          console.error(
-            'Failed to complete job',
-            error
-          );
-
-          this.actionLoading = false;
-        }
-
-      });
+    this.jobService.completeJob(job.id, workSummary).subscribe({
+      next: (updatedJob: Job) => {
+        this.job.set(updatedJob);
+        this.showCompleteDialog.set(false);
+        this.actionLoading = false;
+        this.loadJobParts();
+      },
+      error: (error: any) => {
+        console.error('Failed to complete job', error);
+        this.completionError.set(
+          error?.error?.message ?? 'Unable to complete this job. Check the job status and try again.'
+        );
+        this.actionLoading = false;
+      }
+    });
   }
 
 

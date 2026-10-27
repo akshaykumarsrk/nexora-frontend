@@ -1264,3 +1264,51 @@
 .parts-page ::ng-deep .p-tag-danger { background:#fee2e2!important; color:#991b1b!important; border:1px solid #fecaca!important; font-weight:700; }
 :host-context(html.dark) .parts-page ::ng-deep .p-tag-success { background:#064e3b!important; color:#d1fae5!important; border-color:#047857!important; }
 :host-context(html.dark) .parts-page ::ng-deep .p-tag-danger { background:#7f1d1d!important; color:#fee2e2!important; border-color:#b91c1c!important; }
+
+
+/* Empty/error/loading states remain legible and balanced in light and dark themes. */
+.parts-page .state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  min-height: 250px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  background: var(--nexora-surface, #fff);
+  color: var(--nexora-text, #172033);
+}
+.parts-page .state-container > i {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: .25rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 12%, var(--nexora-surface, #fff));
+  color: var(--nexora-primary, #6366f1);
+  font-size: 1.4rem;
+}
+.parts-page .state-container h3 {
+  margin: .25rem 0 0;
+  color: var(--nexora-text, #172033);
+  font-size: 1.05rem;
+}
+.parts-page .state-container p {
+  max-width: 28rem;
+  margin: 0;
+  color: var(--nexora-text-muted, #64748b);
+  line-height: 1.6;
+}
+.parts-page .state-container.error-state > i {
+  background: color-mix(in srgb, #dc2626 12%, var(--nexora-surface, #fff));
+  color: #dc2626;
+}
+:host-context(html.dark) .parts-page .state-container {
+  background: var(--nexora-surface, #111827);
+  color: var(--nexora-text, #f8fafc);
+}
+:host-context(html.dark) .parts-page .state-container h3 {
+  color: var(--nexora-text, #f8fafc);
+}

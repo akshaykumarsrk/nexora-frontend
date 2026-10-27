@@ -30,6 +30,9 @@ import {
   JobCardService
 } from '../../services/job-card';
 
+import { JobService } from '../../../jobs/services/job';
+import { Job } from '../../../jobs/models/job';
+
 
 @Component({
   imports: [
@@ -59,6 +62,9 @@ export class JobCardForm implements OnInit {
   private readonly jobCardService =
     inject(JobCardService);
 
+  private readonly jobService =
+    inject(JobService);
+
 
   // =========================================================
   // STATE
@@ -81,6 +87,9 @@ export class JobCardForm implements OnInit {
 
   readonly editing =
     signal(false);
+
+  readonly availableJobs = signal<Job[]>([]);
+  readonly selectedJobId = signal<number | null>(null);
 
 
   // =========================================================
@@ -182,11 +191,7 @@ export class JobCardForm implements OnInit {
 
 
     if (!jobIdParam) {
-
-      this.errorMessage.set(
-        'Job ID is missing.'
-      );
-
+      this.loadAvailableJobs();
       return;
     }
 
@@ -214,6 +219,63 @@ export class JobCardForm implements OnInit {
 
   }
 
+
+  private loadAvailableJobs(): void {
+    this.loading.set(true);
+    this.errorMessage.set(null);
+
+    const loadCardsAndFilter = (jobs: Job[]): void => {
+      this.jobCardService.getJobCards().subscribe({
+        next: cards => {
+          const existingJobIds = new Set((cards ?? []).map(card => card.jobId));
+          const eligible = (jobs ?? []).filter(job =>
+            !['COMPLETED', 'CANCELLED'].includes(String(job.status).toUpperCase())
+            && !existingJobIds.has(job.id)
+          );
+          this.availableJobs.set(eligible);
+          this.loading.set(false);
+          if (!eligible.length) {
+            this.errorMessage.set('No eligible jobs are available for a new job card. Jobs must be assigned and must not already have a job card.');
+          }
+        },
+        error: () => {
+          // Still show jobs; the backend remains authoritative about duplicates.
+          this.availableJobs.set((jobs ?? []).filter(job =>
+            !['COMPLETED', 'CANCELLED'].includes(String(job.status).toUpperCase())
+          ));
+          this.loading.set(false);
+          if (!this.availableJobs().length) {
+            this.errorMessage.set('No eligible jobs are available for a new job card.');
+          }
+        }
+      });
+    };
+
+    this.jobService.getAllJobs().subscribe({
+      next: jobs => loadCardsAndFilter(jobs ?? []),
+      error: () => this.jobService.getMyJobs().subscribe({
+        next: jobs => loadCardsAndFilter(jobs ?? []),
+        error: error => {
+          console.error('Failed to load jobs for job card creation', error);
+          this.loading.set(false);
+          this.errorMessage.set(error?.error?.message ?? 'Unable to load eligible jobs. Refresh and try again.');
+        }
+      })
+    });
+  }
+
+  selectJob(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const id = Number(value);
+    if (Number.isInteger(id) && id > 0) {
+      this.selectedJobId.set(id);
+      this.jobId.set(id);
+      this.errorMessage.set(null);
+    } else {
+      this.selectedJobId.set(null);
+      this.jobId.set(null);
+    }
+  }
 
   // =========================================================
   // LOAD JOB CARD FOR EDIT
@@ -327,7 +389,7 @@ export class JobCardForm implements OnInit {
 
 
     const currentJobId =
-      this.jobId();
+      this.jobId() ?? this.selectedJobId();
 
 
     if (!currentJobId) {
@@ -427,7 +489,7 @@ export class JobCardForm implements OnInit {
             this.saving.set(false);
 
             this.errorMessage.set(
-              'Failed to update job card. Please try again.'
+              error?.error?.message ?? 'Failed to update job card. Please try again.'
             );
 
           }
@@ -448,15 +510,12 @@ export class JobCardForm implements OnInit {
       .createJobCard(request)
       .subscribe({
 
-        next: () => {
-
+        next: (createdJobCard: JobCard) => {
           this.saving.set(false);
-
           this.router.navigate([
-            '/jobs',
-            currentJobId
+            '/job-cards',
+            createdJobCard.id
           ]);
-
         },
 
 

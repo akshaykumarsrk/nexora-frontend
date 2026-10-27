@@ -53,6 +53,11 @@ export class JobService {
 
   }
 
+  /** Returns only jobs assigned to the authenticated technician. */
+  getMyJobs(): Observable<Job[]> {
+    return this.http.get<Job[]>(`${this.apiUrl}/my-jobs`);
+  }
+
 
   // =========================================================
   // GET JOB BY ID
@@ -112,9 +117,10 @@ export class JobService {
   ): Observable<Job> {
 
     return this.http.patch<Job>(
-      `${this.apiUrl}/${id}/assign-technician`,
+      `${this.apiUrl}/${id}/assign`,
+      null,
       {
-        technicianId
+        params: { technicianId: String(technicianId) }
       }
     );
 

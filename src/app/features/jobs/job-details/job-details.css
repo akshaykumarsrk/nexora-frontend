@@ -1087,3 +1087,71 @@
     font-size: 18px;
   }
 }
+
+/* Completion dialog content is scoped to Job Details only. */
+.completion-dialog-content {
+  display: grid;
+  gap: .75rem;
+  color: var(--nexora-text, #172033);
+}
+.completion-dialog-content p {
+  margin: 0;
+  color: var(--nexora-text-muted, #64748b);
+  line-height: 1.6;
+}
+.completion-dialog-content label {
+  font-weight: 700;
+}
+.completion-dialog-content textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--nexora-border, #dbe2ee);
+  border-radius: .7rem;
+  padding: .8rem;
+  background: var(--nexora-surface, #fff);
+  color: var(--nexora-text, #172033);
+}
+.completion-dialog-content textarea:focus {
+  outline: 2px solid var(--nexora-primary, #6366f1);
+  outline-offset: 1px;
+}
+.completion-dialog-content .completion-error {
+  color: var(--nexora-danger, #b42318);
+  font-size: .85rem;
+}
+:host-context(html.dark) .completion-dialog-content textarea {
+  background: var(--nexora-surface-soft, #172033);
+  color: var(--nexora-text, #f8fafc);
+  border-color: var(--nexora-border, #334155);
+}
+
+
+/* Explicit action row inside completion dialog: reliable across PrimeNG overlay versions. */
+.completion-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nexora-border);
+}
+.completion-dialog-content {
+  color: var(--nexora-text);
+}
+.completion-dialog-content textarea {
+  color: var(--nexora-text);
+  background: var(--nexora-surface);
+  border-color: var(--nexora-border);
+}
+
+.schedule-error {
+  margin: 0 0 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--nexora-danger) 25%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--nexora-danger) 7%, var(--nexora-surface));
+  color: var(--nexora-danger);
+  font-size: 0.82rem;
+}

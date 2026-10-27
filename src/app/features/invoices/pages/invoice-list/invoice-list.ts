@@ -22,6 +22,8 @@ import { MessageService } from 'primeng/api';
 
 import { InvoiceService } from '../../services/invoice';
 import { Invoice } from '../../models/invoice';
+import { Job } from '../../../jobs/models/job';
+import { JobService } from '../../../jobs/services/job';
 
 @Component({
   selector: 'app-invoice-list',
@@ -49,6 +51,7 @@ import { Invoice } from '../../models/invoice';
 export class InvoiceList implements OnInit {
 
   private readonly invoiceService = inject(InvoiceService);
+  private readonly jobService = inject(JobService);
   private readonly router = inject(Router);
   private readonly messageService = inject(MessageService);
 
@@ -59,6 +62,8 @@ export class InvoiceList implements OnInit {
   readonly invoices = signal<Invoice[]>([]);
   readonly loading = signal(false);
   readonly searchTerm = signal('');
+  readonly readyJobs = signal<Job[]>([]);
+  readonly jobsLoading = signal(false);
 
   // =========================================================
   // FILTERED INVOICES
@@ -123,6 +128,7 @@ export class InvoiceList implements OnInit {
 
         this.invoices.set(invoices ?? []);
         this.loading.set(false);
+        this.loadReadyJobs(invoices ?? []);
       },
 
       error: error => {
@@ -139,6 +145,33 @@ export class InvoiceList implements OnInit {
             'Unable to load invoices'
         });
       }
+    });
+  }
+
+  private loadReadyJobs(invoices: Invoice[]): void {
+    this.jobsLoading.set(true);
+    const alreadyInvoiced = new Set(invoices.map(invoice => invoice.jobId));
+
+    this.jobService.getAllJobs().subscribe({
+      next: jobs => {
+        this.readyJobs.set((jobs ?? []).filter(job =>
+          String(job.status).toUpperCase() === 'COMPLETED'
+          && !alreadyInvoiced.has(job.id)
+        ));
+        this.jobsLoading.set(false);
+      },
+      error: error => {
+        // Invoice list remains usable if job-list permission/API is unavailable.
+        console.warn('Could not load completed jobs awaiting invoices', error);
+        this.readyJobs.set([]);
+        this.jobsLoading.set(false);
+      }
+    });
+  }
+
+  invoiceCompletedJob(job: Job): void {
+    this.router.navigate(['/invoices', 'create'], {
+      queryParams: { jobId: job.id }
     });
   }
 

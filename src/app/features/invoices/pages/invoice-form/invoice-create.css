@@ -1161,3 +1161,45 @@
     transition: none !important;
   }
 }
+
+.invoice-job-option {
+  display: grid;
+  gap: .2rem;
+}
+.invoice-job-option strong {
+  color: var(--nexora-text, #172033);
+}
+.invoice-job-option small {
+  color: var(--nexora-text-muted, #64748b);
+}
+
+
+/* Job number selection must remain readable in light and dark themes. */
+:host ::ng-deep .invoice-job-select,
+:host ::ng-deep .invoice-job-select .p-select-label,
+:host ::ng-deep .invoice-job-select .p-select-dropdown {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border-color: var(--nexora-border) !important;
+}
+:host ::ng-deep .invoice-job-select .p-select-label.p-placeholder {
+  color: var(--nexora-text-muted) !important;
+}
+:host ::ng-deep .p-select-overlay {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+  border: 1px solid var(--nexora-border) !important;
+}
+:host ::ng-deep .p-select-overlay .p-select-option {
+  background: var(--nexora-surface) !important;
+  color: var(--nexora-text) !important;
+}
+:host ::ng-deep .p-select-overlay .p-select-option:hover,
+:host ::ng-deep .p-select-overlay .p-select-option.p-focus {
+  background: color-mix(in srgb, var(--nexora-primary) 10%, var(--nexora-surface)) !important;
+  color: var(--nexora-primary) !important;
+}
+.invoice-job-option strong,
+.invoice-job-option small {
+  color: var(--nexora-text) !important;
+}

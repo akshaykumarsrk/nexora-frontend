@@ -88,28 +88,43 @@
           <div class="form-field">
 
             <label for="jobId">
-              Job ID
+              Completed job
               <span class="required">*</span>
             </label>
 
-            <p-inputnumber
+            <p-select
               inputId="jobId"
+              [options]="eligibleJobs()"
+              optionLabel="jobNumber"
+              optionValue="id"
               formControlName="jobId"
-              [useGrouping]="false"
-              placeholder="Enter Job ID"
-              styleClass="w-full"
-            />
+              placeholder="Select a completed job"
+              [filter]="true"
+              [showClear]="true"
+              [loading]="loading()"
+              [disabled]="editMode()"
+              appendTo="body"
+              styleClass="w-full invoice-job-select"
+              (onChange)="onJobSelected($event.value)"
+            >
+              <ng-template #item let-job>
+                <div class="invoice-job-option">
+                  <strong>{{ job.jobNumber }}</strong>
+                  <small>Customer #{{ job.customerId }} · {{ job.completedAt ? (job.completedAt | date:'dd MMM yyyy') : 'Completed' }}</small>
+                </div>
+              </ng-template>
+              <ng-template #selectedItem let-job>
+                <span>{{ job.jobNumber }}</span>
+              </ng-template>
+            </p-select>
 
-            @if (
-              invoiceForm.controls.jobId.invalid &&
-              invoiceForm.controls.jobId.touched
-            ) {
-
-              <small class="field-error">
+            @if (jobSelectionError()) {
+              <small class="field-error" role="alert">
                 <i class="pi pi-exclamation-circle"></i>
-                Please enter a valid Job ID.
+                {{ jobSelectionError() }}
               </small>
-
+            } @else if (!loading() && eligibleJobs().length === 0 && !editMode()) {
+              <small class="field-hint">No completed jobs are currently available to invoice.</small>
             }
 
           </div>
