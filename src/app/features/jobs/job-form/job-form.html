@@ -149,12 +149,18 @@
             <p-select
               formControlName="customerId"
               [options]="customers"
-              optionLabel="name"
+              optionLabel="displayName"
               optionValue="id"
               placeholder="Select customer"
               [filter]="true"
               appendTo="body"
               class="w-full">
+              <ng-template let-customer #item>
+                <span>{{ customer.displayName }}</span>
+              </ng-template>
+              <ng-template let-customer #selectedItem>
+                <span>{{ customer.displayName }}</span>
+              </ng-template>
             </p-select>
 
             @if (
@@ -182,12 +188,18 @@
             <p-select
               formControlName="siteId"
               [options]="sites"
-              optionLabel="name"
+              optionLabel="displayName"
               optionValue="id"
               placeholder="Select site"
               [filter]="true"
               appendTo="body"
               class="w-full">
+              <ng-template let-site #item>
+                <span>{{ site.displayName }}</span>
+              </ng-template>
+              <ng-template let-site #selectedItem>
+                <span>{{ site.displayName }}</span>
+              </ng-template>
             </p-select>
 
             @if (

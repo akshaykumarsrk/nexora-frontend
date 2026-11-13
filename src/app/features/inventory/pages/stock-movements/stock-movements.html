@@ -592,11 +592,17 @@
         <span>*</span>
       </label>
 
-        <p-inputNumber
-        inputId="quantity"
-        formControlName="quantity"
-        placeholder="Enter quantity">
-        </p-inputNumber>
+        <input
+          id="quantity"
+          type="number"
+          formControlName="quantity"
+          class="stock-quantity-input"
+          min="1"
+          step="1"
+          inputmode="numeric"
+          placeholder="Enter quantity"
+          autocomplete="off"
+        />
 
       @if (
         movementForm.controls.quantity.invalid &&

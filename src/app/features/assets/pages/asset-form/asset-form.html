@@ -246,13 +246,19 @@
             Brand
           </label>
 
-          <input
-            pInputText
-            id="brand"
+          <p-select
+            inputId="brand"
             formControlName="brand"
-            placeholder="e.g. Daikin"
-            maxlength="150"
-          />
+            [options]="brands()"
+            optionLabel="name"
+            optionValue="name"
+            placeholder="Select a brand"
+            [showClear]="true"
+            [filter]="true"
+            filterBy="name"
+            appendTo="body"
+            (onChange)="onBrandChange($event.value)"
+          ></p-select>
 
         </div>
 
@@ -265,13 +271,29 @@
             Model
           </label>
 
-          <input
-            pInputText
-            id="model"
+          <p-select
+            inputId="model"
             formControlName="model"
-            placeholder="e.g. VRV-X"
-            maxlength="150"
-          />
+            [options]="availableModels()"
+            optionLabel="modelNumber"
+            optionValue="modelNumber"
+            placeholder="Select a model"
+            [showClear]="true"
+            [filter]="true"
+            filterBy="modelNumber,productType"
+            [disabled]="!selectedBrandName()"
+            appendTo="body"
+          >
+            <ng-template #item let-model>
+              <div class="asset-model-option">
+                <strong>{{ model.modelNumber }}</strong>
+                <small>{{ model.productType }}</small>
+              </div>
+            </ng-template>
+          </p-select>
+          @if (selectedBrandName() && !availableModels().length) {
+            <small class="field-hint">No active models are configured for this brand. Add one in Brands & Models.</small>
+          }
 
         </div>
 

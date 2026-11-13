@@ -31,13 +31,13 @@ export class OrganizationBrandingComponent implements OnInit, OnDestroy {
   readonly errorMessage = signal('');
   readonly logoPreviewUrl = signal<string | null>(null);
   readonly hasLogo = computed(() => !!this.logoPreviewUrl());
-  readonly hasSelectedFile = computed(() => !!this.selectedFile);
+  readonly hasSelectedFile = computed(() => !!this.selectedFile());
 
   useCompanyLogo = true;
   showNexoraAttribution = true;
   invoiceFooterText = '';
   receiptFooterText = '';
-  private selectedFile: File | null = null;
+  private readonly selectedFile = signal<File | null>(null);
   private objectUrl: string | null = null;
 
   ngOnInit(): void { this.loadSettings(); }
@@ -82,20 +82,21 @@ export class OrganizationBrandingComponent implements OnInit, OnDestroy {
       input.value = '';
       return;
     }
-    this.selectedFile = file;
+    this.selectedFile.set(file);
     this.setPreview(URL.createObjectURL(file));
   }
 
   uploadLogo(): void {
-    if (!this.selectedFile || this.uploading()) return;
+    const file = this.selectedFile();
+    if (!file || this.uploading()) return;
     this.uploading.set(true);
-    this.brandingService.uploadLogo(this.selectedFile).pipe(
+    this.brandingService.uploadLogo(file).pipe(
       takeUntilDestroyed(this.destroyRef),
       finalize(() => this.uploading.set(false))
     ).subscribe({
       next: response => {
         this.settings.set(response);
-        this.selectedFile = null;
+        this.selectedFile.set(null);
         this.messageService.add({ severity: 'success', summary: 'Logo uploaded', detail: 'Your company logo has been saved.' });
         this.loadLogoPreview(true);
       },
@@ -112,7 +113,7 @@ export class OrganizationBrandingComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: response => {
         this.settings.set(response);
-        this.selectedFile = null;
+        this.selectedFile.set(null);
         this.setPreview(null);
         this.useCompanyLogo = false;
         this.messageService.add({ severity: 'success', summary: 'Logo removed', detail: 'Documents will use the company name and details instead.' });

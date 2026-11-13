@@ -2124,3 +2124,24 @@ button[type="submit"]:active {
 .back-button:focus-visible, .icon-back-button:focus-visible, .header-actions button:focus-visible, .movements-page button:focus-visible { outline: 2px solid var(--nexora-primary); outline-offset: 2px; }
 .icon-back-button { display:inline-grid; place-items:center; width:2.35rem; height:2.35rem; padding:0; border:1px solid var(--nexora-border); border-radius:10px; background:var(--nexora-surface); color:var(--nexora-text-muted); cursor:pointer; }
 .icon-back-button:hover { color:var(--nexora-primary); background:color-mix(in srgb,var(--nexora-primary) 8%,var(--nexora-surface)); border-color:color-mix(in srgb,var(--nexora-primary) 35%,var(--nexora-border)); box-shadow:var(--nexora-shadow-sm); }
+
+
+/* Quantity control in the movement dialog */
+.stock-quantity-input {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--nexora-border);
+  border-radius: 0.7rem;
+  background: var(--nexora-surface);
+  color: var(--nexora-text);
+  font: inherit;
+}
+
+.stock-quantity-input:focus {
+  outline: 0;
+  border-color: var(--nexora-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nexora-primary) 14%, transparent);
+}

@@ -63,6 +63,10 @@ import {
   SiteService
 } from '../../../sites/services/sites';
 
+import { CatalogService } from '../../../catalog/services/catalog.service';
+import { Brand, EquipmentModel } from '../../../catalog/models';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-asset-form',
@@ -98,6 +102,9 @@ export class AssetForm implements OnInit {
   private readonly siteService =
     inject(SiteService);
 
+  private readonly catalogService =
+    inject(CatalogService);
+
   private readonly messageService =
     inject(MessageService);
 
@@ -111,6 +118,16 @@ export class AssetForm implements OnInit {
 
   readonly sites =
     signal<Site[]>([]);
+
+  readonly brands = signal<Brand[]>([]);
+  readonly equipmentModels = signal<EquipmentModel[]>([]);
+  readonly selectedBrandName = signal<string>('');
+
+  readonly availableModels = computed(() => {
+    const brand = this.brands().find(item => item.name === this.selectedBrandName());
+    if (!brand) return [];
+    return this.equipmentModels().filter(model => model.brandId === brand.id && model.active !== false);
+  });
 
   readonly editing =
     signal(false);
@@ -211,6 +228,7 @@ export class AssetForm implements OnInit {
     this.initializeForm();
 
     this.loadSites();
+    this.loadCatalog();
 
     const id =
       this.route.snapshot.paramMap.get('id');
@@ -304,6 +322,38 @@ export class AssetForm implements OnInit {
   /* ======================================================
      LOAD SITES
      ====================================================== */
+
+  private loadCatalog(): void {
+    forkJoin({
+      brands: this.catalogService.getBrands(),
+      models: this.catalogService.getModels()
+    }).subscribe({
+      next: ({ brands, models }) => {
+        this.brands.set(brands ?? []);
+        this.equipmentModels.set(models ?? []);
+
+        // Keep the selected brand in sync when editing an existing asset.
+        const currentBrand = this.assetForm.get('brand')?.value ?? '';
+        this.selectedBrandName.set(currentBrand);
+      },
+      error: error => {
+        console.error('Failed to load asset brand/model catalog', error);
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Catalog unavailable',
+          detail: 'Brands and models could not be loaded. Please refresh and try again.'
+        });
+      }
+    });
+  }
+
+  onBrandChange(brandName: string | null): void {
+    const selectedName = brandName ?? '';
+    this.selectedBrandName.set(selectedName);
+
+    // A model from the previous brand must never remain selected.
+    this.assetForm.patchValue({ model: '' });
+  }
 
   private loadSites(): void {
 
@@ -430,6 +480,8 @@ export class AssetForm implements OnInit {
       notes:
         asset.notes ?? ''
     });
+
+    this.selectedBrandName.set(asset.brand ?? '');
   }
 
 

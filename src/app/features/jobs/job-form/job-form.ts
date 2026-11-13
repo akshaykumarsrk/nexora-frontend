@@ -475,14 +475,10 @@ export class JobForm implements OnInit {
     // =======================================================
 
     this.customers = [
-
       {
         id: serviceRequest.customerId,
-
-        name:
-          `Customer #${serviceRequest.customerId}`
+        displayName: `Customer #${serviceRequest.customerId}`
       }
-
     ];
 
 
@@ -567,8 +563,19 @@ export class JobForm implements OnInit {
 
         next: (sites) => {
 
-          this.sites =
-            sites ?? [];
+          this.sites = (sites ?? []).map(site => {
+            // Keep the real site ID as the form value, but show a short,
+            // consistent label instead of noisy API/debug text.
+            const cleanName = (site.name ?? '')
+              .replace(/\s*(?:Record\s*)?ID\s*:?\s*\d+\s*/gi, '')
+              .replace(/\s+/g, ' ')
+              .trim();
+
+            return {
+              ...site,
+              displayName: `${cleanName || 'Site'} #${site.id}`
+            };
+          });
 
 
           // ---------------------------------------------------

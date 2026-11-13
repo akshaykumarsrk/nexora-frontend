@@ -29,7 +29,7 @@
         </div>
         <div class="upload-actions">
           <label class="btn btn-secondary file-button">Choose logo<input type="file" accept="image/png,image/jpeg" (change)="onLogoSelected($event)" [disabled]="!canManageBranding" /></label>
-          <button class="btn btn-primary" type="button" [disabled]="!canManageBranding || !hasSelectedFile()" (click)="uploadLogo()">{{ uploading() ? 'Uploading…' : 'Upload logo' }}</button>
+          <button class="btn btn-primary" type="button" [disabled]="!canManageBranding || !hasSelectedFile() || uploading()" (click)="uploadLogo()">{{ uploading() ? 'Uploading…' : 'Upload logo' }}</button>
           <button class="btn btn-quiet" type="button" [disabled]="!canManageBranding || !logoPreviewUrl() || removingLogo()" (click)="removeLogo()">{{ removingLogo() ? 'Removing…' : 'Remove' }}</button>
         </div>
         <p class="hint">PNG or JPEG · Maximum 2 MB. Use a clear, high-resolution logo with a transparent or white background.</p>

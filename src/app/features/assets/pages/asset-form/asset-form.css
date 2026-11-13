@@ -942,3 +942,23 @@
     transform: translateY(0);
   }
 }
+/* Keep the equipment model number and product type on separate lines.
+   PrimeNG's custom #item template does not automatically stack inline text. */
+:host ::ng-deep .asset-model-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+:host ::ng-deep .asset-model-option strong {
+  color: var(--nexora-text);
+  font-weight: 650;
+}
+
+:host ::ng-deep .asset-model-option small {
+  color: var(--nexora-text-muted);
+  font-size: 11px;
+}

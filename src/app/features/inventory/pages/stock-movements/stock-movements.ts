@@ -24,7 +24,6 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -54,7 +53,6 @@ import { Inventory } from '../../models/inventory';
     ButtonModule,
     DialogModule,
     InputTextModule,
-    InputNumberModule,
     SelectModule,
     TableModule,
     TagModule,
