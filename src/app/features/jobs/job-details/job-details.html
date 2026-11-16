@@ -158,7 +158,7 @@
           </span>
 
           <strong>
-            #{{ job()?.serviceRequestId }}
+            {{ job()?.serviceRequestTitle || 'Service Request' }} #{{ job()?.serviceRequestId }}
           </strong>
 
         </div>
@@ -175,7 +175,7 @@
           </span>
 
           <strong>
-            #{{ job()?.customerId }}
+            {{ job()?.customerName || 'Customer' }} #{{ job()?.customerId }}
           </strong>
 
         </div>
@@ -192,7 +192,7 @@
           </span>
 
           <strong>
-            #{{ job()?.siteId }}
+            {{ job()?.siteName || 'Site' }} #{{ job()?.siteId }}
           </strong>
 
         </div>
@@ -211,7 +211,7 @@
           @if (job()?.assetId) {
 
             <strong>
-              #{{ job()?.assetId }}
+              {{ job()?.assetName || 'Asset' }} #{{ job()?.assetId }}
             </strong>
 
           } @else {
@@ -238,7 +238,7 @@
           @if (job()?.technicianId) {
 
             <strong>
-              #{{ job()?.technicianId }}
+              {{ job()?.technicianName || 'Technician' }} #{{ job()?.technicianId }}
             </strong>
 
           } @else {

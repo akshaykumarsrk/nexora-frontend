@@ -81,6 +81,8 @@ import {
   TechnicianService
 } from '../../../features/technicians/services/technician';
 
+import { CustomerService } from '../../customers/services/customer';
+
 import {
   Technician
 } from '../../../features/technicians/models/technician';
@@ -137,6 +139,8 @@ export class JobForm implements OnInit {
 
   private readonly technicianService =
     inject(TechnicianService);
+
+  private readonly customerService = inject(CustomerService);
 
 
   // =========================================================
@@ -220,6 +224,8 @@ export class JobForm implements OnInit {
 
     this.loadTechnicians();
 
+    this.loadCustomers();
+
 
     // ---------------------------------------------------------
     // Edit mode
@@ -244,6 +250,22 @@ export class JobForm implements OnInit {
 
   }
 
+  private loadCustomers(): void {
+    this.customerService.getAllCustomers().subscribe({
+      next: customers => {
+        this.customers = (customers ?? []).map(customer => ({
+          ...customer, displayName: `${customer.name} #${customer.id}`
+        }));
+        if (this.job?.serviceRequestId) this.setupRelatedData(this.job.serviceRequestId);
+      },
+      error: error => {
+        console.error('Failed to load customers', error);
+        this.customers = [];
+        this.showError('Unable to load customers');
+      }
+    });
+  }
+
   private loadTechnicians(): void {
 
   this.technicianService
@@ -253,7 +275,10 @@ export class JobForm implements OnInit {
       next: (technicians) => {
 
         this.technicians =
-          technicians ?? [];
+          (technicians ?? []).map(technician => ({
+            ...technician,
+            displayName: `${technician.name} #${technician.id}`
+          })) as Technician[];
 
       },
 
@@ -461,37 +486,12 @@ export class JobForm implements OnInit {
     }
 
 
-    // =======================================================
-    // CUSTOMER
-    // =======================================================
-    //
-    // Customer service does not exist yet.
-    //
-    // Therefore we temporarily create one option using
-    // customerId from ServiceRequest.
-    //
-    // Later, when CustomerService is created, replace this
-    // with actual customer data.
-    // =======================================================
-
-    this.customers = [
-      {
-        id: serviceRequest.customerId,
-        displayName: `Customer #${serviceRequest.customerId}`
-      }
-    ];
-
-
+    // Keep the real customer record from CustomerService in the options.
+    // The service request determines which customer is selected.
     this.jobForm.patchValue(
-      {
-        customerId:
-          serviceRequest.customerId
-      },
-      {
-        emitEvent: false
-      }
+      { customerId: serviceRequest.customerId },
+      { emitEvent: false }
     );
-
 
     // =======================================================
     // SITE
@@ -563,19 +563,10 @@ export class JobForm implements OnInit {
 
         next: (sites) => {
 
-          this.sites = (sites ?? []).map(site => {
-            // Keep the real site ID as the form value, but show a short,
-            // consistent label instead of noisy API/debug text.
-            const cleanName = (site.name ?? '')
-              .replace(/\s*(?:Record\s*)?ID\s*:?\s*\d+\s*/gi, '')
-              .replace(/\s+/g, ' ')
-              .trim();
-
-            return {
-              ...site,
-              displayName: `${cleanName || 'Site'} #${site.id}`
-            };
-          });
+          this.sites =
+            (sites ?? []).map(site => ({
+              ...site, displayName: `${site.name} #${site.id}`
+            }));
 
 
           // ---------------------------------------------------

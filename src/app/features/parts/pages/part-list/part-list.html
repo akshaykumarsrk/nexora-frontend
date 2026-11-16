@@ -172,31 +172,22 @@
 
     @else if (filteredParts.length === 0) {
 
-      <div class="state-container">
+      <div class="state-container nexora-empty-state">
 
-        <i class="pi pi-box"></i>
+        <div class="nexora-empty-icon"><i class="pi pi-box" aria-hidden="true"></i></div>
 
-        <h3>
-          No parts found
-        </h3>
+        <h3>{{ searchTerm || selectedCategory || selectedStatus !== null ? 'No matching parts' : 'No parts yet' }}</h3>
 
         <p>
-          Try changing your search or filters.
+          {{ searchTerm || selectedCategory || selectedStatus !== null
+            ? 'Try changing your search or filters to find the parts you need.'
+            : 'Add spare parts and components to start managing your inventory.' }}
         </p>
 
-        @if (
-          searchTerm ||
-          selectedCategory ||
-          selectedStatus !== null
-        ) {
-
-          <p-button
-            label="Clear Filters"
-            icon="pi pi-filter-slash"
-            [outlined]="true"
-            (onClick)="clearFilters()"
-          />
-
+        @if (searchTerm || selectedCategory || selectedStatus !== null) {
+          <p-button label="Clear Filters" icon="pi pi-filter-slash" [outlined]="true" (onClick)="clearFilters()" />
+        } @else if (canManageParts()) {
+          <p-button label="Add Part" icon="pi pi-plus" (onClick)="createPart()" />
         }
 
       </div>

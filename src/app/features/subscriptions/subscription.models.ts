@@ -2,6 +2,21 @@
 export type SubscriptionStatus = 'TRIALING' | 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'EXPIRED' | 'INCOMPLETE';
 export type BillingInterval = 'MONTHLY' | 'ANNUAL';
 
+export interface SubscriptionPlanApiResponse {
+  code: 'STARTER' | 'BUSINESS' | 'GROWTH';
+  name: string;
+  description?: string;
+  monthlyPrice?: number;
+  annualPrice?: number;
+  monthlyPriceInr?: number;
+  annualPriceInr?: number;
+  maxUsers?: number;
+  maxTechnicians?: number;
+  maxJobsPerMonth?: number;
+  limits?: { maxUsers?: number; maxTechnicians?: number; maxJobsPerMonth?: number };
+  features?: string[];
+}
+
 export interface SubscriptionPlan {
   code: 'STARTER' | 'BUSINESS' | 'GROWTH';
   name: string;
@@ -37,4 +52,14 @@ export interface TrialRequest {
 export interface SubscriptionApiError {
   message?: string;
   code?: string;
+}
+
+export interface CheckoutRequest {
+  planCode: SubscriptionPlan['code'];
+  billingInterval: BillingInterval;
+}
+
+export interface CheckoutResponse {
+  subscriptionId: string;
+  shortUrl: string;
 }

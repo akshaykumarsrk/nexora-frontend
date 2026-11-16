@@ -10,6 +10,11 @@ export interface Job {
   assetId?: number;
   technicianId?: number;
 
+  serviceRequestTitle?: string;
+  customerName?: string;
+  siteName?: string;
+  assetName?: string;
+  technicianName?: string;
   serviceRequest?: any;
   customer?: any;
   site?: any;

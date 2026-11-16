@@ -1985,3 +1985,61 @@ html.dark .p-datepicker-panel .p-datepicker-month:hover {
   background: color-mix(in srgb, var(--nexora-primary) 10%, var(--nexora-surface)) !important;
   color: var(--nexora-primary) !important;
 }
+
+
+/* Shared, theme-aware empty states used across NEXORA list modules. */
+.nexora-empty-state {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 250px;
+  padding: 38px 24px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center !important;
+  color: var(--nexora-text, #172033);
+  background: color-mix(in srgb, var(--nexora-surface, #fff) 96%, var(--nexora-primary, #6366f1));
+  border: 1px dashed var(--nexora-border, #dbe2ea);
+  border-radius: 16px;
+}
+.nexora-empty-state h3 {
+  margin: 4px 0 0 !important;
+  color: var(--nexora-text, #172033) !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.nexora-empty-state p {
+  max-width: 440px;
+  margin: 0 !important;
+  color: var(--nexora-text-muted, #64748b) !important;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+.nexora-empty-icon {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: var(--nexora-primary, #6366f1);
+  background: color-mix(in srgb, var(--nexora-primary, #6366f1) 11%, var(--nexora-surface, #fff));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--nexora-primary, #6366f1) 15%, transparent);
+}
+.nexora-empty-icon i {
+  font-size: 1.65rem;
+}
+.nexora-empty-state p-button {
+  margin-top: 8px;
+}
+.nexora-empty-state .p-button {
+  min-height: 40px;
+}
+td .nexora-empty-state {
+  min-height: 230px;
+  margin: 8px 0;
+  border: 0;
+  background: transparent;
+}

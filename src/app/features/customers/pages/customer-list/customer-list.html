@@ -251,15 +251,21 @@
 
             <td colspan="7">
 
-              <div class="empty-table">
+              <div class="empty-table nexora-empty-state">
 
-                <i class="pi pi-users"></i>
+                <div class="nexora-empty-icon"><i class="pi pi-users" aria-hidden="true"></i></div>
 
-                <h3>No customers found</h3>
+                <h3>{{ searchTerm || customerTypeFilter !== 'ALL' ? 'No matching customers' : 'No customers yet' }}</h3>
 
                 <p>
-                  Try changing your search or filters.
+                  {{ searchTerm || customerTypeFilter !== 'ALL'
+                    ? 'Try changing your search or customer type filter.'
+                    : 'Add your first customer to start managing sites, jobs and invoices.' }}
                 </p>
+
+                @if (!searchTerm && customerTypeFilter === 'ALL') {
+                  <p-button label="Add Customer" icon="pi pi-plus" (onClick)="createCustomer()" />
+                }
 
               </div>
 

@@ -4,8 +4,17 @@
 
   <div class="page-header">
 
-    <div>
-
+    <div class="flex align-items-start gap-3">
+      <p-button
+        icon="pi pi-arrow-left"
+        [text]="true"
+        [rounded]="true"
+        severity="secondary"
+        ariaLabel="Back to jobs"
+        styleClass="mt-2 flex-shrink-0"
+        (onClick)="goBack()">
+      </p-button>
+      <div>
       <h2>
         {{ isEditMode ? 'Edit Job' : 'Create Job' }}
       </h2>
@@ -17,16 +26,8 @@
             : 'Create a new service job'
         }}
       </p>
-
+      </div>
     </div>
-
-    <p-button
-      label="Back"
-      icon="pi pi-arrow-left"
-      severity="secondary"
-      [outlined]="true"
-      (onClick)="goBack()">
-    </p-button>
 
   </div>
 
@@ -155,12 +156,6 @@
               [filter]="true"
               appendTo="body"
               class="w-full">
-              <ng-template let-customer #item>
-                <span>{{ customer.displayName }}</span>
-              </ng-template>
-              <ng-template let-customer #selectedItem>
-                <span>{{ customer.displayName }}</span>
-              </ng-template>
             </p-select>
 
             @if (
@@ -194,12 +189,6 @@
               [filter]="true"
               appendTo="body"
               class="w-full">
-              <ng-template let-site #item>
-                <span>{{ site.displayName }}</span>
-              </ng-template>
-              <ng-template let-site #selectedItem>
-                <span>{{ site.displayName }}</span>
-              </ng-template>
             </p-select>
 
             @if (
@@ -249,7 +238,7 @@
             <p-select
               formControlName="technicianId"
               [options]="technicians"
-              optionLabel="name"
+              optionLabel="displayName"
               optionValue="id"
               placeholder="Assign technician"
               [filter]="true"

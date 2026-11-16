@@ -36,8 +36,8 @@
       <p>Proposed pricing for early customer pilots. Final prices and limits will be confirmed by the subscription API.</p>
     </div>
     <div class="billing-toggle" role="group" aria-label="Billing interval">
-      <button type="button" [class.selected]="!annual()" [attr.aria-pressed]="!annual()" (click)="annual.set(false)">Monthly</button>
-      <button type="button" [class.selected]="annual()" [attr.aria-pressed]="annual()" (click)="annual.set(true)">Yearly <span>Save ~17%</span></button>
+      <button type="button" [class.selected]="!annual()" [attr.aria-pressed]="!annual()" (click)="setBillingInterval('MONTHLY')">Monthly</button>
+      <button type="button" [class.selected]="annual()" [attr.aria-pressed]="annual()" (click)="setBillingInterval('ANNUAL')">Yearly <span>Save ~17%</span></button>
     </div>
   </div>
 
@@ -56,18 +56,20 @@
         <div class="plan-price">
           <span class="currency">₹</span><strong>{{ price(plan) | number:'1.0-0' }}</strong><span class="price-period">/{{ intervalLabel() }}</span>
         </div>
-        @if (annual()) { <p class="billing-caption">Billed annually · equivalent to ₹{{ (plan.annualPriceInr / 12) | number:'1.0-0' }}/month</p> }
-        @else { <p class="billing-caption">No payment is collected on this page.</p> }
-        <button type="button" class="plan-action" [class.primary-action]="plan.recommended" [disabled]="!apiConnected() || startingTrial() !== null || isCurrent(plan)" (click)="startTrial(plan)">
+        @if (annual()) { <p class="billing-caption">Billed once per year · equivalent to ₹{{ (plan.annualPriceInr / 12) | number:'1.0-0' }}/month</p> }
+        @else { <p class="billing-caption">Secure recurring billing through Razorpay.</p> }
+        <button type="button" class="plan-action" [class.primary-action]="plan.recommended" [disabled]="!apiConnected() || startingTrial() !== null || checkingOut() !== null || isCurrent(plan)" (click)="selectPlan(plan)">
           @if (startingTrial() === plan.code) { <i class="pi pi-spin pi-spinner" aria-hidden="true"></i> Starting trial… }
+          @else if (checkingOut() === plan.code) { <i class="pi pi-spin pi-spinner" aria-hidden="true"></i> Connecting to Razorpay… }
           @else if (isCurrent(plan)) { Current plan }
-          @else if (!apiConnected()) { Backend setup required }
-          @else { Start 30-day trial }
+          @else if (!apiConnected()) { Connecting to subscription service… }
+          @else if (!current() && plan.code === 'STARTER') { Start 30-day trial }
+          @else { Subscribe securely }
         </button>
         <div class="plan-limits">
-          <div><i class="pi pi-users" aria-hidden="true"></i><span>Up to {{ plan.limits.maxUsers }} users</span></div>
-          <div><i class="pi pi-wrench" aria-hidden="true"></i><span>Up to {{ plan.limits.maxTechnicians }} technicians</span></div>
-          <div><i class="pi pi-briefcase" aria-hidden="true"></i><span>{{ plan.limits.maxJobsPerMonth | number }} jobs / month</span></div>
+          <div><i class="pi pi-users" aria-hidden="true"></i><span>Up to {{ plan.limits?.maxUsers ?? '—' }} users</span></div>
+          <div><i class="pi pi-wrench" aria-hidden="true"></i><span>Up to {{ plan.limits?.maxTechnicians ?? '—' }} technicians</span></div>
+          <div><i class="pi pi-briefcase" aria-hidden="true"></i><span>{{ (plan.limits?.maxJobsPerMonth ?? 0) | number }} jobs / month</span></div>
         </div>
         <div class="feature-divider"></div>
         <p class="included-label">WHAT'S INCLUDED</p>
@@ -86,7 +88,7 @@
 
   <section class="trial-note">
     <div class="trial-note-icon"><i class="pi pi-calendar-clock" aria-hidden="true"></i></div>
-    <div><strong>Try NEXORA for 30 days</strong><p>The trial length is enforced by the backend, not this page. No payment gateway is connected yet; paid checkout will be enabled after subscription APIs, authorization and billing webhooks are implemented and tested.</p></div>
+    <div><strong>Try NEXORA for 30 days</strong><p>Your 30-day trial is managed by NEXORA. Select another plan to continue to secure Razorpay checkout. Your subscription activates after Razorpay confirms the payment through its signed webhook.</p></div>
   </section>
 
   <footer class="pricing-footer">
